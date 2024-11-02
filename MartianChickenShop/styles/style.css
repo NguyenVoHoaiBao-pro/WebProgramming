@@ -87,3 +87,59 @@
     margin-left: 20px;
   }
   
+/* Home Section CSS */
+
+#home span {
+    color: coral;
+  }
+  
+  #home {
+    background-image: url('images/img1.avif');
+    width: 100%;
+    height: 100vh;
+    background-position: top 200px center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #home-bg{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(43, 40, 39, 0.283);
+    height: top 70vh;
+    border-radius : 20px;
+    padding: 60px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  
+  .text-container {
+    padding: 20px;
+    color:aliceblue;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  #home button {
+    font-size: 0.8rem;
+    font-weight: 700;
+    outline: none;
+    border-radius: 2px;
+    border: none;
+    background-color: #1d1d1d;
+    color: aliceblue;
+    padding: 13px 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.5s ease-in-out;
+  }
+  
+  #home button:hover {
+    background-color: coral;
+  }
+  

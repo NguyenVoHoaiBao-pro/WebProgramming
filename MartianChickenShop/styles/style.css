@@ -414,4 +414,133 @@ footer h5{
     height: 90px;
     width: 150px;
   }
+  /* Cart */
+
+#cart-container table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  #cart-container table thead {
+    font-weight: 700;
+  }
+  
+  #cart-container table thead td {
+    background-color: coral;
+    color: aliceblue;
+    border: none;
+    padding: 8px 5px;
+  }
+  
+  #cart-container table td {
+    border: 1px solid #343a40;
+    text-align: center;
+    border-top:none;
+  }
+  
+  #cart-container table td:nth-child(1) {
+    width: 100px;
+  }
+  
+  #cart-container table td:nth-child(2){
+    width: 200px;
+  }
+  
+  #cart-container table td:nth-child(4),
+  #cart-container table td:nth-child(5),
+  #cart-container table td:nth-child(6){
+    width: 170px;
+  }
+  
+  #cart-container table tbody img{
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    padding: 15px;
+  }
+  
+  #cart-container table tbody i {
+    color: #343a40;
+  }
+  
+  #cart-container table tbody h5 {
+    color: #343a40;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  #cart-bottom .coupon > div,
+  #cart-bottom .Total > div {
+    border: 1px solid #343a40;
+  }
+  
+  #cart-bottom .coupon h5,
+  #cart-bottom .Total h5 {
+      background-color: #343a40;
+      color: aliceblue;
+      border: none;
+      padding: 6px 12px;
+      font-weight: 700;
+  }
+  
+  #cart-bottom .coupon p,
+  #cart-bottom .coupon input,
+  #cart-bottom .Total p{
+      padding: 0 12px;
+  }
+  
+  #cart-bottom .coupon input{
+      height: 44px;
+      margin: 0 0 20px 12px;
+  }
+  
+  #cart-bottom .coupon button {
+      margin: 0 12px 20px 10px;
+  
+  }
+  
+  #cart-bottom .coupon input:focus {
+      outline: none;
+  }
+  
+  #cart-bottom .coupon button,
+  #cart-bottom .Total button {
+      background-color: #343a40;
+      color: aliceblue;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.5s ease-in-out;
+  }
+  
+  #cart-bottom .Total div>div {
+      padding: 0 12px;
+  }
+  
+  #cart-bottom .Total h6 {
+      color: #343a40;
+  }
+  
+  .second-hr {
+      border: 1px solid #343a40;
+  }
+  
+  #cart-bottom .Total div>button{
+      margin: 0 12px 20px 0;
+      display: flex;
+      justify-content: flex-end;
+  }        
+  
+  
+  #trash-btn {
+    border: none;
+    background-color: transparent;
+  }
+  
+  #cart-table > tbody #trash-btn{
+    border: none;
+    background-color: transparent;
+  }
   

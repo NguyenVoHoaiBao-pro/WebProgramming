@@ -1,0 +1,89 @@
+/* Nabar CSS */
+
+.navbar {
+    font-size: 18px;
+    color: white;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link{
+    padding: 0 20px;
+    color: white;
+    transition: 0.3s ease;
+  }
+  
+  .navbar-light .navbar-nav .nav-item .nav-link:hover,
+  .navbar-light .navbar-nav .nav-item .nav-link.active {
+    color: coral;
+  }
+  
+  .navbar i:hover,
+  .navbar i.active {
+    color: lightblue;
+  }
+  
+  .navbar i {
+    font-size: 21px;
+    padding: 0 7px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s eae;
+    color: coral;
+  }
+  
+  #nav-icons {
+    margin-left: 45px;
+    margin-right: 50px;
+  }
+  /* Mobile Nav */
+  .navbar-light .navbar-toggler {
+    border: none;
+    outline: none;
+  }
+  
+  #nav-bar-icon {
+    font-size: 1.5rem;
+    padding: 7px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s ease;
+  }
+  #nav-bar-icon:hover,
+  #nav-bar-icon .active {
+    color: lightblue;
+  }
+  @media only screen and (max-width: 991px) {
+    body > nav > div > button:hover,
+    body > nav > div > button:focus{
+      background-color: coral;
+    }
+    body > nav > div > button:hover #nav-bar-icon,
+    body > nav > div > button:focus #nav-bar-icon{
+      color: lightblue;
+    }
+    
+    #nav-icons {
+      margin: 0px;
+    }
+  
+    #navbarSupportedContent > ul{
+      margin: 1rem;
+      justify-content: flex-end;
+      align-items: right;
+      text-align: right;
+    }
+    
+    #navbarSupportedContent > ul > li:nth-child(n) > a{
+      padding: 10px 0px;
+    }
+  }
+  #logo-img {
+    height: 80px;
+    width: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-left: 20px;
+  }
+  

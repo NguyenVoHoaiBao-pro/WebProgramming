@@ -1,150 +1,159 @@
 /* Nabar CSS */
 
 .navbar {
-    font-size: 18px;
-    color: white;
-    top: 0;
-    left: 0;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  color: white;
+  top: 0;
+  left: 0;
+  height: 100px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link {
+  padding: 0 20px;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item .nav-link.active {
+  color: #BC1F23;
+}
+
+.navbar i:hover,
+.navbar i.active {
+  color: lightblue;
+}
+
+.navbar i {
+  font-size: 21px;
+  padding: 0 7px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s eae;
+  color: #BC1F23;
+}
+
+#nav-icons {
+  margin-left: 45px;
+  margin-right: 50px;
+}
+
+/* Mobile Nav */
+.navbar-light .navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+#nav-bar-icon {
+  font-size: 1.5rem;
+  padding: 7px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+#nav-bar-icon:hover,
+#nav-bar-icon .active {
+  color: lightblue;
+}
+
+@media only screen and (max-width: 991px) {
+
+  body>nav>div>button:hover,
+  body>nav>div>button:focus {
+    background-color: #BC1F23;
   }
-  
-  .navbar-light .navbar-nav .nav-item .nav-link{
-    padding: 0 20px;
-    color: white;
-    transition: 0.3s ease;
-  }
-  
-  .navbar-light .navbar-nav .nav-item .nav-link:hover,
-  .navbar-light .navbar-nav .nav-item .nav-link.active {
-    color: coral;
-  }
-  
-  .navbar i:hover,
-  .navbar i.active {
+
+  body>nav>div>button:hover #nav-bar-icon,
+  body>nav>div>button:focus #nav-bar-icon {
     color: lightblue;
   }
-  
-  .navbar i {
-    font-size: 21px;
-    padding: 0 7px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.3s eae;
-    color: coral;
-  }
-  
+
   #nav-icons {
-    margin-left: 45px;
-    margin-right: 50px;
+    margin: 0px;
   }
-  /* Mobile Nav */
-  .navbar-light .navbar-toggler {
-    border: none;
-    outline: none;
+
+  #navbarSupportedContent>ul {
+    margin: 1rem;
+    justify-content: flex-end;
+    align-items: right;
+    text-align: right;
   }
-  
-  #nav-bar-icon {
-    font-size: 1.5rem;
-    padding: 7px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: 0.3s ease;
+
+  #navbarSupportedContent>ul>li:nth-child(n)>a {
+    padding: 10px 0px;
   }
-  #nav-bar-icon:hover,
-  #nav-bar-icon .active {
-    color: lightblue;
-  }
-  @media only screen and (max-width: 991px) {
-    body > nav > div > button:hover,
-    body > nav > div > button:focus{
-      background-color: coral;
-    }
-    body > nav > div > button:hover #nav-bar-icon,
-    body > nav > div > button:focus #nav-bar-icon{
-      color: lightblue;
-    }
-    
-    #nav-icons {
-      margin: 0px;
-    }
-  
-    #navbarSupportedContent > ul{
-      margin: 1rem;
-      justify-content: flex-end;
-      align-items: right;
-      text-align: right;
-    }
-    
-    #navbarSupportedContent > ul > li:nth-child(n) > a{
-      padding: 10px 0px;
-    }
-  }
-  #logo-img {
-    height: 80px;
-    width: 220px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin-left: 20px;
-  }
-  
+}
+
+#logo-img {
+  height: 80px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-left: 20px;
+}
+
 /* Home Section CSS */
 
 #home span {
-    color: coral;
-  }
-  
-  #home {
-    background-image: url('../images/Page1/comboga_1.webp');
-    width: 100%;
-    height: 100vh;
-    background-position: top 200px center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  #home-bg{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(43, 40, 39, 0.283);
-    height: top 70vh;
-    border-radius : 20px;
-    padding: 60px;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
-  }
-  
-  
-  .text-container {
-    padding: 20px;
-    color:aliceblue;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  
-  #home button {
-    font-size: 0.8rem;
-    font-weight: 700;
-    outline: none;
-    border-radius: 2px;
-    border: none;
-    background-color: #1d1d1d;
-    color: aliceblue;
-    padding: 13px 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.5s ease-in-out;
-  }
-  
-  #home button:hover {
-    background-color: coral;
-  }
-  /* Product images section */
+  color: #db0711;
 
-#new .one img{
+}
+
+#home {
+  background-image: url('../images/Page1/comboga_1.webp');
+  width: 100%;
+  height: 100vh;
+  background-position: top 200px center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#home-bg {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(43, 40, 39, 0.283);
+  height: top 70vh;
+  border-radius: 20px;
+  padding: 60px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+.text-container {
+  padding: 20px;
+  color: aliceblue;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#home button {
+  font-size: 0.8rem;
+  font-weight: 700;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  background-color: #1d1d1d;
+  color: aliceblue;
+  padding: 13px 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.5s ease-in-out;
+}
+
+#home button:hover {
+  background-color: #BC1F23;
+}
+
+/* Product images section */
+
+#new .one img {
   width: 100%;
   height: 100%;
   background-position: center center;
@@ -165,6 +174,7 @@
 #new .one:hover .details {
   cursor: pointer;
   background-color: rgba(245, 178, 178, 0.31);
+
   h2 {
     color: black;
   }
@@ -221,326 +231,341 @@
   align-items: flex-end;
   text-align: end;
 }
-/* services section icons */
-.bi-cart , .bi-award, .bi-tags , .bi-shield-check {
-    font-size: 1.5rem;
-    color: coral;
-    transition: 0.3s ease;
-  }
-  
-  .bi-cart:hover , .bi-award:hover, .bi-tags:hover, .bi-shield-check:hover {
-    font-size: 1.5rem;
-    color: lightblue;
-    transition: 0.3s ease;
-  }
-  
-  
-  /* Featured Product section */
-  .border {
-    width: 40px
-  }
-  #featured h5 {
-    color: #1a1a1a;
-    font-size: 18px;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin: 1rem 0;
-  }
-  .product-price {
-    color: gray;
-    font-size: 18px;
-    font-weight: 400;
-    margin: 1rem 0;
-  }
-  .buy-btn{
-    background-color: black;
-    font-size: 0.8rem;
-    font-weight: 700;
-    outline: none;
-    border-radius: 2px;
-    border: none;
-    color: aliceblue;
-    padding: 13px 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.5s ease-in-out;
-  }
-  
-  .buy-btn:hover {
-    background-color: coral;
-  }
-  
-  .product {
-    cursor: pointer;
-    font-size: 2rem;
-  }
-  
-  .product img {
-    transition: 0.3s all;
-    width: 100%;
-    height: 70%;
-    object-fit: contain;
-  }
-  
-  .product:hover img {
-    opacity: 0.7;
-  }
-  
-  .product .buy-btn {
-    background-color: black;
-    transform: translateY(20px);
-    opacity: 0;
-    font-size: 0.8rem;
-    font-weight: 700;
-    outline: none;
-    border-radius: 2px;
-    border: none;
-    color: aliceblue;
-    padding: 13px 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.5s ease-in-out;
-  }
-  
-  .product:hover .buy-btn {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  
-  .star {
-    padding: 10px 0;
-  }
-  
-  .star i{
-    font-size: 0.8rem;
-    color: goldenrod;
-  }
-  
-  #banner {
-    background-image: url('images/home_img_1.jpg');
-    width: 100%;
-    height: 60vh;
-    background-position: top 70px center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  #banner h4{
-    color: coral;
-    font-weight: 400;
-  }
-  
-  #banner h1 {
-    color: aliceblue;
-    font-weight: 600;
-  }
-  
-  #banner button {
-    font-size: 0.8rem;
-    font-weight: 700;
-    outline: none;
-    border-radius: 2px;
-    border: none;
-    background-color: coral;
-    color: aliceblue;
-    padding: 13px 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.5s ease-in-out;
-    margin-top: 15px;
-  }
-  /* footer section */
-footer h5{
-    color: coral;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  footer li{
-    padding-bottom: 10px;
-  }
-  
-  footer li a{
-    font-size: 16px;
-    color: aliceblue;
-    transition: 0.3s ease-in-out;
-  }
-  
-  footer li a:hover{
-    color: lightblue;
-    text-decoration: none;
-  }
-  
-  footer p{
-    color: lightblue;
-    font-size: 15px;
-  }
-  
-  footer .copyright a {
-    color: black;
-    width: 38px;
-    height: 38px;
-    background-color: aliceblue;
-    display: inline-block;
-    text-align: center;
-    line-height: 38px;
-    border-radius: 50%;
-    transition: 0.3s ease-in-out;
-    margin: 0 5px;
-  }
-  
-  footer .copyright a:hover {
-    background-color: coral;
-    color: aliceblue;
-  
-  }
-  
-  footer h6 {
-    color: aliceblue;
-  }
-  
-  footer #logo-img-footer {
-    height: 68px;
-    width: 180px;
-    object-fit: cover;
-    border-radius: 15px;
-  }
-  
-  footer .footer-img {
-    height: 90px;
-    width: 150px;
-  }
-  /* Cart */
 
-#cart-container table{
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
-  }
-  
-  #cart-container table thead {
-    font-weight: 700;
-  }
-  
-  #cart-container table thead td {
-    background-color: coral;
-    color: aliceblue;
-    border: none;
-    padding: 8px 5px;
-  }
-  
-  #cart-container table td {
-    border: 1px solid #343a40;
-    text-align: center;
-    border-top:none;
-  }
-  
-  #cart-container table td:nth-child(1) {
-    width: 100px;
-  }
-  
-  #cart-container table td:nth-child(2){
-    width: 200px;
-  }
-  
-  #cart-container table td:nth-child(4),
-  #cart-container table td:nth-child(5),
-  #cart-container table td:nth-child(6){
-    width: 170px;
-  }
-  
-  #cart-container table tbody img{
-    width: 100px;
-    height: 80px;
-    object-fit: cover;
-    padding: 15px;
-  }
-  
-  #cart-container table tbody i {
-    color: #343a40;
-  }
-  
-  #cart-container table tbody h5 {
-    color: #343a40;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  
-  #cart-bottom .coupon > div,
-  #cart-bottom .Total > div {
-    border: 1px solid #343a40;
-  }
-  
-  #cart-bottom .coupon h5,
-  #cart-bottom .Total h5 {
-      background-color: #343a40;
-      color: aliceblue;
-      border: none;
-      padding: 6px 12px;
-      font-weight: 700;
-  }
-  
-  #cart-bottom .coupon p,
-  #cart-bottom .coupon input,
-  #cart-bottom .Total p{
-      padding: 0 12px;
-  }
-  
-  #cart-bottom .coupon input{
-      height: 44px;
-      margin: 0 0 20px 12px;
-  }
-  
-  #cart-bottom .coupon button {
-      margin: 0 12px 20px 10px;
-  
-  }
-  
-  #cart-bottom .coupon input:focus {
-      outline: none;
-  }
-  
-  #cart-bottom .coupon button,
-  #cart-bottom .Total button {
-      background-color: #343a40;
-      color: aliceblue;
-      border: none;
-      padding: 10px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.5s ease-in-out;
-  }
-  
-  #cart-bottom .Total div>div {
-      padding: 0 12px;
-  }
-  
-  #cart-bottom .Total h6 {
-      color: #343a40;
-  }
-  
-  .second-hr {
-      border: 1px solid #343a40;
-  }
-  
-  #cart-bottom .Total div>button{
-      margin: 0 12px 20px 0;
-      display: flex;
-      justify-content: flex-end;
-  }        
-  
-  
-  #trash-btn {
-    border: none;
-    background-color: transparent;
-  }
-  
-  #cart-table > tbody #trash-btn{
-    border: none;
-    background-color: transparent;
-  }
-  
+/* services section icons */
+.bi-cart,
+.bi-award,
+.bi-tags,
+.bi-shield-check {
+  font-size: 1.5rem;
+  color: #BC1F23;
+  transition: 0.3s ease;
+}
+
+.bi-cart:hover,
+.bi-award:hover,
+.bi-tags:hover,
+.bi-shield-check:hover {
+  font-size: 1.5rem;
+  color: lightblue;
+  transition: 0.3s ease;
+}
+
+
+/* Featured Product section */
+.border {
+  width: 40px
+}
+
+#featured h5 {
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 1rem 0;
+}
+
+.product-price {
+  color: gray;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 1rem 0;
+}
+
+.buy-btn {
+  background-color: black;
+  font-size: 0.8rem;
+  font-weight: 700;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  color: aliceblue;
+  padding: 13px 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.5s ease-in-out;
+}
+
+.buy-btn:hover {
+  background-color: #BC1F23;
+}
+
+.product {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.product img {
+  transition: 0.3s all;
+  width: 100%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.product:hover img {
+  opacity: 0.7;
+}
+
+.product .buy-btn {
+  background-color: black;
+  transform: translateY(20px);
+  opacity: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  color: aliceblue;
+  padding: 13px 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.5s ease-in-out;
+}
+
+.product:hover .buy-btn {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.star {
+  padding: 10px 0;
+}
+
+.star i {
+  font-size: 0.8rem;
+  color: goldenrod;
+}
+
+#banner {
+  background-image: url('images/home_img_1.jpg');
+  width: 100%;
+  height: 60vh;
+  background-position: top 70px center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#banner h4 {
+  color: #BC1F23;
+  font-weight: 400;
+}
+
+#banner h1 {
+  color: aliceblue;
+  font-weight: 600;
+}
+
+#banner button {
+  font-size: 0.8rem;
+  font-weight: 700;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  background-color: #BC1F23;
+  color: aliceblue;
+  padding: 13px 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.5s ease-in-out;
+  margin-top: 15px;
+}
+
+/* footer section */
+footer h5 {
+  color: #BC1F23;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+footer li {
+  padding-bottom: 10px;
+}
+
+footer li a {
+  font-size: 16px;
+  color: aliceblue;
+  transition: 0.3s ease-in-out;
+}
+
+footer li a:hover {
+  color: lightblue;
+  text-decoration: none;
+}
+
+footer p {
+  color: lightblue;
+  font-size: 15px;
+}
+
+footer .copyright a {
+  color: black;
+  width: 38px;
+  height: 38px;
+  background-color: aliceblue;
+  display: inline-block;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+  margin: 0 5px;
+}
+
+footer .copyright a:hover {
+  background-color: #BC1F23;
+  color: aliceblue;
+
+}
+
+footer h6 {
+  color: aliceblue;
+}
+
+
+
+
+footer #logo-img-footer {
+  height: 68px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+footer .footer-img {
+  height: 90px;
+  width: 150px;
+}
+
+/* Cart */
+
+#cart-container table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#cart-container table thead {
+  font-weight: 700;
+}
+
+#cart-container table thead td {
+  background-color: coral;
+  color: aliceblue;
+  border: none;
+  padding: 8px 5px;
+}
+
+#cart-container table td {
+  border: 1px solid #343a40;
+  text-align: center;
+  border-top: none;
+}
+
+#cart-container table td:nth-child(1) {
+  width: 100px;
+}
+
+#cart-container table td:nth-child(2) {
+  width: 200px;
+}
+
+#cart-container table td:nth-child(4),
+#cart-container table td:nth-child(5),
+#cart-container table td:nth-child(6) {
+  width: 170px;
+}
+
+#cart-container table tbody img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  padding: 15px;
+}
+
+#cart-container table tbody i {
+  color: #343a40;
+}
+
+#cart-container table tbody h5 {
+  color: #343a40;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#cart-bottom .coupon>div,
+#cart-bottom .Total>div {
+  border: 1px solid #343a40;
+}
+
+#cart-bottom .coupon h5,
+#cart-bottom .Total h5 {
+  background-color: #343a40;
+  color: aliceblue;
+  border: none;
+  padding: 6px 12px;
+  font-weight: 700;
+}
+
+#cart-bottom .coupon p,
+#cart-bottom .coupon input,
+#cart-bottom .Total p {
+  padding: 0 12px;
+}
+
+#cart-bottom .coupon input {
+  height: 44px;
+  margin: 0 0 20px 12px;
+}
+
+#cart-bottom .coupon button {
+  margin: 0 12px 20px 10px;
+
+}
+
+#cart-bottom .coupon input:focus {
+  outline: none;
+}
+
+#cart-bottom .coupon button,
+#cart-bottom .Total button {
+  background-color: #343a40;
+  color: aliceblue;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+#cart-bottom .Total div>div {
+  padding: 0 12px;
+}
+
+#cart-bottom .Total h6 {
+  color: #343a40;
+}
+
+.second-hr {
+  border: 1px solid #343a40;
+}
+
+#cart-bottom .Total div>button {
+  margin: 0 12px 20px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+#trash-btn {
+  border: none;
+  background-color: transparent;
+}
+
+#cart-table>tbody #trash-btn {
+  border: none;
+  background-color: transparent;
+}

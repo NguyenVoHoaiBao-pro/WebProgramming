@@ -129,7 +129,7 @@ function addToCart() {
     }
     cart[productId] = noi;
     window.localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Product added to cart');
+    alert('Sản phẩm đã được thêm vào giỏ hàng');
 }
 
 function removeFromCart(productId) {
@@ -159,7 +159,7 @@ function contactUs() {
     let email = document.getElementById('email').value;
     let message = document.getElementById('message').value;
 
-    alert('Thank you for contacting us. We will get back to you soon.');
+    alert('Cảm ơn bạn đã liên hệ với chúng tôi. Chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.');
 
     window.location.href = '/index.html';
 }

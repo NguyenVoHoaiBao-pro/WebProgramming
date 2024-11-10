@@ -7,14 +7,14 @@ const productList = {
         "image": "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png"
     },
     "2": {
-        "name": "Wellesley Women's Laptop Bag",
-        "price": "3990",
-        "image": "/images/leather/products/78image.jpg"
+        "name": "Cánh gà giòn",
+        "price": "35000",
+        "image": "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png"
     },
     "3": {
-        "name": "Tudor Leather Messenger Bag",
-        "price": "5990",
-        "image": "/images/leather/products/113image.jpg"
+        "name": "Cánh gà phô mai",
+        "price": "45000",
+        "image": "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png"
     }
   
 }
@@ -78,6 +78,6 @@ function contactUs() {
 function signUp(){
     event.preventDefault();
     let email = document.getElementById('email').value;
-    alert('Signed up successfully as ' + email);
+    alert('Đăng ký thành công với ' + email);
     window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/Login.html';
 }

@@ -288,7 +288,7 @@
                     <td><button id="trash-btn" onclick="removeFromCart(${id})"><i class="bi bi-trash3"></i></button></td>
                     <td><img src="${product.image}" alt="product"></td>
                     <td><h5>${product.name}</h5></td>
-                    <td><h5>${product.price.toLocaleString('vi-VN')} đ</h5></td>
+                    <td><h5>${Number(product.price).toLocaleString('vi-VN')} đ</h5></td>
                     <td><input class="w-25 pl-1" type="number" value="${quantity}" disabled min="1" max="10"></td>
                     <td><h5>${total.toLocaleString('vi-VN')} đ</h5></td>
                 `;
@@ -303,7 +303,7 @@
                 return acc + product.price * quantity;
             }, 0);
 
-            const shipping = 1200;
+            const shipping = 12000;
 
             document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " đ";
             document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " đ";

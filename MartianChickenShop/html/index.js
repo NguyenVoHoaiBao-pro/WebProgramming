@@ -1,5 +1,11 @@
 
+function openMenu() {
+    document.getElementById("mySidebar").style.width = "250px";
+}
 
+function closeMenu() {
+    document.getElementById("mySidebar").style.width = "0";
+}
 const productList = {
     "1": {
         "name": "Cánh gà kiểu Thái",

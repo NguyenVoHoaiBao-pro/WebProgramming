@@ -1,5 +1,46 @@
 /* Nabar CSS */
 /* Định dạng nút quay lại đầu trang */
+        /* Nút 3 gạch */
+        .menu-icon {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          font-size: 24px;
+          cursor: pointer;
+          color: #333;
+      }
+      /* Sidebar menu */
+      .sidebar {
+          height: 100%;
+          width: 0;
+          position: fixed;
+          top: 0;
+          right: 0;
+          background-color: #333;
+          overflow-x: hidden;
+          transition: 0.3s;
+          padding-top: 60px;
+          color: white;
+      }
+      .sidebar a {
+          padding: 10px 20px;
+          text-decoration: none;
+          font-size: 18px;
+          color: #ddd;
+          display: block;
+          transition: 0.2s;
+      }
+      .sidebar a:hover {
+          color: #fff;
+      }
+      .close-btn {
+          position: absolute;
+          top: 10px;
+          right: 25px;
+          font-size: 24px;
+          cursor: pointer;
+          color: #ddd;
+      }
 .back-to-top {
   position: fixed;
   bottom: 20px;

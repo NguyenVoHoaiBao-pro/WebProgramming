@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <link rel="icon" href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png" type="image/png">
+    <link rel="stylesheet" href="/WebProgramming/MartianChickenShop/styles/style.css">
+    <script src="/WebProgramming/MartianChickenShop/html/index.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- bootstarp stackpath cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Bootstrap icons cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .ShopMore {
+            background-color: black;
+            font-size: 18px;
+            font-weight: 700;
+            outline: none;
+            border-radius: 2px;
+            border: none;
+            color: aliceblue;
+            padding: 13px 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.5s ease-in-out;
+            padding: 20px;
+            width: 250px;
+        }
+        .ShopMore:hover {
+            background-color: #BC1F23;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+     <!-- Nav section -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+        <div class="container-fluid mr-5">
+            <!-- <div class="col-1"></div> -->
+            <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" id="logo-img" alt="logo..">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                          <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a>
+                       
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Quality</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">Liên hệ</a>
+
+                    </li>
+                    <li class="nav-item" id="nav-icons">
+                        <!-- <i class="bi bi-search"></i> -->
+                        <a href="./Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="./Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+    
+    <!-- cart section -->
+    <section id="featured" class="mt-3 pt-1">
+        <div class="container mx-auto mt-5 px-5 pt-5 text-center">
+            <h3 class="mt-5 pt-5">Giỏ Hàng Của Bạn</h3>
+            <hr class="border border-danger border-2 opacity-75 mx-auto">
+        </div>
+    </section>
+
+    <section id="cart-container" class="container-fluid my-5">
+        <table width="100%" id="cart-table">
+            <thead>
+                <tr>
+                    <td>Xóa</td>
+                    <td>Hình ảnh</td>
+                    <td>Sản phẩm</td>
+                    <td>Giá</td>
+                    <td>Số lượng</td>
+                    <td>Tổng tiền</td>
+                </tr>
+            </thead>
+            
+            <tbody>
+                
+            </tbody>
+        </table>
+    </section>
+
+    <section id="cart-bottom" class="container">
+        <div class="row">
+            <!-- <div class="coupon col-lg-6 col-md-6 col-12 mb-4">
+                <div>
+                    <h5>COUPON</h5>
+                    <p>Enter the coupon code if you have one.</p>
+                    <input type="text" placeholder="Coupon code">
+                    <button>APPLY COUPON</button>
+                </div>        
+            </div> -->
+            <div class="Total col-lg-8 col-md-6 col-12 mb-4 mx-auto">
+                <div>
+                    <h5>Tổng giỏ hàng</h5>
+                    <div class="d-flex justify-content-between">
+                        <h6>Tạm tính</h6>
+                        <p id="subtotal-value"></p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6>Phí vận chuyển</h6>
+                        <p id="shipping-value"></p>
+                    </div>
+                    <hr class="second-hr">
+                    <div class="d-flex justify-content-between">
+                        <h6>Tổng cộng</h6>
+                        <p id="total-value"></p>
+                    </div>
+                    <button class="ml-auto" onclick="window.location.href = './checkout.html';">TIẾN HÀNH THANH TOÁN</button>
+                </div>        
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Related Product section -->
+    <section id="featured" class="my-5 pb-5">
+        <div class="container text-center mt-5 py-5">
+            <h3>Các sản phẩm liên quan</h3>
+            <hr class="border border-danger border-2 opacity-75 mx-auto">
+        </div>
+        <div class="row mx-auto container-fluid">
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaXiMuoi.png" alt="Cánh gà xí muội">
+                <div class="star">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
+                <h4 class="product-price">30.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct13.html';">Mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.jpg" alt="Gà rán sốt cay kiểu Thái">
+                <div class="star">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
+                <h4 class="product-price">45.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct17.html';">Mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaChanhDay.jpg" alt="Gà rán giòn sốt chanh dây">
+                <div class="star">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
+                <h4 class="product-price">50.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct20.html';">Mua ngay</button>
+            </div>
+            <div class="product container text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuNhat.jpg" alt="Gà rán xù kiểu Nhật">
+                <div class="star">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
+                <h4 class="product-price">39.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = 'sproduct21.html';">Mua ngay</button>
+            </div>
+            <button class="ShopMore my-5 mx-auto" onclick="window.location.href = 'Shop.html';">Tiếp tục mua sắm</button>
+        </div>
+    </section>
+
+
+    <!-- Footer section -->
+   <footer class="mt-5 p-5 bg-dark">
+  <div class="row conatiner mx-auto pt-5">
+    <div class="footer-one col-lg-3 col-md-6 col-12">
+
+      <img id="logo-img-footer" src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="logo">
+      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+    
+    </div>
+    
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên kết nhanh</h5>
+      <ul class="text-uppercase list-unstyled">
+        <li><a href="index.html">trang chủ</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">thông tin</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">liên hệ</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">Giỏ hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+      <div>
+        <h6 class="text-uppercase">Địa chỉ</h6>
+        <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">điện thoại</h6>
+        <p>0849294483</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">Email</h6>
+        <p>MarsStore@gmail.com</p>
+      </div>
+    </div>
+    <div class="Photos col-lg-3 col-md-6 col-12">
+
+      <h5 class="pb-2">Các đơn vị tài trợ</h5>
+      <div class="row">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 3.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 2.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image.png" alt="leather-img">
+    </div>
+    </div>
+  <div class="copyright mt-5">
+    <div class="row container mx-auto">
+      <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <img src="img/payment.png" alt="payment..logo">
+      </div> -->
+
+      <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+        <p>ABK WEBSITE &copy; DESIGN 2024</p>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12">
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-twitter"></i></a>
+        <a href="#"><i class="bi bi-linkedin"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>  
+</footer>
+    <script>
+
+        const cartData = window.localStorage.getItem('cart');
+        const cart = JSON.parse(cartData); // {"id": "quantity", "id": "quantity"}
+        
+        console.log(productList) // {"id": {"name": "", "price": "", "image": ""}}
+        
+        // if cart is empty, then show a message "No items in cart"
+        if (!cart || Object.keys(cart).length === 0) {
+            document.querySelector('#cart-table tbody').innerHTML = '<tr><td colspan="6">Không có sản phẩm nào trong giỏ hàng</td></tr>';
+            document.querySelector('#subtotal-value').textContent = "0";
+            document.querySelector('#shipping-value').textContent = "0";
+            document.querySelector('#total-value').textContent = "0";
+        }
+        else {
+            Object.keys(cart).forEach((id) => {
+                const product = productList[id];
+                const quantity = cart[id];
+                const total = product.price * quantity;
+                const tr = document.createElement('tr');
+               tr.innerHTML = `
+                    <td><button id="trash-btn" onclick="removeFromCart(${id})"><i class="bi bi-trash3"></i></button></td>
+                    <td><img src="${product.image}" alt="product"></td>
+                    <td><h5>${product.name}</h5></td>
+                    <td><h5>${Number(product.price).toLocaleString('vi-VN')} đ</h5></td>
+                    <td><input class="w-25 pl-1" type="number" value="${quantity}" disabled min="1" max="10"></td>
+                    <td><h5>${total.toLocaleString('vi-VN')} đ</h5></td>
+                `;
+
+                
+                document.querySelector('#cart-table tbody').appendChild(tr);
+            });
+
+            const subtotal = Object.keys(cart).reduce((acc, id) => {
+                const product = productList[id];
+                const quantity = cart[id];
+                return acc + product.price * quantity;
+            }, 0);
+
+            const shipping = 12000;
+
+            document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " đ";
+            document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " đ";
+            document.querySelector('#total-value').textContent = (subtotal + shipping).toLocaleString('vi-VN') + " đ";
+
+        }
+    </script>
+
+    <!-- bootstarp cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

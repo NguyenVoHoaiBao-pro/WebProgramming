@@ -39,9 +39,6 @@
 </head>
 <body>
  <button class="back-to-top" id="backToTop">↑</button>
-
-    
-    <!-- JavaScript để hiển thị và cuộn trang về đầu -->
     <script>
         // Lấy nút quay lại đầu trang
         const backToTopButton = document.getElementById("backToTop");
@@ -102,9 +99,19 @@
     <!-- Featured Product section -->
     <section id="featured" class="my-5 py-5">
         <div class="container ml-5 mt-5 px-5 pt-5">
-            <h3>Các món nổi bật</h3>
+            <h3>Các món nổi bật Đùi gà</h3>
             <hr class="border border-danger border-2 opacity-75">
             <p style="font-size: 18px">Tại đây, bạn có thể khám phá các món mới của chúng tôi trên <span style="color: #BC1F23" >MFC.</span> </p>
+                    <div style="display: flex; justify-content: center;">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination mt-5">
+
+                        <li class="page-item active"><a class="page-link" href="">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html" id="page2">2</a></li>
+                        
+                    </ul>
+                </nav>
+            </div>   
         </div>
         <div class="row container-fluid px-5">
             <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">

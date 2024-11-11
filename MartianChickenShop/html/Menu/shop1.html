@@ -38,6 +38,25 @@
     </style>
 </head>
 <body>
+<button class="back-to-top" id="backToTop">↑</button>
+    <script>
+        // Lấy nút quay lại đầu trang
+        const backToTopButton = document.getElementById("backToTop");
+
+        // Hiển thị nút khi cuộn xuống 100px
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        // Thêm sự kiện click để quay lại đầu trang
+        backToTopButton.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
     <!-- Nav section -->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">
@@ -82,100 +101,7 @@
         </div>
         <div class="row container-fluid px-5">
             
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/64image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">The Rodeo Tote</h5>
-                <h4 class="product-price">Rs. 1,990</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/1image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">Duality Zip Around Wallet</h5>
-                <h4 class="product-price">Rs. 1,500</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/3image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">Lil Flap Leather Wallet</h5>
-                <h4 class="product-price">Rs. 1,690</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/26image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">Leather Passport Sleeve</h5>
-                <h4 class="product-price">Rs. 1,290</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/11image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">Leather Mini Portfolio</h5>
-                <h4 class="product-price">Rs. 1,990</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/7image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">Lancaster Leather Wallet</h5>
-                <h4 class="product-price">Rs. 990</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-            <!-- <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="images/leather/products/90image.jpg" alt="">
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <h5 class="product-name">Leather Money Clip</h5>
-                <h4 class="product-price">Rs. 399</h4>
-                <button class="buy-btn" onclick="window.location.href = '#';">Buy Now</button>
-            </div> -->
-           
-            
-            
+
            
             <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaMuoiTieu.png" alt="Cánh gà muối tiêu ">

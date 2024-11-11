@@ -38,6 +38,28 @@
     </style>
 </head>
 <body>
+ <button class="back-to-top" id="backToTop">↑</button>
+
+    
+    <!-- JavaScript để hiển thị và cuộn trang về đầu -->
+    <script>
+        // Lấy nút quay lại đầu trang
+        const backToTopButton = document.getElementById("backToTop");
+
+        // Hiển thị nút khi cuộn xuống 100px
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        // Thêm sự kiện click để quay lại đầu trang
+        backToTopButton.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
     <!-- Nav section -->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">

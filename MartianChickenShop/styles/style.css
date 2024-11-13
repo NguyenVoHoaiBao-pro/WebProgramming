@@ -1,88 +1,88 @@
 /* Nabar CSS */
 /* Sidebar styling */
 .sidebar {
-    height: 100%;
-    width: 0; 
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #333;
-    overflow-x: hidden;
-    transition: 0.3s;
-    z-index: 1000;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  transition: 0.3s;
+  z-index: 1000;
 }
 
 .sidebar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #343A40;
-    padding: 10px;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #343A40;
+  padding: 10px;
+  position: relative;
 }
 
 .logo {
-    width: auto;
-    height: 80px;
+  width: auto;
+  height: 80px;
 }
 
 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
 }
 
 .sidebar-content {
-    padding: 20px;
+  padding: 20px;
 }
 
 .menu-section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .menu-section h4 {
-    color: white;
+  color: white;
 }
 
 .menu-section ul {
-    list-style-type: none;
-    padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .menu-section li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .menu-section li a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .menu-section li a:hover {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
 
 .sidebar.open {
-    width: 400px; 
+  width: 400px;
 }
 
 #toggle-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
 }
 
 #toggle-btn:hover {
-    background-color: #444;
+  background-color: #444;
 }
 
 .back-to-top {
@@ -96,8 +96,10 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  display: none; /* Ẩn nút khi chưa cần */
+  display: none;
+  /* Ẩn nút khi chưa cần */
 }
+
 .navbar {
   font-size: 18px;
   color: white;
@@ -667,15 +669,17 @@ footer .footer-img {
   border: none;
   background-color: transparent;
 }
- 
+
 .search-bar {
   width: 100%;
   max-width: 500px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 50px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: solid #BC1F23 2px; 
 }
 
 .search-input {
@@ -684,18 +688,18 @@ footer .footer-img {
   border: none;
   outline: none;
   font-size: 16px;
-   height: 40px; 
+  height: 40px;  /* Đặt chiều cao cố định cho input */
 }
 
 .search-button {
-  width:15%; 
+  width: 15%; 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   background-color: #BC1F23; 
   border: solid #BC1F23 10px; 
-   height: 40px; 
+  height: 40px;  /* Đặt chiều cao cố định cho button */
 }
 
 .search-button i {

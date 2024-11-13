@@ -1,6 +1,29 @@
 /* Nabar CSS */
 /* Định dạng nút quay lại đầu trang */
         /* Nút 3 gạch */
+        @media (min-width: 992px) {
+          .page-wrapper {
+            padding: 2.85714286rem 1.07142857rem;
+            padding-top: 2.85714rem;
+          }
+          .page-with-bar {
+            position: relative;
+            padding-top: 1rem;
+          }
+        }
+        @media (min-width: 1200px) {
+          .container {
+            max-width: 1200px;
+          }
+        }
+        h3[_ngcontent-ng-cli-universal-c140] {
+          font-style: italic;
+        }
+        .container {
+          width: 100%;
+          padding: 0 1.07142857rem;
+          margin: 0 auto;
+        }
         .menu-icon {
           position: fixed;
           top: 35px;

@@ -8,7 +8,7 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="/WebProgramming/MartianChickenShop/styles/style.css">
-    <script src="index.js"></script>
+    <script src="/WebProgramming/MartianChickenShop/html/index.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -69,16 +69,54 @@
                         <a href="./Login.html"><i class="bi bi-person-fill"></i></a>
                         <a href="./Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
                         <!-- Biểu tượng menu 3 gạch -->
-    <i class="bi bi-list menu-icon" onclick="openMenu()"></i>
+                      <!-- Biểu tượng menu 3 gạch -->
+                        <i class="bi bi-list menu-icon" onclick="toggleMenu()"></i>
 
-    <!-- Sidebar menu -->
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
-        <a href="home.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-    </div>
+                        <!-- Sidebar menu -->
+                        <div id="mySideBar" class="sidebar">
+                            <div class="sidebar-header">
+                                <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                                <span id="closeBtn" class="close-btn">&times;</span> <!-- Dấu 'X' để đóng sidebar -->
+                            </div>
+                            <div class="sidebar-content">
+                                <!-- Nội dung sidebar -->
+                                <div class="menu-section">
+                                    <h4>DANH MỤC MÓN ĂN</h4>
+                                    <ul>
+                                        <li><a href="#">Ưu Đãi</a></li>
+                                        <li><a href="#">Món Mới</a></li>
+                                        <li><a href="#">Combo 1 Người</a></li>
+                                        <li><a href="#">Combo Nhóm</a></li>
+                                        <li><a href="#">Gà Rán</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-section">
+                                    <h4>VỀ MFS</h4>
+                                    <ul>
+                                        <li><a href="#">Câu Chuyện Của Chúng Tôi</a></li>
+                                        <li><a href="#">Tin Khuyến Mãi</a></li>
+                                        <li><a href="#">Tin tức MFS</a></li>
+                                        <li><a href="#">Tuyển dụng</a></li>
+                                        <li><a href="#">Đặt tiệc Sinh nhật</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-section">
+                                    <h4>LIÊN HỆ MFS</h4>
+                                    <ul>
+                                        <li><a href="#">Theo dõi đơn hàng</a></li>
+                                        <li><a href="#">Liên hệ MFS</a></li>
+                                    </ul>
+                                </div>
+                                <div class="menu-section">
+                                    <h4>CHÍNH SÁCH</h4>
+                                    <ul>
+                                        <li><a href="#">Chính sách hoạt động</a></li>
+                                        <li><a href="#">Chính sách và quy định</a></li>
+                                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

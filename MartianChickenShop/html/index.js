@@ -1,11 +1,17 @@
 
-function openMenu() {
-    document.getElementById("mySidebar").style.width = "250px";
+function toggleMenu() {
+    var sidebar = document.getElementById("mySideBar");
+    if (sidebar.style.width === "350px") {
+        sidebar.style.width = "0";
+    } else {
+        sidebar.style.width = "350px"; 
+    }
+    document.getElementById('closeBtn').addEventListener('click', function() {
+    var sidebar = document.getElementById("mySideBar");
+    sidebar.style.width = "0";
+});
 }
 
-function closeMenu() {
-    document.getElementById("mySidebar").style.width = "0";
-}
 const productList = {
     "1": {
         "name": "Cánh gà kiểu Thái",

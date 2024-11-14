@@ -162,50 +162,76 @@
         </div>
     </section>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-12 mt-0">
-                <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" class="img-fluid" alt="login-img">
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-5">
-                    <!-- <p>Don't have an account? <a href="#" id="showSignUp">Sign up</a></p> -->
-                    <form id="signUpForm" action="" onsubmit="SignUp()">
-                    <!-- Add your sign-up form fields here -->
-                        <div class="form-group">
-                        <label for ="name">Tên</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên của bạn" required>
-                        </div>
-                        <div class="form-group">
-                        <label for ="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn" required>
-                        </div>
-                        <div class="form-group">
-                        <label for ="password">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
-                        </div>
-                        <div class="form-group">
-                        <label for ="confirmPassword">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
-                        </div>
+    <div class="container mt-5">         
+        <div class="row">             
+            <div class="col-lg-6 col-md-6 col-12 mt-0">                 
+                <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" class="img-fluid" alt="login-img">             
+            </div>             
+            <div class="col-lg-6 col-md-6 col-12 mt-5">                     
+                <form id="signUpForm" action="" onsubmit="SignUp()">                     
+                    <div class="form-group">                         
+                        <label for="name">Tên</label>                         
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên của bạn" required>                     
+                    </div>                     
+                    <div class="form-group">                         
+                        <label for="email">Email</label>                         
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn" required>                     
+                    </div>                     
+                    <div class="form-group">                         
+                        <label for="password">Mật khẩu</label>                         
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>                     
+                    </div>                     
+                    <div class="form-group">                         
+                        <label for="confirmPassword">Nhập lại mật khẩu</label>                         
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>                     
+                    </div>                     
 
-                        <div class="form-group">
-                        <label for ="address">Địa chỉ</label>
-                        <input type="address" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ cụ thế" required>
-                        </div>
+                    <!-- Địa chỉ khu vực Hồ Chí Minh -->
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Số nhà, tên đường" required>
+                    </div>
 
-                        
-                        <div class="form-group">
-                        <label for ="sdt">SDT</label>
-                        <input type="sdt" class="form-control" id="sdt" name="sdt" placeholder="Nhập sdt" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="district">Quận/Huyện</label>
+                        <select class="form-control" id="district" name="district" required>
+                            <option value="">Chọn Quận/Huyện</option>
+                            <option value="Quận 1">Quận 1</option>
+                            <option value="Quận 2">Quận 2</option>
+                            <option value="Quận 3">Quận 3</option>
+                            <option value="Quận 4">Quận 4</option>
+                            <option value="Quận 5">Quận 5</option>
+                            <option value="Quận 6">Quận 6</option>
+                            <option value="Quận 7">Quận 7</option>
+                            <option value="Quận 8">Quận 8</option>
+                            <option value="Quận 9">Quận 9</option>
+                            <option value="Quận 10">Quận 10</option>
+                            <option value="Quận 11">Quận 11</option>
+                            <option value="Quận 12">Quận 12</option>
+                            <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                            <option value="Quận Tân Bình">Quận Tân Bình</option>
+                            <option value="Quận Gò Vấp">Quận Gò Vấp</option>
+                            <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                            <option value="Quận Thủ Đức">Quận Thủ Đức</option>
+                            <option value="Huyện Bình Chánh">Huyện Bình Chánh</option>
+                            <option value="Huyện Củ Chi">Huyện Củ Chi</option>
+                            <option value="Huyện Hóc Môn">Huyện Hóc Môn</option>
+                            <option value="Huyện Nhà Bè">Huyện Nhà Bè</option>
+                            <option value="Huyện Cần Giờ">Huyện Cần Giờ</option>
+                        </select>
+                    </div>
 
-                        <button type="submit" class="btn btn-dark" onclick="signUp()">Đăng ký</button>
-                    <p class="py-2 text-center">Bạn có tài khoản r?<a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html" id="showSignUp">Đăng Nhập</a></p>
+                    <div class="form-group">                         
+                        <label for="sdt">Số điện thoại</label>                         
+                        <input type="tel" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" required>                     
+                    </div>                      
 
-                </form>
-            </div>
-        </div>
-    </div>
+                    <button type="submit" class="btn btn-dark" onclick="signUp()">Đăng ký</button>                     
+                    <p class="py-2 text-center">Bạn có tài khoản rồi? <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html" id="showSignUp">Đăng Nhập</a></p>                  
+                </form>             
+            </div>         
+        </div>     
+    </div> 
 
 <footer class="mt-5 p-5 bg-dark">
   <div class="row conatiner mx-auto pt-5">

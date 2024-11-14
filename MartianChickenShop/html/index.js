@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.style.width = "0";
     });
 });
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('closeBtn').addEventListener('click', function() {
+        var sidebar = document.getElementById("mySideBar");
+        sidebar.style.width = "0";
+    });
+});
 
 // Hàm mở/đóng sidebar
 function toggleMenu() {
@@ -138,3 +144,14 @@ function validateForm() {
     // Form hợp lệ
     return true;
 }
+
+document.querySelector('.toggle-menu').addEventListener('click', function() {
+    var submenu = this.parentElement.nextElementSibling; // Chọn <ul> của "THỰC ĐƠN"
+    
+    // Toggle hiển thị submenu
+    if (submenu.style.display === "none" || submenu.style.display === "") {
+        submenu.style.display = "block"; // Hiển thị submenu
+    } else {
+        submenu.style.display = "none"; // Ẩn submenu
+    }
+});

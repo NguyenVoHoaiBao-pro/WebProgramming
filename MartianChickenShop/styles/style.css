@@ -1,113 +1,13 @@
 /* Nabar CSS */
-/* Sidebar styling */
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: #333;
-  overflow-x: hidden;
-  transition: 0.3s;
-  z-index: 1000;
-}
 
-.sidebar-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #343A40;
-  padding: 10px;
-  position: relative;
-}
-
-.logo {
- 
-  width: auto;
-  height: 75px;
-
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 0px;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
-}
-
-.sidebar-content {
-  padding: 20px;
-}
-
-.menu-section {
-  margin-bottom: 10px;
-}
-
-.menu-section h4 {
-  color: white;
-}
-
-.menu-section ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.menu-section li {
-  margin: 10px 0;
-}
-
-.menu-section li a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.menu-section li a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar.open {
-  width: 400px;
-}
-
-#toggle-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-}
-
-#toggle-btn:hover {
-  background-color: #444;
-}
-
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  display: none;
-  /* Ẩn nút khi chưa cần */
-}
 
 .navbar {
   font-size: 18px;
   color: white;
   top: 0;
   left: 0;
-  height: 70px;
+  height: 90px;
+  align-items: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -129,7 +29,7 @@
 
 .navbar i {
   font-size: 21px;
-  padding: 0 7px;
+  padding: 0 20px;
   cursor: pointer;
   font-weight: 500;
   transition: 0.3s eae;
@@ -139,7 +39,7 @@
 #nav-icons {
   margin-left: 25px;
   margin-right: 0px;
-  
+
 }
 
 /* Mobile Nav */
@@ -154,49 +54,238 @@
   cursor: pointer;
   font-weight: 700;
   transition: 0.3s ease;
-  
+
 }
+
 
 #nav-bar-icon:hover,
 #nav-bar-icon .active {
-  color: lightblue;
-}
-
-@media only screen and (max-width: 991px) {
-
-  body>nav>div>button:hover,
-  body>nav>div>button:focus {
-    background-color: #BC1F23;
-  }
-
-  body>nav>div>button:hover #nav-bar-icon,
-  body>nav>div>button:focus #nav-bar-icon {
-    color: lightblue;
-  }
-
-  #nav-icons {
-    margin: 0px;
-  }
-
-  #navbarSupportedContent>ul {
-    margin: 1rem;
-    justify-content: flex-end;
-    align-items: right;
-    text-align: right;
-  }
-
-  #navbarSupportedContent>ul>li:nth-child(n)>a {
-    padding: 10px 0px;
-  }
+  color: black;
 }
 
 #logo-img {
-  height: 60px;
+  height: 70px;
   width: auto;
   object-fit: cover;
   border-radius: 15px;
   margin-left: 20px;
 }
+
+
+.search-bar {
+  width: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: solid #BC1F23 2px;
+  margin-left: 50px;
+
+}
+
+.search-input {
+  width: 85%;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  height: 40px;
+}
+
+.search-button {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #BC1F23;
+  border: solid #BC1F23 10px;
+  height: 40px;
+}
+
+.search-button i {
+  font-size: 20px;
+  color: white;
+}
+
+@media (max-width: 991px) {
+  .navbar {
+    height: 120px;
+  }
+
+  .search-bar {
+    display: none !important;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+/* Hiển thị sidebar khi mở */
+.sidebar.open {
+  width: 400px;
+  /* Kích thước của sidebar khi mở */
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #343A40;
+  padding: 10px;
+  position: relative;
+}
+
+.logo {
+  width: auto;
+  height: 75px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar a {
+  color: white;
+  /* Màu chữ mặc định cho liên kết */
+  text-decoration: none;
+  /* Loại bỏ gạch chân mặc định */
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+
+.menu-section li a {
+  font-size: 16px;
+  padding: 5px 0;
+  display: block;
+  /* Đảm bảo liên kết chiếm toàn bộ chiều rộng */
+}
+
+.menu-section li a:hover {
+  color: #fff;
+  /* Màu chữ khi hover */
+  text-decoration: none;
+}
+
+.menu-section {
+  margin-bottom: 10px;
+}
+
+.menu-section h4 {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.menu-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.menu-section li {
+  margin: 10px 0;
+}
+
+.menu-section li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  padding: 5px 0;
+}
+
+.menu-section li a:hover {
+  color: #f1f1f1;
+}
+.submenu {
+    display: none; /* Ẩn */
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.submenu li {
+    margin: 10px 0;
+}
+
+.menu-section h4 a {
+    cursor: pointer; /* Thêm con trỏ khi hover */
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+/* Sidebar khi mở */
+.sidebar.open {
+  width: 400px;
+  /* Chiều rộng của sidebar khi mở */
+}
+
+
+#toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 1000px;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#toggle-btn:hover {
+  background-color: #444;
+}
+
+
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
+  /* Ẩn nút khi chưa cần */
+}
+
 
 /* Home Section CSS */
 
@@ -672,42 +761,4 @@ footer .footer-img {
 #cart-table>tbody #trash-btn {
   border: none;
   background-color: transparent;
-}
-
-.search-bar {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: solid #BC1F23 2px; 
-  
-}
-
-.search-input {
-  width: 85%;
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  height: 40px;  /* Đặt chiều cao cố định cho input */
-}
-
-.search-button {
-  width: 15%; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: #BC1F23; 
-  border: solid #BC1F23 10px; 
-  height: 40px;  /* Đặt chiều cao cố định cho button */
-}
-
-.search-button i {
-  font-size: 20px;
-  color: white; 
 }

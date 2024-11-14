@@ -163,15 +163,18 @@
   cursor: pointer;
 }
 
+
 .sidebar-content {
-  padding: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 .sidebar a {
   color: white;
-  /* Màu chữ mặc định cho liên kết */
   text-decoration: none;
-  /* Loại bỏ gạch chân mặc định */
 }
 
 .sidebar a:hover {
@@ -184,7 +187,6 @@
   font-size: 16px;
   padding: 5px 0;
   display: block;
-  /* Đảm bảo liên kết chiếm toàn bộ chiều rộng */
 }
 
 .menu-section li a:hover {
@@ -194,7 +196,7 @@
 }
 
 .menu-section {
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .menu-section h4 {
@@ -224,27 +226,38 @@
 .menu-section li a:hover {
   color: #f1f1f1;
 }
+
+.menu-section i {
+  color: white;
+}
+.user{
+  margin-top:80px;
+}
+
 .submenu {
-    display: none; /* Ẩn */
-    list-style-type: none;
-    padding-left: 0;
+  display: none;
+  /* Ẩn */
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .submenu li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .menu-section h4 a {
-    cursor: pointer; /* Thêm con trỏ khi hover */
+  cursor: pointer;
+  /* Thêm con trỏ khi hover */
 }
 
 .sidebar a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
+/* Khi hover vào link */
 .sidebar a:hover {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
 
 /* Sidebar khi mở */

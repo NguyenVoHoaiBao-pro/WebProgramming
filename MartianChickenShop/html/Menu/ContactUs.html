@@ -50,21 +50,24 @@
     </style>
 </head>
 <body>
-     <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+       <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">
-            <!-- <div class="col-1"></div> -->
+                     <!-- <div class="col-1"></div> -->
             <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <button class="navbar-toggler" onclick="toggleMenu()">
                 <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
             </button>
+
+             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
+                        <a class="nav-link " href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                          <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a>
-                       
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa Hàng</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Quality</a>
@@ -73,68 +76,64 @@
                         <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">Thông tin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Liên hệ</a>
+                        <a class="nav-link active" href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">Liên hệ</a>
 
                     </li>
                     <li class="nav-item" id="nav-icons">
                         <!-- <i class="bi bi-search"></i> -->
-                        <a href="./Login.html"><i class="bi bi-person-fill"></i></a>
-                        <a href="./Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
-                        <!-- Biểu tượng menu 3 gạch -->
-                        <i class="bi bi-list menu-icon" onclick="toggleMenu()"></i>
-
-                        <!-- Sidebar menu -->
-                        <div id="mySideBar" class="sidebar">
-                            <div class="sidebar-header">
-                                <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
-                                <span id="closeBtn" class="close-btn">&times;</span> <!-- Dấu 'X' để đóng sidebar -->
-                            </div>
-                            <div class="sidebar-content">
-                                <!-- Nội dung sidebar -->
-                                <div class="menu-section">
-                                    <h4>DANH MỤC MÓN ĂN</h4>
-                                    <ul>
-                                        <li><a href="#">Ưu Đãi</a></li>
-                                        <li><a href="#">Món Mới</a></li>
-                                        <li><a href="#">Combo 1 Người</a></li>
-                                        <li><a href="#">Combo Nhóm</a></li>
-                                        <li><a href="#">Gà Rán</a></li>
-                                    </ul>
-                                </div>
-                                <div class="menu-section">
-                                    <h4>VỀ MFS</h4>
-                                    <ul>
-                                        <li><a href="#">Câu Chuyện Của Chúng Tôi</a></li>
-                                        <li><a href="#">Tin Khuyến Mãi</a></li>
-                                        <li><a href="#">Tin tức MFS</a></li>
-                                        <li><a href="#">Tuyển dụng</a></li>
-                                        <li><a href="#">Đặt tiệc Sinh nhật</a></li>
-                                    </ul>
-                                </div>
-                                <div class="menu-section">
-                                    <h4>LIÊN HỆ MFS</h4>
-                                    <ul>
-                                        <li><a href="#">Theo dõi đơn hàng</a></li>
-                                        <li><a href="#">Liên hệ MFS</a></li>
-                                    </ul>
-                                </div>
-                                <div class="menu-section">
-                                    <h4>CHÍNH SÁCH</h4>
-                                    <ul>
-                                        <li><a href="#">Chính sách hoạt động</a></li>
-                                        <li><a href="#">Chính sách và quy định</a></li>
-                                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
                     </li>
+                    
                 </ul>
-            </div>
+              </div>
+
             
-        </div>
-    </nav>
-    
+                <!-- Biểu tượng menu để mở/đóng sidebar
+                <i class="bi bi-list menu-icon" onclick="toggleMenu()" id="menu-btn"></i>
+
+                <-- Sidebar menu -->
+           <div id="mySideBar" class="sidebar">
+              <div class="sidebar-header">
+                  <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                  <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
+              </div>
+              <div class="sidebar-content">
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/index.html">TRANG CHỦ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                      
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
+                      <ul class="submenu">
+                          <li><a href="#">Combo gà phải thử</a></li>
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                      </ul>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">DỊCH VỤ</a></h4>
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">TUYỂN DỤNG</a></h4>
+                  </div>
+
+                   <div class="menu-section user">
+                      <h4><i class="bi bi-person"></i><a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
+                      
+                  </div>
+              </div>
+          </div>
+        </nav>
 
     <!-- ContactUs section -->
     <section class="ContactUs-section mt-5 py-5">

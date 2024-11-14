@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Hàm mở/đóng sidebar
 function toggleMenu() {
     var sidebar = document.getElementById("mySideBar");
-    if (sidebar.style.width === "350px") {
+    if (sidebar.style.width === "300px") {
         sidebar.style.width = "0";
     } else {
-        sidebar.style.width = "350px";
+        sidebar.style.width = "300px";
     }
     // Đảm bảo sự kiện đóng sidebar luôn hoạt động
     document.getElementById('closeBtn').addEventListener('click', function() {
@@ -145,13 +145,23 @@ function validateForm() {
     return true;
 }
 
-document.querySelector('.toggle-menu').addEventListener('click', function() {
-    var submenu = this.parentElement.nextElementSibling; // Chọn <ul> của "THỰC ĐƠN"
+// Đảm bảo JavaScript chỉ chạy sau khi trang đã tải
+document.addEventListener("DOMContentLoaded", function() {
+    // Lấy tất cả các liên kết với class 'toggle-menu' (là "THỰC ĐƠN")
+    var toggleMenus = document.querySelectorAll('.toggle-menu');
     
-    // Toggle hiển thị submenu
-    if (submenu.style.display === "none" || submenu.style.display === "") {
-        submenu.style.display = "block"; // Hiển thị submenu
-    } else {
-        submenu.style.display = "none"; // Ẩn submenu
-    }
+    // Lặp qua tất cả các liên kết và thêm sự kiện click
+    toggleMenus.forEach(function(menu) {
+        menu.addEventListener('click', function() {
+            // Tìm <ul> kế tiếp sau <h4> (submenu)
+            var submenu = menu.closest('.menu-section').querySelector('.submenu');
+            
+            // Toggle hiển thị submenu
+            if (submenu.style.display === "none" || submenu.style.display === "") {
+                submenu.style.display = "block"; // Hiển thị submenu
+            } else {
+                submenu.style.display = "none"; // Ẩn submenu
+            }
+        });
+    });
 });

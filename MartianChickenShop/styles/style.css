@@ -22,14 +22,16 @@
 }
 
 .logo {
+ 
   width: auto;
-  height: 80px;
+  height: 75px;
+
 }
 
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 20px;
+  right: 0px;
   font-size: 30px;
   color: white;
   cursor: pointer;
@@ -40,7 +42,7 @@
 }
 
 .menu-section {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .menu-section h4 {
@@ -105,12 +107,12 @@
   color: white;
   top: 0;
   left: 0;
-  height: 100px;
+  height: 70px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-light .navbar-nav .nav-item .nav-link {
-  padding: 0 20px;
+  padding: 0 10px;
   color: white;
   transition: 0.3s ease;
 }
@@ -135,8 +137,9 @@
 }
 
 #nav-icons {
-  margin-left: 45px;
-  margin-right: 50px;
+  margin-left: 25px;
+  margin-right: 0px;
+  
 }
 
 /* Mobile Nav */
@@ -151,6 +154,7 @@
   cursor: pointer;
   font-weight: 700;
   transition: 0.3s ease;
+  
 }
 
 #nav-bar-icon:hover,
@@ -680,6 +684,7 @@ footer .footer-img {
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: solid #BC1F23 2px; 
+  
 }
 
 .search-input {

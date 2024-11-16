@@ -111,6 +111,49 @@
   color: white;
 }
 
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 360px;
+    width: 500px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 10;
+    display: none; 
+}
+
+.search-result {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f8f8f8; 
+    color: #333333;
+}
+
+.search-result:last-child {
+    border-bottom: none;
+}
+
+.search-result:hover {
+    background-color: #e6e6e6; 
+    color: #000; 
+}
+
+.search-result img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.search-result p {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+
 @media (max-width: 1500px) {
   .navbar {
     height: 120px;

@@ -1,34 +1,59 @@
-// Mẫu dữ liệu người dùng
+// Mẫu dữ liệu người dùng với vai trò
 const users = [
-    { id: 1, name: "Nguyễn Văn A", email: "a@example.com", role: "Admin" },
-    { id: 2, name: "Trần Thị B", email: "b@example.com", role: "User" }
+    { username: "user1", password: "password1", role: "user" },
+    { username: "user2", password: "password2", role: "user" },
+    { username: "user3", password: "password3", role: "user" },
+    { username: "user4", password: "password4", role: "user" },
+    { username: "user5", password: "password5", role: "user" },
+    { username: "admin@gmail.com", password: "admin123", role: "admin" }
 ];
 
-// Mẫu dữ liệu sản phẩm
+// Mẫu dữ liệu sản phẩm với số lượng
 const products = [
-    { id: 1, name: "Gà Sao", price: 50000, quantity: 10 },
-    { id: 2, name: "Gà Hấp Hành", price: 70000, quantity: 5 }
+    { id: 1, name: "Cánh gà kiểu Thái", price: "50000", quantity: 10, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png" },
+    { id: 2, name: "Cánh gà giòn", price: "35000", quantity: 15, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png" },
+    { id: 3, name: "Cánh gà phô mai", price: "45000", quantity: 8, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png" }
 ];
 
-// Hiển thị danh sách người dùng
-function displayUsers() {
-    const userTable = document.getElementById("userTable");
-    userTable.innerHTML = "";
+let currentUser = null; // Biến lưu trữ người dùng hiện tại
 
-    users.forEach((user, index) => {
-        const row = `
-            <tr>
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.role}</td>
-                <td>
-                    <button class="btn btn-danger" onclick="deleteUser(${index})">Xóa</button>
-                </td>
-            </tr>
-        `;
-        userTable.innerHTML += row;
-    });
+// Hàm đăng nhập
+function login(username, password) {
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        currentUser = user;
+        alert(`Đăng nhập thành công! Xin chào ${user.role === "admin" ? "Admin" : "User"} ${username}`);
+        if (user.role === "admin") {
+            showUsersSection();
+        } else {
+            showProductsSection();
+        }
+    } else {
+        alert("Tên đăng nhập hoặc mật khẩu không đúng.");
+    }
+}
+
+// Hiển thị danh sách người dùng (chỉ admin)
+function displayUsers() {
+    if (currentUser && currentUser.role === "admin") {
+        const userTable = document.getElementById("userTable");
+        userTable.innerHTML = "";
+
+        users.forEach((user, index) => {
+            const row = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.password}</td>
+                    <td>${user.role}</td>
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteUser(${index})">Xóa</button>
+                    </td>
+                </tr>
+            `;
+            userTable.innerHTML += row;
+        });
+    }
 }
 
 // Hiển thị danh sách sản phẩm
@@ -43,6 +68,7 @@ function displayProducts() {
                 <td>${product.name}</td>
                 <td>${product.price} VND</td>
                 <td>${product.quantity}</td>
+                <td><img src="${product.image}" alt="${product.name}" style="width: 100px; height: auto;"></td>
                 <td>
                     <button class="btn btn-danger" onclick="deleteProduct(${index})">Xóa</button>
                 </td>
@@ -52,25 +78,32 @@ function displayProducts() {
     });
 }
 
-// Thêm người dùng
+// Thêm người dùng (chỉ admin)
 function addUser() {
-    const id = users.length + 1;
-    const name = prompt("Nhập tên người dùng:");
-    const email = prompt("Nhập email:");
-    const role = prompt("Nhập vai trò (Admin/User):");
+    if (currentUser && currentUser.role === "admin") {
+        const username = prompt("Nhập tên người dùng:");
+        const password = prompt("Nhập mật khẩu:");
+        const role = prompt("Nhập vai trò (admin/user):");
 
-    if (name && email && role) {
-        users.push({ id, name, email, role });
-        displayUsers();
+        if (username && password && role) {
+            users.push({ username, password, role });
+            displayUsers();
+        } else {
+            alert("Vui lòng nhập đầy đủ thông tin.");
+        }
     } else {
-        alert("Vui lòng nhập đầy đủ thông tin.");
+        alert("Chỉ admin mới có quyền thêm người dùng.");
     }
 }
 
-// Xóa người dùng
+// Xóa người dùng (chỉ admin)
 function deleteUser(index) {
-    users.splice(index, 1);
-    displayUsers();
+    if (currentUser && currentUser.role === "admin") {
+        users.splice(index, 1);
+        displayUsers();
+    } else {
+        alert("Chỉ admin mới có quyền xóa người dùng.");
+    }
 }
 
 // Thêm sản phẩm
@@ -79,9 +112,10 @@ function addProduct() {
     const name = prompt("Nhập tên sản phẩm:");
     const price = prompt("Nhập giá:");
     const quantity = prompt("Nhập số lượng:");
+    const image = prompt("Nhập đường dẫn hình ảnh:");
 
-    if (name && price && quantity) {
-        products.push({ id, name, price, quantity });
+    if (name && price && quantity && image) {
+        products.push({ id, name, price, quantity, image });
         displayProducts();
     } else {
         alert("Vui lòng nhập đầy đủ thông tin.");
@@ -94,8 +128,28 @@ function deleteProduct(index) {
     displayProducts();
 }
 
-// Khởi tạo bảng khi tải trang
-document.addEventListener("DOMContentLoaded", () => {
-    displayUsers();
+// Hiển thị mục Quản lý Người Dùng và ẩn Quản lý Sản Phẩm (chỉ admin)
+function showUsersSection() {
+    if (currentUser && currentUser.role === "admin") {
+        document.getElementById("users-section").style.display = "block";
+        document.getElementById("products-section").style.display = "none";
+        displayUsers();
+    } else {
+        alert("Chỉ admin mới được truy cập vào mục Quản lý Người Dùng.");
+    }
+}
+
+// Hiển thị mục Quản lý Sản Phẩm và ẩn Quản lý Người Dùng
+function showProductsSection() {
+    document.getElementById("products-section").style.display = "block";
+    document.getElementById("users-section").style.display = "none";
     displayProducts();
+}
+
+// Khởi tạo chế độ hiển thị mặc định khi tải trang
+document.addEventListener("DOMContentLoaded", () => {
+    login("admin@gmail.com", "admin123");
+
+    document.querySelector("a[href='#users-section']").onclick = showUsersSection;
+    document.querySelector("a[href='#products-section']").onclick = showProductsSection;
 });

@@ -169,10 +169,10 @@
                 <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" class="img-fluid" alt="login-img">
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-5 pt-5">
-                <form id="loginForm" action="" onsubmit="login()">
+                <form id="loginForm" action="" onsubmit="login(event)">
                     <div class="form-group">
-                        <label for="email">Email / Sdt</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email/sdt" required>
+                        <label for="username">Tài khoản</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Mật khẩu</label>
@@ -181,7 +181,7 @@
                     <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
                     <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html" id="showSignUp">Đăng ký</a></p>
                 </form>
-                    <p id="loginSuccess" class="alert alert-success" style="display: none;">Bạn đã đăng nhập thành công!</p>
+                <p id="loginSuccess" class="alert alert-success" style="display: none;">Bạn đã đăng nhập thành công!</p>
             </div>
         </div>
     </div>

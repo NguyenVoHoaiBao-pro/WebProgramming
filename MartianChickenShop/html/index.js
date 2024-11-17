@@ -79,10 +79,25 @@ function removeFromCart(productId) {
 // Hàm đăng nhập
 function login(event) {
     event.preventDefault();
-    let email = document.getElementById('email').value;
-    
-    alert('Đăng nhập thành công với ' + email);
-    window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/index.html';
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    // Tìm kiếm người dùng trong danh sách users
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+        alert('Đăng nhập thành công với tài khoản: ' + username);
+        
+        if (user.role === 'admin') {
+            // Điều hướng đến trang quản trị
+            window.location.href = '/WebProgramming/MartianChickenShop/html/AdminDashboard.html';
+        } else {
+            // Điều hướng đến trang menu
+            window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/index.html';
+        }
+    } else {
+        alert('Sai tên đăng nhập hoặc mật khẩu.');
+    }
 }
 
 // Hàm xử lý liên hệ
@@ -217,3 +232,12 @@ function clearSearchResults() {
     resultContainer.innerHTML = ''; // Xóa tất cả kết quả
     resultContainer.style.display = 'none'; // Ẩn kết quả
 }
+const users = [
+    { username: "user1", password: "password1", role: "user" },
+    { username: "user2", password: "password2", role: "user" },
+    { username: "user3", password: "password3", role: "user" },
+    { username: "user4", password: "password4", role: "user" },
+    { username: "user5", password: "password5", role: "user" },
+    { username: "admin@gmail.com", password: "admin123", role: "admin" }
+  ];
+  

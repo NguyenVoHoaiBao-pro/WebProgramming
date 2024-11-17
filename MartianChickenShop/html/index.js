@@ -90,7 +90,7 @@ function login(event) {
         
         if (user.role === 'admin') {
             // Điều hướng đến trang quản trị
-            window.location.href = '/WebProgramming/MartianChickenShop/html/AdminDashboard.html';
+            window.location.href = '/WebProgramming/MartianChickenShop/html/Admin.html';
         } else {
             // Điều hướng đến trang menu
             window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/index.html';

@@ -65,26 +65,65 @@ const productList = {
 //     window.localStorage.setItem('cart', JSON.stringify(cart));
 //     alert('Sản phẩm đã được thêm vào giỏ hàng');
 // }
+// function addToCart() {
+//     const isLoggedIn = window.localStorage.getItem('isLoggedIn');
+//     if (!isLoggedIn) {
+//         alert('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
+//         window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/login.html';
+//         return; 
+//     }
+
+//     let productId = window.location.href.split('/').pop().split('.')[0];
+//     productId = productId.length == 9 ? productId[8] : productId[8] + productId[9];
+
+//     let noi = document.getElementById('noi').value; 
+//     let cart = window.localStorage.getItem('cart');
+//     if (cart == null) {
+//         cart = {};
+//     } else {
+//         cart = JSON.parse(cart);
+//     }
+//     cart[productId] = noi; 
+//     window.localStorage.setItem('cart', JSON.stringify(cart));
+//     alert('Sản phẩm đã được thêm vào giỏ hàng');
+// }
+
+
+
 function addToCart() {
     const isLoggedIn = window.localStorage.getItem('isLoggedIn');
     if (!isLoggedIn) {
         alert('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
-        window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/login.html';
+        window.location.href = '/WebProgramming/MartianChickenShop/html/login.html';
         return; 
     }
 
     let productId = window.location.href.split('/').pop().split('.')[0];
     productId = productId.length == 9 ? productId[8] : productId[8] + productId[9];
 
-    let noi = document.getElementById('noi').value; 
+    let quantityToAdd = parseInt(document.getElementById('noi').value);
+
+    let product = products.find(p => p.id == productId);
+    if (!product) {
+        alert('Sản phẩm không tồn tại.');
+        return;
+    }
+
+    if (quantityToAdd > product.quantity) {
+        alert(`Số lượng yêu cầu vượt quá số lượng có sẵn. Chỉ còn ${product.quantity} sản phẩm.`);
+        return; 
+    }
+
     let cart = window.localStorage.getItem('cart');
     if (cart == null) {
         cart = {};
     } else {
         cart = JSON.parse(cart);
     }
-    cart[productId] = noi; 
-    window.localStorage.setItem('cart', JSON.stringify(cart));
+
+    cart[productId] = quantityToAdd; 
+    window.localStorage.setItem('cart', JSON.stringify(cart)); 
+
     alert('Sản phẩm đã được thêm vào giỏ hàng');
 }
 

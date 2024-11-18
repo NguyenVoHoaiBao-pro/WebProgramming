@@ -49,19 +49,41 @@ const productList = {
 
 
 // Hàm thêm sản phẩm vào giỏ hàng
+// function addToCart() {
+//     let productId = window.location.href.split('/').pop().split('.')[0];
+//     // Lấy productId từ URL
+//     productId = productId.length == 9 ? productId[8] : productId[8] + productId[9];
+
+//     let noi = document.getElementById('noi').value;
+//     let cart = window.localStorage.getItem('cart');
+//     if (cart == null) {
+//         cart = {};
+//     } else {
+//         cart = JSON.parse(cart);
+//     }
+//     cart[productId] = noi;
+//     window.localStorage.setItem('cart', JSON.stringify(cart));
+//     alert('Sản phẩm đã được thêm vào giỏ hàng');
+// }
 function addToCart() {
+    const isLoggedIn = window.localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+        alert('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
+        window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/login.html';
+        return; 
+    }
+
     let productId = window.location.href.split('/').pop().split('.')[0];
-    // Lấy productId từ URL
     productId = productId.length == 9 ? productId[8] : productId[8] + productId[9];
 
-    let noi = document.getElementById('noi').value;
+    let noi = document.getElementById('noi').value; 
     let cart = window.localStorage.getItem('cart');
     if (cart == null) {
         cart = {};
     } else {
         cart = JSON.parse(cart);
     }
-    cart[productId] = noi;
+    cart[productId] = noi; 
     window.localStorage.setItem('cart', JSON.stringify(cart));
     alert('Sản phẩm đã được thêm vào giỏ hàng');
 }
@@ -97,7 +119,7 @@ function login(event) {
             window.location.href = '/WebProgramming/MartianChickenShop/html/Admin.html';
         } else {
             // Điều hướng đến trang menu
-            window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/index.html';
+            window.location.href = '/WebProgramming/MartianChickenShop/html/index.html';
         }
     } else {
         alert('Sai tên đăng nhập hoặc mật khẩu.');

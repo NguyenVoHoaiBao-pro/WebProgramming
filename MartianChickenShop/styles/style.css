@@ -970,7 +970,7 @@ button:hover {
   font-size: 12px;
   color: #999;
 }
-.btn-review {
+.btn-review{
     background-color: black;
     color: white; 
     border: none;
@@ -980,7 +980,7 @@ button:hover {
     transition: background-color 0.3s;
 }
 
-.btn-review:hover {
+.btn-review:hover{
     background-color: #BC1F23; /* Màu nền tối hơn khi hover */
 }
 

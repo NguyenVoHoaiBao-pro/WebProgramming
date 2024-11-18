@@ -45,6 +45,9 @@ const productList = {
     }
 };
 
+
+
+
 // Hàm thêm sản phẩm vào giỏ hàng
 function addToCart() {
     let productId = window.location.href.split('/').pop().split('.')[0];
@@ -62,6 +65,7 @@ function addToCart() {
     window.localStorage.setItem('cart', JSON.stringify(cart));
     alert('Sản phẩm đã được thêm vào giỏ hàng');
 }
+
 
 // Hàm xóa sản phẩm khỏi giỏ hàng
 function removeFromCart(productId) {
@@ -100,7 +104,6 @@ function login(event) {
     }
 }
 
-// Hàm xử lý liên hệ
 function contactUs(event) {
     event.preventDefault();
     let name = document.getElementById('name').value;
@@ -240,4 +243,36 @@ const users = [
     { username: "user5", password: "password5", role: "user" },
     { username: "admin@gmail.com", password: "admin123", role: "admin" }
   ];
-  
+
+const products = [
+    { id: 1, name: "Cánh gà kiểu Thái", price: "50000", quantity: 10, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png" },
+    { id: 2, name: "Cánh gà giòn", price: "35000", quantity: 15, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png" },
+    { id: 3, name: "Cánh gà phô mai", price: "45000", quantity: 8, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png" }
+];
+
+
+// Hàm lấy productId từ URL
+function getProductIdFromUrl() {
+    const url = window.location.href; 
+    const fileName = url.split('/').pop(); 
+    const productId = parseInt(fileName.split('sproduct')[1].split('.html')[0]); 
+    return productId;
+}
+
+function displayAvailableQuantity() {
+    const productId = getProductIdFromUrl(); 
+    const product = products.find(p => p.id === productId); 
+
+    if (product) {
+        const quantityElement = document.getElementById('available-quantity'); 
+        if (quantityElement) {
+            quantityElement.textContent = `${product.quantity} sản phẩm có sẵn`;
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", displayAvailableQuantity);
+
+
+
+

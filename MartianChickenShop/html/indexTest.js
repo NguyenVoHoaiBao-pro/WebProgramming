@@ -153,3 +153,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("a[href='#users-section']").onclick = showUsersSection;
     document.querySelector("a[href='#products-section']").onclick = showProductsSection;
 });
+
+document.getElementById("available-quantity").textContent = product.quantity;

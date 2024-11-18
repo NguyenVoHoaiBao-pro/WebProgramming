@@ -45,6 +45,7 @@
             opacity: 1;
             transition: 0.3s all;
         }
+
     </style>
 </head>
 <body>
@@ -145,7 +146,7 @@
             <div class="col-lg-6 col-md-12 col-12">
                 <h6 class="text-secondary mt-5" onclick="window.location.href = 'sproduct1.html';">Trang chủ / Sản phẩm</h6>
                 <h3 class="pt-3 pb-2">Cánh gà kiểu Thái</h3>
-                <h2 class="p"> 50.000 đ</h2>
+                <h2 class="p">50.000 đ</h2>
                 <span class="bold">Số lượng: </span><input id="noi" class="my-3" type="number" value="1" min="1">
                 <span class="bold"><span id="available-quantity"></span></span><br>
                 <button class="buy-btn" onclick="addToCart()">Thêm vào giỏ hàng</button>
@@ -155,7 +156,80 @@
         </div>
     </section>
 
-    <!-- Related Product section -->
+    <!-- Product Review Section -->
+        <section class="container my-5">
+            <h3 class="text-center pb-3">Đánh giá sản phẩm</h3>
+            <hr class="border border-danger border-2 opacity-75 mx-auto mb-4">
+            <div class="rating-summary">
+      <div class="rating-score">5 trên 5</div>
+      <div class="stars">★★★★★</div>
+      <div class="filter-buttons">
+        <button class="active">Tất Cả</button>
+        <button>5 Sao (3)</button>
+        <button>4 Sao (0)</button>
+        <button>3 Sao (0)</button>
+        <button>2 Sao (0)</button>
+        <button>1 Sao (0)</button>
+      </div>
+    </div>
+
+        <div class="reviews">
+        <div class="review">
+            <div class="user-avatar">A</div>
+            <div class="review-content">
+            <p class="username">anhtruonguyenhong6879</p>
+            <div class="stars">★★★★★</div>
+            <p class="review-date">2024-02-19 23:14</p>
+            <p>Chất lượng sản phẩm: ok</p>
+            </div>
+        </div>
+
+        <div class="review">
+            <div class="user-avatar">T</div>
+            <div class="review-content">
+            <p class="username">trngiahuy159</p>
+            <div class="stars">★★★★★</div>
+            <p class="review-date">2024-02-16 16:18</p>
+            <p>Tuyệt vời</p>
+            </div>
+        </div>
+
+        <div class="review">
+            <div class="user-avatar">N</div>
+            <div class="review-content">
+            <p class="username">nambuiohoang857</p>
+            <div class="stars">★★★★★</div>
+            <p class="review-date">2023-11-24 19:18</p>
+            </div>
+        </div>
+        </div>
+
+            
+    <!-- Add a new review form -->
+    <div class="mt-5">
+        <h5>Để lại đánh giá của bạn</h5>
+        <form id="review-form">
+            <div class="form-group mt-3">
+                <label for="review-comment">Nhận xét của bạn</label>
+                <textarea class="form-control" id="review-comment" rows="4" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm" required></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="review-rating">Đánh giá:</label>
+                <select class="form-control" id="review-rating" required>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-review">Gửi đánh giá</button>
+        </form>
+    </div>
+</section>
+
+   
+     <!-- Related Product section -->
     <section id="featured" class="my-5 pb-5">
         <div class="container text-center mt-5 py-5">
             <h3>Những sản phẩm tương tự</h3>
@@ -193,7 +267,6 @@
         </div>
     </section>
 
-    
    <footer class="mt-5 p-5 bg-dark">
   <div class="row conatiner mx-auto pt-5">
     <div class="footer-one col-lg-3 col-md-6 col-12">

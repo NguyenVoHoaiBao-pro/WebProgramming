@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="/WebProgramming/MartianChickenShop/styles/style.css">
+     <link rel="icon" href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png" type="image/png">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="/WebProgramming/MartianChickenShop/html/index.js"></script>
+    <script
+      src="https://kit.fontawesome.com/cc9450bd42.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- bootstarp stackpath cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Bootstrap icons cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .small-img-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .small-img-col {
+            flex-basis: 24%;
+            cursor: pointer;
+        }
+        .sproduct input {
+            width: 50px;
+            height: 40px;
+            padding-left: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .sproduct input:focus {
+            outline: none;
+        }
+        .buy-btn {
+            background: #BC1F23;
+            color: aliceblue;
+            opacity: 1;
+            transition: 0.3s all;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Nav section -->
+             <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+        <div class="container-fluid mr-5">
+                     <!-- <div class="col-1"></div> -->
+            <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+            
+            <button class="navbar-toggler" onclick="toggleMenu()">
+                <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
+            </button>
+
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link " href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa Hàng</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Quality</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">Liên hệ</a>
+
+                    </li>
+                    <li class="nav-item" id="nav-icons">
+                        <!-- <i class="bi bi-search"></i> -->
+                       <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+                    </li>
+                    
+                </ul>
+              </div>
+
+            
+                <!-- Biểu tượng menu để mở/đóng sidebar
+                <i class="bi bi-list menu-icon" onclick="toggleMenu()" id="menu-btn"></i>
+
+                <-- Sidebar menu -->
+           <div id="mySideBar" class="sidebar">
+              <div class="sidebar-header">
+                  <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                  <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
+              </div>
+              <div class="sidebar-content">
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/index.html">TRANG CHỦ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                      
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
+                      <ul class="submenu">
+                          <li><a href="#">Combo gà phải thử</a></li>
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                      </ul>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">DỊCH VỤ</a></h4>
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">TUYỂN DỤNG</a></h4>
+                  </div>
+
+                   <div class="menu-section user">
+                      <h4><i class="bi bi-person"></i><a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
+                      
+                  </div>
+              </div>
+          </div>
+      </nav>
+
+
+    <!-- Product details section -->
+    <section class="container sproduct my-5 pt-5">
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-12 col-12">
+                <img class="img-fluid w-100 py-5" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png" id="MainImg" alt="product-img">
+            
+            </div>
+            <div class="col-lg-6 col-md-12 col-12">
+                <h6 class="text-secondary mt-5" onclick="window.location.href = 'sproduct1.html';">Trang chủ / Sản phẩm</h6>
+                <h3 class="pt-3 pb-2">Cánh gà kiểu Thái</h3>
+                <h2 class="p">50.000 đ</h2>
+                <span class="bold">Số lượng: </span><input id="noi" class="my-3" type="number" value="1" min="1">
+                <span class="bold"><span id="available-quantity"></span></span><br>
+                <button class="buy-btn" onclick="addToCart()">Thêm vào giỏ hàng</button>
+                <h4 class="mt-5 pb-3">Chi tiết sản phẩm</h4>
+                <span class="text-secondary">Cánh gà kiểu thái là sự kết hợp hoàn hảo giữa gà Việt Nam và hương liệu của Thái tạo nên vị ngon tuyệt vời của món ăn , phụ gia là chanh ớt cay nồng của Việt Nam tạo nên hương vị đặc trưng của món ăn.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Review Section -->
+        <section class="container my-5">
+            <h3 class="text-center pb-3">Đánh giá sản phẩm</h3>
+            <hr class="border border-danger border-2 opacity-75 mx-auto mb-4">
+            <div class="rating-summary">
+      <div class="rating-score">5 trên 5</div>
+      <div class="stars">★★★★★</div>
+      <div class="filter-buttons">
+        <button class="active">Tất Cả</button>
+        <button>5 Sao (3)</button>
+        <button>4 Sao (0)</button>
+        <button>3 Sao (0)</button>
+        <button>2 Sao (0)</button>
+        <button>1 Sao (0)</button>
+      </div>
+    </div>
+
+        <div class="reviews">
+        <div class="review">
+            <div class="user-avatar">A</div>
+            <div class="review-content">
+            <p class="username">anhtruonguyenhong6879</p>
+            <div class="stars">★★★★★</div>
+            <p class="review-date">2024-02-19 23:14</p>
+            <p>Chất lượng sản phẩm: ok</p>
+            </div>
+        </div>
+
+        <div class="review">
+            <div class="user-avatar">T</div>
+            <div class="review-content">
+            <p class="username">trngiahuy159</p>
+            <div class="stars">★★★★★</div>
+            <p class="review-date">2024-02-16 16:18</p>
+            <p>Tuyệt vời</p>
+            </div>
+        </div>
+
+        <div class="review">
+            <div class="user-avatar">N</div>
+            <div class="review-content">
+            <p class="username">nambuiohoang857</p>
+            <div class="stars">★★★★★</div>
+            <p class="review-date">2023-11-24 19:18</p>
+            </div>
+        </div>
+        </div>
+
+            
+    <!-- Add a new review form -->
+    <div class="mt-5">
+        <h5>Để lại đánh giá của bạn</h5>
+        <form id="review-form">
+            <div class="form-group mt-3">
+                <label for="review-comment">Nhận xét của bạn</label>
+                <textarea class="form-control" id="review-comment" rows="4" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm" required></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="review-rating">Đánh giá:</label>
+                <select class="form-control" id="review-rating" required>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-review">Gửi đánh giá</button>
+        </form>
+    </div>
+</section>
+
+   
+     <!-- Related Product section -->
+    <section id="featured" class="my-5 pb-5">
+        <div class="container text-center mt-5 py-5">
+            <h3>Những sản phẩm tương tự</h3>
+            <hr class="border border-danger border-2 opacity-75 mx-auto">
+        </div>
+        <div class="row mx-auto container-fluid">
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (4).png" alt="">
+               
+                <h5 class="product-name">Gà rán sốt cay xí muội</h5>
+                <h4 class="product-price">75.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = './sproduct4.html';">mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (104).png"" alt="">
+               
+                <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
+                <h4 class="product-price">65.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = './sproduct5.html';">Mua ngay</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (102).png"" alt="">
+               
+                <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
+                <h4 class="product-price">85.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = './sproduct6.html';">Mua ngay</button>
+            </div>
+            <div class="product container text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (103).png"" alt="">
+               
+                <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
+                <h4 class="product-price">55.000 đ</h4>
+                <button class="buy-btn" onclick="window.location.href = './sproduct7.html';">Mua ngay</button>
+            </div>
+        </div>
+    </section>
+
+   <footer class="mt-5 p-5 bg-dark">
+  <div class="row conatiner mx-auto pt-5">
+    <div class="footer-one col-lg-3 col-md-6 col-12">
+    
+      <img id="logo-img-footer" src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="logo">
+      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+    
+    </div>
+
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên kết nhanh</h5>
+      <ul class="text-uppercase list-unstyled">
+        <li><a href="index.html">trang chủ</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">thông tin</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">liên hệ</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">Giỏ hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+      <div>
+        <h6 class="text-uppercase">Địa chỉ</h6>
+        <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">điện thoại</h6>
+        <p>0849294483</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">Email</h6>
+        <p>MarsStore@gmail.com</p>
+      </div>
+    </div>
+    <div class="Photos col-lg-3 col-md-6 col-12">
+         <h5 class="pb-2">Các đơn vị tài trợ</h5>
+    <div class="row">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 3.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 2.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image.png" alt="leather-img">
+    </div>
+    </div>
+  <div class="copyright mt-5">
+    <div class="row container mx-auto">
+      <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <img src="img/payment.png" alt="payment..logo">
+      </div> -->
+
+      <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+        <p>ABK WEBSITE &copy; DESIGN 2024</p>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12">
+        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+        <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>  
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

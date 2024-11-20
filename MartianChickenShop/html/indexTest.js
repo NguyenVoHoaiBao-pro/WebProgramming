@@ -184,11 +184,15 @@ function signUp(event) {
         sdt
     };
 
-    // Lưu vào localStorage
+ 
+    // Lưu vào localStorage (tạm thời lưu trên trình duyệt)
     let users = JSON.parse(localStorage.getItem('users')) || [];
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
 
-    alert('Đăng ký thành công!');
-    document.getElementById('signUpForm').reset(); // Reset form
+    // Đặt cờ để hiển thị thông báo thành công trên trang index
+    localStorage.setItem('signupSuccess', 'true');
+
+    // Chuyển hướng về trang index
+    window.location.href = 'index.html';
 }

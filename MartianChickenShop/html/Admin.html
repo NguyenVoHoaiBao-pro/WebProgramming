@@ -75,7 +75,48 @@
             </table>
         </div>
     </section>
+    <div class="container mt-5">
+        <h1 class="text-center">Quản lý người dùng</h1>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                    <th>Quận/Huyện</th>
+                    <th>Số điện thoại</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <!-- Nội dung sẽ được thêm động -->
+            </tbody>
+        </table>
+    </div>
 
+    <script>
+        // Load dữ liệu người dùng từ localStorage và hiển thị trong bảng
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userTable = document.getElementById('userTable');
+            userTable.innerHTML = ''; // Reset bảng
+            
+            users.forEach(user => {
+                const row = `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.address}</td>
+                        <td>${user.district}</td>
+                        <td>${user.sdt}</td>
+                    </tr>
+                `;
+                userTable.innerHTML += row;
+            });
+        }
+
+        // Gọi hàm khi tải trang admin
+        window.onload = loadUsers;
+    </script>
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/WebProgramming/MartianChickenShop/html/indexTest.js"></script>

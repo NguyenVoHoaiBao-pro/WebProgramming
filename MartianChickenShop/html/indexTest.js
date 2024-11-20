@@ -155,3 +155,40 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("available-quantity").textContent = product.quantity;
+
+// Lưu thông tin người dùng vào localStorage
+function signUp(event) {
+    event.preventDefault(); // Ngăn chặn reload trang
+    
+    // Lấy dữ liệu từ form
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const address = document.getElementById('address').value;
+    const district = document.getElementById('district').value;
+    const sdt = document.getElementById('sdt').value;
+
+    // Kiểm tra mật khẩu khớp
+    if (password !== confirmPassword) {
+        alert('Mật khẩu không khớp!');
+        return;
+    }
+
+    // Tạo đối tượng người dùng
+    const user = {
+        name,
+        email,
+        address,
+        district,
+        sdt
+    };
+
+    // Lưu vào localStorage
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    users.push(user);
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert('Đăng ký thành công!');
+    document.getElementById('signUpForm').reset(); // Reset form
+}

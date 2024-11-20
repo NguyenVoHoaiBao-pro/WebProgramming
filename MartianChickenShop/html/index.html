@@ -8,7 +8,7 @@
     <link rel="icon" href="../images/Page1/LoadWeb.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    
 
 
 
@@ -24,25 +24,6 @@
 
 </head>
 <body>
-  <div class="container mt-5">
-    <h1 class="text-center">Chào mừng đến với hệ thống</h1>
-
-    <!-- Thông báo đăng ký thành công -->
-    <div id="successMessage" class="alert alert-success d-none" role="alert">
-        Đăng ký thành công! Bạn có thể đăng nhập ngay bây giờ.
-    </div>
-
-    <!-- Nội dung khác -->
-    <a href="signup.html" class="btn btn-primary">Đăng ký tài khoản</a>
-</div>
-
-<script>
-    // Kiểm tra cờ đăng ký thành công
-    if (localStorage.getItem('signupSuccess') === 'true') {
-        document.getElementById('successMessage').classList.remove('d-none');
-        localStorage.removeItem('signupSuccess'); // Xóa cờ để không hiển thị lại
-    }
-</script>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">

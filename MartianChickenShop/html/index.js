@@ -174,56 +174,6 @@ function contactUs(event) {
     alert('Cảm ơn bạn đã liên hệ với chúng tôi. Chúng tôi sẽ liên lạc lại với bạn sớm.');
     window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/index.html';
 }
-
-// Hàm đăng ký
-function signUp(event) {
-    event.preventDefault();
-    let email = document.getElementById('email').value;
-    
-    alert('Đăng ký thành công với ' + email);
-    window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/Login.html';
-}
-
-// Hàm xác thực form đăng ký
-function validateForm() {
-    // Lấy giá trị từ các trường form
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const confirmPassword = document.getElementById('confirmPassword').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const district = document.getElementById('district').value;
-    const phone = document.getElementById('sdt').value.trim();
-
-    // Kiểm tra nếu có trường nào bỏ trống
-    if (!name || !email || !password || !confirmPassword || !address || !district || !phone) {
-        alert('Vui lòng điền đầy đủ tất cả các trường.');
-        return false;
-    }
-
-    // Kiểm tra mật khẩu và mật khẩu xác nhận có khớp không
-    if (password !== confirmPassword) {
-        alert('Mật khẩu và mật khẩu xác nhận không khớp.');
-        return false;
-    }
-
-    // Kiểm tra định dạng email
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email)) {
-        alert('Vui lòng nhập email hợp lệ.');
-        return false;
-    }
-
-    // Kiểm tra độ dài số điện thoại (ít nhất 10 số)
-    if (phone.length < 10 || phone.length > 11) {
-        alert('Vui lòng nhập số điện thoại hợp lệ (10-11 chữ số).');
-        return false;
-    }
-
-    // Form hợp lệ
-    return true;
-}
-
 // Đảm bảo JavaScript chỉ chạy sau khi trang đã tải
 document.addEventListener("DOMContentLoaded", function() {
     // Lấy tất cả các liên kết với class 'toggle-menu' (là "THỰC ĐƠN")

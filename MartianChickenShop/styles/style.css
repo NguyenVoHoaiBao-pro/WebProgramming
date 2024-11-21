@@ -377,22 +377,27 @@ table th {
 
 
 
-.back-to-top {
+#backToTop {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: red;
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: red;
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
-  display: none;
-  /* Ẩn nút khi chưa cần */
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
-
-
+#backToTop:hover {
+  background: red;
+}
 /* Home Section CSS */
 
 #home span {

@@ -236,7 +236,7 @@ function displayAvailableQuantity() {
         }
     }
 }
-
+document.addEventListener("DOMContentLoaded", displayAvailableQuantity);
 // Giả sử trạng thái đăng nhập được lưu trong localStorage
 document.addEventListener("DOMContentLoaded", function () {
     const loginLink = document.querySelector("#nav-icons a[href*='Login.html']");

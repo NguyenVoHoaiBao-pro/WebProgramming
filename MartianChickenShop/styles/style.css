@@ -151,6 +151,46 @@
     vertical-align: middle;
 }
 
+/* User Menu Styles */
+.user-menu {
+    position: absolute;
+    top: 80px;
+    right: 60px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Đảm bảo menu xuất hiện trên các phần tử khác */
+    min-width: 200px; /* Đặt chiều rộng tối thiểu để chứa các nội dung */
+}
+
+
+.user-menu a {
+    display: block;
+    padding: 8px 0;
+    color: #333;
+    text-decoration: none;
+}
+
+.user-menu a:hover {
+    background-color: #f4f4f4;
+    text-decoration: none;
+    color: #BC1F23;
+}
+
+.greeting, .username {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+
+
+
+
+
 
 
 

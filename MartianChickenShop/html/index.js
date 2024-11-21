@@ -45,56 +45,11 @@ const productList = {
     }
 };
 
-
-
-
-// Hàm thêm sản phẩm vào giỏ hàng
-// function addToCart() {
-//     let productId = window.location.href.split('/').pop().split('.')[0];
-//     // Lấy productId từ URL
-//     productId = productId.length == 9 ? productId[8] : productId[8] + productId[9];
-
-//     let noi = document.getElementById('noi').value;
-//     let cart = window.localStorage.getItem('cart');
-//     if (cart == null) {
-//         cart = {};
-//     } else {
-//         cart = JSON.parse(cart);
-//     }
-//     cart[productId] = noi;
-//     window.localStorage.setItem('cart', JSON.stringify(cart));
-//     alert('Sản phẩm đã được thêm vào giỏ hàng');
-// }
-// function addToCart() {
-//     const isLoggedIn = window.localStorage.getItem('isLoggedIn');
-//     if (!isLoggedIn) {
-//         alert('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
-//         window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/login.html';
-//         return; 
-//     }
-
-//     let productId = window.location.href.split('/').pop().split('.')[0];
-//     productId = productId.length == 9 ? productId[8] : productId[8] + productId[9];
-
-//     let noi = document.getElementById('noi').value; 
-//     let cart = window.localStorage.getItem('cart');
-//     if (cart == null) {
-//         cart = {};
-//     } else {
-//         cart = JSON.parse(cart);
-//     }
-//     cart[productId] = noi; 
-//     window.localStorage.setItem('cart', JSON.stringify(cart));
-//     alert('Sản phẩm đã được thêm vào giỏ hàng');
-// }
-
-
-
 function addToCart() {
     const isLoggedIn = window.localStorage.getItem('isLoggedIn');
     if (!isLoggedIn) {
         alert('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.');
-        window.location.href = '/WebProgramming/MartianChickenShop/html/login.html';
+        window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/login.html';
         return; 
     }
 
@@ -282,7 +237,44 @@ function displayAvailableQuantity() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", displayAvailableQuantity);
+// Giả sử trạng thái đăng nhập được lưu trong localStorage
+document.addEventListener("DOMContentLoaded", function () {
+    const loginLink = document.querySelector("#nav-icons a[href*='Login.html']");
+    const userMenu = document.getElementById("user-menu");
+
+    // Lấy trạng thái đăng nhập từ localStorage
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const username = localStorage.getItem("username");
+
+    if (isLoggedIn && username) {
+        // Vô hiệu hóa link đăng nhập
+        loginLink.style.pointerEvents = "none";
+        loginLink.style.opacity = "0.6";
+
+        userMenu.style.display = "none";
+    } else {
+        userMenu.style.display = "none";
+    }
+
+    loginLink.addEventListener("click", function (event) {
+        if (isLoggedIn) {
+            event.preventDefault(); // Ngăn chuyển hướng tới trang đăng nhập
+            if (userMenu.style.display === "none") {
+                userMenu.style.display = "block";
+            } else {
+                userMenu.style.display = "none";
+            }
+        }
+    });
+});
+
+// Hàm logout
+function logout() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+    window.location.reload(); // Tải lại trang
+    window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/Login.html'; // Chuyển hướng về trang đăng nhập
+}
 
 
 

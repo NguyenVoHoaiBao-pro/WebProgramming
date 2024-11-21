@@ -156,16 +156,48 @@
             <hr class="border border-danger border-2 opacity-75">
             <p style="font-size: 18px">Tại đây, bạn có thể khám phá các món mới của chúng tôi trên <span style="color: #BC1F23" >MFC.</span> </p>
                     <div style="display: flex; justify-content: center;">
-                <!-- <nav aria-label="Page navigation example">
-                    <ul class="pagination mt-5">
-
-                        <li class="page-item active"><a class="page-link" href="">1</a></li>
-                        <li class="page-item"><a class="page-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html" id="page2">2</a></li>
-                        
-                    </ul>
-                </nav> -->
             </div>   
         </div>
+        <div style="display: flex; justify-content: center;">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mt-5">
+
+                    <li class="page-item active"><a class="page-link" href="">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html" id="page2">2</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+        <style>
+            .pagination .page-item .page-link {
+                color: #fff; /* Màu chữ trắng */
+                background-color: #dc3545; /* Màu nền đỏ */
+                border: 1px solid #dc3545; /* Viền đỏ */
+                padding: 8px 12px;
+                border-radius: 4px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+            }
+        
+            .pagination .page-item .page-link:hover {
+                background-color: #a71d2a; /* Màu nền đỏ đậm hơn khi hover */
+            }
+        
+            .pagination .page-item.active .page-link {
+                background-color: #7b111a; /* Màu đỏ tối cho trang đang active */
+                border-color: #7b111a;
+            }
+        
+            .pagination {
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+            }
+        
+            .pagination .page-item {
+                margin: 0 5px;
+            }
+        </style>
         <div class="row container-fluid px-5">
             <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png" onclick="window.location.href = 'sproduct1.html';">

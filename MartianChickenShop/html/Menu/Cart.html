@@ -81,7 +81,7 @@
                 <i class="bi bi-list menu-icon" onclick="toggleMenu()" id="menu-btn"></i>
 
                 <-- Sidebar menu -->
-           <div id="mySideBar" class="sidebar">
+          <div id="mySideBar" class="sidebar">
               <div class="sidebar-header">
                   <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
                   <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
@@ -104,9 +104,9 @@
                   <div class="menu-section">
                       <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
                       <ul class="submenu">
-                          <li><a href="#">Combo gà phải thử</a></li>
                           <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
                           <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                          <li><a href="#">Combo gà phải thử</a></li>
                       </ul>
                   </div>
                   <div class="menu-section">
@@ -119,9 +119,14 @@
                       <h4><a href="#">TUYỂN DỤNG</a></h4>
                   </div>
 
-                   <div class="menu-section user">
+                   <div class="menu-section user" id="user-sidebar">
                       <h4><i class="bi bi-person"></i><a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
                       
+                  </div>
+                   <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+                      <span id="greeting-menu"></span>
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+                      <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
                   </div>
               </div>
           </div>

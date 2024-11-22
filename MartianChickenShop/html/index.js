@@ -302,6 +302,7 @@ function displayUserMenu() {
   const loggedInMenu = document.getElementById("user-logged-in");
   const greeting = document.getElementById("greeting");
   const menuGreeting = document.getElementById("greeting-menu");
+  const profileGreeting = document.getElementById("profile-greeting"); // Thêm dòng này
   const loginLink = document.querySelector(
     '#nav-icons a[href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"]'
   );
@@ -311,9 +312,16 @@ function displayUserMenu() {
     // Nếu người dùng đã đăng nhập, hiển thị menu và chào mừng
     greeting.textContent = `Xin chào, ${loggedInUser.username}`; // Hiển thị tên người dùng
     menuGreeting.textContent = `XIN CHÀO, ${loggedInUser.username.toUpperCase()}`;
+
+    if (profileGreeting) {
+      // Hiển thị lời chào trong profile-bar nếu phần tử tồn tại
+      profileGreeting.textContent = `XIN CHÀO, ${loggedInUser.username.toUpperCase()}`;
+    }
+
     userSidebar.style.display = "none";
     userMenu.style.display = "none";
     loggedInMenu.style.display = "block";
+
     loginLink.addEventListener("click", function (event) {
       event.preventDefault();
 
@@ -332,6 +340,11 @@ function displayUserMenu() {
     userMenu.style.display = "none";
     userSidebar.style.display = "none";
     loggedInMenu.style.display = "none";
+
+    if (profileGreeting) {
+      // Hiển thị lời chào mặc định trong profile-bar
+      profileGreeting.textContent = "XIN CHÀO!";
+    }
   }
 }
 
@@ -349,5 +362,10 @@ function logout() {
   window.location.href =
     "/WebProgramming/MartianChickenShop/html/Menu/Login.html";
 }
+
+
+
+
+
 
 

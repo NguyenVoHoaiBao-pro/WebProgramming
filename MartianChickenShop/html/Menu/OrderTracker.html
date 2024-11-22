@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiệm Gà Sao Hỏa</title>
+    <link
+      rel="icon"
+      href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png"
+      type="image/png"
+    />
+    <link
+      rel="stylesheet"
+      href="/WebProgramming/MartianChickenShop/styles/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <script src="/WebProgramming/MartianChickenShop/html/index.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstarp stackpath cdn -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap icons cdn-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+      /* CSS cho giao diện */
+      .container-tracker {
+        width: 80%;
+        margin: 150px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(55, 53, 53, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      .order-status {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .status-step {
+        text-align: center;
+        position: relative;
+        flex: 1;
+        width: 25%;
+      }
+
+      .status-step span {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ccc;
+        color: #fff;
+        margin: 0 auto;
+        line-height: 40px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .status-step.completed span {
+        background-color: #bc1f23;
+      }
+
+      .status-step.current span {
+        background-color: coral;
+      }
+
+      .status-text {
+        margin-top: 8px;
+      }
+
+      .order-info {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .order-info .product-name {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .order-info .product-price {
+        font-size: 16px;
+        color: #333;
+      }
+
+      .order-info .product-note {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .order-info .order-id {
+        font-size: 16px;
+        color: #333;
+      }
+
+      /* Nút "Cảm ơn" */
+      .thank-you-message {
+        text-align: center;
+        font-size: 24px;
+        color: black;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+      <div class="container-fluid mr-5">
+        <img
+          src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png"
+          onclick="location.reload();"
+          id="logo-img"
+          alt="logo.."
+        />
+        <button class="navbar-toggler" onclick="toggleMenu()">
+          <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="/WebProgramming/MartianChickenShop/html/index.html"
+                >Trang Chủ</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="/WebProgramming/MartianChickenShop/html/Menu/shop.html"
+                >Cửa Hàng</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html"
+                >Thông tin</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html"
+                >Liên hệ</a
+              >
+            </li>
+            <li class="nav-item" id="nav-icons">
+              <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"
+                ><i class="bi bi-person-fill"></i
+              ></a>
+              <a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html"
+                ><i class="bi bi-bag-heart-fill"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-tracker">
+      <h1>Theo Dõi Đơn Hàng</h1>
+      <hr class="border border-danger border-2 opacity-75 mx-auto" />
+
+      <!-- Trạng thái đơn hàng -->
+      <div class="order-status">
+        <div class="status-step" id="status-received">
+          <span><i class="fas fa-file-alt"></i></span>
+          <div class="status-text">Nhận Đơn</div>
+        </div>
+
+        <div class="status-step" id="status-preparing">
+          <span><i class="bi bi-fire"></i></span>
+          <div class="status-text">Chế Biến</div>
+        </div>
+
+        <div class="status-step" id="status-shipping">
+          <span><i class="bi bi-truck"></i></span>
+          <div class="status-text">Đang Giao</div>
+        </div>
+
+        <div class="status-step" id="status-completed">
+          <span><i class="bi bi-house"></i></span>
+          <div class="status-text">Hoàn Thành</div>
+        </div>
+      </div>
+
+      <!-- Thông tin sản phẩm -->
+      <div class="order-info">
+        <div class="product-name">
+          Tên Sản Phẩm: <span>Cánh gà phô mai</span>
+        </div>
+        <div class="product-price">Giá: <span>200,000 VND</span></div>
+        <div class="product-note">
+          Ghi Chú: <span>Không hành, thêm phô mai</span>
+        </div>
+        <div class="order-id">Mã Đơn Hàng: 241117F3EVT1FA</div>
+      </div>
+
+      <!-- Lời cảm ơn -->
+      <div
+        class="thank-you-message"
+        id="thank-you-message"
+        style="display: none"
+      >
+        Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi!
+      </div>
+    </div>
+
+    <script>
+      let currentStep = 0; // Bắt đầu từ bước 1
+      const steps = [
+        "status-received",
+        "status-preparing",
+        "status-shipping",
+        "status-completed",
+      ];
+
+      function updateOrderStatus() {
+        // Remove "completed" and "current" classes from all steps
+        steps.forEach((step, index) => {
+          const element = document.getElementById(step);
+          element.classList.remove("completed");
+          element.classList.remove("current");
+        });
+
+        // Add "completed" class to the steps that are completed
+        for (let i = 0; i <= currentStep; i++) {
+          const step = document.getElementById(steps[i]);
+          step.classList.add("completed");
+        }
+
+        // Add "current" class to the current step
+        const currentElement = document.getElementById(steps[currentStep]);
+        currentElement.classList.add("current");
+
+        // If we've reached the last step, mark all steps as completed
+        if (currentStep >= steps.length) {
+          steps.forEach((step) => {
+            const element = document.getElementById(step);
+            element.classList.add("completed");
+          });
+        }
+
+        currentStep++;
+      }
+
+      setInterval(() => {
+        if (currentStep < steps.length) {
+          updateOrderStatus();
+        } else if (currentStep === steps.length) {
+          // Corrected the comparison
+          updateOrderStatus();
+        }
+      }, 2000); // Cập nhật mỗi 2 giây
+      setTimeout(() => {
+        document.getElementById("thank-you-message").style.display = "block"; // Hiển thị thông báo cảm ơn sau 3 giây
+      }, 10000);
+    </script>
+  <footer class="mt-5 p-5 bg-dark">
+  <div class="row conatiner mx-auto pt-5">
+    <div class="footer-one col-lg-3 col-md-6 col-12">
+    
+      <img id="logo-img-footer" src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="logo">
+      <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+    
+    </div>
+
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên kết nhanh</h5>
+      <ul class="text-uppercase list-unstyled">
+        <li><a href="index.html">trang chủ</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">thông tin</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">liên hệ</a></li>
+        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">Giỏ hàng</a></li>
+      </ul>
+    </div>
+    <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+      <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+      <div>
+        <h6 class="text-uppercase">Địa chỉ</h6>
+        <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">điện thoại</h6>
+        <p>0849294483</p>
+      </div>
+      <div>
+        <h6 class="text-uppercase">Email</h6>
+        <p>MarsStore@gmail.com</p>
+      </div>
+    </div>
+    <div class="Photos col-lg-3 col-md-6 col-12">
+         <h5 class="pb-2">Các đơn vị tài trợ</h5>
+    <div class="row">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 3.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 2.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image.png" alt="leather-img">
+    </div>
+    </div>
+  <div class="copyright mt-5">
+    <div class="row container mx-auto">
+      <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <img src="img/payment.png" alt="payment..logo">
+      </div> -->
+
+      <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+        <p>ABK WEBSITE &copy; DESIGN 2024</p>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12">
+        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+        <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>  
+</footer>
+    <!-- bootstarp cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -203,9 +203,10 @@
             }
         </style>
         <div style="text-align: right; margin-bottom: 20px;">
-            <button onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>
-            <button onclick="sortProducts('desc')">Sắp xếp từ cao đến thấp</button>
+            <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>
+            <button class="sort-button" onclick="sortProducts('desc')">Sắp xếp từ cao đến thấp</button>
         </div>
+        
         <script>
             function sortProducts(order) {
                 const products = document.querySelectorAll('.product');

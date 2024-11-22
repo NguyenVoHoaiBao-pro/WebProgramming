@@ -200,6 +200,27 @@
                 margin: 0 5px;
             }
         </style>
+        <div style="text-align: right; margin-bottom: 20px;">
+            <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>
+            <button class="sort-button" onclick="sortProducts('desc')">Sắp xếp từ cao đến thấp</button>
+        </div>
+        <script>
+            function sortProducts(order) {
+                const products = document.querySelectorAll('.product');
+        
+                const sortedProducts = Array.from(products).sort((a, b) => {
+                    const priceA = parseInt(a.querySelector('.product-price').innerText.replace(/\./g, '').replace(' đ', ''));
+                    const priceB = parseInt(b.querySelector('.product-price').innerText.replace(/\./g, '').replace(' đ', ''));
+                    return order === 'asc' ? priceA - priceB : priceB - priceA;
+                });
+        
+                const container = document.querySelector('.row.container-fluid');
+                container.innerHTML = ''; // Xóa nội dung hiện tại
+                sortedProducts.forEach(product => {
+                    container.appendChild(product); // Thêm lại các sản phẩm đã sắp xếp
+                });
+            }
+        </script>
         <div class="row container-fluid px-5">
             
                 <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">

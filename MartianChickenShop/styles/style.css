@@ -1,6 +1,29 @@
 /* Nabar CSS */
 
+.sort-button {
+  background-color: red; /* Màu xanh dương */
+  color: white; /* Màu chữ trắng */
+  border: none;
+  padding: 10px 20px; /* Khoảng cách bên trong */
+  border-radius: 5px; /* Bo góc nút */
+  cursor: pointer;
+  font-size: 14px; /* Cỡ chữ */
+  margin-left: 10px; /* Khoảng cách giữa các nút */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Hiệu ứng khi hover */
+}
 
+.sort-button:hover {
+  background-color: red; /* Màu đậm hơn khi hover */
+  transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+.sort-button:active {
+  transform: scale(0.95); /* Thu nhỏ khi nhấn */
+}
+
+.sort-button:focus {
+  outline: none; /* Xóa đường viền mặc định khi chọn nút */
+}
 .navbar {
   font-size: 18px;
   color: white;

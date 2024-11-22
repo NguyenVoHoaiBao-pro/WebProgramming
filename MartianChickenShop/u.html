@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+</head>
+<body>
+    <h1>Chào mừng, <span id="username-display"></span>!</h1>
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        // Kiểm tra nếu chưa đăng nhập, chuyển về login.html
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'l.html';
+        }
+
+        // Hiển thị thông tin user
+        const username = localStorage.getItem('username');
+        document.getElementById('username-display').textContent = username || 'User';
+
+        // Xử lý đăng xuất
+        function logout() {
+            localStorage.removeItem('loggedIn'); // Xóa trạng thái đăng nhập
+            localStorage.removeItem('username'); // Xóa thông tin user
+            window.location.href = 'l.html'; // Quay lại trang đăng nhập
+        }
+    </script>
+</body>
+</html>

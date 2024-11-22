@@ -295,11 +295,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function displayUserMenu() {
-  // Kiểm tra xem người dùng đã đăng nhập chưa
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   const userMenu = document.getElementById("user-menu");
+  const userSidebar = document.getElementById("user-sidebar");
+  const loggedInMenu = document.getElementById("user-logged-in");
   const greeting = document.getElementById("greeting");
+  const menuGreeting = document.getElementById("greeting-menu");
   const loginLink = document.querySelector(
     '#nav-icons a[href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"]'
   );
@@ -308,10 +310,13 @@ function displayUserMenu() {
   if (loggedInUser) {
     // Nếu người dùng đã đăng nhập, hiển thị menu và chào mừng
     greeting.textContent = `Xin chào, ${loggedInUser.username}`; // Hiển thị tên người dùng
+    menuGreeting.textContent = `XIN CHÀO, ${loggedInUser.username.toUpperCase()}`;
+    userSidebar.style.display = "none";
     userMenu.style.display = "none";
+    loggedInMenu.style.display = "block";
     loginLink.addEventListener("click", function (event) {
       event.preventDefault();
-      
+
       if (userMenu.style.display === "none" || userMenu.style.display === "") {
         userMenu.style.display = "block"; // Hiển thị menu người dùng
       } else {
@@ -325,6 +330,8 @@ function displayUserMenu() {
   } else {
     // Nếu người dùng chưa đăng nhập, ẩn menu người dùng và bỏ qua thao tác
     userMenu.style.display = "none";
+    userSidebar.style.display = "none";
+    loggedInMenu.style.display = "none";
   }
 }
 
@@ -342,3 +349,5 @@ function logout() {
   window.location.href =
     "/WebProgramming/MartianChickenShop/html/Menu/Login.html";
 }
+
+

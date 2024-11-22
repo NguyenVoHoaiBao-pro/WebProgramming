@@ -1,29 +1,41 @@
 /* Nabar CSS */
 
 .sort-button {
-  background-color: red; /* Màu xanh dương */
-  color: white; /* Màu chữ trắng */
+  background-color: red;
+  /* Màu xanh dương */
+  color: white;
+  /* Màu chữ trắng */
   border: none;
-  padding: 10px 20px; /* Khoảng cách bên trong */
-  border-radius: 5px; /* Bo góc nút */
+  padding: 10px 20px;
+  /* Khoảng cách bên trong */
+  border-radius: 5px;
+  /* Bo góc nút */
   cursor: pointer;
-  font-size: 14px; /* Cỡ chữ */
-  margin-left: 10px; /* Khoảng cách giữa các nút */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Hiệu ứng khi hover */
+  font-size: 14px;
+  /* Cỡ chữ */
+  margin-left: 10px;
+  /* Khoảng cách giữa các nút */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* Hiệu ứng khi hover */
 }
 
 .sort-button:hover {
-  background-color: red; /* Màu đậm hơn khi hover */
-  transform: scale(1.05); /* Phóng to nhẹ khi hover */
+  background-color: red;
+  /* Màu đậm hơn khi hover */
+  transform: scale(1.05);
+  /* Phóng to nhẹ khi hover */
 }
 
 .sort-button:active {
-  transform: scale(0.95); /* Thu nhỏ khi nhấn */
+  transform: scale(0.95);
+  /* Thu nhỏ khi nhấn */
 }
 
 .sort-button:focus {
-  outline: none; /* Xóa đường viền mặc định khi chọn nút */
+  outline: none;
+  /* Xóa đường viền mặc định khi chọn nút */
 }
+
 .navbar {
   font-size: 18px;
   color: white;
@@ -135,87 +147,81 @@
 }
 
 .search-results {
-    position: absolute;
-    top: 100%;
-    left: 360px;
-    width: 500px;
-    overflow-y: auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-top: none;
-    z-index: 10;
-    display: none; 
+  position: absolute;
+  top: 100%;
+  left: 360px;
+  width: 500px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+  z-index: 10;
+  display: none;
 }
 
 .search-result {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    background-color: #f8f8f8; 
-    color: #333333;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f8f8;
+  color: #333333;
 }
 
 .search-result:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .search-result:hover {
-    background-color: #e6e6e6; 
-    color: #000; 
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 .search-result img {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .search-result p {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* User Menu Styles */
 .user-menu {
-    position: absolute;
-    top: 80px;
-    right: 60px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Đảm bảo menu xuất hiện trên các phần tử khác */
-    min-width: 200px; /* Đặt chiều rộng tối thiểu để chứa các nội dung */
+  position: absolute;
+  top: 80px;
+  right: 60px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  /* Đảm bảo menu xuất hiện trên các phần tử khác */
+  min-width: 200px;
+  /* Đặt chiều rộng tối thiểu để chứa các nội dung */
 }
 
 
 .user-menu a {
-    display: block;
-    padding: 8px 0;
-    color: #333;
-    text-decoration: none;
+  display: block;
+  padding: 8px 0;
+  color: #333;
+  text-decoration: none;
 }
 
 .user-menu a:hover {
-    background-color: #f4f4f4;
-    text-decoration: none;
-    color: #BC1F23;
+  background-color: #f4f4f4;
+  text-decoration: none;
+  color: #BC1F23;
 }
 
 .user-menu span {
-    color: #333;
-    font-size: 18px;
-    margin-bottom: 8px;
-    display: inline-block;
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: inline-block;
 }
-
-
-
-
-
-
-
-
 
 @media (max-width: 1500px) {
   .navbar {
@@ -309,16 +315,24 @@
   font-weight: bold;
   cursor: pointer;
   text-align: center;
+  margin-top: 10px;
+}
+
+.menu-section span{
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  padding-left: 15px;
+  padding-bottom: 15px;
+
 
 }
 
 .menu-section ul {
   list-style-type: none;
   padding-left: 0;
-}
-
-.menu-section li {
-  margin: 10px 0;
 }
 
 .menu-section li a {
@@ -339,7 +353,8 @@
   color: white;
 }
 
-.user {
+
+.user ,.user-logged-in{
   margin-top: 80px;
 }
 
@@ -946,6 +961,7 @@ footer .footer-img {
     text-decoration: underline;
   }
 }
+
 .review-container {
   max-width: 800px;
   margin: 20px auto;
@@ -1021,19 +1037,18 @@ button {
   font-size: 12px;
   color: #999;
 }
-.btn-review{
-    background-color: black;
-    color: white; 
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s;
+
+.btn-review {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.btn-review:hover{
-    background-color: #BC1F23; /* Màu nền tối hơn khi hover */
+.btn-review:hover {
+  background-color: #BC1F23;
+  /* Màu nền tối hơn khi hover */
 }
-
-
-

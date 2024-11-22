@@ -202,7 +202,7 @@
     color: #BC1F23;
 }
 
-.greeting, .username {
+.user-menu span {
     color: #333;
     font-size: 18px;
     margin-bottom: 8px;

@@ -161,47 +161,66 @@
 
 <div class="container mt-4">
     <div class="profile-layout">
-        <!-- Sidebar -->
-        <div class="profile-bar">
-            <div class="profile-info">
-                <img src="/WebProgramming/MartianChickenShop/images/Page1/IconLogo.png" alt="Avatar" class="avatar">
-                <span class="profile-greeting" id="profile-greeting">XIN CHÀO</span>
-               
-            </div>
-            <ul class="menu-links">
-                <li><a href="/WebProgramming/MartianChickenShop/html/Menu/OrderTracker.html">Đơn hàng đã đặt</a></li>
-                <li><a href="#">Đơn hàng yêu thích</a></li>
-                <li><a href="#">Địa chỉ của bạn</a></li>
-                <li><a href="#">Lịch sử mua hàng</a></li>
-                <li><a href="#">Đặt lại mật khẩu</a></li>
-                <li><a href="#">Xóa tài khoản</a></li>
-            </ul>
-             <a href="javascript:void(0);" onclick="logout()" class="logout" id="logout">ĐĂNG XUẤT</a>
+    <!-- Sidebar -->
+    <div class="profile-bar">
+        <div class="profile-info">
+            <img src="/WebProgramming/MartianChickenShop/images/Page1/IconLogo.png" alt="Avatar" class="avatar">
+            <span class="profile-greeting" id="profile-greeting">XIN CHÀO</span>
         </div>
-
-        <!-- Profile Form -->
-        <div class="profile-form">
-            <form id="profileForm">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Họ và Tên</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Số Điện Thoại</label>
-                    <input type="text" class="form-control" id="phone" name="phone" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa Chỉ</label>
-                    <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn-profile" id="btn-profile" >Cập nhật</button>
-            </form>
-        </div>
+        <ul class="menu-links">
+            <li><a href="/WebProgramming/MartianChickenShop/html/Menu/OrderTracker.html">Đơn hàng đã đặt</a></li>
+            <li><a href="#">Đơn hàng yêu thích</a></li>
+            <li><a href="#">Địa chỉ của bạn</a></li>
+            <li><a href="#">Lịch sử mua hàng</a></li>
+            <li><a href="javascript:void(0);" onclick="showChangePasswordForm()">Đặt lại mật khẩu</a></li>
+            <li><a href="#">Xóa tài khoản</a></li>
+        </ul>
+        <a href="javascript:void(0);" onclick="logout()" class="logout" id="logout">ĐĂNG XUẤT</a>
     </div>
+
+    <!-- Profile Form -->
+    <div class="profile-form" id="profile-form">
+        <form id="profileForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Họ và Tên</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Số Điện Thoại</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Địa Chỉ</label>
+                <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn-profile" id="btn-profile">Cập nhật</button>
+        </form>
+    </div>
+
+    <!-- Change Password Form -->
+    <div class="changedpw-form" id="changedpw-form" style="display: none;">
+        <form id="changePasswordForm">
+            <div class="mb-3">
+                <label for="currentPassword" class="form-label">Mật khẩu cũ</label>
+                <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+            </div>
+            <div class="mb-3">
+                <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit" class="btn-profile" id="btn-change-password">Cập nhật mật khẩu</button>
+        </form>
+    </div>
+</div>
+
 </div>
 
 
@@ -247,6 +266,23 @@
 
         // Load dữ liệu khi trang được tải
         loadProfile();
+        function showChangePasswordForm() {
+                // Ẩn form profile
+                document.getElementById('profile-form').style.display = 'none';
+
+                // Hiển thị form đổi mật khẩu
+                document.getElementById('changedpw-form').style.display = 'block';
+            }
+
+            // Hàm để trở lại form profile (nếu cần)
+            function showProfileForm() {
+                // Hiển thị lại form profile
+                document.getElementById('profile-form').style.display = 'block';
+
+                // Ẩn form đổi mật khẩu
+                document.getElementById('changedpw-form').style.display = 'none';
+            }
+
 
     </script>
 

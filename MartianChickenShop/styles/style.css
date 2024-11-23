@@ -1162,6 +1162,74 @@ button {
     background-color: #BC1F23;
 }
 
+/* Đảm bảo form đổi mật khẩu có kiểu dáng tương tự như form đăng nhập */
+.changedpw-form {
+    width: 70%; /* Đảm bảo chiều rộng giống như form profile */
+    background-color: #fff;
+    padding-top:20px;
+    padding-right: 100px;
+    padding-left: 100px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    margin-top: 20px;
+}
+
+.changedpw-form h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* Căn giữa tiêu đề */
+}
+
+/* Các trường input và button giống như form profile */
+.changedpw-form .form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.changedpw-form .form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%; /* Đảm bảo input có chiều rộng 100% */
+}
+
+.changedpw-form .btn-profile {
+    background-color: black;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: block; /* Đảm bảo nút là block-level */
+    width: 200px; /* Đặt chiều rộng của nút */
+    margin: 20px auto 0; /* Căn giữa nút */
+}
+
+.changedpw-form .btn-profile:hover {
+    background-color: #BC1F23;
+}
+
+/* Responsive cho các thiết bị nhỏ */
+@media (max-width: 768px) {
+    .changedpw-form {
+        width: 90%; /* Chiều rộng của form trên màn hình nhỏ */
+    }
+
+    .changedpw-form .form-control {
+        font-size: 14px; /* Điều chỉnh font-size trên thiết bị nhỏ */
+    }
+
+    .changedpw-form .btn-profile {
+        width: 100%; /* Nút sẽ chiếm 100% chiều rộng trên thiết bị nhỏ */
+    }
+}
+
+
 @media (max-width: 768px) {
   .profile-bar {
     width: 100%;

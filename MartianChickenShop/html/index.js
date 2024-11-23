@@ -293,7 +293,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
 function displayUserMenu() {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
@@ -302,48 +301,55 @@ function displayUserMenu() {
   const loggedInMenu = document.getElementById("user-logged-in");
   const greeting = document.getElementById("greeting");
   const menuGreeting = document.getElementById("greeting-menu");
-  const profileGreeting = document.getElementById("profile-greeting"); // Thêm dòng này
+  const profileGreeting = document.getElementById("profile-greeting"); // Nếu có phần này trong profile
   const loginLink = document.querySelector(
     '#nav-icons a[href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"]'
   );
   const logoutLink = document.querySelector('#user-menu a[onclick="logout()"]');
 
   if (loggedInUser) {
-    // Nếu người dùng đã đăng nhập, hiển thị menu và chào mừng
-    greeting.textContent = `Xin chào, ${loggedInUser.username}`; // Hiển thị tên người dùng
+    // Khi người dùng đã đăng nhập
+    if (greeting) {
+      greeting.textContent = `Xin chào, ${loggedInUser.username}`;
+    }
     menuGreeting.textContent = `XIN CHÀO, ${loggedInUser.username.toUpperCase()}`;
 
     if (profileGreeting) {
-      // Hiển thị lời chào trong profile-bar nếu phần tử tồn tại
       profileGreeting.textContent = `XIN CHÀO, ${loggedInUser.username.toUpperCase()}`;
     }
 
-    userSidebar.style.display = "none";
-    userMenu.style.display = "none";
-    loggedInMenu.style.display = "block";
+    userSidebar.style.display = "none"; // Ẩn phần đăng nhập / đăng ký
+    loggedInMenu.style.display = "block"; // Hiển thị menu khi đăng nhập
 
-    loginLink.addEventListener("click", function (event) {
-      event.preventDefault();
+    if (userMenu) {
+      userMenu.style.display = "none";
+    }
 
-      if (userMenu.style.display === "none" || userMenu.style.display === "") {
-        userMenu.style.display = "block"; // Hiển thị menu người dùng
-      } else {
-        userMenu.style.display = "none"; // Ẩn menu người dùng
-      }
-    });
+    if (loginLink) {
+      loginLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        userMenu.style.display =
+          userMenu.style.display === "none" || userMenu.style.display === ""
+            ? "block"
+            : "none";
+      });
+    }
 
-    logoutLink.addEventListener("click", function (event) {
-      logout();
-    });
+    if (logoutLink) {
+      logoutLink.addEventListener("click", function () {
+        logout();
+      });
+    }
   } else {
-    // Nếu người dùng chưa đăng nhập, ẩn menu người dùng và bỏ qua thao tác
-    userMenu.style.display = "none";
-    userSidebar.style.display = "none";
-    loggedInMenu.style.display = "none";
-
+    // Khi người dùng chưa đăng nhập
     if (profileGreeting) {
-      // Hiển thị lời chào mặc định trong profile-bar
       profileGreeting.textContent = "XIN CHÀO!";
+    }
+
+    userSidebar.style.display = "block"; // Hiển thị phần Đăng nhập / Đăng ký
+    loggedInMenu.style.display = "none"; // Ẩn menu người dùng đã đăng nhập
+    if (userMenu) {
+      userMenu.style.display = "none";
     }
   }
 }
@@ -358,10 +364,10 @@ function logout() {
   window.localStorage.removeItem("isLoggedIn");
   window.localStorage.removeItem("loggedInUser");
   window.localStorage.removeItem("cart");
-  alert("Bạn đã đăng xuất.");
   window.location.href =
     "/WebProgramming/MartianChickenShop/html/Menu/Login.html";
 }
+
 
 
 

@@ -207,28 +207,28 @@
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaXiMuoi.png" alt="Cánh gà xí muội">
                
                 <h5 class="product-name">Cánh gà sốt cay xí muội</h5>
-                <h4 class="product-price">30.000 đ</h4>
+                <h4 class="product-price">30.000 VND</h4>
                 <button class="buy-btn" onclick="window.location.href = 'sproduct13.html';">Mua ngay</button>
             </div>
             <div class="product text-center col-lg-3 col-md-4 col-12">
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.jpg" alt="Gà rán sốt cay kiểu Thái">
                
                 <h5 class="product-name">Gà rán sốt cay kiểu Thái</h5>
-                <h4 class="product-price">45.000 đ</h4>
+                <h4 class="product-price">45.000 VND</h4>
                 <button class="buy-btn" onclick="window.location.href = 'sproduct17.html';">Mua ngay</button>
             </div>
             <div class="product text-center col-lg-3 col-md-4 col-12">
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaChanhDay.jpg" alt="Gà rán giòn sốt chanh dây">
                 
                 <h5 class="product-name">Gà rán giòn sốt chanh dây</h5>
-                <h4 class="product-price">50.000 đ</h4>
+                <h4 class="product-price">50.000 VND</h4>
                 <button class="buy-btn" onclick="window.location.href = 'sproduct20.html';">Mua ngay</button>
             </div>
             <div class="product container text-center col-lg-3 col-md-4 col-12">
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuNhat.jpg" alt="Gà rán xù kiểu Nhật">
                 
                 <h5 class="product-name">Gà rán xù kiểu Nhật</h5>
-                <h4 class="product-price">39.000 đ</h4>
+                <h4 class="product-price">39.000 VND</h4>
                 <button class="buy-btn" onclick="window.location.href = 'sproduct21.html';">Mua ngay</button>
             </div>
             <button class="ShopMore my-5 mx-auto" onclick="window.location.href = 'Shop.html';">Tiếp tục mua sắm</button>
@@ -321,9 +321,9 @@
                     <td><button id="trash-btn" onclick="removeFromCart(${id})"><i class="bi bi-trash3"></i></button></td>
                     <td><img src="${product.image}" alt="product"></td>
                     <td><h5>${product.name}</h5></td>
-                    <td><h5>${Number(product.price).toLocaleString('vi-VN')} đ</h5></td>
+                    <td><h5>${Number(product.price).toLocaleString('vi-VN')} VND</h5></td>
                     <td><input class="w-25 pl-1" type="number" value="${quantity}" disabled min="1" max="10"></td>
-                    <td><h5>${total.toLocaleString('vi-VN')} đ</h5></td>
+                    <td><h5>${total.toLocaleString('vi-VN')} VND</h5></td>
                 `;
 
                 
@@ -338,9 +338,9 @@
 
             const shipping = 12000;
 
-            document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " đ";
-            document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " đ";
-            document.querySelector('#total-value').textContent = (subtotal + shipping).toLocaleString('vi-VN') + " đ";
+            document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " VND";
+            document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " VND";
+            document.querySelector('#total-value').textContent = (subtotal + shipping).toLocaleString('vi-VN') + " VND";
 
         }
     </script>

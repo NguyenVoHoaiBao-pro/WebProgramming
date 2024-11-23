@@ -175,109 +175,95 @@
         </nav>
 
     <!-- Main Section -->
-    <section id="favorite-orders" class="mt-5 pt-5">
-        <div class="container">
-            <h3 class="text-center mt-5">Đơn Hàng Yêu Thích</h3>
-            <hr class="border border-danger border-2 opacity-75 mx-auto">
-            <div id="favorite-list">
-                <!-- Danh sách sản phẩm yêu thích sẽ hiển thị tại đây -->
-            </div>
-            <button class="btn-add-favorite" onclick="addSampleFavorite()">Thêm Đơn Hàng Yêu Thích Mẫu</button>
-            <button class="btn-return" onclick="goToShop()">Quay lại Cửa Hàng</button>
+<section id="favorite-orders" class="mt-5 pt-5">
+    <div class="container">
+        <h3 class="text-center mt-5">Đơn Hàng Yêu Thích</h3>
+        <hr class="border border-danger border-2 opacity-75 mx-auto">
+        <div id="favorite-list">
+            <!-- Danh sách sản phẩm yêu thích sẽ hiển thị tại đây -->
         </div>
-    </section>
+        <button class="btn-return" onclick="goToShop()">Quay lại Cửa Hàng</button>
+    </div>
+</section>
 
-    <script>
-        // Hàm để hiển thị các sản phẩm yêu thích
-        function loadFavoriteOrders() {
-            const favorites = JSON.parse(localStorage.getItem('favoriteOrders')) || [];
-
-            const favoriteListDiv = document.getElementById('favorite-list');
-
-            if (favorites.length === 0) {
-                favoriteListDiv.innerHTML = `<p class="no-favorites">Bạn chưa có sản phẩm yêu thích nào.</p>`;
-                return;
+<script>
+    // Hàm để hiển thị các sản phẩm yêu thích
+    function loadFavoriteOrders() {
+        const favorites = [
+            {
+                products: [
+                    { name: 'Đùi Gà kiểu Thái', quantity: 1, price: 80000 },
+                    { name: 'Đùi gà phô mai', quantity: 2, price: 60000 },
+                    { name: 'Đùi gà giòn', quantity: 1, price: 70000 },
+                    { name: 'Đùi gà tiêu chanh', quantity: 3, price: 50000 }
+                ]
+            },
+            {
+                products: [
+                    { name: 'Đùi gà tẩm bột', quantity: 2, price: 75000 },
+                    { name: 'Đùi gà phô mai', quantity: 1, price: 65000 },
+                    { name: 'Đùi gà giòn', quantity: 4, price: 85000 },
+                    { name: 'Đùi Gà kiểu thái', quantity: 1, price: 90000 }
+                ]
+            },
+            {
+                products: [
+                    { name: 'Đùi gà phô mai', quantity: 2, price: 70000 },
+                    { name: 'Đùi Gà kiểu thái', quantity: 1, price: 95000 },
+                    { name: 'Đùi Gà truyền thống', quantity: 1, price: 68000 },
+                    { name: 'Đùi gà giòn', quantity: 3, price: 50000 }
+                ]
             }
+        ];
 
-            let tableHTML = `
-                <table class="favorite-items-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Sản phẩm 1</th>
-                            <th>Sản phẩm 2</th>
-                            <th>Sản phẩm 3</th>
-                            <th>Sản phẩm 4</th>
-                            <th>Tổng giá tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+        const favoriteListDiv = document.getElementById('favorite-list');
 
-            favorites.forEach((favorite, index) => {
-                let totalPrice = 0;
-                let rowHTML = `<tr><td>${index + 1}</td>`;
+        if (favorites.length === 0) {
+            favoriteListDiv.innerHTML = `<p class="no-favorites">Bạn chưa có sản phẩm yêu thích nào.</p>`;
+            return;
+        }
 
-                // Loop through the products in each order and calculate the total
-                favorite.products.forEach(product => {
-                    rowHTML += `<td>${product.name} x${product.quantity}</td>`;
-                    totalPrice += product.price * product.quantity;
-                });
+        let tableHTML = `
+            <table class="favorite-items-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Sản phẩm 1</th>
+                        <th>Sản phẩm 2</th>
+                        <th>Sản phẩm 3</th>
+                        <th>Sản phẩm 4</th>
+                        <th>Tổng giá tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
 
-                rowHTML += `<td>${totalPrice.toLocaleString()} VND</td></tr>`;
-                tableHTML += rowHTML;
+        favorites.forEach((favorite, index) => {
+            let totalPrice = 0;
+            let rowHTML = `<tr><td>${index + 1}</td>`;
+
+            // Loop through the products in each order and calculate the total
+            favorite.products.forEach(product => {
+                rowHTML += `<td>${product.name} x${product.quantity}</td>`;
+                totalPrice += product.price * product.quantity;
             });
 
-            tableHTML += `</tbody></table>`;
-            favoriteListDiv.innerHTML = tableHTML;
-        }
+            rowHTML += `<td>${totalPrice.toLocaleString()} VND</td></tr>`;
+            tableHTML += rowHTML;
+        });
 
-        // Hàm thêm đơn hàng yêu thích mẫu
-        function addSampleFavorite() {
-            const currentFavorites = JSON.parse(localStorage.getItem('favoriteOrders')) || [];
+        tableHTML += `</tbody></table>`;
+        favoriteListDiv.innerHTML = tableHTML;
+    }
 
-            // Sample products for each order
-            const newFavorites = [
-                {
-                    products: [
-                        { name: 'Gà Xối Mỡ', quantity: 1, price: 80000 },
-                        { name: 'Gà Rán', quantity: 2, price: 60000 },
-                        { name: 'Gà Nướng', quantity: 1, price: 70000 },
-                        { name: 'Gà Hấp', quantity: 3, price: 50000 }
-                    ]
-                },
-                {
-                    products: [
-                        { name: 'Gà Xào Lăn', quantity: 2, price: 75000 },
-                        { name: 'Gà Kho', quantity: 1, price: 65000 },
-                        { name: 'Gà Quay', quantity: 4, price: 85000 },
-                        { name: 'Gà Bắp', quantity: 1, price: 90000 }
-                    ]
-                },
-                {
-                    products: [
-                        { name: 'Gà Luộc', quantity: 2, price: 70000 },
-                        { name: 'Gà Bảy Món', quantity: 1, price: 95000 },
-                        { name: 'Gà Xào Sả', quantity: 1, price: 68000 },
-                        { name: 'Gà Cay', quantity: 3, price: 50000 }
-                    ]
-                }
-            ];
+    // Chuyển hướng đến trang cửa hàng
+    function goToShop() {
+        window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/shop.html';
+    }
 
-            currentFavorites.push(...newFavorites);
-            localStorage.setItem('favoriteOrders', JSON.stringify(currentFavorites));
-            alert('Đã thêm ba đơn hàng yêu thích mẫu!');
-            loadFavoriteOrders(); // Cập nhật giao diện
-        }
-
-        // Chuyển hướng đến trang cửa hàng
-        function goToShop() {
-            window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/shop.html';
-        }
-
-        // Tải danh sách đơn hàng yêu thích khi trang được tải
-        document.addEventListener('DOMContentLoaded', loadFavoriteOrders);
-    </script>
+    // Tải danh sách đơn hàng yêu thích khi trang được tải
+    document.addEventListener('DOMContentLoaded', loadFavoriteOrders);
+</script>
 
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">

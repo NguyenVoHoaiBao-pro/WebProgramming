@@ -44,6 +44,11 @@ const productList = {
     price: "45000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png",
   },
+  1000: {
+    name: "Combo 4",
+    price: "250000",
+    image: "/WebProgramming/MartianChickenShop/images/ComboGa/4dui.png",
+  },
 };
 
 function addToCart() {
@@ -53,18 +58,29 @@ function addToCart() {
       "/WebProgramming/MartianChickenShop/html/Menu/login.html";
     return; // Dừng hàm nếu chưa đăng nhập
   }
-  let productId = window.location.href.split("/").pop().split(".")[0];
-  productId =
-    productId.length == 9 ? productId[8] : productId[8] + productId[9];
+
+  // Lấy ID từ tên file trong URL
+  const url = window.location.href;
+  const fileName = url.split("/").pop(); // Lấy phần cuối cùng của URL (ví dụ: sproduct1000.html)
+  const productId = parseInt(fileName.replace("sproduct", "").replace(".html", "")); // Lấy ID (1000)
+
+  // Kiểm tra giá trị productId
+  console.log("Product ID: ", productId);
+
+  if (!productId || !productList[productId]) {
+    alert("Sản phẩm không tồn tại.");
+    return;
+  }
 
   let quantityToAdd = parseInt(document.getElementById("noi").value);
 
-  let product = products.find((p) => p.id == productId);
+  let product = productList[productId]; // Lấy thông tin sản phẩm từ productList
   if (!product) {
     alert("Sản phẩm không tồn tại.");
     return;
   }
 
+  // Kiểm tra số lượng có sẵn (nếu bạn thêm thuộc tính quantity vào productList)
   if (quantityToAdd > product.quantity) {
     alert(
       `Số lượng yêu cầu vượt quá số lượng có sẵn. Chỉ còn ${product.quantity} sản phẩm.`
@@ -72,6 +88,7 @@ function addToCart() {
     return;
   }
 
+  // Lấy giỏ hàng từ localStorage
   let cart = window.localStorage.getItem("cart");
   if (cart == null) {
     cart = {};
@@ -79,11 +96,13 @@ function addToCart() {
     cart = JSON.parse(cart);
   }
 
-  cart[productId] = quantityToAdd;
+  // Thêm sản phẩm vào giỏ hàng
+  cart[productId] = (cart[productId] || 0) + quantityToAdd; // Cộng dồn nếu sản phẩm đã tồn tại trong giỏ
   window.localStorage.setItem("cart", JSON.stringify(cart));
 
   alert("Sản phẩm đã được thêm vào giỏ hàng");
 }
+
 
 // Hàm xóa sản phẩm khỏi giỏ hàng
 function removeFromCart(productId) {

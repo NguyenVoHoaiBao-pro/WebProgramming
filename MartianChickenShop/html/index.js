@@ -31,25 +31,29 @@ const productList = {
   1: {
     name: "Cánh gà kiểu Thái",
     price: "50000",
-    image:
-      "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png",
+    image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png",
+    link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html",
   },
   2: {
     name: "Cánh gà giòn",
     price: "35000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png",
+    link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct2.html",
   },
   3: {
     name: "Cánh gà phô mai",
     price: "45000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png",
+    link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct3.html",
   },
   1000: {
     name: "Combo 4",
     price: "250000",
     image: "/WebProgramming/MartianChickenShop/images/ComboGa/4dui.png",
+    link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1000.html",
   },
 };
+
 
 function addToCart() {
   if (!isLoggedIn()) {
@@ -184,16 +188,27 @@ function displaySearchResults(results) {
   results.forEach((product) => {
     let productElement = document.createElement("div");
     productElement.classList.add("search-result");
+
+    // Thêm nội dung sản phẩm
     productElement.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <p><strong>${product.name}</strong> - ${product.price} VND</p>
         `;
+
+    // Thêm sự kiện click để chuyển hướng đến link sản phẩm
+    productElement.addEventListener("click", () => {
+      window.location.href = product.link; // Chuyển đến trang chi tiết
+    });
+
+    // Thêm phần tử vào container
     resultContainer.appendChild(productElement);
   });
 
   // Hiển thị phần tử kết quả tìm kiếm
   resultContainer.style.display = "block";
 }
+
+
 
 // Hàm xóa kết quả tìm kiếm
 function clearSearchResults() {

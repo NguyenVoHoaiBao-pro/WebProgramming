@@ -185,6 +185,10 @@
                         <p id="shippingtime">1h</p>
                     </div>
                     <hr class="second-hr">
+                     <div id="discount-row" class="d-flex justify-content-between" style="display: none;">
+                        <h6>Giảm giá</h6>
+                        <p id="discount-value"></p>
+                    </div>
                     <div class="d-flex justify-content-between">
                         <h6>Tổng cộng</h6>
                         <p id="total-value"></p>
@@ -299,51 +303,118 @@
 </footer>
     <script>
 
-        const cartData = window.localStorage.getItem('cart');
-        const cart = JSON.parse(cartData); // {"id": "quantity", "id": "quantity"}
+    //     const cartData = window.localStorage.getItem('cart');
+    //     const cart = JSON.parse(cartData); // {"id": "quantity", "id": "quantity"}
         
-        console.log(productList) // {"id": {"name": "", "price": "", "image": ""}}
+    //     console.log(productList) // {"id": {"name": "", "price": "", "image": ""}}
         
-        // if cart is empty, then show a message "No items in cart"
-        if (!cart || Object.keys(cart).length === 0) {
-            document.querySelector('#cart-table tbody').innerHTML = '<tr><td colspan="6">Không có sản phẩm nào trong giỏ hàng</td></tr>';
-            document.querySelector('#subtotal-value').textContent = "0";
-            document.querySelector('#shipping-value').textContent = "0";
-            document.querySelector('#total-value').textContent = "0";
-        }
-        else {
-            Object.keys(cart).forEach((id) => {
-                const product = productList[id];
-                const quantity = cart[id];
-                const total = product.price * quantity;
-                const tr = document.createElement('tr');
-               tr.innerHTML = `
-                    <td><button id="trash-btn" onclick="removeFromCart(${id})"><i class="bi bi-trash3"></i></button></td>
-                    <td><img src="${product.image}" alt="product"></td>
-                    <td><h5>${product.name}</h5></td>
-                    <td><h5>${Number(product.price).toLocaleString('vi-VN')} VND</h5></td>
-                    <td><input class="w-25 pl-1" type="number" value="${quantity}" disabled min="1" max="10"></td>
-                    <td><h5>${total.toLocaleString('vi-VN')} VND</h5></td>
-                `;
+    //     // if cart is empty, then show a message "No items in cart"
+    //     if (!cart || Object.keys(cart).length === 0) {
+    //         document.querySelector('#cart-table tbody').innerHTML = '<tr><td colspan="6">Không có sản phẩm nào trong giỏ hàng</td></tr>';
+    //         document.querySelector('#subtotal-value').textContent = "0";
+    //         document.querySelector('#shipping-value').textContent = "0";
+    //         document.querySelector('#total-value').textContent = "0";
+    //     }
+    //     else {
+    //         Object.keys(cart).forEach((id) => {
+    //             const product = productList[id];
+    //             const quantity = cart[id];
+    //             const total = product.price * quantity;
+    //             const tr = document.createElement('tr');
+    //            tr.innerHTML = `
+    //                 <td><button id="trash-btn" onclick="removeFromCart(${id})"><i class="bi bi-trash3"></i></button></td>
+    //                 <td><img src="${product.image}" alt="product"></td>
+    //                 <td><h5>${product.name}</h5></td>
+    //                 <td><h5>${Number(product.price).toLocaleString('vi-VN')} VND</h5></td>
+    //                 <td><input class="w-25 pl-1" type="number" value="${quantity}" disabled min="1" max="10"></td>
+    //                 <td><h5>${total.toLocaleString('vi-VN')} VND</h5></td>
+    //             `;
 
                 
-                document.querySelector('#cart-table tbody').appendChild(tr);
-            });
+    //             document.querySelector('#cart-table tbody').appendChild(tr);
+    //         });
 
-            const subtotal = Object.keys(cart).reduce((acc, id) => {
-                const product = productList[id];
-                const quantity = cart[id];
-                return acc + product.price * quantity;
-            }, 0);
+    //         const subtotal = Object.keys(cart).reduce((acc, id) => {
+    //             const product = productList[id];
+    //             const quantity = cart[id];
+    //             return acc + product.price * quantity;
+    //         }, 0);
 
-            const shipping = 12000;
+    //         const shipping = 12000;
 
-            document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " VND";
-            document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " VND";
-            document.querySelector('#total-value').textContent = (subtotal + shipping).toLocaleString('vi-VN') + " VND";
+    //         document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " VND";
+    //         document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " VND";
+    //         document.querySelector('#total-value').textContent = (subtotal + shipping).toLocaleString('vi-VN') + " VND";
 
-        }
-    </script>
+    //     }
+    const cartData = window.localStorage.getItem('cart');
+const cart = JSON.parse(cartData); // {"id": "quantity", "id": "quantity"}
+
+if (!cart || Object.keys(cart).length === 0) {
+    document.querySelector('#cart-table tbody').innerHTML = '<tr><td colspan="6">Không có sản phẩm nào trong giỏ hàng</td></tr>';
+    document.querySelector('#subtotal-value').textContent = "0 VND";
+    document.querySelector('#shipping-value').textContent = "0 VND";
+    document.querySelector('#total-value').textContent = "0 VND";
+     document.querySelector('#discount-value').textContent = "0 VND";
+} else {
+    Object.keys(cart).forEach((id) => {
+        const product = productList[id];
+        const quantity = cart[id];
+        const total = product.price * quantity;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><button id="trash-btn" onclick="removeFromCart(${id})"><i class="bi bi-trash3"></i></button></td>
+            <td><img src="${product.image}" alt="product"></td>
+            <td><h5>${product.name}</h5></td>
+            <td><h5>${Number(product.price).toLocaleString('vi-VN')} VND</h5></td>
+            <td><input class="w-25 pl-1" type="number" value="${quantity}" disabled min="1" max="10"></td>
+            <td><h5>${total.toLocaleString('vi-VN')} VND</h5></td>
+        `;
+
+        document.querySelector('#cart-table tbody').appendChild(tr);
+    });
+
+    const subtotal = Object.keys(cart).reduce((acc, id) => {
+        const product = productList[id];
+        const quantity = cart[id];
+        return acc + product.price * quantity;
+    }, 0);
+
+    const shipping = 12000;
+    let discount = 0;
+
+    // Tính tổng cộng trước khi áp dụng giảm giá
+    const totalBeforeDiscount = subtotal + shipping;
+
+    // Áp dụng giảm giá nếu tổng cộng > 320,000 VND
+    if (totalBeforeDiscount > 320000) {
+        discount = subtotal * 0.2; // Giảm giá 20%
+    }
+
+    // Hiển thị các giá trị
+    document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " VND";
+    document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " VND";
+
+    // Tính và hiển thị tổng cộng sau giảm giá
+    const total = totalBeforeDiscount - discount;
+    document.querySelector('#total-value').textContent = total.toLocaleString('vi-VN') + " VND";
+
+    // Chỉ hiển thị giảm giá khi có giảm giá
+    const discountElement = document.getElementById('discount-value');
+    const discountRow = document.getElementById('discount-row');
+    if (discount > 0) {
+        discountElement.textContent = `- ${discount.toLocaleString('vi-VN')} VND`;
+        discountRow.style.display = "flex"; // Hiển thị dòng giảm giá
+    } else {
+        discountRow.style.display = "none"; // Ẩn nếu không có giảm giá
+    }
+}
+
+    
+    
+    
+</script>
+
 
     <!-- bootstarp cdn -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

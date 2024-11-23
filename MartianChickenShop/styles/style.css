@@ -1084,7 +1084,7 @@ button {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    margin-left: 75px;
+    margin-left: 45px;
 }
 
 .profile-bar .logout {
@@ -1160,4 +1160,67 @@ button {
 
 .profile-form .btn-profile:hover {
     background-color: #BC1F23;
+}
+
+@media (max-width: 768px) {
+  .profile-bar {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex; /* Sử dụng Flexbox */
+    align-items: center; /* Căn giữa theo trục dọc */
+    justify-content: flex-start; /* Căn tất cả phần tử sang bên trái */
+  }
+
+  .profile-bar .profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Tạo khoảng cách giữa các phần tử */
+  }
+
+  .profile-bar .profile-info .avatar {
+    width: 60px; /* Điều chỉnh kích thước avatar */
+    height: 60px;
+    border-radius: 50%; /* Nếu muốn avatar bo tròn */
+  }
+
+  .profile-greeting {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .profile-bar {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Sắp xếp theo chiều dọc */
+    align-items: center; /* Căn giữa các phần tử */
+    text-align: center; /* Căn giữa văn bản */
+    justify-content: flex-start; /* Căn các phần tử ở trên cùng */
+    height: 100%; /* Chiếm toàn bộ chiều cao của phần chứa */
+  }
+
+  .profile-bar .profile-info {
+    display: flex;
+    flex-direction: column; /* Sắp xếp avatar và greeting theo chiều dọc */
+    align-items: center; /* Căn giữa các phần tử */
+    gap: 8px; /* Khoảng cách giữa các phần tử */
+    flex-grow: 1; /* Tạo không gian cho các phần tử trên */
+  }
+
+  .profile-bar .profile-info .avatar {
+    width: 50px; /* Kích thước avatar */
+    height: 50px;
+    border-radius: 50%; /* Bo tròn avatar */
+  }
+
+  .profile-greeting {
+    font-size: 14px; /* Cỡ chữ nhỏ hơn */
+    margin-top: 8px; /* Khoảng cách từ avatar đến greeting */
+    margin-bottom: 8px; /* Khoảng cách từ greeting đến phần tử tiếp theo */
+  }
+
 }

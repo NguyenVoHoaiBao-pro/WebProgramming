@@ -230,7 +230,61 @@
                 });
             }
         </script>
-               
+        <div class="search-container">
+            <input type="text" id="search-box" placeholder="Tìm kiếm sản phẩm...">
+            <button onclick="searchProduct()">Tìm kiếm</button>
+        </div>
+        <style>
+            
+            .product.show {
+                display: block; /* Hiện sản phẩm phù hợp */
+            }
+            .search-container {
+                margin: 20px;
+                text-align: center;
+            }
+            .search-container input {
+                width: 300px;
+                padding: 8px;
+            }
+            .search-container button {
+                padding: 8px;
+            }
+        </style>    
+        <script>
+            // Hàm loại bỏ dấu tiếng Việt
+            function removeVietnameseTones(str) {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
+            }
+        
+            // Hàm tìm kiếm sản phẩm
+            function searchProduct() {
+                const searchInput = document.getElementById("search-box").value.toLowerCase();
+                const normalizedSearch = removeVietnameseTones(searchInput);
+        
+                const products = document.querySelectorAll(".product");
+                let found = false; // Kiểm tra nếu tìm thấy sản phẩm
+        
+                products.forEach(product => {
+                    const productName = product.querySelector(".product-name").textContent.toLowerCase();
+                    const normalizedName = removeVietnameseTones(productName);
+        
+                    if (normalizedName.includes(normalizedSearch)) {
+                        product.classList.add("show");
+                        product.style.display = "block"; // Hiển thị sản phẩm
+                        found = true;
+                    } else {
+                        product.classList.remove("show");
+                        product.style.display = "none"; // Ẩn sản phẩm không khớp
+                    }
+                });
+        
+                // Thông báo nếu không tìm thấy sản phẩm nào
+                if (!found) {
+                    alert("Không tìm thấy sản phẩm nào phù hợp.");
+                }
+            }
+        </script>
         <div class="row container-fluid px-5">
             <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
                 <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png" onclick="window.location.href = 'sproduct1.html';">

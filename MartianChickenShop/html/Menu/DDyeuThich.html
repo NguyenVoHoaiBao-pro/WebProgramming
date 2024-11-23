@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiệm Gà Sao Hỏa</title>
+    <link rel="icon" href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png" type="image/png">
+    <link rel="stylesheet" href="/WebProgramming/MartianChickenShop/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/WebProgramming/MartianChickenShop/html/index.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .favorite-items-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .favorite-items-table th,
+        .favorite-items-table td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .favorite-items-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .favorite-items-table tbody tr:hover {
+            background-color: #f1f1f1;
+            transition: 0.3s;
+        }
+
+        .btn-return,
+        .btn-add-favorite {
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-add-favorite {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-add-favorite:hover {
+            background-color: #218838;
+        }
+
+        .btn-return {
+            background-color: red;
+            color: white;
+        }
+
+        .btn-return:hover {
+            background-color: darkred;
+        }
+
+        .no-favorites {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+        <div class="container-fluid mr-5">
+                     <!-- <div class="col-1"></div> -->
+            <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+            
+            <button class="navbar-toggler" onclick="toggleMenu()">
+                <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
+            </button>
+
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa Hàng</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Quality</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">Liên hệ</a>
+
+                    </li>
+                    <li class="nav-item" id="nav-icons">
+                        <!-- <i class="bi bi-search"></i> -->
+                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+                    </li>
+                    
+                </ul>
+              </div>
+           <div id="mySideBar" class="sidebar">
+              <div class="sidebar-header">
+                  <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                  <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
+              </div>
+              <div class="sidebar-content">
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/index.html">TRANG CHỦ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                      
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/sidebar/chinhsach.html">CHÍNH SÁCH</a></h4>
+                      
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
+                      <ul class="submenu">
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                          <li><a href="#">Combo gà phải thử</a></li>
+                      </ul>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">DỊCH VỤ</a></h4>
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">TUYỂN DỤNG</a></h4>
+                  </div>
+
+                   <div class="menu-section user" id="user-sidebar">
+                      <h4><i class="bi bi-person"></i><a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
+                      
+                  </div>
+                   <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+                      <span id="greeting-menu"></span>
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+                      <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
+                  </div>
+              </div>
+          </div>
+        </nav>
+
+    <!-- Main Section -->
+    <section id="favorite-orders" class="mt-5 pt-5">
+        <div class="container">
+            <h3 class="text-center mt-5">Đơn Hàng Yêu Thích</h3>
+            <hr class="border border-danger border-2 opacity-75 mx-auto">
+            <div id="favorite-list">
+                <!-- Danh sách sản phẩm yêu thích sẽ hiển thị tại đây -->
+            </div>
+            <button class="btn-add-favorite" onclick="addSampleFavorite()">Thêm Đơn Hàng Yêu Thích Mẫu</button>
+            <button class="btn-return" onclick="goToShop()">Quay lại Cửa Hàng</button>
+        </div>
+    </section>
+
+    <script>
+        // Hàm để hiển thị các sản phẩm yêu thích
+        function loadFavoriteOrders() {
+            const favorites = JSON.parse(localStorage.getItem('favoriteOrders')) || [];
+
+            const favoriteListDiv = document.getElementById('favorite-list');
+
+            if (favorites.length === 0) {
+                favoriteListDiv.innerHTML = `<p class="no-favorites">Bạn chưa có sản phẩm yêu thích nào.</p>`;
+                return;
+            }
+
+            let tableHTML = `
+                <table class="favorite-items-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sản phẩm 1</th>
+                            <th>Sản phẩm 2</th>
+                            <th>Sản phẩm 3</th>
+                            <th>Sản phẩm 4</th>
+                            <th>Tổng giá tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            favorites.forEach((favorite, index) => {
+                let totalPrice = 0;
+                let rowHTML = `<tr><td>${index + 1}</td>`;
+
+                // Loop through the products in each order and calculate the total
+                favorite.products.forEach(product => {
+                    rowHTML += `<td>${product.name} x${product.quantity}</td>`;
+                    totalPrice += product.price * product.quantity;
+                });
+
+                rowHTML += `<td>${totalPrice.toLocaleString()} VND</td></tr>`;
+                tableHTML += rowHTML;
+            });
+
+            tableHTML += `</tbody></table>`;
+            favoriteListDiv.innerHTML = tableHTML;
+        }
+
+        // Hàm thêm đơn hàng yêu thích mẫu
+        function addSampleFavorite() {
+            const currentFavorites = JSON.parse(localStorage.getItem('favoriteOrders')) || [];
+
+            // Sample products for each order
+            const newFavorites = [
+                {
+                    products: [
+                        { name: 'Gà Xối Mỡ', quantity: 1, price: 80000 },
+                        { name: 'Gà Rán', quantity: 2, price: 60000 },
+                        { name: 'Gà Nướng', quantity: 1, price: 70000 },
+                        { name: 'Gà Hấp', quantity: 3, price: 50000 }
+                    ]
+                },
+                {
+                    products: [
+                        { name: 'Gà Xào Lăn', quantity: 2, price: 75000 },
+                        { name: 'Gà Kho', quantity: 1, price: 65000 },
+                        { name: 'Gà Quay', quantity: 4, price: 85000 },
+                        { name: 'Gà Bắp', quantity: 1, price: 90000 }
+                    ]
+                },
+                {
+                    products: [
+                        { name: 'Gà Luộc', quantity: 2, price: 70000 },
+                        { name: 'Gà Bảy Món', quantity: 1, price: 95000 },
+                        { name: 'Gà Xào Sả', quantity: 1, price: 68000 },
+                        { name: 'Gà Cay', quantity: 3, price: 50000 }
+                    ]
+                }
+            ];
+
+            currentFavorites.push(...newFavorites);
+            localStorage.setItem('favoriteOrders', JSON.stringify(currentFavorites));
+            alert('Đã thêm ba đơn hàng yêu thích mẫu!');
+            loadFavoriteOrders(); // Cập nhật giao diện
+        }
+
+        // Chuyển hướng đến trang cửa hàng
+        function goToShop() {
+            window.location.href = '/WebProgramming/MartianChickenShop/html/Menu/shop.html';
+        }
+
+        // Tải danh sách đơn hàng yêu thích khi trang được tải
+        document.addEventListener('DOMContentLoaded', loadFavoriteOrders);
+    </script>
+
+<footer class="mt-5 p-5 bg-dark">
+    <div class="row conatiner mx-auto pt-5">
+      <div class="footer-one col-lg-3 col-md-6 col-12">
+      
+        <img id="logo-img-footer" src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="logo">
+        <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
+      
+      </div>
+  
+      <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+        <h5 class="pb-2">Liên kết nhanh</h5>
+        <ul class="text-uppercase list-unstyled">
+          <li><a href="index.html">trang chủ</a></li>
+          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a></li>
+          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">thông tin</a></li>
+          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">liên hệ</a></li>
+          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">Giỏ hàng</a></li>
+        </ul>
+      </div>
+      <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+        <h5 class="pb-2">Liên hệ với chúng tôi</h5>
+        <div>
+          <h6 class="text-uppercase">Địa chỉ</h6>
+          <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
+        </div>
+        <div>
+          <h6 class="text-uppercase">điện thoại</h6>
+          <p>0849294483</p>
+        </div>
+        <div>
+          <h6 class="text-uppercase">Email</h6>
+          <p>MarsStore@gmail.com</p>
+        </div>
+      </div>
+      <div class="Photos col-lg-3 col-md-6 col-12">
+           <h5 class="pb-2">Các đơn vị tài trợ</h5>
+      <div class="row">
+        <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 3.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 2.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy.png" alt="leather-img">
+        <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image.png" alt="leather-img">
+      </div>
+      </div>
+    <div class="copyright mt-5">
+      <div class="row container mx-auto">
+        <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+          <img src="img/payment.png" alt="payment..logo">
+        </div> -->
+  
+        <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
+          <p>ABK WEBSITE &copy; DESIGN 2024</p>
+        </div>
+  
+        <div class="col-lg-3 col-md-6 col-12">
+          <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+          <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+    </div>  
+  </footer>
+</body>
+
+</html>

@@ -1,11 +1,11 @@
 // Mẫu dữ liệu người dùng với vai trò
 const users = [
-    { username: "user1", password: "password1", role: "user" },
-    { username: "user2", password: "password2", role: "user" },
-    { username: "user3", password: "password3", role: "user" },
-    { username: "user4", password: "password4", role: "user" },
-    { username: "user5", password: "password5", role: "user" },
-    { username: "admin@gmail.com", password: "admin123", role: "admin" }
+    { username: "user1", password: "password1", role: "user", email: "user1@example.com", diachi: "001, abc, TPHCM" },
+    { username: "user2", password: "password2", role: "user", email: "user2@example.com", diachi: "002, abc, TP THU DUC" },
+    { username: "user3", password: "password3", role: "user", email: "user3@example.com", diachi: "003, abc, TPHCM" },
+    { username: "user4", password: "password4", role: "user", email: "user4@example.com", diachi: "004, abc, TP THU DUC" },
+    { username: "user5", password: "password5", role: "user", email: "user5@example.com", diachi: "005, abc, TPHCM" },
+    { username: "admin@gmail.com", password: "admin123", role: "admin", email: "22130022@st.hcmuaf.edu.vn", diachi: "admin, abc, TPHCM" },
 ];
 
 // Mẫu dữ liệu sản phẩm với số lượng
@@ -15,19 +15,19 @@ const products = [
     { id: 3, name: "Cánh gà phô mai", price: "45000", quantity: 8, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png" }
 ];
 
-// Hàm hiển thị danh sách người dùng
+// Hiển thị bảng người dùng
 function renderUsers() {
     const userList = document.getElementById('user-list');
-    userList.innerHTML = '';
+    userList.innerHTML = '';  // Clear the table
 
     users.forEach((user, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td>
-            <td>${user.name}</td>
-            <td>${user.phone}</td>
+            <td>${user.username}</td>
+            <td>${user.password}</td>
             <td>${user.email}</td>
-            <td>${user.address}</td>
+            <td>${user.diachi}</td>
             <td>
                 <button class="btn btn-warning" onclick="editUser(${index})">Sửa</button>
                 <button class="btn btn-danger" onclick="deleteUser(${index})">Xóa</button>
@@ -37,10 +37,10 @@ function renderUsers() {
     });
 }
 
-// Hàm hiển thị danh sách món ăn
+// Hiển thị bảng món ăn
 function renderProducts() {
     const productList = document.getElementById('product-list');
-    productList.innerHTML = '';
+    productList.innerHTML = '';  // Clear the table
 
     products.forEach((product, index) => {
         const row = document.createElement('tr');
@@ -59,27 +59,43 @@ function renderProducts() {
     });
 }
 
-// Hàm thêm người dùng
+// Chuyển bảng người dùng và món ăn
+function showUsersSection() {
+    document.getElementById('users-section').style.display = 'block';
+    document.getElementById('products-section').style.display = 'none';
+    document.getElementById('users-btn').classList.add('active');
+    document.getElementById('products-btn').classList.remove('active');
+}
+
+function showProductsSection() {
+    document.getElementById('products-section').style.display = 'block';
+    document.getElementById('users-section').style.display = 'none';
+    document.getElementById('products-btn').classList.add('active');
+    document.getElementById('users-btn').classList.remove('active');
+}
+
+// Thêm người dùng
 function addUser() {
     const name = document.getElementById('add-user-username').value;
     const password = document.getElementById('add-user-password').value;
     const role = document.getElementById('add-user-role').value;
 
     const newUser = {
-        name: name,
+        username: name,
         password: password,
         role: role,
-        phone: '0123456789', // Thông tin giả
-        email: 'user@example.com', // Thông tin giả
-        address: '123 Main St' // Thông tin giả
+        email: 'user' + (users.length + 1) + '@example.com',
+        diachi: 'Address ' + (users.length + 1)
     };
 
     users.push(newUser);
     renderUsers();
-    $('#addUserModal').modal('hide');
+
+    const addUserModal = new bootstrap.Modal(document.getElementById('addUserModal'));
+    addUserModal.hide();
 }
 
-// Hàm thêm món ăn
+// Thêm món ăn
 function addProduct() {
     const name = document.getElementById('add-product-name').value;
     const price = document.getElementById('add-product-price').value;
@@ -95,32 +111,34 @@ function addProduct() {
 
     products.push(newProduct);
     renderProducts();
-    $('#addProductModal').modal('hide');
+
+    const addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
+    addProductModal.hide();
 }
 
-// Hàm xóa người dùng
+// Xóa người dùng
 function deleteUser(index) {
     users.splice(index, 1);
     renderUsers();
 }
 
-// Hàm xóa món ăn
+// Xóa món ăn
 function deleteProduct(index) {
     products.splice(index, 1);
     renderProducts();
 }
 
-// Hàm chỉnh sửa người dùng
+// Chỉnh sửa người dùng
 function editUser(index) {
     const user = users[index];
-    const newName = prompt('Nhập tên mới:', user.name);
+    const newName = prompt('Nhập tên mới:', user.username);
     if (newName) {
-        user.name = newName;
+        user.username = newName;
         renderUsers();
     }
 }
 
-// Hàm chỉnh sửa món ăn
+// Chỉnh sửa món ăn
 function editProduct(index) {
     const product = products[index];
     const newName = prompt('Nhập tên món ăn mới:', product.name);
@@ -128,6 +146,96 @@ function editProduct(index) {
         product.name = newName;
         renderProducts();
     }
+}
+
+// Gọi hàm render ban đầu
+renderUsers();
+renderProducts();
+
+// Thêm sự kiện cho nút chuyển bảng
+document.getElementById('users-btn').addEventListener('click', showUsersSection);
+document.getElementById('products-btn').addEventListener('click', showProductsSection);
+
+// Sửa phần modal thêm người dùng
+document.querySelector('#addUserModal .btn-primary').addEventListener('click', addUser);
+
+// Sửa phần modal thêm món ăn
+document.querySelector('#addProductModal .btn-primary').addEventListener('click', addProduct);
+// Hiển thị modal thêm người dùng
+function showAddUserModal() {
+    const addUserModal = new bootstrap.Modal(document.getElementById('addUserModal'));
+    addUserModal.show();
+}
+
+// Hiển thị modal thêm món ăn
+function showAddProductModal() {
+    const addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
+    addProductModal.show();
+}
+
+// Thêm người dùng
+function addUser() {
+    const username = document.getElementById('add-user-username').value;
+    const password = document.getElementById('add-user-password').value;
+    const role = document.getElementById('add-user-role').value;
+
+    if (!username || !password || !role) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+    }
+
+    const newUser = {
+        username: username,
+        password: password,
+        role: role,
+        email: username + "@example.com", // Tạo email từ username
+        diachi: 'Địa chỉ ' + (users.length + 1)
+    };
+
+    users.push(newUser);
+    renderUsers(); // Cập nhật bảng người dùng
+
+    const addUserModal = new bootstrap.Modal(document.getElementById('addUserModal'));
+    addUserModal.hide(); // Đóng modal
+
+    // Reset input fields
+    document.getElementById('add-user-username').value = '';
+    document.getElementById('add-user-password').value = '';
+    document.getElementById('add-user-role').value = 'user';
+}
+
+// Thêm món ăn
+function addProduct() {
+    const name = document.getElementById('add-product-name').value;
+    const price = document.getElementById('add-product-price').value;
+    const quantity = document.getElementById('add-product-quantity').value;
+    const image = document.getElementById('add-product-image').value;
+
+    if (!name || !price || !quantity || !image) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+    }
+
+    const newProduct = {
+        id: products.length + 1,
+        name: name,
+        price: price,
+        quantity: quantity,
+        image: image
+    };
+
+    products.push(newProduct);
+    renderProducts(); // Cập nhật bảng món ăn
+    alert('Thêm thành công');
+
+    const addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
+    addProductModal.hide(); // Đóng modal
+
+    // Reset input fields
+    document.getElementById('add-product-name').value = '';
+    document.getElementById('add-product-price').value = '';
+    document.getElementById('add-product-quantity').value = '';
+    document.getElementById('add-product-image').value = '';
 }
 
 // Gọi hàm render ban đầu

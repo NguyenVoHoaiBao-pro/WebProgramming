@@ -19,10 +19,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#users-section">Quản lý người dùng</a>
+                        <a id="users-btn" class="nav-link active" href="#users-section">Quản lý người dùng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#products-section">Quản lý món ăn</a>
+                        <a id="products-btn" class="nav-link" href="#products-section">Quản lý món ăn</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-danger text-white" href="/WebProgramming/MartianChickenShop/html/index.html">Đăng xuất</a>
@@ -41,11 +41,11 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Họ và tên</th>
-                        <th>Số điện thoại</th>
+                        <th>Tài khoản</th>
+                        <th>Mật Khẩu</th>
                         <th>Email</th>
                         <th>Địa chỉ</th>
-                        <th>Hành động</th>
+                        <th>Trạng hái mua</th>
                     </tr>
                 </thead>
                 <tbody id="user-list">
@@ -105,7 +105,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" onclick="showAddUserModal()">Thêm</button>
+                    <button type="button" class="btn btn-primary" onclick="addUser()">Thêm</button>
+
                 </div>
             </div>
         </div>
@@ -139,7 +140,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" onclick="showAddProductModal()">Thêm</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Thêm</button>
+
                 </div>
             </div>
         </div>

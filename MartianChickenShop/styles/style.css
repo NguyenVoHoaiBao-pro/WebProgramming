@@ -1292,3 +1292,8 @@ button {
   }
 
 }
+ .product img {
+    object-fit: cover; /* Cắt ảnh theo tỷ lệ vuông */
+    display: block;
+        
+    }

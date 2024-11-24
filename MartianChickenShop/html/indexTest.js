@@ -15,145 +15,121 @@ const products = [
     { id: 3, name: "Cánh gà phô mai", price: "45000", quantity: 8, image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png" }
 ];
 
-let currentUser = null; // Biến lưu trữ người dùng hiện tại
+// Hàm hiển thị danh sách người dùng
+function renderUsers() {
+    const userList = document.getElementById('user-list');
+    userList.innerHTML = '';
 
-// Hàm đăng nhập
-function login(username, password) {
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        currentUser = user;
-        alert(`Đăng nhập thành công! Xin chào ${user.role === "admin" ? "Admin" : "User"} ${username}`);
-        if (user.role === "admin") {
-            showUsersSection();
-        } else {
-            showProductsSection();
-        }
-    } else {
-        alert("Tên đăng nhập hoặc mật khẩu không đúng.");
-    }
-}
-
-// Hiển thị danh sách người dùng (chỉ admin)
-function displayUsers() {
-    if (currentUser && currentUser.role === "admin") {
-        const userTable = document.getElementById("userTable");
-        userTable.innerHTML = "";
-
-        users.forEach((user, index) => {
-            const row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${user.username}</td>
-                    <td>${user.password}</td>
-                    <td>${user.role}</td>
-                    <td>
-                        <button class="btn btn-danger" onclick="deleteUser(${index})">Xóa</button>
-                    </td>
-                </tr>
-            `;
-            userTable.innerHTML += row;
-        });
-    }
-}
-
-// Hiển thị danh sách sản phẩm
-function displayProducts() {
-    const productTable = document.getElementById("productTable");
-    productTable.innerHTML = "";
-
-    products.forEach((product, index) => {
-        const row = `
-            <tr>
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>${product.price} VND</td>
-                <td>${product.quantity}</td>
-                <td><img src="${product.image}" alt="${product.name}" style="width: 100px; height: auto;"></td>
-                <td>
-                    <button class="btn btn-danger" onclick="deleteProduct(${index})">Xóa</button>
-                </td>
-            </tr>
+    users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${user.name}</td>
+            <td>${user.phone}</td>
+            <td>${user.email}</td>
+            <td>${user.address}</td>
+            <td>
+                <button class="btn btn-warning" onclick="editUser(${index})">Sửa</button>
+                <button class="btn btn-danger" onclick="deleteUser(${index})">Xóa</button>
+            </td>
         `;
-        productTable.innerHTML += row;
+        userList.appendChild(row);
     });
 }
 
-// Thêm người dùng (chỉ admin)
+// Hàm hiển thị danh sách món ăn
+function renderProducts() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+
+    products.forEach((product, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.quantity}</td>
+            <td><img src="${product.image}" alt="${product.name}" width="50"></td>
+            <td>
+                <button class="btn btn-warning" onclick="editProduct(${index})">Sửa</button>
+                <button class="btn btn-danger" onclick="deleteProduct(${index})">Xóa</button>
+            </td>
+        `;
+        productList.appendChild(row);
+    });
+}
+
+// Hàm thêm người dùng
 function addUser() {
-    if (currentUser && currentUser.role === "admin") {
-        const username = prompt("Nhập tên người dùng:");
-        const password = prompt("Nhập mật khẩu:");
-        const role = prompt("Nhập vai trò (admin/user):");
+    const name = document.getElementById('add-user-username').value;
+    const password = document.getElementById('add-user-password').value;
+    const role = document.getElementById('add-user-role').value;
 
-        if (username && password && role) {
-            users.push({ username, password, role });
-            displayUsers();
-        } else {
-            alert("Vui lòng nhập đầy đủ thông tin.");
-        }
-    } else {
-        alert("Chỉ admin mới có quyền thêm người dùng.");
-    }
+    const newUser = {
+        name: name,
+        password: password,
+        role: role,
+        phone: '0123456789', // Thông tin giả
+        email: 'user@example.com', // Thông tin giả
+        address: '123 Main St' // Thông tin giả
+    };
+
+    users.push(newUser);
+    renderUsers();
+    $('#addUserModal').modal('hide');
 }
 
-// Xóa người dùng (chỉ admin)
-function deleteUser(index) {
-    if (currentUser && currentUser.role === "admin") {
-        users.splice(index, 1);
-        displayUsers();
-    } else {
-        alert("Chỉ admin mới có quyền xóa người dùng.");
-    }
-}
-
-// Thêm sản phẩm
+// Hàm thêm món ăn
 function addProduct() {
-    const id = products.length + 1;
-    const name = prompt("Nhập tên sản phẩm:");
-    const price = prompt("Nhập giá:");
-    const quantity = prompt("Nhập số lượng:");
-    const image = prompt("Nhập đường dẫn hình ảnh:");
+    const name = document.getElementById('add-product-name').value;
+    const price = document.getElementById('add-product-price').value;
+    const quantity = document.getElementById('add-product-quantity').value;
+    const image = document.getElementById('add-product-image').value;
 
-    if (name && price && quantity && image) {
-        products.push({ id, name, price, quantity, image });
-        displayProducts();
-    } else {
-        alert("Vui lòng nhập đầy đủ thông tin.");
-    }
+    const newProduct = {
+        name: name,
+        price: price,
+        quantity: quantity,
+        image: image
+    };
+
+    products.push(newProduct);
+    renderProducts();
+    $('#addProductModal').modal('hide');
 }
 
-// Xóa sản phẩm
+// Hàm xóa người dùng
+function deleteUser(index) {
+    users.splice(index, 1);
+    renderUsers();
+}
+
+// Hàm xóa món ăn
 function deleteProduct(index) {
     products.splice(index, 1);
-    displayProducts();
+    renderProducts();
 }
 
-// Hiển thị mục Quản lý Người Dùng và ẩn Quản lý Sản Phẩm (chỉ admin)
-function showUsersSection() {
-    if (currentUser && currentUser.role === "admin") {
-        document.getElementById("users-section").style.display = "block";
-        document.getElementById("products-section").style.display = "none";
-        displayUsers();
-    } else {
-        alert("Chỉ admin mới được truy cập vào mục Quản lý Người Dùng.");
+// Hàm chỉnh sửa người dùng
+function editUser(index) {
+    const user = users[index];
+    const newName = prompt('Nhập tên mới:', user.name);
+    if (newName) {
+        user.name = newName;
+        renderUsers();
     }
 }
 
-// Hiển thị mục Quản lý Sản Phẩm và ẩn Quản lý Người Dùng
-function showProductsSection() {
-    document.getElementById("products-section").style.display = "block";
-    document.getElementById("users-section").style.display = "none";
-    displayProducts();
+// Hàm chỉnh sửa món ăn
+function editProduct(index) {
+    const product = products[index];
+    const newName = prompt('Nhập tên món ăn mới:', product.name);
+    if (newName) {
+        product.name = newName;
+        renderProducts();
+    }
 }
 
-// Khởi tạo chế độ hiển thị mặc định khi tải trang
-document.addEventListener("DOMContentLoaded", () => {
-    login("admin@gmail.com", "admin123");
-
-    document.querySelector("a[href='#users-section']").onclick = showUsersSection;
-    document.querySelector("a[href='#products-section']").onclick = showProductsSection;
-});
-
-document.getElementById("available-quantity").textContent = product.quantity;
-
-// Lưu thông tin người dùng vào localStorage
+// Gọi hàm render ban đầu
+renderUsers();
+renderProducts();

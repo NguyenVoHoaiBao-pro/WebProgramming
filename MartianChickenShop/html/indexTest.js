@@ -162,6 +162,7 @@ document.querySelector('#addUserModal .btn-primary').addEventListener('click', a
 // Sửa phần modal thêm món ăn
 document.querySelector('#addProductModal .btn-primary').addEventListener('click', addProduct);
 // Hiển thị modal thêm người dùng
+// Hiển thị modal thêm người dùng
 function showAddUserModal() {
     const addUserModal = new bootstrap.Modal(document.getElementById('addUserModal'));
     addUserModal.show();
@@ -173,6 +174,7 @@ function showAddProductModal() {
     addProductModal.show();
 }
 
+// Thêm người dùng
 // Thêm người dùng
 function addUser() {
     const username = document.getElementById('add-user-username').value;
@@ -188,15 +190,16 @@ function addUser() {
         username: username,
         password: password,
         role: role,
-        email: username + "@example.com", // Tạo email từ username
+        email: username + "@example.com",
         diachi: 'Địa chỉ ' + (users.length + 1)
     };
 
     users.push(newUser);
     renderUsers(); // Cập nhật bảng người dùng
 
+    // Đóng modal và reset form
     const addUserModal = new bootstrap.Modal(document.getElementById('addUserModal'));
-    addUserModal.hide(); // Đóng modal
+    addUserModal.hide();
 
     // Reset input fields
     document.getElementById('add-user-username').value = '';
@@ -205,14 +208,22 @@ function addUser() {
 }
 
 // Thêm món ăn
+// Thêm món ăn
 function addProduct() {
     const name = document.getElementById('add-product-name').value;
     const price = document.getElementById('add-product-price').value;
     const quantity = document.getElementById('add-product-quantity').value;
     const image = document.getElementById('add-product-image').value;
 
+    // Kiểm tra nếu có trường nào bị thiếu thông tin
     if (!name || !price || !quantity || !image) {
         alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+    }
+
+    // Kiểm tra nếu thông tin nhập vào hợp lệ
+    if (isNaN(price) || isNaN(quantity)) {
+        alert('Giá và số lượng phải là số hợp lệ!');
         return;
     }
 
@@ -226,10 +237,11 @@ function addProduct() {
 
     products.push(newProduct);
     renderProducts(); // Cập nhật bảng món ăn
-    alert('Thêm thành công');
+    alert('Thêm sản phẩm thành công!');
 
+    // Đóng modal và reset form
     const addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
-    addProductModal.hide(); // Đóng modal
+    addProductModal.hide();
 
     // Reset input fields
     document.getElementById('add-product-name').value = '';
@@ -238,6 +250,13 @@ function addProduct() {
     document.getElementById('add-product-image').value = '';
 }
 
-// Gọi hàm render ban đầu
-renderUsers();
-renderProducts();
+// Xử lý sự kiện khi nhấn nút đóng modal
+document.querySelectorAll('.btn-close').forEach(button => {
+    button.addEventListener('click', function () {
+        // Reset các trường nhập liệu khi đóng modal
+        document.getElementById('add-product-name').value = '';
+        document.getElementById('add-product-price').value = '';
+        document.getElementById('add-product-quantity').value = '';
+        document.getElementById('add-product-image').value = '';
+    });
+});

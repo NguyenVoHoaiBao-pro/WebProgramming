@@ -163,7 +163,7 @@
         <div class="container ml-5 mt-5 px-5 pt-5">
             <h3>Các COMBO gà nổi bật</h3>
             <hr class="border border-danger border-2 opacity-75">
-            <p style="font-size: 18px">Tại đây, bạn có thể khám phá các combo gà mới của chúng tôi trên <span style="color: #BC1F23" >MFC.</span> </p>
+            <p style="font-size: 18px">Tại đây, bạn có thể khám phá các combo gà mới của chúng tôi trên <span style="color: #BC1F23" >MarsStore.</span> </p>
                     <div style="display: flex; justify-content: center;">
             </div>   
         </div>
@@ -206,48 +206,83 @@
                 margin: 0 5px;
             }
         </style>
-        <div class="search-container">
-            <input type="text" id="search-box" placeholder="Tìm kiếm sản phẩm...">
-            <button onclick="searchProduct()">Tìm kiếm</button>
-        </div>
+        <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
+                <button class="search-button" id="searchButton">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
         <style>
             
             .product.show {
-                display: block; 
-                
+                display: block; /* Hiện sản phẩm phù hợp */
             }
-            .search-container {
-                margin: 20px;
-                text-align: center;
-                
-            }
-            .search-container input {
-                width: 300px;
-                padding: 8px;
-            }
-            .search-container button {
-                padding: 8px;
-                background-color:red;
-            }
+            .search-bar {
+                    width: 400px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    border: solid #BC1F23 2px;
+                    margin-left: 650px;
+
+                    }
+
+                    .search-input {
+                    width: 85%;
+                    padding: 10px 20px;
+                    border: none;
+                    outline: none;
+                    font-size: 16px;
+                    height: 40px;
+                    }
+
+                    .search-button {
+                    width: 15%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    background-color: #BC1F23;
+                    border: solid #BC1F23 10px;
+                    height: 40px;
+                    }
+
+                    .search-button i {
+                    font-size: 20px;
+                    color: white;
+                    }
+                    .search-container input {
+                        width: 300px;
+                        padding: 8px;
+                    }
+
+            
         </style>    
         <script>
-            // Hàm loại bỏ dấu tiếng Việt
-            function removeVietnameseTones(str) {
-                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
-            }
-        
-            // Hàm tìm kiếm sản phẩm
+    // Hàm loại bỏ dấu tiếng Việt
+    function removeVietnameseTones(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
+    }
+
+    // Hàm tìm kiếm sản phẩm
             function searchProduct() {
-                const searchInput = document.getElementById("search-box").value.toLowerCase();
+                // Lấy giá trị từ ô input
+                const searchInput = document.getElementById("searchInput").value.toLowerCase();
                 const normalizedSearch = removeVietnameseTones(searchInput);
-        
+
+                // Lấy danh sách các sản phẩm
                 const products = document.querySelectorAll(".product");
                 let found = false; // Kiểm tra nếu tìm thấy sản phẩm
-        
+
                 products.forEach(product => {
                     const productName = product.querySelector(".product-name").textContent.toLowerCase();
                     const normalizedName = removeVietnameseTones(productName);
-        
+
+                    // Kiểm tra nếu sản phẩm phù hợp với từ khóa tìm kiếm
                     if (normalizedName.includes(normalizedSearch)) {
                         product.classList.add("show");
                         product.style.display = "block"; // Hiển thị sản phẩm
@@ -257,12 +292,15 @@
                         product.style.display = "none"; // Ẩn sản phẩm không khớp
                     }
                 });
-        
+
                 // Thông báo nếu không tìm thấy sản phẩm nào
                 if (!found) {
                     alert("Không tìm thấy sản phẩm nào phù hợp.");
                 }
             }
+
+            // Thêm sự kiện click cho nút tìm kiếm
+            document.getElementById("searchButton").addEventListener("click", searchProduct);
         </script>
         <div style="text-align: right; margin-bottom: 20px;">
             <button class="sort-button" onclick="sortProducts('asc')">Sắp xếp từ thấp đến cao</button>

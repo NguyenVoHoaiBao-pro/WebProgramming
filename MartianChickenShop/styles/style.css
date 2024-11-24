@@ -1,7 +1,7 @@
 /* Nabar CSS */
 
 .sort-button {
-  background-color: red;
+  background-color: #BC1F23;
   /* Màu xanh dương */
   color: white;
   /* Màu chữ trắng */
@@ -20,7 +20,7 @@
 }
 
 .sort-button:hover {
-  background-color: red;
+  background-color: #BC1F23;
   /* Màu đậm hơn khi hover */
   transform: scale(1.05);
   /* Phóng to nhẹ khi hover */
@@ -408,7 +408,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: red;
+  background-color: #BC1F23;
   color: white;
   border: none;
   padding: 10px 15px;

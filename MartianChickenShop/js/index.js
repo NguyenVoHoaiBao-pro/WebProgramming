@@ -377,7 +377,7 @@ function displayUserMenu() {
   } else {
     // Khi người dùng chưa đăng nhập
     if (profileGreeting) {
-      profileGreeting.textContent = "XIN CHÀO!";
+      profileGreeting.textContent = "XIN CHÀO !";
     }
 
     userSidebar.style.display = "block"; // Hiển thị phần Đăng nhập / Đăng ký

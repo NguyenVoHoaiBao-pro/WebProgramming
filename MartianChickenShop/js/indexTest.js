@@ -217,13 +217,13 @@ function addProduct() {
 
     // Kiểm tra nếu có trường nào bị thiếu thông tin
     if (!name || !price || !quantity || !image) {
-        alert('Vui lòng điền đầy đủ thông tin!');
+        alert('Vui lòng điền đầy đủ thông tin !');
         return;
     }
 
     // Kiểm tra nếu thông tin nhập vào hợp lệ
     if (isNaN(price) || isNaN(quantity)) {
-        alert('Giá và số lượng phải là số hợp lệ!');
+        alert('Giá và số lượng phải là số hợp lệ !');
         return;
     }
 
@@ -237,7 +237,7 @@ function addProduct() {
 
     products.push(newProduct);
     renderProducts(); // Cập nhật bảng món ăn
-    alert('Thêm sản phẩm thành công!');
+    alert('Thêm sản phẩm thành công !');
 
     // Đóng modal và reset form
     const addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));

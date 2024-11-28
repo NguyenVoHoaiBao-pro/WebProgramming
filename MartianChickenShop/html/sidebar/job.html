@@ -3,60 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin</title>
-     <link rel="icon" href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png" type="image/png">
+    <title>Tuyển dụng</title>
     <link rel="stylesheet" href="/WebProgramming/MartianChickenShop/styles/style.css">
-    <script src="index.js"></script>
+    <link rel="icon" href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/WebProgramming/MartianChickenShop/js/index.js"></script>
+    <script
+      src="https://kit.fontawesome.com/cc9450bd42.js"
+      crossorigin="anonymous"
+    ></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- bootstarp stackpath cdn -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <!-- Bootstrap icons cdn-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-       .about-section h2 {
-            color: #BC1F23;
-            margin-top: 40px;
-        }
-        .about-section p {
-            font-size: 18px;
-            color: #343a40;
-        }
-        .about-section img {
-            border-radius: 10px;
-            margin: 10px;
-            margin-top: 35px;
-            width: 100%;
-            object-fit: contain;
-        }
+      .container {
+    max-width: 1200px;
+    margin-top: 200px;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.job-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.job-card {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    justify-content: space-between; /* Căn đều không gian giữa các phần tử */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 220px; /* Cố định chiều cao */
+}
+
+.job-card h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.job-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.apply-btn {
+    background-color: #BC1F23;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto; /* Đẩy nút xuống đáy */
+}
+
+.apply-btn:hover {
+    background-color: darkred;
+}
+
+  
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <!-- Nav section -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
+             <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">
-            <!-- <div class="col-1"></div> -->
-            <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png"  onclick="location.reload();" id="logo-img" alt="logo..">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                     <!-- <div class="col-1"></div> -->
+            <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+            
+            <button class="navbar-toggler" onclick="toggleMenu()">
                 <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
             </button>
+
+          
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
+                        <a class="nav-link " href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                          <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a>
-                       
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa Hàng</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Quality</a>
                     </li> -->
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Thông tin</a>
+                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">Thông tin</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">Liên hệ</a>
@@ -64,46 +115,114 @@
                     </li>
                     <li class="nav-item" id="nav-icons">
                         <!-- <i class="bi bi-search"></i> -->
-                        <a href="./Login.html"><i class="bi bi-person-fill"></i></a>
-                        <a href="./Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
-                        <!-- Biểu tượng menu 3 gạch -->
-    <i class="bi bi-list menu-icon" onclick="openMenu()"></i>
-
-   <!-- Sidebar menu -->
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
-        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/sidebar/combo.html">Combo 1 nhóm</a>
-        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/sidebar/tiec.html">Đặt tiệc</a>
-        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/sidebar/job.html">Tuyển dụng</a>
-        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/sidebar/chinhsach.html">Chính sách hoạt động</a>
-    
-    </div>
+                       <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
                     </li>
+                    
                 </ul>
-            </div>
+              </div>
+
             
-        </div>
-    </nav>
-    
+                <!-- Biểu tượng menu để mở/đóng sidebar
+                <i class="bi bi-list menu-icon" onclick="toggleMenu()" id="menu-btn"></i>
+
+                <-- Sidebar menu -->
+           <div id="mySideBar" class="sidebar">
+              <div class="sidebar-header">
+                  <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                  <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
+              </div>
+              <div class="sidebar-content">
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/index.html">TRANG CHỦ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                      
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/sidebar/chinhsach.html">CHÍNH SÁCH</a></h4>
+                      
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
+                      <ul class="submenu">
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                          <li><a href="#">Combo gà phải thử</a></li>
+                      </ul>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">DỊCH VỤ</a></h4>
+                  </div>
+                   <div class="menu-section">
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                  </div>
+                  <div class="menu-section">
+                      <h4><a href="#">TUYỂN DỤNG</a></h4>
+                  </div>
+
+                   <div class="menu-section user" id="user-sidebar">
+                      <h4><i class="bi bi-person"></i><a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
+                      
+                  </div>
+                   <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+                      <span id="greeting-menu"></span>
+                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+                      <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
+                  </div>
+              </div>
+          </div>
+      </nav>
 
     <!-- About section -->
-    <section class="about-section mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-6 col-12 mt-5 pt-5">
-                </div>
-                <div class="col-lg-6 col-md-6 col-12 mt-5 m-3 p-5">
-                    <h2 class="text-uppercase">Về chúng tôi</h2>
-                    <p class="text-uppercase"> Thông điệp founder Trần Nhật Huy </p>
-                    <p class="py-3">MFS không chỉ là một cửa hàng bán gà rán; chúng tôi là những người đam mê ẩm thực. Với tình yêu dành cho gà và sự tận tâm trong từng món ăn, đội ngũ đầu bếp của chúng tôi đã nghiên cứu và phát triển các công thức độc quyền để mang đến cho bạn những miếng gà rán giòn rụm, ngọt mềm và đầy hương vị. Chúng tôi cam kết sử dụng nguyên liệu chất lượng cao nhất để đảm bảo mỗi bữa ăn đều hoàn hảo.
-                    Việc gắn liền tên quán với "Sao Hỏa" ngụ ý rằng tiệm gà có phong cách khác biệt, độc đáo, hoặc có thể là thực đơn đặc biệt không giống với các tiệm gà truyền thống, hàm ý rằng món gà ở đây ngon đến mức khách hàng có thể cảm thấy như đang trải nghiệm một điều gì đó ngoài sức tưởng tượng.Chất Lượng "Ngoài Hành Tinh"
-                    </p>
-                </div>
-            </div>
+   <div class="container">
+        <div class="header">
+            <h1>Khu Vực Tuyển Dụng</h1>
         </div>
-    </section>
 
-
+        <div class="job-list">
+            <div class="job-card">
+              <h2>Nhân viên làm thêm ở cửa hàng Marstore</h2>
+              <p>📍 Hồ Chí Minh &nbsp;|&nbsp; ⏰ 27/11/2024 &nbsp;|&nbsp; Toàn thời gian</p>
+              <p>Hạn nộp: 28/02/2025</p>
+              <button class="apply-btn">Ứng Tuyển</button>
+          </div>
+          <div class="job-card">
+              <h2>Giám sát cửa hàng Marstore</h2>
+              <p>📍 Hồ Chí Minh &nbsp;|&nbsp; ⏰ 15/04/2024 &nbsp;|&nbsp; Toàn thời gian</p>
+              <p>Hạn nộp: 31/12/2024</p>
+              <button class="apply-btn">Ứng Tuyển</button>
+          </div>
+          <div class="job-card">
+              <h2>Nhân viên làm thêm Part-time ở cửa hàng Marstore</h2>
+              <p>📍 Hồ Chí Minh &nbsp;|&nbsp; ⏰ 04/11/2024 &nbsp;|&nbsp; Không toàn thời gian</p>
+              <p>Hạn nộp: 31/12/2024</p>
+              <button class="apply-btn">Ứng Tuyển</button>
+          </div>
+          <div class="job-card">
+              <h2>Nhân viên giao hàng Marstore</h2>
+              <p>📍 Hồ Chí Minh &nbsp;|&nbsp; ⏰ 01/12/2024 &nbsp;|&nbsp; Bán thời gian</p>
+              <p>Hạn nộp: 15/01/2025</p>
+              <button class="apply-btn">Ứng Tuyển</button>
+          </div>
+          <div class="job-card">
+              <h2>Chuyên viên chăm sóc khách hàng Marstore</h2>
+              <p>📍 Hồ Chí Minh &nbsp;|&nbsp; ⏰ 20/11/2024 &nbsp;|&nbsp; Toàn thời gian</p>
+              <p>Hạn nộp: 30/01/2025</p>
+              <button class="apply-btn">Ứng Tuyển</button>
+          </div>
+          <div class="job-card">
+              <h2>Nhân viên kiểm kho Marstore</h2>
+              <p>📍 Hồ Chí Minh &nbsp;|&nbsp; ⏰ 10/12/2024 &nbsp;|&nbsp; Toàn thời gian</p>
+              <p>Hạn nộp: 25/02/2025</p>
+              <button class="apply-btn">Ứng Tuyển</button>
+          </div>
+        </div>
+    </div>
 
 <footer class="mt-5 p-5 bg-dark">
   <div class="row conatiner mx-auto pt-5">
@@ -161,7 +280,7 @@
 
       <div class="col-lg-3 col-md-6 col-12">
         <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
-        <a href="https://x.com/home?lang=vi"><i class="bi bi-x"></i></a>
+        <a href="https://x.com/home?lang=vi"><i class="fa-brands fa-x-twitter"></i></a>
         <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
         <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
       </div>

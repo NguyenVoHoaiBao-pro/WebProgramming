@@ -340,6 +340,7 @@ function displayUserMenu() {
     '#nav-icons a[href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"]'
   );
   const logoutLink = document.querySelector('#user-menu a[onclick="logout()"]');
+  const adminBtn = document.getElementById("admin-btn"); // Nút quản trị
 
   if (loggedInUser) {
     // Khi người dùng đã đăng nhập
@@ -374,6 +375,11 @@ function displayUserMenu() {
         logout();
       });
     }
+
+    // Hiển thị nút quản trị nếu là admin
+    if (adminBtn) {
+      adminBtn.style.display = loggedInUser.role === "admin" ? "block" : "none";
+    }
   } else {
     // Khi người dùng chưa đăng nhập
     if (profileGreeting) {
@@ -385,6 +391,11 @@ function displayUserMenu() {
     if (userMenu) {
       userMenu.style.display = "none";
     }
+
+    // Ẩn nút quản trị
+    if (adminBtn) {
+      adminBtn.style.display = "none";
+    }
   }
 }
 
@@ -392,6 +403,7 @@ function displayUserMenu() {
 document.addEventListener("DOMContentLoaded", function () {
   displayUserMenu();
 });
+
 
 function logout() {
   window.localStorage.removeItem("username");

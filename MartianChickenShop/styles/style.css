@@ -2,28 +2,20 @@
 
 .sort-button {
   background-color: #BC1F23;
-  /* Màu xanh dương */
   color: white;
-  /* Màu chữ trắng */
   border: none;
   padding: 10px 20px;
-  /* Khoảng cách bên trong */
   border-radius: 5px;
-  /* Bo góc nút */
   cursor: pointer;
   font-size: 14px;
-  /* Cỡ chữ */
   margin-left: 10px;
-  /* Khoảng cách giữa các nút */
   transition: background-color 0.3s ease, transform 0.2s ease;
-  /* Hiệu ứng khi hover */
 }
 
 .sort-button:hover {
   background-color: #BC1F23;
-  /* Màu đậm hơn khi hover */
   transform: scale(1.05);
-  /* Phóng to nhẹ khi hover */
+
 }
 
 .sort-button:active {
@@ -1153,18 +1145,17 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    display: block; /* Đảm bảo nút là block-level */
-    width: 200px; /* Đặt chiều rộng của nút */
-    margin: 20px auto 0; /* Căn giữa nút */
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
 }
 
 .profile-form .btn-profile:hover {
     background-color: #BC1F23;
 }
 
-/* Đảm bảo form đổi mật khẩu có kiểu dáng tương tự như form đăng nhập */
 .changedpw-form {
-    width: 70%; /* Đảm bảo chiều rộng giống như form profile */
+    width: 70%; 
     background-color: #fff;
     padding-top:20px;
     padding-right: 100px;
@@ -1180,10 +1171,9 @@ button {
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
-    text-align: center; /* Căn giữa tiêu đề */
+    text-align: center; 
 }
 
-/* Các trường input và button giống như form profile */
 .changedpw-form .form-label {
     font-weight: bold;
     color: #333;
@@ -1194,7 +1184,7 @@ button {
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
-    width: 100%; /* Đảm bảo input có chiều rộng 100% */
+    width: 100%;
 }
 
 .changedpw-form .btn-profile {
@@ -1205,9 +1195,9 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    display: block; /* Đảm bảo nút là block-level */
-    width: 200px; /* Đặt chiều rộng của nút */
-    margin: 20px auto 0; /* Căn giữa nút */
+    display: block; 
+    width: 200px; 
+    margin: 20px auto 0;
 }
 
 .changedpw-form .btn-profile:hover {
@@ -1242,13 +1232,13 @@ button {
   .profile-bar .profile-info {
     display: flex;
     align-items: center;
-    gap: 10px; /* Tạo khoảng cách giữa các phần tử */
+    gap: 10px; 
   }
 
   .profile-bar .profile-info .avatar {
-    width: 60px; /* Điều chỉnh kích thước avatar */
+    width: 60px; 
     height: 60px;
-    border-radius: 50%; /* Nếu muốn avatar bo tròn */
+    border-radius: 50%; 
   }
 
   .profile-greeting {
@@ -1264,36 +1254,36 @@ button {
     width: 100%;
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column; /* Sắp xếp theo chiều dọc */
-    align-items: center; /* Căn giữa các phần tử */
-    text-align: center; /* Căn giữa văn bản */
-    justify-content: flex-start; /* Căn các phần tử ở trên cùng */
-    height: 100%; /* Chiếm toàn bộ chiều cao của phần chứa */
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    justify-content: flex-start; 
+    height: 100%; 
   }
 
   .profile-bar .profile-info {
     display: flex;
-    flex-direction: column; /* Sắp xếp avatar và greeting theo chiều dọc */
-    align-items: center; /* Căn giữa các phần tử */
-    gap: 8px; /* Khoảng cách giữa các phần tử */
-    flex-grow: 1; /* Tạo không gian cho các phần tử trên */
+    flex-direction: column; 
+    align-items: center;
+    gap: 8px;
+    flex-grow: 1; 
   }
 
   .profile-bar .profile-info .avatar {
-    width: 50px; /* Kích thước avatar */
+    width: 50px; 
     height: 50px;
-    border-radius: 50%; /* Bo tròn avatar */
+    border-radius: 50%; 
   }
 
   .profile-greeting {
-    font-size: 14px; /* Cỡ chữ nhỏ hơn */
-    margin-top: 8px; /* Khoảng cách từ avatar đến greeting */
-    margin-bottom: 8px; /* Khoảng cách từ greeting đến phần tử tiếp theo */
+    font-size: 14px; 
+    margin-top: 8px; 
+    margin-bottom: 8px; 
   }
 
 }
  .product img {
-    object-fit: cover; /* Cắt ảnh theo tỷ lệ vuông */
+    object-fit: cover; 
     display: block;
         
     }

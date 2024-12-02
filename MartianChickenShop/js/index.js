@@ -32,18 +32,21 @@ const productList = {
     name: "Cánh gà kiểu Thái",
     price: "50000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png",
+    quantity: 10,
     link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html",
   },
   2: {
     name: "Cánh gà giòn",
     price: "35000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png",
+    quantity: 15,
     link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct2.html",
   },
   3: {
     name: "Cánh gà phô mai",
     price: "45000",
     image: "/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png",
+    quantity: 8,
     link: "/WebProgramming/MartianChickenShop/html/chickendishes/sproduct3.html",
   },
   1000: {

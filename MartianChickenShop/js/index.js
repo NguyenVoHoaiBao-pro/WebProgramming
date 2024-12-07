@@ -405,6 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
 function logout() {
   window.localStorage.removeItem("username");
   window.localStorage.removeItem("isLoggedIn");

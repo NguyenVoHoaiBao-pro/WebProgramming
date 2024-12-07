@@ -474,14 +474,14 @@
             // Tính tổng cộng trước khi áp dụng giảm giá
             const totalBeforeDiscount = subtotal + shipping;
 
-            // Áp dụng giảm giá nếu tổng cộng > 320,000 VND
-            if (totalBeforeDiscount > 320000) {
-                discount = subtotal * 0.2; // Giảm giá 20%
-            }
+    // Áp dụng giảm giá nếu tổng cộng > 320,000 VND
+    if (totalBeforeDiscount > 320000) {
+        discount = subtotal * 0.2; // Giảm giá 20%
+    }
 
-            // Hiển thị các giá trị
-            document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " VND";
-            document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " VND";
+    // Hiển thị các giá trị
+    document.querySelector('#subtotal-value').textContent = subtotal.toLocaleString('vi-VN') + " VND";
+    document.querySelector('#shipping-value').textContent = shipping.toLocaleString('vi-VN') + " VND";
 
             // Tính và hiển thị tổng cộng sau giảm giá
             const total = totalBeforeDiscount - discount;

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đui ga gion</title>
-    <link rel="stylesheet" href="/WebProgramming/MartianChickenShop/styles/style.css">
-     <link rel="icon" href="/WebProgramming/MartianChickenShop/images/Page1/LoadWeb.png" type="image/png">
+    <link rel="stylesheet" href="../../styles/style.css">
+     <link rel="icon" href="../../images/Page1/LoadWeb.png" type="image/png">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="/WebProgramming/MartianChickenShop/js/index.js"></script>
+    <script src="../../js/index.js"></script>
     <script
       src="https://kit.fontawesome.com/cc9450bd42.js"
       crossorigin="anonymous"
@@ -22,20 +22,20 @@
     <style>
         .ShopMore {
             background-color: black;
+            color: aliceblue;
             font-size: 18px;
             font-weight: 700;
-            outline: none;
-            border-radius: 2px;
             border: none;
-            color: aliceblue;
-            padding: 13px 30px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.5s ease-in-out;
+            border-radius: 2px;
+            outline: none;
             padding: 20px;
             width: 250px;
             margin-bottom: 100px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.5s ease-in-out;
         }
+
         .ShopMore:hover {
             background-color: #BC1F23;
             color: black;
@@ -47,7 +47,7 @@
                  <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
         <div class="container-fluid mr-5">
                      <!-- <div class="col-1"></div> -->
-            <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+            <img src="../../images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
             
             <button class="navbar-toggler" onclick="toggleMenu()">
                 <span><i id = "nav-bar-icon" class="bi bi-list"></i></span>
@@ -58,25 +58,25 @@
                 <ul class="navbar-nav ml-auto">
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/index.html">Trang Chủ</a>
+                        <a class="nav-link" href="../../html/index.html">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa Hàng</a>
+                        <a class="nav-link active" href="../../html/Menu/shop.html">Cửa Hàng</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Quality</a>
                     </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">Thông tin</a>
+                        <a class="nav-link" href="../../html/Menu/AboutUs.html">Thông tin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">Liên hệ</a>
+                        <a class="nav-link" href="../../html/Menu/ContactUs.html">Liên hệ</a>
 
                     </li>
                     <li class="nav-item" id="nav-icons">
                         <!-- <i class="bi bi-search"></i> -->
-                      <a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
-                        <a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
+                      <a href="../../html/Menu/Login.html"><i class="bi bi-person-fill"></i></a>
+                        <a href="../../html/Menu/Cart.html"><i class="bi bi-bag-heart-fill"></i></a>
                     </li>
                     
                 </ul>
@@ -89,29 +89,29 @@
                 <-- Sidebar menu -->
            <div id="mySideBar" class="sidebar">
               <div class="sidebar-header">
-                  <img src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="Logo" class="logo"> 
+                  <img src="../../images/Page1/LogoWeb.png" alt="Logo" class="logo">
                   <span id="closeBtn" class="close-btn" onclick="toggleMenu()">&times;</span>
               </div>
               <div class="sidebar-content">
                   <div class="menu-section">
-                      <h4><a href="/WebProgramming/MartianChickenShop/html/index.html">TRANG CHỦ</a></h4>
+                      <h4><a href="../../html/index.html">TRANG CHỦ</a></h4>
                   </div>
                   <div class="menu-section">
-                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">GIỎ HÀNG</a></h4>
+                      <h4><a href="../../html/Menu/Cart.html">GIỎ HÀNG</a></h4>
                   </div>
                   <div class="menu-section">
-                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">VỀ MFS</a></h4>
+                      <h4><a href="../../html/Menu/AboutUs.html">VỀ MFS</a></h4>
                       
                   </div>
                    <div class="menu-section">
-                      <h4><a href="/WebProgramming/MartianChickenShop/html/sidebar/chinhsach.html">CHÍNH SÁCH</a></h4>
+                      <h4><a href="../../html/sidebar/chinhsach.html">CHÍNH SÁCH</a></h4>
                       
                   </div>
                   <div class="menu-section">
                       <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
                       <ul class="submenu">
-                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
-                          <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
+                          <li><a href="../../html/Menu/shop.html">Các món đùi gà nổi bật</a></li>
+                          <li><a href="../../html/Menu/shop1.html">Các món cánh gà nổi bật</a></li>
                           <li><a href="#">Combo gà phải thử</a></li>
                       </ul>
                   </div>
@@ -119,19 +119,19 @@
                       <h4><a href="#">DỊCH VỤ</a></h4>
                   </div>
                    <div class="menu-section">
-                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
+                      <h4><a href="../../html/Menu/ContactUs.html">LIÊN HỆ</a></h4>
                   </div>
                   <div class="menu-section">
                       <h4><a href="#">TUYỂN DỤNG</a></h4>
                   </div>
 
                    <div class="menu-section user" id="user-sidebar">
-                      <h4><i class="bi bi-person"></i><a href="/WebProgramming/MartianChickenShop/html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="/WebProgramming/MartianChickenShop/html/Menu/Register.html">ĐĂNG KÝ</a></h4> 
+                      <h4><i class="bi bi-person"></i><a href="../../html/Menu/Login.html">ĐĂNG NHẬP</a> / <a href="../../html/Menu/Register.html">ĐĂNG KÝ</a></h4>
                       
                   </div>
                    <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
                       <span id="greeting-menu"></span>
-                      <h4><a href="/WebProgramming/MartianChickenShop/html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
+                      <h4><a href="../../html/Menu/Profile.html">TÀI KHOẢN CỦA TÔI / </a></h4>
                       <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
                   </div>
               </div>
@@ -145,27 +145,27 @@
         </div>
         <div class="row mx-auto container-fluid">
               <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaKieuThai.png" onclick="window.location.href = 'sproduct1.html';">
+                <img class="img-fluid" src="../../images/CanhGa/CanhGaKieuThai.png" onclick="window.location.href = 'sproduct1.html';" alt="">
                 <h5 class="product-name">Đùi gà kiểu Thái</h5>
                 <h4 class="product-price">50.000 VND</h4>
                 <button class="buy-btn" onclick="event.stopPropagation(); window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct1.html';">Mua ngay</button>
             </div>
             <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct2.html';"  class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaGion.png" alt="Cánh gà giòn"  onclick="window.location.href = 'sproduct2.html';">
+                <img class="img-fluid" src="../../images/CanhGa/CanhGaGion.png" alt="Cánh gà giòn"  onclick="window.location.href = 'sproduct2.html';">
                 
                 <h5 class="product-name">Đùi gà giòn</h5>
                 <h4 class="product-price">35.000 VND</h4>
                 <button class="buy-btn" onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct2.html';">Mua ngay</button>
             </div>
             <div onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct3.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/CanhGaPhoMai.png" alt="Cánh gà phô mai"  onclick="window.location.href = 'sproduct3.html';">
+                <img class="img-fluid" src="../../images/CanhGa/CanhGaPhoMai.png" alt="Cánh gà phô mai"  onclick="window.location.href = 'sproduct3.html';">
                 
                 <h5 class="product-name">Đùi gà phô mai</h5>
                 <h4 class="product-price">45.000 VND</h4>
                 <button class="buy-btn" onclick="window.location.href = '/WebProgramming/MartianChickenShop/html/chickendishes/sproduct3.html';">Mua ngay</button>
             </div>
             <div class="product text-center col-lg-3 col-md-4 col-12 my-2">
-                <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/CanhGa/GaTieuDen.png" alt="Cánh gà tiêu đen">
+                <img class="img-fluid" src="../../images/CanhGa/GaTieuDen.png" alt="Cánh gà tiêu đen">
                 
                 <h5 class="product-name">Đùi gà tiêu đen</h5>
                 <h4 class="product-price">40.000 VND</h4>
@@ -183,25 +183,25 @@
         </div>
         <div class="row mx-auto container-fluid">
             <div onclick="window.location.href = 'sproduct16.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
-            <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (16).png">
+            <img class="img-fluid" src="../../images/duigaimg/Pasted image (16).png" alt="">
             <h5 class="product-name">Đùi gà rán mù tạt</h5>
             <h4 class="product-price">50.000 VND</h4>
             <button class="buy-btn" onclick="window.location.href = './sproduct16.html';">Mua ngay</button>
         </div>
         <div onclick="window.location.href = 'sproduct17.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
-            <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (17).png">
+            <img class="img-fluid" src="../../images/duigaimg/Pasted image (17).png" alt="">
             <h5 class="product-name">Đùi gà rán muối tiêu</h5>
             <h4 class="product-price">60.000 VND</h4>
             <button class="buy-btn" onclick="window.location.href = './sproduct17.html';">Mua ngay</button>
         </div>
         <div onclick="window.location.href = 'sproduct18.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
-            <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (18).png">
+            <img class="img-fluid" src="../../images/duigaimg/Pasted image (18).png" alt="">
             <h5 class="product-name">Đùi gà rán kiểu Trung Hoa</h5>
             <h4 class="product-price">70.000 VND</h4>
             <button class="buy-btn" onclick="window.location.href = './sproduct18.html';">Mua ngay</button>
         </div>
         <div onclick="window.location.href = 'sproduct19.html';" class="product text-center col-lg-3 col-md-4 col-12 my-2">
-            <img class="img-fluid" src="/WebProgramming/MartianChickenShop/images/duigaimg/Pasted image (19).png">
+            <img class="img-fluid" src="../../images/duigaimg/Pasted image (19).png" alt="">
             <h5 class="product-name">Đùi gà rán hành tỏi</h5>
             <h4 class="product-price">80.000 VND</h4>
             <button class="buy-btn" onclick="window.location.href = './sproduct19.html';">Mua ngay</button>
@@ -215,7 +215,7 @@
   <div class="row conatiner mx-auto pt-5">
     <div class="footer-one col-lg-3 col-md-6 col-12">
     
-      <img id="logo-img-footer" src="/WebProgramming/MartianChickenShop/images/Page1/LogoWeb.png" alt="logo">
+      <img id="logo-img-footer" src="../../images/Page1/LogoWeb.png" alt="logo">
       <p class="py-3 pl-2 ml-4 mr-5">Tiệm Gà Sao Hỏa là một quán ăn hiện đại với phong cách thiết kế đậm chất không gian. Thực đơn của quán không chỉ có các món gà nổi tiếng, mà còn kèm theo những món ăn độc lạ lấy cảm hứng từ vũ trụ mang lại cảm giác mới mẻ cho thực khách.</p>
     
     </div>
@@ -223,11 +223,11 @@
     <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
       <h5 class="pb-2">Liên kết nhanh</h5>
       <ul class="text-uppercase list-unstyled">
-        <li><a href="index.html">trang chủ</a></li>
-        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/shop.html">Cửa hàng</a></li>
-        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/AboutUs.html">thông tin</a></li>
-        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/ContactUs.html">liên hệ</a></li>
-        <li><a href="/WebProgramming/MartianChickenShop/html/Menu/Cart.html">Giỏ hàng</a></li>
+        <li><a href="../index.html">trang chủ</a></li>
+        <li><a href="../../html/Menu/shop.html">Cửa hàng</a></li>
+        <li><a href="../../html/Menu/AboutUs.html">thông tin</a></li>
+        <li><a href="../../html/Menu/ContactUs.html">liên hệ</a></li>
+        <li><a href="../../html/Menu/Cart.html">Giỏ hàng</a></li>
       </ul>
     </div>
     <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
@@ -248,10 +248,10 @@
     <div class="Photos col-lg-3 col-md-6 col-12">
          <h5 class="pb-2">Các đơn vị tài trợ</h5>
     <div class="row">
-      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 3.png" alt="leather-img">
-      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy 2.png" alt="leather-img">
-      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image copy.png" alt="leather-img">
-      <img class="footer-img img-fluid mb-2" src="/WebProgramming/MartianChickenShop/images/Page1/image.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="../../images/Page1/image copy 3.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="../../images/Page1/image copy 2.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="../../images/Page1/image copy.png" alt="leather-img">
+      <img class="footer-img img-fluid mb-2" src="../../images/Page1/image.png" alt="leather-img">
     </div>
     </div>
   <div class="copyright mt-5">

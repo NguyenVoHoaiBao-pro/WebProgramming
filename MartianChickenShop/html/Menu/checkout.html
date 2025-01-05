@@ -25,7 +25,7 @@
         display: flex;
         flex-direction: column;
         background-color: white;
-        background-image: url("");
+        //background-image: url("");
         color: coral;
       }
 
@@ -33,7 +33,7 @@
         width: 60rem;
         margin: auto;
         background: white;
-        position: center;
+        //position: center;
         align-self: center;
         top: 50rem;
         border-radius: 1.5rem;
@@ -85,7 +85,6 @@
         margin-bottom: 1rem;
         border-radius: 0.3rem;
         font-family: "Roboto", sans-serif;
-        color: #343a40;
         font-size: 1.1rem;
         font-weight: 500;
         outline: none;
@@ -131,9 +130,6 @@
 
         .leftside {
           width: 100%;
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 0;
-          border-top-right-radius: 0;
           border-radius: 0;
         }
 
@@ -141,8 +137,8 @@
           width: auto;
           border-bottom-left-radius: 1.5rem;
           padding: 0.5rem 3rem 3rem 2rem;
-          border-radius: 0;
         }
+
 
         .product {
           object-fit: cover;
@@ -168,7 +164,7 @@
       <div class="card">
         <div class="leftside">
           <img
-            src="/WebProgramming/MartianChickenShop/images/Page1/background.webp"
+            src="../../images/Page1/background.webp"
             class="product"
             alt="product image"
           />
@@ -178,8 +174,11 @@
             <h1>Thanh toán</h1>
             <h2>Thông tin thanh toán</h2>
             <p>Tên chủ thẻ</p>
-            <input type="text" class="inputbox" name="name" required />
+            <label>
+              <input type="text" class="inputbox" name="name" required />
+            </label>
             <p>Số Thẻ</p>
+            <label for="card_number"></label>
             <input
               type="number"
               class="inputbox"
@@ -189,6 +188,7 @@
             />
 
             <p>Loại thẻ</p>
+            <label for="card_type"></label>
             <select class="inputbox" name="card_type" id="card_type" required>
               <option value="">--Các loại thẻ--</option>
               <option value="Visa">Visa</option>
@@ -197,6 +197,7 @@
             </select>
             <div class="expcvv">
               <p class="expcvv_text">Hết hạn</p>
+              <label for="exp_date"></label>
               <input
                 type="date"
                 class="inputbox"
@@ -206,6 +207,7 @@
               />
 
               <p class="expcvv_text2">CVV</p>
+              <label for="cvv"></label>
               <input
                 type="password"
                 class="inputbox"

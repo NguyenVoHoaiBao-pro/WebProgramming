@@ -10,8 +10,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 @WebServlet("/register") // Đường dẫn để gọi servlet
 public class RegisterController extends HttpServlet {
@@ -54,7 +58,7 @@ public class RegisterController extends HttpServlet {
             forwardToRegisterPage(request, response);
         } else {
             try {
-                // Mã hóa mật khẩu (thay thế với mã hóa mật khẩu thực tế như BCrypt)
+                // Mã hóa mật khẩu với PBKDF2WithHmacSHA256
                 String hashedPassword = hashPassword(password);
 
                 // Đăng ký người dùng mới
@@ -85,9 +89,28 @@ public class RegisterController extends HttpServlet {
         return value == null || value.trim().isEmpty();
     }
 
-    private String hashPassword(String password) {
-        // Thay thế bằng mã hóa mật khẩu thực tế như BCrypt
-        // Ví dụ: return BCrypt.hashpw(password, BCrypt.gensalt());
-        return password; // Đoạn này chỉ để minh họa, cần thay thế bằng mã hóa thực tế
+    private String hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 65536;
+        int keyLength = 256;
+        char[] passwordChars = password.toCharArray();
+        byte[] salt = new byte[16]; // Bạn có thể thêm mã để tạo muối ngẫu nhiên và lưu trữ nó cùng với mật khẩu.
+
+        PBEKeySpec spec = new PBEKeySpec(passwordChars, salt, iterations, keyLength);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+
+        return bytesToHex(hash); // Chuyển đổi byte array thành chuỗi hex để lưu trữ.
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 }

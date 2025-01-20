@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,13 +59,18 @@ public class RegisterController extends HttpServlet {
             forwardToRegisterPage(request, response);
         } else {
             try {
+                // Tạo muối ngẫu nhiên
+                SecureRandom random = new SecureRandom();
+                byte[] salt = new byte[16];
+                random.nextBytes(salt);
+
                 // Mã hóa mật khẩu với PBKDF2WithHmacSHA256
-                String hashedPassword = hashPassword(password);
+                String hashedPassword = hashPassword(password, salt);
 
                 // Đăng ký người dùng mới
                 d.Register(username, email, hashedPassword, phone, address);
                 request.setAttribute("success", "Registration successful!");
-                response.sendRedirect("doanweb/html/Login.jsp"); // Chuyển hướng đến trang chính sau khi đăng ký
+                response.sendRedirect("doanweb/html/Login.jsp"); // Chuyển hướng đến trang đăng nhập sau khi đăng ký
             } catch (Exception e) {
                 // Ghi log ngoại lệ và thông báo lỗi cho người dùng
                 LOGGER.log(Level.SEVERE, "Error during registration", e);
@@ -89,17 +95,13 @@ public class RegisterController extends HttpServlet {
         return value == null || value.trim().isEmpty();
     }
 
-    private String hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 65536;
         int keyLength = 256;
-        char[] passwordChars = password.toCharArray();
-        byte[] salt = new byte[16]; // Bạn có thể thêm mã để tạo muối ngẫu nhiên và lưu trữ nó cùng với mật khẩu.
-
-        PBEKeySpec spec = new PBEKeySpec(passwordChars, salt, iterations, keyLength);
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         byte[] hash = skf.generateSecret(spec).getEncoded();
-
-        return bytesToHex(hash); // Chuyển đổi byte array thành chuỗi hex để lưu trữ.
+        return bytesToHex(salt) + ":" + bytesToHex(hash); // Lưu cả salt và hash
     }
 
     private String bytesToHex(byte[] bytes) {

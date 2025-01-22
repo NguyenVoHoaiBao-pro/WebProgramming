@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
@@ -52,7 +53,7 @@ public class ShopController extends HttpServlet {
         } else {
             request.setAttribute("message", "Không có sản phẩm nào.");
         }
-        Products l=productDAO.getLatestProduct();
+        Products l = productDAO.getLatestProduct();
         request.setAttribute("lastp", l);
 
 // loc sp
@@ -63,8 +64,6 @@ public class ShopController extends HttpServlet {
         } else {
             filteredProducts = productDAO.getAllProducts();
         }
-
-
 
 
         String sortOrder = request.getParameter("sort");
@@ -80,6 +79,7 @@ public class ShopController extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
+
     // Hàm sắp xếp sản phẩm theo giá
     private List<Products> sortProducts(List<Products> products, String sortOrder) {
         if ("asc".equals(sortOrder)) {

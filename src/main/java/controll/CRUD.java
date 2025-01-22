@@ -1,11 +1,12 @@
 package controll;
+
 import entity.CartItem;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dao.dao ;
+import dao.dao;
 import entity.Products;
 import entity.Categories;
 
@@ -78,7 +79,7 @@ public class CRUD extends HttpServlet {
         String image = request.getParameter("image");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
 
-        daoInstance.addProduct(name, price, stock,description, category_id, image);
+        daoInstance.addProduct(name, price, stock, description, category_id, image);
         response.getWriter().write("Thêm sản phẩm thành công!");
     }
 

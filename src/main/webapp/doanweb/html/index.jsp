@@ -93,12 +93,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
                 </li>
-<%--                <li class="nav-item" id="admin-btn" style="display: <%=--%>
-<%--                    (session.getAttribute("role") != null &&--%>
-<%--                    (Integer.parseInt((String)session.getAttribute("role")) == 1)) ? "block" : "none"--%>
-<%--                    %>;">--%>
-<%--                    <a class="nav-link" href="<%= request.getContextPath() %>/ad">Quản trị</a>--%>
-<%--                </li>--%>
+                <%--                <li class="nav-item" id="admin-btn" style="display: <%=--%>
+                <%--                    (session.getAttribute("role") != null &&--%>
+                <%--                    (Integer.parseInt((String)session.getAttribute("role")) == 1)) ? "block" : "none"--%>
+                <%--                    %>;">--%>
+                <%--                    <a class="nav-link" href="<%= request.getContextPath() %>/ad">Quản trị</a>--%>
+                <%--                </li>--%>
 
 
                 <div class="nav-item" id="nav-icons">
@@ -408,10 +408,10 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
                 <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
-                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
-                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">Thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">Liên hệ</a></li>
                 <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
@@ -422,7 +422,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

@@ -12,7 +12,7 @@ public class Orders {
     // Constructor, getters, and setters
 
 
-    public Orders(int orderId, int userId, BigDecimal totalAmount , Timestamp orderDate) {
+    public Orders(int orderId, int userId, BigDecimal totalAmount, Timestamp orderDate) {
         this.orderId = orderId;
         this.userId = userId;
         this.totalAmount = totalAmount;

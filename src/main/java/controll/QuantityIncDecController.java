@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,19 +48,20 @@ public class QuantityIncDecController extends HttpServlet {
                     // Cập nhật tổng tiền
                     item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
                     break;
+                }
             }
-        }
 
             session.setAttribute("cart", cart);
             // Tính tổng giá tạm tính
             int totalPrice = 0;
             for (CartItem item : cart) {
                 totalPrice += item.getTotalPrice();
-        }
+            }
 
             session.setAttribute("totalPrice", totalPrice);
             // Chuyển hướng về giỏ hàng
             response.sendRedirect("cart");
+        }
     }
-}}
+}
 

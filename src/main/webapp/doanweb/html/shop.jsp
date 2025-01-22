@@ -589,10 +589,10 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
                 <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
+                <li><a href="/html/Menu/AboutUs.html">Thông tin</a></li>
+                <li><a href="/html/Menu/ContactUs.html">Liên hệ</a></li>
                 <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
             </ul>
         </div>
@@ -603,7 +603,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

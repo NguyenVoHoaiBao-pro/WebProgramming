@@ -3,6 +3,7 @@ package entity;
 public class Categories {
     private int id;
     private String name;
+
     public Categories() {
     }
 

@@ -53,6 +53,7 @@
             height: 100%; /* Chiều cao đầy đủ container */
             object-fit: cover; /* Đảm bảo ảnh lấp đầy và giữ tỷ lệ */
         }
+
         /* CSS cho phần hình ảnh sản phẩm */
         .product img {
             margin-right: 50px;
@@ -94,7 +95,7 @@
             background-color: black;
         }
 
-        .ShopMore  {
+        .ShopMore {
             background-color: black;
             font-size: 18px;
             font-weight: 700;
@@ -110,7 +111,7 @@
             width: 250px;
         }
 
-        .buy-now-btn  {
+        .buy-now-btn {
             background-color: black !important;
             font-size: 0.8rem;
             font-weight: 700;
@@ -134,6 +135,7 @@
             text-align: center;
             margin-top: 10px;
         }
+
         .product-name {
             color: black;
             font-weight: bold;
@@ -401,7 +403,8 @@
                 <c:if test="${status.index < 4}">
                     <div class="product text-center col-lg-3 col-md-4 col-12 mb-4">
                         <a href="detail?id=${product.id}">
-                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
+                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}"
+                                 alt="${product.name}">
                             <h5 class="product-name">${product.name}</h5>
                             <h4 class="product-price">${product.price} VND</h4>
                         </a>
@@ -414,7 +417,6 @@
         <button class="ShopMore my-5 mx-auto" onclick="window.location.href = '/shop';">Tiếp tục mua sắm</button>
     </div>
 </section>
-
 
 
 <footer class="mt-5 p-5 bg-dark">
@@ -431,11 +433,11 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
                 <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
-                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
-                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
-                <li><a href="/<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">Thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">Liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
@@ -445,7 +447,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

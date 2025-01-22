@@ -1161,7 +1161,6 @@ button {
 }
 
 
-
 /* Cài đặt lại kiểu button trong form */
 /* Cập nhật CSS cho nút logout */
 #logout-form button.logout-btn {
@@ -1208,7 +1207,7 @@ button {
     color: #333;
 }
 
-.changedpw-form .form-control{
+.changedpw-form .form-control {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -1229,7 +1228,7 @@ button {
     margin: 20px auto 0;
 }
 
-.changedpw-form .btn-profile:hover{
+.changedpw-form .btn-profile:hover {
     background-color: #BC1F23;
 }
 
@@ -1239,25 +1238,25 @@ button {
         width: 90%; /* Chiều rộng của form trên màn hình nhỏ */
     }
 
-    .changedpw-form .form-control{
+    .changedpw-form .form-control {
         font-size: 14px; /* Điều chỉnh font-size trên thiết bị nhỏ */
     }
 
-    .changedpw-form .btn-profile  {
+    .changedpw-form .btn-profile {
         width: 100%; /* Nút sẽ chiếm 100% chiều rộng trên thiết bị nhỏ */
     }
 }
 
 .delete-account-form {
     width: 70% !important;
-    background-color: #fff!important;
-    padding-top: 20px!important;
-    padding-right: 100px!important;
-    padding-left: 100px!important;
-    border-radius: 10px!important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)!important;
-    align-items: center!important;
-    margin-top: 20px!important;
+    background-color: #fff !important;
+    padding-top: 20px !important;
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    align-items: center !important;
+    margin-top: 20px !important;
 }
 
 .delete-account-form h3 {

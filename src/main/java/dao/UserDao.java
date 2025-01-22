@@ -48,6 +48,7 @@ public class UserDao {
         }
         return user;  // Trả về người dùng nếu tìm thấy, nếu không trả về null
     }
+
     public boolean changePassword(String username, String oldPassword, String newPassword) {
         boolean isUpdated = false;
         String queryCheck = "SELECT password FROM User WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu cũ

@@ -25,5 +25,5 @@
         <th>Ngày kết thúc</th>
         <th>Hành động</th>
     </tr>
-    <!-- Dữ liệu khuyến mãi sẽ được hiển thị ở đây -->
+
 </table>

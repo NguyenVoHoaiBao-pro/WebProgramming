@@ -13,5 +13,5 @@
         <th>Ngày</th>
         <th>Doanh thu</th>
     </tr>
-    <!-- Dữ liệu báo cáo sẽ được hiển thị ở đây -->
+
 </table>

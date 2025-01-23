@@ -9,5 +9,5 @@
         <th>Vai trò</th>
         <th>Hành động</th>
     </tr>
-    <!-- Dữ liệu người dùng sẽ được hiển thị ở đây -->
+
 </table>

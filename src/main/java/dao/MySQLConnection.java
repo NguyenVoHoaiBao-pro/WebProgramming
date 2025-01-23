@@ -22,10 +22,10 @@ public class MySQLConnection {
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
         // Cấu hình các thông số bổ sung nếu cần
-        config.setMaximumPoolSize(10); // Số kết nối tối đa trong pool
-        config.setMinimumIdle(5); // Số kết nối tối thiểu trong pool
-        config.setIdleTimeout(30000); // Thời gian chờ tối đa khi kết nối không được sử dụng
-        config.setMaxLifetime(600000); // Thời gian tối đa kết nối tồn tại
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(5);
+        config.setIdleTimeout(30000);
+        config.setMaxLifetime(600000);
 
         // Tạo nguồn kết nối HikariCP
         dataSource = new HikariDataSource(config);

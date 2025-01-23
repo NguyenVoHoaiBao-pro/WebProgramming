@@ -13,5 +13,5 @@
         <th>Mô tả</th>
         <th>Hành động</th>
     </tr>
-    <!-- Dữ liệu danh mục sẽ được hiển thị ở đây -->
+
 </table>

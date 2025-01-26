@@ -8,17 +8,18 @@ public class Orders {
     private int userId;
     private BigDecimal totalAmount;
     private Timestamp orderDate;
+    private String status; // Trạng thái đơn hàng
 
-    // Constructor, getters, and setters
-
-
-    public Orders(int orderId, int userId, BigDecimal totalAmount, Timestamp orderDate) {
+    // Constructor
+    public Orders(int orderId, int userId, BigDecimal totalAmount, Timestamp orderDate, String status) {
         this.orderId = orderId;
         this.userId = userId;
         this.totalAmount = totalAmount;
         this.orderDate = orderDate;
+        this.status = status;
     }
 
+    // Getters and Setters
     public int getOrderId() {
         return orderId;
     }
@@ -35,6 +36,14 @@ public class Orders {
         this.userId = userId;
     }
 
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
     public Timestamp getOrderDate() {
         return orderDate;
     }
@@ -43,12 +52,12 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -58,6 +67,7 @@ public class Orders {
                 ", userId=" + userId +
                 ", totalAmount=" + totalAmount +
                 ", orderDate=" + orderDate +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

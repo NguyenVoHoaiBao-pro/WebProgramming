@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <h2>Báo cáo doanh thu</h2>
 <form method="get" action="ReportServlet">
-    <label for="dateRange">Chọn thời gian:</label>
+    <%--@declare id="daterange"--%><label for="dateRange">Chọn thời gian:</label>
     <input type="date" id="startDate" name="startDate">
     <input type="date" id="endDate" name="endDate">
     <button type="submit">Xem báo cáo</button>

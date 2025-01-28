@@ -105,7 +105,7 @@ public class CRUD extends HttpServlet {
         int productStock = Integer.parseInt(stock); // stock phải là số nguyên
         int productCategoryId = Integer.parseInt(categoryId); // categoryId phải là số nguyên
 
-        // Cập nhật sản phẩm vào cơ sở dữ liệu
+
         daoInstance.updateProduct(productId, name, (int) productPrice, productStock, description, productCategoryId, image);
 
         // Kiểm tra và phản hồi cho người dùng

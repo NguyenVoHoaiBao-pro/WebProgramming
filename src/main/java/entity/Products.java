@@ -1,7 +1,6 @@
 package entity;
 
-import java.sql.Timestamp;
-import java.util.List;
+
 
 public class Products {
     private int id;

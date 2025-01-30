@@ -1,22 +1,19 @@
 package controll;
 
 import dao.dao;
-import entity.Categories;
+
 import entity.Products;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {

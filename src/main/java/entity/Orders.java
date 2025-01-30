@@ -11,7 +11,7 @@ public class Orders {
     private String status; // Trạng thái đơn hàng
 
     // Constructor
-    public Orders(int orderId, int userId, BigDecimal totalAmount, Timestamp orderDate, String status) {
+    public Orders(int orderId, int userId, BigDecimal totalAmount, Timestamp orderDate) {
         this.orderId = orderId;
         this.userId = userId;
         this.totalAmount = totalAmount;

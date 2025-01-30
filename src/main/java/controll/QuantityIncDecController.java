@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @WebServlet("/quantity-inc-dec")

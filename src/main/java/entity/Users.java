@@ -9,7 +9,6 @@ public class Users {
     private String phone;
     private String address;
 
-    // Constructors
 
 
     public Users(int id, String username, String email, String password, String phone, String role, String address) {

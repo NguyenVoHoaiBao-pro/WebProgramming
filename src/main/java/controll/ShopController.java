@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
-@WebServlet("/shop") // Đường dẫn để gọi servlet
+@WebServlet("/shop")
 public class ShopController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

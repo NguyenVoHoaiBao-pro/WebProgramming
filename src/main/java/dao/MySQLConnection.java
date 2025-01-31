@@ -14,7 +14,7 @@ public class MySQLConnection {
     private static HikariDataSource dataSource;
 
     static {
-        // Cấu hình kết nối HikariCP
+
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(URL);
         config.setUsername(USER);

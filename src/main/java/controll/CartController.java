@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/cart") // Đường dẫn để gọi servlet
+@WebServlet("/cart") //
 public class CartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

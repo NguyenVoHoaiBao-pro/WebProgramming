@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/ad") // Đường dẫn để gọi servlet
+@WebServlet("/ad")
 public class AdController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

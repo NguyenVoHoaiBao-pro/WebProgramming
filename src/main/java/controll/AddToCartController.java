@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/add-to-cart") // Đường dẫn để gọi servlet
+@WebServlet("/add-to-cart")
 public class AddToCartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private dao dao = new dao();

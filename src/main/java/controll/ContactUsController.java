@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/contact") // Đường dẫn để gọi servlet
+@WebServlet("/contact")
 public class ContactUsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -2,7 +2,6 @@
 <%@ page import="java.sql.*" %>
 <h2>Quản lý khuyến mãi</h2>
 
-<!-- Form thêm khuyến mãi -->
 <form method="post" action="PromotionServlet">
     <label for="code">Mã giảm giá:</label>
     <input type="text" id="code" name="code" required>
@@ -19,7 +18,6 @@
     <button type="submit">Thêm khuyến mãi</button>
 </form>
 
-<!-- Bảng hiển thị danh sách khuyến mãi -->
 <table border="1">
     <tr>
         <th>ID</th>
@@ -30,7 +28,7 @@
         <th>Hành động</th>
     </tr>
     <%
-        // Kết nối tới cơ sở dữ liệu
+
         String url = "jdbc:mysql://localhost:3306/ten_cua_csdl";
         String username = "root";
         String password = "mat_khau";

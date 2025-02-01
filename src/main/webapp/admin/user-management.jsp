@@ -2,7 +2,6 @@
 <%@ page import="java.sql.*" %>
 <h2>Quản lý người dùng</h2>
 
-<!-- Form thêm người dùng -->
 <form method="post" action="UserServlet">
     <label for="username">Tên người dùng:</label>
     <input type="text" id="username" name="username" required>
@@ -25,7 +24,6 @@
     <button type="submit">Thêm người dùng</button>
 </form>
 
-<!-- Bảng hiển thị danh sách người dùng -->
 <table border="1">
     <tr>
         <th>ID</th>
@@ -36,7 +34,6 @@
         <th>Hành động</th>
     </tr>
     <%
-        // Kết nối cơ sở dữ liệu
         String url = "jdbc:mysql://localhost:3306/ten_cua_csdl";
         String username = "root";
         String password = "mat_khau";

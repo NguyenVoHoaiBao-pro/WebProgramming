@@ -5,7 +5,6 @@
 
 <h2>Quản lý đơn hàng</h2>
 
-<!-- Bảng hiển thị danh sách đơn hàng -->
 <table border="1" style="width: 100%; text-align: center; border-collapse: collapse;">
     <tr>
         <th>ID Đơn hàng</th>
@@ -17,11 +16,9 @@
     </tr>
 
     <%
-        // Lấy danh sách đơn hàng từ DAO
         OrderDao orderDao = new OrderDao();
         List<Orders> ordersList = orderDao.getAllOrders();
 
-        // Kiểm tra danh sách đơn hàng
         if (ordersList != null && !ordersList.isEmpty()) {
             for (Orders order : ordersList) {
     %>

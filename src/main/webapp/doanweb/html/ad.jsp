@@ -50,25 +50,25 @@
 <body>
 <button id="backToTopBtn" onclick="scrollToTop()">⬆️</button>
 <style>
-    /* CSS cho nút "Lên đầu trang" */
+
     #backToTopBtn {
         position: fixed;
-        bottom: 20px; /* Cách đáy màn hình 20px */
-        right: 20px; /* Cách phải màn hình 20px */
-        z-index: 1000; /* Đặt trên các phần tử khác */
-        display: none; /* Ẩn nút ban đầu */
-        background-color: #007bff; /* Màu nền */
-        color: white; /* Màu chữ */
-        border: none; /* Xóa viền */
-        border-radius: 50%; /* Bo tròn nút */
-        padding: 10px 15px; /* Kích thước nút */
-        cursor: pointer; /* Hiển thị con trỏ */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-        font-size: 16px; /* Kích thước chữ */
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: none;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        padding: 10px 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
     }
 
     #backToTopBtn:hover {
-        background-color: #0056b3; /* Màu khi hover */
+        background-color: #0056b3;
     }
 </style>
 <h1>Admin Quản lý sản phẩm</h1>
@@ -132,7 +132,7 @@
 </form>
 
 
-<!-- Hiển thị danh sách sản phẩm -->
+
 <table>
     <tr>
         <th>ID</th>

@@ -590,10 +590,10 @@
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
                 <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
-                <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">Thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">Liên hệ</a></li>
-                <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>shop.html">Cửa hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>AboutUs.html">Thông tin</a></li>
+                <li><a href=<%= request.getContextPath() %>.html">Liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>Cart.html">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">

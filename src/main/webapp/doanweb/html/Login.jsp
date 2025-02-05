@@ -305,15 +305,4 @@
 </body>
 </html>
 
-<%--<div class="category-filter">--%>
-<%--  <form action="<%= request.getContextPath() %>/shop" method="get">--%>
-<%--    <label for="category">Chọn danh mục:</label>--%>
-<%--    <select name="category" id="category">--%>
-<%--      <option value="">Tất cả</option>--%>
-<%--      <c:forEach var="category" items="${categoriesList}">--%>
-<%--        <option value="${category.id}">${category.name}</option>--%>
-<%--      </c:forEach>--%>
-<%--    </select>--%>
-<%--    <button type="submit">Lọc</button>--%>
-<%--  </form>--%>
-<%--</div>--%>
+<%----%>

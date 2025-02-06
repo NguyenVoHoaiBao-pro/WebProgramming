@@ -445,9 +445,6 @@
         </div>
         <div class="copyright mt-5">
             <div class="row container mx-auto">
-                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-                  <img src="img/payment.png" alt="payment..logo">
-                </div> -->
 
                 <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
                     <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
@@ -464,7 +461,7 @@
     </div>
 
 </footer>
-<!-- bootstarp cdn -->
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -474,15 +471,3 @@
 </body>
 </html>
 
-<%--<div class="category-filter">--%>
-<%--  <form action="<%= request.getContextPath() %>/shop" method="get">--%>
-<%--    <label for="category">Chọn danh mục:</label>--%>
-<%--    <select name="category" id="category">--%>
-<%--      <option value="">Tất cả</option>--%>
-<%--      <c:forEach var="category" items="${categoriesList}">--%>
-<%--        <option value="${category.id}">${category.name}</option>--%>
-<%--      </c:forEach>--%>
-<%--    </select>--%>
-<%--    <button type="submit">Lọc</button>--%>
-<%--  </form>--%>
-<%--</div>--%>

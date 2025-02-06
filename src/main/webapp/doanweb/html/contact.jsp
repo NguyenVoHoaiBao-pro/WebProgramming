@@ -247,9 +247,7 @@
         </div>
         <div class="copyright mt-5">
             <div class="row container mx-auto">
-                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-                  <img src="img/payment.png" alt="payment..logo">
-                </div> -->
+
 
                 <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
                     <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>

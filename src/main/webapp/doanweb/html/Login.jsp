@@ -183,8 +183,7 @@
         </div>
 </nav>
 
-<!-- login section -->
-<!-- login section -->
+
 <section id="featured" class="mt-3 pt-3">
     <div class="container text-center mt-5 pt-5">
         <h3 id="form-heading" class="mt-5 pt-5">Đăng Nhập</h3>
@@ -276,9 +275,7 @@
         </div>
         <div class="copyright mt-5">
             <div class="row container mx-auto">
-                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-                  <img src="img/payment.png" alt="payment..logo">
-                </div> -->
+
 
                 <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
                     <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>

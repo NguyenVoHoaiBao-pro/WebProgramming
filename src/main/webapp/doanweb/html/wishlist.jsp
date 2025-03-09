@@ -1,12 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-
 <head>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cart</title>
+        <title>Wishlist</title>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
         <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
 
@@ -79,41 +78,41 @@
 
             .quantity-selector {
                 display: flex;
-                justify-content: center; /* Căn giữa theo chiều ngang */
-                align-items: center; /* Căn giữa theo chiều dọc */
-                gap: 5px; /* Khoảng cách giữa các phần tử */
+                align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+                justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+                gap: 10px; /* Khoảng cách giữa các phần tử */
+                padding-top: 12px;
             }
 
-            .quantity-selector form {
-                margin: 0;
-            }
-
-            .quantity-selector .btn-minus,
-            .quantity-selector .btn-plus {
+            .quantity-selector button {
                 padding: 5px 10px;
-                font-size: 14px;
+                font-size: 20px; /* Điều chỉnh kích thước chữ để dễ nhìn */
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
                 cursor: pointer;
+                width: 35px; /* Điều chỉnh kích thước nút */
+                height: 35px; /* Điều chỉnh kích thước nút */
+                display: flex;
+                align-items: center; /* Căn giữa nội dung nút theo chiều dọc */
+                justify-content: center; /* Căn giữa nội dung nút theo chiều ngang */
             }
 
-            .quantity-selector input[type="number"] {
-                width: 50px;
+            .quantity-selector button:hover {
+                background-color: #e0e0e0;
+            }
+
+            .quantity-selector input {
+                width: 50px; /* Điều chỉnh chiều rộng của ô nhập liệu */
                 text-align: center;
-                margin: 0 5px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                padding: 4px;
+                padding: 5px;
+                font-size: 16px;
+                border: 1px solid #ccc;
             }
 
 
         </style>
     </head>
 <body>
-<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-<% if (errorMessage != null) { %>
-<script>
-    alert("<%= errorMessage %>");
-</script>
-<% } %>
 <!-- Nav section -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
@@ -223,10 +222,10 @@
 </nav>
 
 
-<!-- Cart Section -->
+<!-- wishlist Section -->
 <section id="featured" class="mt-3 pt-1">
     <div class="container mx-auto mt-5 px-5 pt-5 text-center">
-        <h3 class="mt-5 pt-5">Giỏ Hàng Của Bạn</h3>
+        <h3 class="mt-5 pt-5">Danh sách sản phẩm yêu thích</h3>
         <hr class="border border-danger border-2 opacity-75 mx-auto">
     </div>
 </section>
@@ -238,144 +237,32 @@
             <td class="col-12 col-md-2">Hình ảnh</td> <!-- Chiếm 20% trên màn hình lớn -->
             <td class="col-12 col-md-2">Sản phẩm</td> <!-- Chiếm 20% trên màn hình lớn -->
             <td class="col-12 col-md-1">Giá</td> <!-- Chiếm 15% trên màn hình lớn -->
-            <td class="col-12 col-md-2">Số lượng</td> <!-- Chiếm 20% trên màn hình lớn -->
-            <td class="col-12 col-md-1">Tổng tiền</td> <!-- Chiếm 10% trên màn hình lớn -->
             <td class="col-12 col-md-1">Xóa</td> <!-- Chiếm 10% trên màn hình lớn -->
         </tr>
         </thead>
         <tbody>
-        <!-- Hiển thị sản phẩm từ giỏ hàng -->
-        <c:forEach var="item" items="${cart}">
+        <c:forEach var="product" items="${wishlist}">
             <tr>
-
                 <td>
-                    <img src="${item.product.image}" alt="${item.product.name}" width="100">
+                    <a href="detail?id=${product.id}">
+                        <img src="${product.image}" alt="${product.name}" style="width: 100px; height: 100px;" />
+                    </a>
                 </td>
-                <td>${item.product.name}</td>
-                <td>${item.product.price}K</td>
-                <td>
-                    <div class="quantity-selector">
-                        <form action="/quantity-inc-dec" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="${item.product.id}">
-                            <button type="submit" name="action" value="dec" class="btn-minus">-</button>
-                        </form>
-                        <input type="number" id="quantity-${item.product.id}" value="${item.quantity}" min="1"
-                               class="form-control" disabled>
-                        <form action="/quantity-inc-dec" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="${item.product.id}">
-                            <button type="submit" name="action" value="inc" class="btn-plus">+</button>
-                        </form>
-                    </div>
-                </td>
-
-                <td>${item.quantity * item.product.price}k</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
                 <td>
                     <button type="button" class="remove-btn"
-                            onclick="window.location.href='add-to-cart?id=${item.product.id}&action=remove'">
+                            onclick="window.location.href='add-to-wishlist?id=${product.id}&action=remove'">
                         <i class="bi bi-trash3"></i>
                     </button>
+
                 </td>
             </tr>
         </c:forEach>
+
         </tbody>
     </table>
 </section>
-
-<section id="cart-bottom" class="container">
-    <div class="row">
-        <div class="Total col-lg-8 col-md-6 col-12 mb-4 mx-auto">
-            <div>
-                <h5>Tổng giỏ hàng</h5>
-                <div class="d-flex justify-content-between">
-                    <h6>Tạm tính</h6>
-                    <p id="subtotal-value">
-                        <strong>${sessionScope.totalPrice}K</strong>
-                    </p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <h6>Phí vận chuyển</h6>
-                    <p id="shipping-value">20K</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <h6>Thời gian giao hàng dự kiến</h6>
-                    <p id="shippingtime">1h</p>
-                </div>
-                <hr class="second-hr">
-                <div id="discount-row" class="d-flex justify-content-between">
-                    <h6>Giảm giá</h6>
-                    <p id="discount-value">
-                        <fmt:formatNumber value="${discount}" type="currency" currencySymbol="VND"/>
-                    </p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <h6>Tổng cộng</h6>
-                    <p id="total-value">
-                        ${sessionScope.totalPrice + 20}K
-                    </p>
-                </div>
-
-                <div class="form-group my-3">
-                    <label for="voucherSelect">
-                        <h6>Chọn voucher</h6>
-                    </label>
-                    <select class="form-control" id="voucherSelect" onchange="applyVoucher()">
-                        <option value="0">Không sử dụng voucher</option>
-                        <option value="5000">Giảm 5,000 VND</option>
-                        <option value="10000">Giảm 10,000 VND</option>
-                    </select>
-                </div>
-
-                <!-- Phương thức thanh toán -->
-                <div class="form-group my-3">
-                    <label for="paymentMethod">
-                        <h6>Phương thức thanh toán</h6>
-                    </label>
-                    <select class="form-control" id="paymentMethod">
-                        <option value="cash">Thanh toán trực tiếp</option>
-                        <option value="card">Thanh toán bằng thẻ</option>
-                    </select>
-                </div>
-                <button class="ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
-            </div>
-        </div>
-    </div>
-</section>
-<script>
-    function handlePayment() {
-        const paymentMethod = document.getElementById("paymentMethod").value;
-
-        if (paymentMethod === "card") {
-            // Điều hướng đến trang xử lý thanh toán thẻ
-            window.location.href = "/checkout";
-        } else {
-            // Thanh toán trực tiếp thành công
-            alert("Thanh toán thành công!");
-
-            // Gửi AJAX yêu cầu xóa giỏ hàng và tạo đơn hàng
-            sendDirectPaymentRequest();
-        }
-    }
-
-    function sendDirectPaymentRequest() {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/checkout", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert("Giỏ hàng đã được thanh toán thành công.");
-            } else {
-                alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
-            }
-        };
-
-        xhr.send("action=directPayment");
-    }
-</script>
-
-
-
-
 </body>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
@@ -417,11 +304,11 @@
             <h5 class="pb-2">Các đơn vị tài trợ</h5>
             <div class="row">
                 <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 3.png" alt="leather-img">
+                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image%20copy%203.png" alt="leather-img">
                 <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy 2.png" alt="leather-img">
+                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image%20copy%202.png" alt="leather-img">
                 <img class="footer-img img-fluid mb-2"
-                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image copy.png" alt="leather-img">
+                     src="<%= request.getContextPath() %>/doanweb/images/Page1/image%20copy.png" alt="leather-img">
                 <img class="footer-img img-fluid mb-2"
                      src="<%= request.getContextPath() %>/doanweb/images/Page1/image.png" alt="leather-img">
             </div>

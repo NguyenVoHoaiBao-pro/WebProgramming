@@ -22,7 +22,9 @@ public class Products {
         this.image = image;
         this.category_id = category_id;
     }
+    public Products(){
 
+    }
 
 
     public int getId() {

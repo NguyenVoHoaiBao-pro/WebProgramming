@@ -309,6 +309,14 @@
             padding: 10px;
             outline: none;
         }
+        .product-card a {
+            text-decoration: none !important; /* Xóa gạch chân mặc định */
+            color: inherit; /* Giữ màu mặc định của văn bản */
+        }
+
+        .product-card a:hover {
+            text-decoration: none !important;
+        }
 
 
         .product-card h5 {
@@ -347,7 +355,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 50px;
-            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: solid #BC1F23 2px;
             margin-left: 625px;
@@ -499,6 +506,14 @@
             max-width: 1400px; /* Tăng độ rộng tối đa của container */
             width: 100%; /* Đảm bảo container chiếm hết chiều ngang nếu cần */
         }
+        a:hover {
+            text-decoration: none; /* Xóa gạch chân khi hover */
+            color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
+        }
+        .button-container{
+            margin: 10px;
+        }
+
 
     </style>
 
@@ -553,7 +568,7 @@
                                 </a>
                                 <div class="button-container">
                                     <button class="add-btn"
-                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">
+                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart-shop'">
                                         Add to cart
                                     </button>
                                     <button class="buy-btn"

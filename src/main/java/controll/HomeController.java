@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,25 +34,25 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Lấy tất cả các sản phẩm (có thể thêm lọc theo danh mục sau)
+        // Đảm bảo sử dụng mã hóa UTF-8 khi nhận tham số từ client
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
+
+        // Lấy các sản phẩm khác (ngẫu nhiên, theo danh mục...)
         List<Products> randomProducts = dao.getRandomProducts();
-
-        String productName = request.getParameter("productName");
-        List<Products> searchProducts = (List<Products>) dao.getProductByName(productName);
-
-        // Lấy các sản phẩm theo từng danh mục (ví dụ: category_id = 1, 2, 3, ...)
         List<Products> category1Products = dao.getProductsByCategory(1); // Đùi Gà
         List<Products> category2Products = dao.getProductsByCategory(2); // Cá
         List<Products> category3Products = dao.getProductsByCategory(3); // Thịt
 
-        // Đưa danh sách sản phẩm vào request
+        // Truyền các danh sách sản phẩm vào request
         request.setAttribute("randomProductList", randomProducts);
-        request.setAttribute("searchProductList", searchProducts);
         request.setAttribute("category1ProductList", category1Products);
         request.setAttribute("category2ProductList", category2Products);
         request.setAttribute("category3ProductList", category3Products);
 
         // Chuyển tiếp tới JSP để hiển thị
-        request.getRequestDispatcher("doanweb/html/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/doanweb/html/index.jsp").forward(request, response);
     }
 }
+

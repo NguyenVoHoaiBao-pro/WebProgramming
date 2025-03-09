@@ -97,8 +97,6 @@
     border-radius: 15px;
     margin-left: 20px;
 }
-
-
 .search-bar {
     width: 500px;
     overflow: hidden;
@@ -106,7 +104,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 50px;
-    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: solid #BC1F23 2px;
     margin-left: 50px;
@@ -140,15 +137,19 @@
 
 .search-results {
     position: absolute;
-    top: 100%;
-    left: 360px;
-    width: 500px;
+    top: 100%; /* Đặt kết quả ngay dưới ô tìm kiếm */
+    left: 0;
+    width: 350px;
+    max-height: 300px; /* Giới hạn chiều cao */
     overflow-y: auto;
     background-color: #fff;
     border: 1px solid #ddd;
     border-top: none;
     z-index: 10;
     display: none;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: white; /* Đảm bảo kết quả không bị ảnh hưởng bởi background ngoài */
 }
 
 .search-result {
@@ -177,6 +178,7 @@
     display: inline-block;
     vertical-align: middle;
 }
+
 
 /* User Menu Styles */
 .user-menu {
@@ -449,7 +451,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(43, 40, 39, 0.283);
-    height: top 70vh;
+    height: 70vh;
     border-radius: 20px;
     padding: 60px;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
@@ -1070,30 +1072,33 @@ button {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Đảm bảo profile-bar chiếm toàn bộ chiều cao */
-    position: relative;
-}
+    justify-content: space-between;
 
-.profile-bar .profile-header {
-    display: flex; /* Chứa avatar và thông tin */
-    flex-direction: column; /* Xếp avatar và thông tin thành cột */
-    align-items: center; /* Căn giữa các phần tử theo chiều ngang */
-    margin-bottom: 20px; /* Khoảng cách giữa avatar và các liên kết menu */
 }
 
 .profile-bar .avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin-bottom: 10px; /* Khoảng cách giữa avatar và lời chào */
+    margin: 0 auto;
+    display: block;
 }
+
 
 .profile-bar .profile-greeting {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+    margin-left: 15px;
+}
+
+.profile-bar .logout {
+    text-align: center;
+    display: block;
+    color: #fff;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 .profile-bar .menu-links {
@@ -1103,6 +1108,8 @@ button {
 
 .profile-bar .menu-links li {
     margin: 20px;
+    margin-left: 40px;
+
 }
 
 .profile-bar .menu-links a {
@@ -1122,6 +1129,7 @@ button {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     align-items: center;
+
 }
 
 .profile-form h3 {
@@ -1174,7 +1182,7 @@ button {
     font-weight: bold;
     display: block;
     width: 200px;
-    margin: 20px auto 0;
+    margin-bottom: 40px;
 }
 
 /* Khi hover lên nút */

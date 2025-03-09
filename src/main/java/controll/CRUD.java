@@ -1,13 +1,11 @@
 package controll;
-import entity.CartItem;
+import entity.Cart;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dao.dao ;
-import entity.Products;
-import entity.Categories;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,9 +141,9 @@ public class CRUD extends HttpServlet {
     private void getTotalCartPrice(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Chuyển đổi cartList từ request (ví dụ: JSON) thành `ArrayList<CartItem>`
         // Tạm thời giả định cartList được truyền đúng format
-        ArrayList<CartItem> cartList = (ArrayList<CartItem>) request.getAttribute("cartList");
+        ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
 
-        double total = daoInstance.getTotalCartPrice(cartList);
-        response.getWriter().write("Tổng giá trị giỏ hàng: " + total);
+//        double total = daoInstance.getTotalCartPrice(cartList);
+//        response.getWriter().write("Tổng giá trị giỏ hàng: " + total);
     }
 }

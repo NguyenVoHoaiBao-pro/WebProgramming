@@ -1,25 +1,23 @@
 package entity;
 
+import java.sql.Timestamp;
+import dao.dao;
+
 public class CartItem {
-    private Products product;
+    private Cart cart;
     private int quantity;
-    private int totalPrice; // Thêm thuộc tính tổng giá tiền
 
-    // Constructor
-    public CartItem(Products product, int quantity) {
-        this.product = product;
+    public CartItem(Cart cart, int quantity) {
+        this.cart = cart;
         this.quantity = quantity;
-        this.totalPrice = product.getPrice() * quantity; // Khởi tạo tổng giá tiền
     }
 
-    // Getters và Setters
-    public Products getProduct() {
-        return product;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setProduct(Products product) {
-        this.product = product;
-        updateTotalPrice(); // Cập nhật tổng giá tiền khi thay đổi sản phẩm
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public int getQuantity() {
@@ -28,28 +26,35 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        updateTotalPrice(); // Cập nhật tổng giá tiền khi thay đổi số lượng
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
+    public int getCartId() {
+        return cart.getC_id();
     }
 
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice; // Cho phép cập nhật trực tiếp nếu cần
+    public int getUserId() {
+        return cart.getUser_id();
     }
 
-    // Phương thức cập nhật tổng giá tiền
-    private void updateTotalPrice() {
-        this.totalPrice = product.getPrice() * quantity;
+    public int getProductId() {
+        return cart.getProduct_id();
     }
 
-    @Override
-    public String toString() {
-        return "CartItem{" +
-                "product=" + product +
-                ", quantity=" + quantity +
-                ", totalPrice=" + totalPrice +
-                '}';
+    public Timestamp getCreatedAt() {
+        return cart.getCreated_at();
     }
+
+
+    public void setCartAttributes(int c_id, int user_id, int product_id, Timestamp created_at, int quantity) {
+        this.cart.setC_id(c_id);
+        this.cart.setUser_id(user_id);
+        this.cart.setProduct_id(product_id);
+        this.cart.setCreated_at(created_at);
+        this.setQuantity(quantity);
+    }
+    public Products getProduct() {
+        return dao.getProductById(cart.getProduct_id());
+    }
+
+
 }

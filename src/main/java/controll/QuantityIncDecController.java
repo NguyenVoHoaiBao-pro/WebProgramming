@@ -1,6 +1,8 @@
 package controll;
 
+import dao.CartDao;
 import entity.CartItem;
+import entity.Users;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,58 +10,64 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/quantity-inc-dec")
 public class QuantityIncDecController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private final CartDao cartDao = new CartDao();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
         String action = request.getParameter("action");
-        String idParam = request.getParameter("id");
+        int productId = Integer.parseInt(request.getParameter("id"));
 
-        if (action == null || (!"inc".equals(action) && !"dec".equals(action))) {
-            response.sendRedirect("cart.jsp");
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("/login");
             return;
         }
+        int userId = ((Users) session.getAttribute("user")).getId();
 
-        int productId;
         try {
-            productId = Integer.parseInt(idParam);
-        } catch (NumberFormatException e) {
-            response.sendRedirect("cart.jsp");
-            return;
-        }
-        HttpSession session = request.getSession();
-        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+            List<CartItem> cartItems = cartDao.getCartByUserId(userId);
+            int cartId = -1;
 
-        if (cart != null) {
-            for (CartItem item : cart) {
+            for (CartItem item : cartItems) {
                 if (item.getProduct().getId() == productId) {
-                    if ("inc".equals(action)) {
-                        item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
-                    } else if ("dec".equals(action) && item.getQuantity() > 1) {
-                        item.setQuantity(item.getQuantity() - 1); // Giảm số lượng (nhưng không dưới 1)
-                    }
-                    // Cập nhật tổng tiền
-                    item.setTotalPrice(item.getQuantity() * item.getProduct().getPrice());
+                    cartId = item.getCartId();
                     break;
+                }
             }
-        }
 
-            session.setAttribute("cart", cart);
-            // Tính tổng giá tạm tính
-            int totalPrice = 0;
-            for (CartItem item : cart) {
-                totalPrice += item.getTotalPrice();
-        }
+            if (cartId == -1) {
+                response.sendRedirect("/cart?error=Sản phẩm không tồn tại trong giỏ hàng");
+                return;
+            }
 
-            session.setAttribute("totalPrice", totalPrice);
-            // Chuyển hướng về giỏ hàng
-            response.sendRedirect("cart");
+            int currentQuantity = cartDao.getQuantity(cartId, productId);
+            int productStock = cartDao.getProductStock(productId); // Lấy stock của sản phẩm
+
+            if ("inc".equals(action) && currentQuantity < productStock) {
+                cartDao.updateQuantity(cartId, productId, currentQuantity + 1);
+            } else if ("dec".equals(action) && currentQuantity > 1) {
+                cartDao.updateQuantity(cartId, productId, currentQuantity - 1);
+            } else if ("dec".equals(action) && currentQuantity == 1) {
+                cartDao.removeFromCart(userId, productId);
+            }
+
+            response.sendRedirect("/cart");
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Thông tin sản phẩm không hợp lệ.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi cập nhật giỏ hàng.");
+        }
     }
-}}
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+}

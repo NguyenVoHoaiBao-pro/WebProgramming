@@ -32,6 +32,9 @@
     footer a:hover {
       color: white;
     }
+    .container mt-4 {
+      max-height: 550px;
+    }
 
   </style>
 
@@ -153,6 +156,7 @@
       <ul class="menu-links">
         <li><a href="javascript:void(0);" onclick="showProfileForm()">Thông tin cá nhân</a></li>
         <li><a href="javascript:void(0);" onclick="showChangeProfileForm()">Chỉnh sửa thông tin</a></li>
+        <li><a href="javascript:void(0);"  onclick="window.location.href = '/wishlist';">Danh sách yêu thích</a></li>
         <li id="admin-link" style="display:none;">
           <a href="javascript:void(0);" onclick="window.location.href = '/ad';">Quản trị</a>
         </li>
@@ -269,50 +273,50 @@
   // Lấy giá trị role từ session và chuyển sang JavaScript
   var role = "<%= session.getAttribute("role") != null ? session.getAttribute("role").toString() : "0" %>";
 
-  // Hàm ẩn tất cả các form
+  // Hàm ẩn tất cả các form (không ảnh hưởng đến admin-link)
   function hideAllForms() {
     document.getElementById('profile-form').style.display = 'none';
     document.getElementById('change-profile-form').style.display = 'none';
     document.getElementById('change-password-form').style.display = 'none';
     document.getElementById('delete-account-form').style.display = 'none';
-    document.getElementById('admin-link').style.display = 'none';
   }
 
   // Hàm hiển thị form Thông tin cá nhân
   function showProfileForm() {
     hideAllForms(); // Ẩn các form khác
     document.getElementById('profile-form').style.display = 'block'; // Hiển thị form profile
+    showAdminLink(); // Đảm bảo liên kết quản trị vẫn hiển thị
   }
 
   // Hàm hiển thị form Chỉnh sửa thông tin cá nhân
   function showChangeProfileForm() {
     hideAllForms(); // Ẩn các form khác
     document.getElementById('change-profile-form').style.display = 'block'; // Hiển thị form chỉnh sửa thông tin
+    showAdminLink(); // Đảm bảo liên kết quản trị vẫn hiển thị
   }
 
   // Hàm hiển thị form Đổi mật khẩu
   function showChangePasswordForm() {
     hideAllForms(); // Ẩn các form khác
     document.getElementById('change-password-form').style.display = 'block'; // Hiển thị form đổi mật khẩu
+    showAdminLink(); // Đảm bảo liên kết quản trị vẫn hiển thị
   }
 
   // Hàm hiển thị form Xóa tài khoản
   function showDeleteAccountForm() {
     hideAllForms(); // Ẩn các form khác
     document.getElementById('delete-account-form').style.display = 'block'; // Hiển thị form xóa tài khoản
+    showAdminLink(); // Đảm bảo liên kết quản trị vẫn hiển thị
   }
 
   // Hàm hiển thị form Quản trị nếu đăng nhập và role = 1
   function showAdminLink() {
     if (role === "1") {
-      // Hiển thị form quản trị nếu role = 1
       document.getElementById('admin-link').style.display = 'block';
-    } else {
-      // Nếu không phải role = 1, ẩn form quản trị
-      document.getElementById('admin-link').style.display = 'none';
     }
   }
 
+  // Hiển thị liên kết quản trị khi trang tải
   showAdminLink();
 </script>
 

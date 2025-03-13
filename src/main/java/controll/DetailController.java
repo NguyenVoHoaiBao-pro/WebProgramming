@@ -5,6 +5,8 @@ import dao.dao;
 import entity.Review;
 import dao.ReviewDao;
 import dao.UserDao;
+import entity.Users;
+import dao.MysqlConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -85,7 +87,7 @@ public class DetailController extends HttpServlet {
             return;
         }
 
-        try (Connection conn = MySQLConnection.getConnection()) {
+        try (Connection conn = MysqlConnection.getConnection()) {
             String sql = "INSERT INTO reviews (user_id, product_id, rating, comment, review_date) VALUES (?, ?, ?, ?, NOW())";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, userId);

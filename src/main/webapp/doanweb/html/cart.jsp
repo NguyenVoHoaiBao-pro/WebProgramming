@@ -343,14 +343,37 @@
 <script>
     function handlePayment() {
         const paymentMethod = document.getElementById("paymentMethod").value;
+
         if (paymentMethod === "card") {
+            // Điều hướng đến trang xử lý thanh toán thẻ
             window.location.href = "/checkout";
         } else {
-            alert("Bạn đã chọn thanh toán trực tiếp.");
-        }
+            // Thanh toán trực tiếp thành công
+            alert("Thanh toán thành công!");
 
+            // Gửi AJAX yêu cầu xóa giỏ hàng và tạo đơn hàng
+            sendDirectPaymentRequest();
+        }
+    }
+
+    function sendDirectPaymentRequest() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/checkout", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log("Giỏ hàng đã được thanh toán thành công.");
+            } else {
+                console.log("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
+            }
+        };
+
+        xhr.send("action=directPayment");
     }
 </script>
+
+
 
 
 </body>

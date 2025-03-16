@@ -10,16 +10,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
-@WebServlet("/register") // Đường dẫn để gọi servlet
+@WebServlet("/register")
 public class RegisterController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Thiết lập mã hóa UTF-8 để xử lý tiếng Việt
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
@@ -33,14 +39,14 @@ public class RegisterController extends HttpServlet {
 
         // Kiểm tra nếu có tham số nào rỗng hoặc null
         if (isEmpty(username) || isEmpty(email) || isEmpty(password) || isEmpty(confirmPassword) || isEmpty(phone) || isEmpty(address)) {
-            request.setAttribute("error", "All fields are required.");
+            request.setAttribute("error", "Tất cả các trường là bắt buộc.");
             forwardToRegisterPage(request, response);
             return;
         }
 
         // Kiểm tra nếu mật khẩu và xác nhận mật khẩu không khớp
         if (!password.equals(confirmPassword)) {
-            request.setAttribute("error", "Passwords do not match.");
+            request.setAttribute("error", "Mật khẩu không khớp.");
             forwardToRegisterPage(request, response);
             return;
         }
@@ -50,21 +56,26 @@ public class RegisterController extends HttpServlet {
 
         // Kiểm tra nếu tài khoản đã tồn tại
         if (existingUser != null) {
-            request.setAttribute("error", "Username already exists.");
+            request.setAttribute("error", "Tên người dùng đã tồn tại.");
             forwardToRegisterPage(request, response);
         } else {
             try {
-                // Mã hóa mật khẩu (thay thế với mã hóa mật khẩu thực tế như BCrypt)
-                String hashedPassword = hashPassword(password);
+                // Tạo muối ngẫu nhiên
+                SecureRandom random = new SecureRandom();
+                byte[] salt = new byte[16];
+                random.nextBytes(salt);
+
+                // Mã hóa mật khẩu với PBKDF2WithHmacSHA256
+                String hashedPassword = hashPassword(password, salt);
 
                 // Đăng ký người dùng mới
                 d.Register(username, email, hashedPassword, phone, address);
-                request.setAttribute("success", "Registration successful!");
-                response.sendRedirect("doanweb/html/Login.jsp"); // Chuyển hướng đến trang chính sau khi đăng ký
+                request.setAttribute("success", "Đăng ký thành công!");
+                response.sendRedirect("doanweb/html/Login.jsp"); // Chuyển hướng đến trang đăng nhập sau khi đăng ký
             } catch (Exception e) {
                 // Ghi log ngoại lệ và thông báo lỗi cho người dùng
-                LOGGER.log(Level.SEVERE, "Error during registration", e);
-                request.setAttribute("error", "An error occurred during registration. Please try again.");
+                LOGGER.log(Level.SEVERE, "Lỗi trong quá trình đăng ký", e);
+                request.setAttribute("error", "Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại.");
                 forwardToRegisterPage(request, response);
             }
         }
@@ -85,9 +96,24 @@ public class RegisterController extends HttpServlet {
         return value == null || value.trim().isEmpty();
     }
 
-    private String hashPassword(String password) {
-        // Thay thế bằng mã hóa mật khẩu thực tế như BCrypt
-        // Ví dụ: return BCrypt.hashpw(password, BCrypt.gensalt());
-        return password; // Đoạn này chỉ để minh họa, cần thay thế bằng mã hóa thực tế
+    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 65536;
+        int keyLength = 256;
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return bytesToHex(salt) + ":" + bytesToHex(hash); // Lưu cả salt và hash
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 }

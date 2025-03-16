@@ -8,7 +8,7 @@ import entity.Users;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.mindrot.jbcrypt.BCrypt;
 
 import static dao.MySQLConnection.getConnection;
 
@@ -288,29 +288,35 @@ public class dao {
         return sum;  // Trả về tổng giá trị giỏ hàng
     }
 
+
+
     public Users login(String username, String password) {
-        String query = "SELECT * FROM User WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM User WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            statement.setString(2, password);
 
-            // Kiểm tra kết quả truy vấn
+            statement.setString(1, username);
+
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    // Lấy thông tin người dùng từ kết quả truy vấn
-                    Users user = new Users(
-                            rs.getInt("user_id"),
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("password"),
-                            rs.getString("phone"),
-                            rs.getString("role"),
-                            rs.getString("address")
-                    );
-                    // Hiển thị thông tin người dùng ra console (debug)
-                    System.out.println("Đăng nhập thành công! Người dùng: " + user);
-                    return user;
+                    String hashedPassword = rs.getString("password"); // Lấy mật khẩu đã băm từ DB
+
+                    // Kiểm tra mật khẩu nhập vào với mật khẩu đã băm
+                    if (BCrypt.checkpw(password, hashedPassword)) {
+                        Users user = new Users(
+                                rs.getInt("user_id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("phone"),
+                                rs.getString("role"),
+                                rs.getString("address")
+                        );
+                        System.out.println("Đăng nhập thành công! Người dùng: " + user);
+                        return user;
+                    } else {
+                        System.out.println("Sai mật khẩu.");
+                    }
                 } else {
                     System.out.println("Không tìm thấy người dùng.");
                 }
@@ -319,8 +325,9 @@ public class dao {
             e.printStackTrace();
         }
         return null;
-
     }
+
+
 
     public Users checkExist(String username) {
         String query = "SELECT * FROM User WHERE username = ?";
@@ -353,7 +360,7 @@ public class dao {
         return null; // Trả về null nếu không tìm thấy người dùng
     }
 
-    public void Register(String username, String email, String password, String phone, String address) {
+    public void Register(String username, String email, String hashedPassword, String phone, String address) {
         String query = "INSERT INTO User (username, email, password, role, phone, address) VALUES (?, ?, ?, 0, ?, ?)";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -361,7 +368,7 @@ public class dao {
             // Thiết lập các tham số theo thứ tự đúng
             statement.setString(1, username);
             statement.setString(2, email);
-            statement.setString(3, password);
+            statement.setString(3, hashedPassword); // Dùng mật khẩu đã băm
             statement.setString(4, phone);
             statement.setString(5, address);
 
@@ -372,14 +379,16 @@ public class dao {
             } else {
                 System.out.println("Failed to register user.");
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Bắt lỗi nếu username hoặc email đã tồn tại (giả sử có ràng buộc UNIQUE trong DB)
+            System.err.println("Lỗi: Tên người dùng hoặc email đã tồn tại.");
         } catch (SQLException e) {
-            System.err.println("Database error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi chi tiết ra để dễ dàng debug
+            System.err.println("Lỗi cơ sở dữ liệu: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
+            System.err.println("Lỗi không xác định: " + e.getMessage());
         }
     }
+
 
 
     public List<Products> getRandomProducts() {

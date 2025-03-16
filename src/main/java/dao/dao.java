@@ -5,10 +5,15 @@ import entity.Categories;
 import entity.Products;
 import entity.Users;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.mindrot.jbcrypt.BCrypt;
+
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import static dao.MySQLConnection.getConnection;
 
@@ -299,10 +304,21 @@ public class dao {
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    String hashedPassword = rs.getString("password"); // Lấy mật khẩu đã băm từ DB
+                    String storedPassword = rs.getString("password"); // Mật khẩu đã hash lưu trong DB
+                    String[] parts = storedPassword.split(":");
 
-                    // Kiểm tra mật khẩu nhập vào với mật khẩu đã băm
-                    if (BCrypt.checkpw(password, hashedPassword)) {
+                    if (parts.length != 2) {
+                        System.out.println("Lỗi dữ liệu mật khẩu trong database.");
+                        return null;
+                    }
+
+                    byte[] salt = hexToBytes(parts[0]);
+                    String hashedPasswordFromDB = parts[1];
+
+                    // Kiểm tra mật khẩu nhập vào
+                    String hashedInputPassword = hashPassword(password, salt);
+
+                    if (hashedInputPassword.equals(storedPassword)) {
                         Users user = new Users(
                                 rs.getInt("user_id"),
                                 rs.getString("username"),
@@ -325,6 +341,37 @@ public class dao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 65536;
+        int keyLength = 256;
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return bytesToHex(salt) + ":" + bytesToHex(hash); // Ghép salt và hash lại giống format trong DB
+    }
+
+    private byte[] hexToBytes(String hex) {
+        int length = hex.length();
+        byte[] bytes = new byte[length / 2];
+        for (int i = 0; i < length; i += 2) {
+            bytes[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+                    + Character.digit(hex.charAt(i + 1), 16));
+        }
+        return bytes;
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
 

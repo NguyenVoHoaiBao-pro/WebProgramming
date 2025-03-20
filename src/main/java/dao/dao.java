@@ -280,17 +280,17 @@ public class dao {
                         // Nếu có sản phẩm, lấy giá và tính tổng
                         if (rs.next()) {
                             double price = rs.getDouble("price");
-                            // Cộng giá trị của sản phẩm vào tổng giỏ hàng (có nhân với số lượng)
+
                             sum += price * cartItem.getQuantity();
                         }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();  // In lỗi nếu có sự cố
+                    e.printStackTrace();
                 }
             }
         }
 
-        return sum;  // Trả về tổng giá trị giỏ hàng
+        return sum;
     }
 
 

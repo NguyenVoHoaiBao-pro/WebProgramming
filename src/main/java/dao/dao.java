@@ -10,6 +10,11 @@ import java.util.Map;
 
 import static dao.MySQLConnection.getConnection;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 public class dao {
     // Phương thức lấy danh sách tất cả sản phẩm
     public List<Products> getAllProducts() {
@@ -176,7 +181,7 @@ public class dao {
 
     /// ///////////////////
     public void addProduct(String name, double price, int stock, String description, int category_id, String image) {
-        String sql = "INSERT INTO Product (name, price, stock, description, category_id, image) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO product (name, price, stock, description, category_id, image) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
             stmt.setDouble(2, price);
@@ -202,7 +207,7 @@ public class dao {
 
     // Sửa sản phẩm
     public void updateProduct(int id, String name, int price, int stock, String description, int category_id, String image) {
-        String sql = "UPDATE Product SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE p_id=?";
+        String sql = "UPDATE product SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE p_id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
             stmt.setDouble(2, price);
@@ -219,7 +224,7 @@ public class dao {
 
     // Xóa sản phẩm
     public void deleteProduct(int id) {
-        String sql = "DELETE FROM Product WHERE p_id=?";
+        String sql = "DELETE FROM product WHERE p_id=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -240,7 +245,7 @@ public class dao {
 
     // Cập nhật số lượng tồn kho
     public int updateStock(int productId, int stock) {
-        String query = "UPDATE Product SET stock = ? WHERE p_id = ?";
+        String query = "UPDATE product SET stock = ? WHERE p_id = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -316,7 +321,7 @@ public class dao {
 
 
     public Users login(String username, String password) {
-        String query = "SELECT * FROM User WHERE username = ?";
+        String query = "SELECT * FROM user WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -397,7 +402,7 @@ public class dao {
 
 
     public Users checkExist(String username) {
-        String query = "SELECT * FROM User WHERE username = ?";
+        String query = "SELECT * FROM user WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -428,7 +433,7 @@ public class dao {
     }
 
     public void Register(String username, String email, String hashedPassword, String phone, String address) {
-        String query = "INSERT INTO User (username, email, password, role, phone, address) VALUES (?, ?, ?, 0, ?, ?)";
+        String query = "INSERT INTO user (username, email, password, role, phone, address) VALUES (?, ?, ?, 0, ?, ?)";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 

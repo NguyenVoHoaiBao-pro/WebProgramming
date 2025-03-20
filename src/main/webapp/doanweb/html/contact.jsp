@@ -157,23 +157,35 @@
                 <div class="col-lg-6 col-md-6 col-12">
                     <h2 class="text-uppercase mt-5">Liên Hệ</h2>
                     <p class="text-muted">Chúng tôi luôn sẵn sàng giúp đỡ bạn. Nếu bạn có bất kỳ câu hỏi hoặc gợi ý nào, hãy liên hệ với chúng tôi.</p>
-                    <form action="" onsubmit="contactUs()">
+
+                    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+                    <% String successMessage = (String) request.getAttribute("successMessage"); %>
+
+                    <% if (errorMessage != null) { %>
+                    <div class="alert alert-danger"><%= errorMessage %></div>
+                    <% } %>
+
+                    <% if (successMessage != null) { %>
+                    <div class="alert alert-success"><%= successMessage %></div>
+                    <% } %>
+
+                    <form action="contact" method="post">
                         <div class="form-group">
                             <label for="name">Tên</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên của bạn">
+                            <input type="text" class="form-control" id="name" name="name" required placeholder="Nhập tên của bạn">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email của bạn">
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="Nhập email của bạn">
                         </div>
                         <div class="form-group">
                             <label for="message">Tin nhắn</label>
-                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Nhập nội dung tin nhắn"></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="3" required placeholder="Nhập nội dung tin nhắn"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
-                <div class="col-lg-6 col-md-6 col-12">
+                <div class="col-lg-6 col-md-6 col-12 text center">
                     <img id="about-img" src="<%= request.getContextPath() %>/doanweb/images/Page1/contact.png" class="img-fluid mt-5 py-5" alt="about-img">
                 </div>
             </div>

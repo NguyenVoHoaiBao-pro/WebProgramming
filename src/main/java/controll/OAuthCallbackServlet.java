@@ -29,6 +29,28 @@ public class OAuthCallbackServlet extends HttpServlet {
         }
     }
 
+    private String getAccessToken(String code) throws IOException {
+        HttpTransport transport = new NetHttpTransport();
+        JsonFactory jsonFactory = new JacksonFactory();
 
+        GoogleTokenResponse tokenResponse = new GoogleAuthorizationCodeTokenRequest(
+                transport, jsonFactory, CLIENT_ID, CLIENT_SECRET, code, REDIRECT_URI)
+                .execute();
+
+        return tokenResponse.getAccessToken();
+    }
+
+    private GoogleUser getUserInfo(String accessToken) throws IOException {
+        HttpTransport transport = new NetHttpTransport();
+        JsonFactory jsonFactory = new JacksonFactory();
+
+        Oauth2 oauth2 = new Oauth2.Builder(transport, jsonFactory, new Credential(BearerToken.authorizationHeaderAccessMethod())
+                .setAccessToken(accessToken))
+                .setApplicationName("WebApp")
+                .build();
+
+        Userinfo userinfo = oauth2.userinfo().get().execute();
+
+        return new GoogleUser(userinfo.getId(), userinfo.getName(), userinfo.getEmail());
     }
 }

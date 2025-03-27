@@ -66,6 +66,20 @@
             color: #343a40;
             text-decoration: none;
         }
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 5px;
+            color: #BC1F23;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            color: #343a40;
+            text-decoration: underline;
+        }
+
     </style>
 
 </head>
@@ -201,6 +215,7 @@
                     <label for="password">Mật khẩu</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                 </div>
+                <a href="<%= request.getContextPath() %>/forgot-password" class="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
                 <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register" id="showSignUp">Đăng ký</a></p>
             </form>

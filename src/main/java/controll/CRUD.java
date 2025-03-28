@@ -1,11 +1,13 @@
 package controll;
-import entity.Cart;
+
+import entity.CartItem;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dao.dao ;
+import dao.dao;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,7 +78,7 @@ public class CRUD extends HttpServlet {
         String image = request.getParameter("image");
         int category_id = Integer.parseInt(request.getParameter("category_id"));
 
-        daoInstance.addProduct(name, price, stock,description, category_id, image);
+        daoInstance.addProduct(name, price, stock, description, category_id, image);
         response.getWriter().write("Thêm sản phẩm thành công!");
     }
 
@@ -102,7 +104,7 @@ public class CRUD extends HttpServlet {
         int productStock = Integer.parseInt(stock); // stock phải là số nguyên
         int productCategoryId = Integer.parseInt(categoryId); // categoryId phải là số nguyên
 
-        // Cập nhật sản phẩm vào cơ sở dữ liệu
+
         daoInstance.updateProduct(productId, name, (int) productPrice, productStock, description, productCategoryId, image);
 
         // Kiểm tra và phản hồi cho người dùng
@@ -139,11 +141,10 @@ public class CRUD extends HttpServlet {
     }
 
     private void getTotalCartPrice(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Chuyển đổi cartList từ request (ví dụ: JSON) thành `ArrayList<CartItem>`
-        // Tạm thời giả định cartList được truyền đúng format
-        ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
 
-//        double total = daoInstance.getTotalCartPrice(cartList);
-//        response.getWriter().write("Tổng giá trị giỏ hàng: " + total);
+        ArrayList<CartItem> cartList = (ArrayList<CartItem>) request.getAttribute("cartList");
+
+        double total = daoInstance.getTotalCartPrice(cartList);
+        response.getWriter().write("Tổng giá trị giỏ hàng: " + total);
     }
 }

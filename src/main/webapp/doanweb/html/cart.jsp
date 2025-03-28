@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cart</title>
+        <title>Shop</title>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
         <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
 
@@ -79,41 +79,42 @@
 
             .quantity-selector {
                 display: flex;
-                justify-content: center; /* Căn giữa theo chiều ngang */
-                align-items: center; /* Căn giữa theo chiều dọc */
-                gap: 5px; /* Khoảng cách giữa các phần tử */
+                align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+                justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+                gap: 10px; /* Khoảng cách giữa các phần tử */
+                padding-top: 12px;
             }
 
-            .quantity-selector form {
-                margin: 0;
-            }
-
-            .quantity-selector .btn-minus,
-            .quantity-selector .btn-plus {
+            .quantity-selector button {
                 padding: 5px 10px;
-                font-size: 14px;
+                font-size: 20px; /* Điều chỉnh kích thước chữ để dễ nhìn */
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
                 cursor: pointer;
+                width: 35px; /* Điều chỉnh kích thước nút */
+                height: 35px; /* Điều chỉnh kích thước nút */
+                display: flex;
+                align-items: center; /* Căn giữa nội dung nút theo chiều dọc */
+                justify-content: center; /* Căn giữa nội dung nút theo chiều ngang */
             }
 
-            .quantity-selector input[type="number"] {
-                width: 50px;
+            .quantity-selector button:hover {
+                background-color: #e0e0e0;
+            }
+
+            .quantity-selector input {
+                width: 50px; /* Điều chỉnh chiều rộng của ô nhập liệu */
                 text-align: center;
-                margin: 0 5px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                padding: 4px;
+                padding: 5px;
+                font-size: 16px;
+                border: 1px solid #ccc;
             }
 
 
         </style>
     </head>
+    <title></title>
 <body>
-<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-<% if (errorMessage != null) { %>
-<script>
-    alert("<%= errorMessage %>");
-</script>
-<% } %>
 <!-- Nav section -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
@@ -254,20 +255,17 @@
                 <td>${item.product.name}</td>
                 <td>${item.product.price}K</td>
                 <td>
-                    <div class="quantity-selector">
-                        <form action="/quantity-inc-dec" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="${item.product.id}">
+                    <form action="quantity-inc-dec" method="post">
+                        <input type="hidden" name="id" value="${item.product.id}">
+                        <div class="quantity-selector">
                             <button type="submit" name="action" value="dec" class="btn-minus">-</button>
-                        </form>
-                        <input type="number" id="quantity-${item.product.id}" value="${item.quantity}" min="1"
-                               class="form-control" disabled>
-                        <form action="/quantity-inc-dec" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="${item.product.id}">
+                            <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control"
+                                   disabled>
                             <button type="submit" name="action" value="inc" class="btn-plus">+</button>
-                        </form>
-                    </div>
-                </td>
+                        </div>
+                    </form>
 
+                </td>
                 <td>${item.quantity * item.product.price}k</td>
                 <td>
                     <button type="button" class="remove-btn"
@@ -331,7 +329,7 @@
                         <h6>Phương thức thanh toán</h6>
                     </label>
                     <select class="form-control" id="paymentMethod">
-                        <option value="cash">Thanh toán trực tiếp</option>
+                        <option value="cash">Thanh toán bằng trực tiếp</option>
                         <option value="card">Thanh toán bằng thẻ</option>
                     </select>
                 </div>
@@ -340,42 +338,6 @@
         </div>
     </div>
 </section>
-<script>
-    function handlePayment() {
-        const paymentMethod = document.getElementById("paymentMethod").value;
-
-        if (paymentMethod === "card") {
-            // Điều hướng đến trang xử lý thanh toán thẻ
-            window.location.href = "/checkout";
-        } else {
-            // Thanh toán trực tiếp thành công
-            alert("Thanh toán thành công!");
-
-            // Gửi AJAX yêu cầu xóa giỏ hàng và tạo đơn hàng
-            sendDirectPaymentRequest();
-        }
-    }
-
-    function sendDirectPaymentRequest() {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/checkout", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert("Giỏ hàng đã được thanh toán thành công.");
-            } else {
-                alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
-            }
-        };
-
-        xhr.send("action=directPayment");
-    }
-</script>
-
-
-
-
 </body>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
@@ -391,11 +353,11 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="index.html">trang chủ</a></li>
-                <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
-                <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">Thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">Liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
@@ -405,7 +367,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

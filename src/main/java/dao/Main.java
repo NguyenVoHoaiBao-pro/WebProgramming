@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        // Logic của ứng dụng
+
         try {
             // Sử dụng kết nối từ connection pool
             Connection connection = MySQLConnection.getConnection();

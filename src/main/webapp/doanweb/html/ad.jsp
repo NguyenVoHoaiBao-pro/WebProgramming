@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="dao.dao, entity.Products, entity.Categories" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -7,42 +7,68 @@
     <meta charset="UTF-8">
     <title>Admin Page</title>
     <style>
-        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        form { margin-bottom: 20px; }
-        input, select { padding: 5px; margin: 5px 0; }
-        button { padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #45a049; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
-
-
-
 
 
 <body>
 <button id="backToTopBtn" onclick="scrollToTop()">⬆️</button>
 <style>
-    /* CSS cho nút "Lên đầu trang" */
+
     #backToTopBtn {
         position: fixed;
-        bottom: 20px; /* Cách đáy màn hình 20px */
-        right: 20px; /* Cách phải màn hình 20px */
-        z-index: 1000; /* Đặt trên các phần tử khác */
-        display: none; /* Ẩn nút ban đầu */
-        background-color: #007bff; /* Màu nền */
-        color: white; /* Màu chữ */
-        border: none; /* Xóa viền */
-        border-radius: 50%; /* Bo tròn nút */
-        padding: 10px 15px; /* Kích thước nút */
-        cursor: pointer; /* Hiển thị con trỏ */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-        font-size: 16px; /* Kích thước chữ */
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: none;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        padding: 10px 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
     }
 
     #backToTopBtn:hover {
-        background-color: #0056b3; /* Màu khi hover */
+        background-color: #0056b3;
     }
 </style>
 <h1>Admin Quản lý sản phẩm</h1>
@@ -97,7 +123,8 @@
         <select name="category_id" required>
             <option value="">Chọn danh mục</option>
             <% for (Categories category : categoryList) { %>
-            <option value="<%= category.getId() %>"><%= category.getName() %></option>
+            <option value="<%= category.getId() %>"><%= category.getName() %>
+            </option>
             <% } %>
         </select>
     </label>
@@ -105,7 +132,7 @@
 </form>
 
 
-<!-- Hiển thị danh sách sản phẩm -->
+
 <table>
     <tr>
         <th>ID</th>
@@ -120,13 +147,19 @@
     <% for (Products product : productList) { %>
     <tr>
 
-        <td><%= product.getId() %></td>
-        <td><%= product.getName() %></td>
-        <td><%= product.getDescription() %></td>
-        <td><%= product.getPrice() %></td>
-        <td><%= product.getStock() %></td>
+        <td><%= product.getId() %>
+        </td>
+        <td><%= product.getName() %>
+        </td>
+        <td><%= product.getDescription() %>
+        </td>
+        <td><%= product.getPrice() %>
+        </td>
+        <td><%= product.getStock() %>
+        </td>
         <td><img src="<%= product.getImage() %>" alt="<%= product.getName() %>" style="width: 50px;"></td>
-        <td><%= product.getCategoryId() %></td>
+        <td><%= product.getCategoryId() %>
+        </td>
         <td>
             <form action="UpdateProduct" method="post" style="display:inline;">
                 <input type="hidden" name="id" value="<%= product.getId() %>">
@@ -157,7 +190,8 @@
                 <button type="submit">Cập nhật</button>
             </form>
 
-            <a href="DeleteProduct?id=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+            <a href="DeleteProduct?id=<%= product.getId() %>"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
         </td>
     </tr>
     <% } %>
@@ -181,10 +215,13 @@
     </tr>
     <% for (Categories category : categoryList) { %>
     <tr>
-        <td><%= category.getId() %></td>
-        <td><%= category.getName() %></td>
+        <td><%= category.getId() %>
+        </td>
+        <td><%= category.getName() %>
+        </td>
         <td>
-            <a href="DeleteCategory?id=<%= category.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">Xóa</a>        </td>
+            <a href="DeleteCategory?id=<%= category.getId() %>"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">Xóa</a></td>
     </tr>
     <% } %>
 </table>

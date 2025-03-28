@@ -309,14 +309,6 @@
             padding: 10px;
             outline: none;
         }
-        .product-card a {
-            text-decoration: none !important; /* Xóa gạch chân mặc định */
-            color: inherit; /* Giữ màu mặc định của văn bản */
-        }
-
-        .product-card a:hover {
-            text-decoration: none !important;
-        }
 
 
         .product-card h5 {
@@ -355,6 +347,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50px;
+            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: solid #BC1F23 2px;
             margin-left: 625px;
@@ -506,14 +499,6 @@
             max-width: 1400px; /* Tăng độ rộng tối đa của container */
             width: 100%; /* Đảm bảo container chiếm hết chiều ngang nếu cần */
         }
-        a:hover {
-            text-decoration: none; /* Xóa gạch chân khi hover */
-            color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
-        }
-        .button-container{
-            margin: 10px;
-        }
-
 
     </style>
 
@@ -568,7 +553,7 @@
                                 </a>
                                 <div class="button-container">
                                     <button class="add-btn"
-                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart-shop'">
+                                            onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart'">
                                         Add to cart
                                     </button>
                                     <button class="buy-btn"
@@ -604,11 +589,11 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
-                <li><a href="/html/Menu/shop.html">Cửa hàng</a></li>
-                <li><a href="/html/Menu/AboutUs.html">thông tin</a></li>
-                <li><a href="/html/Menu/ContactUs.html">liên hệ</a></li>
-                <li><a href="/html/Menu/Cart.html">Giỏ hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>shop.html">Cửa hàng</a></li>
+                <li><a href="<%= request.getContextPath() %>AboutUs.html">Thông tin</a></li>
+                <li><a href=<%= request.getContextPath() %>.html">Liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>Cart.html">Giỏ hàng</a></li>
             </ul>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
@@ -618,7 +603,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

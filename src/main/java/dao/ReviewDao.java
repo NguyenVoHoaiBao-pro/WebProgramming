@@ -153,7 +153,7 @@ public class ReviewDao {
 
     public List<Review> getReviewByProductIdAndRating(int productId, int rating) {
         List<Review> reviews = new ArrayList<>();
-        String query = "SELECT * FROM Review WHERE product_id = ? AND rating = ?";
+        String query = "SELECT * FROM review WHERE product_id = ? AND rating = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

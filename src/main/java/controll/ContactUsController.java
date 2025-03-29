@@ -1,3 +1,4 @@
+
 package controll;
 
 import dao.MySQLConnection;
@@ -77,8 +78,8 @@ public class ContactUsController extends HttpServlet {
     }
 
     private void sendEmail(String name, String email, String message) {
-        final String senderEmail = "phamthaibao57@@gmail.com"; // Thay bằng email của bạn
-        final String senderPassword = "rjxnslafxlvkbnxz"; // Thay bằng mật khẩu ứng dụng
+        final String senderEmail = "phamthaibao57@@gmail.com"; 
+        final String senderPassword = "rjxnslafxlvkbnxz"; 
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -105,4 +106,4 @@ public class ContactUsController extends HttpServlet {
             e.printStackTrace();
         }
     }
-}
+

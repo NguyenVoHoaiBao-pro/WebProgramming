@@ -1,7 +1,6 @@
 package entity;
 
-import java.sql.Timestamp;
-import java.util.List;
+
 
 public class Products {
     private int id;
@@ -13,7 +12,7 @@ public class Products {
     private int category_id; // Tham chiếu đến Category
     // Constructor
 
-    public Products(int id, String name,int price,  int stock, String description,int category_id, String image ) {
+    public Products(int id, String name, int price, int stock, String description, int category_id, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,44 +21,52 @@ public class Products {
         this.image = image;
         this.category_id = category_id;
     }
-    public Products(){
-
-    }
 
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public int getPrice() {
         return price;
     }
+
     public void setPrice(int price) {
         this.price = price;
     }
+
     public int getStock() {
         return stock;
     }
+
     public void setStock(int stock) {
         this.stock = stock;
     }
+
     public String getImage() {
         return image;
     }
+
     public void setImage(String image) {
         this.image = image;
     }
@@ -71,6 +78,7 @@ public class Products {
     public void setCategoryId(int category_id) {
         this.category_id = category_id;
     }
+
     @Override
     public String toString() {
         return "Products{" +

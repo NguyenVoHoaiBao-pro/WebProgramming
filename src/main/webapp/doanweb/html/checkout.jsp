@@ -214,7 +214,7 @@
                     />
                 </div>
                 <p></p>
-                <button type="submit" class="button" onclick="RenderToHome()">
+                <button type="submit" class="button">
                     Thanh toán
                 </button>
             </form>
@@ -223,12 +223,17 @@
 </div>
 <!-- partial -->
 <script>
-    function RenderToHome() {
+    // Giữ nguyên thông báo thành công sau khi thanh toán
+    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Ngừng gửi form mặc định
 
-        alert("Order Successful");
-        window.location.href ="/home";
+        // Gửi thông tin thanh toán đến backend (API hoặc xử lý thanh toán tại server)
+        // Bạn cần thay đổi URL và cách gửi form theo cách bạn xử lý thanh toán
 
-    }
+        // Thực hiện thanh toán
+        alert("Thanh toán thành công!");
+        window.location.href = "/home"; // Chuyển hướng về trang chủ sau khi thanh toán thành công
+    });
 </script>
 </body>
 </html>

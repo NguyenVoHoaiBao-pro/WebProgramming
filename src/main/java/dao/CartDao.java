@@ -8,6 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dao.MySQLConnection.getConnection;
+
 public class CartDao {
     public boolean AddToCart(int userId, int productId, int quantity) {
         try (Connection connection = MySQLConnection.getConnection()) {
@@ -258,7 +260,28 @@ public class CartDao {
         return 0;
     }
 
+    public void clearCart(int userId) {
+        String deleteCartItemsQuery = "DELETE FROM cart_item " +
+                "WHERE cart_id IN (SELECT cart_id FROM cart WHERE user_id = ?)";
+        String deleteCartQuery = "DELETE FROM cart WHERE user_id = ?";
 
+        try (Connection connection = getConnection()) {
+            // Xóa dữ liệu trong bảng cart_item
+            try (PreparedStatement statement = connection.prepareStatement(deleteCartItemsQuery)) {
+                statement.setInt(1, userId);
+                statement.executeUpdate();
+            }
+
+            // Xóa dữ liệu trong bảng cart
+            try (PreparedStatement statement = connection.prepareStatement(deleteCartQuery)) {
+                statement.setInt(1, userId);
+                statement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

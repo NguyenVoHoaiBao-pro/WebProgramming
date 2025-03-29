@@ -1,14 +1,12 @@
 package dao;
 
-import entity.Products;
 import entity.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static dao.MySQLConnection.getConnection;
 
@@ -27,36 +25,6 @@ public class UserDao {
 
             // Thiết lập tham số cho PreparedStatement
             statement.setString(1, username);
-
-            // Thực thi câu lệnh và lấy kết quả
-            try (ResultSet rs = statement.executeQuery()) {
-                if (rs.next()) {
-                    user = new Users(
-                            rs.getInt("user_id"),
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("password"),
-                            rs.getString("phone"),
-                            rs.getString("role"),
-                            rs.getString("address")
-                    );
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();  // In ra lỗi nếu có
-        }
-        return user;  // Trả về người dùng nếu tìm thấy, nếu không trả về null
-    }
-    public Users getUserByUserId(int userId) {
-        Users user = null;
-        String query = "SELECT * FROM User WHERE user_id = ?";  // Câu lệnh SQL để lấy người dùng theo username
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            // Thiết lập tham số cho PreparedStatement
-            statement.setInt(1, userId);
 
             // Thực thi câu lệnh và lấy kết quả
             try (ResultSet rs = statement.executeQuery()) {

@@ -1,13 +1,20 @@
+
 package dao;
 
-import entity.*;
+import entity.CartItem;
+import entity.Categories;
+import entity.Products;
+import entity.Users;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-// hello
+
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import static dao.MySQLConnection.getConnection;
 
@@ -111,7 +118,7 @@ public class dao {
         return l;
     }
 
-    public static Products getProductById(int productId) {
+    public Products getProductById(int productId) {
         Products product = null;
         String query = "SELECT * FROM Product WHERE p_id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
 
@@ -255,89 +262,78 @@ public class dao {
     }
 
     //Tổng giá tiền của giỏ hàng
-    public double getTotalCartPrice(List<CartItem> cartList) {
+    public double getTotalCartPrice(ArrayList<CartItem> cartList) {
         double sum = 0;
 
         // Kiểm tra nếu giỏ hàng không rỗng
         if (cartList != null && !cartList.isEmpty()) {
-            // Xây dựng danh sách ID sản phẩm từ giỏ hàng
-            StringBuilder queryBuilder = new StringBuilder("SELECT p_id, price FROM product WHERE p_id IN (");
-            for (int i = 0; i < cartList.size(); i++) {
-                queryBuilder.append("?");
-                if (i < cartList.size() - 1) {
-                    queryBuilder.append(",");
-                }
-            }
-            queryBuilder.append(")");
+            for (CartItem cartItem : cartList) {
+                // Truy vấn giá của sản phẩm từ cơ sở dữ liệu theo ID
+                String query = "SELECT price FROM product WHERE p_id = ?";
 
-            String query = queryBuilder.toString();
+                try (Connection connection = getConnection();
+                     PreparedStatement statement = connection.prepareStatement(query)) {
 
-            try (Connection connection = getConnection();
-                 PreparedStatement statement = connection.prepareStatement(query)) {
+                    // Thiết lập tham số cho câu lệnh SQL (ID sản phẩm)
+                    statement.setInt(1, cartItem.getProduct().getId());
 
-                // Gán giá trị cho từng tham số ID trong truy vấn
-                for (int i = 0; i < cartList.size(); i++) {
-                    statement.setInt(i + 1, cartList.get(i).getProductId());
-                }
+                    try (ResultSet rs = statement.executeQuery()) {
+                        // Nếu có sản phẩm, lấy giá và tính tổng
+                        if (rs.next()) {
+                            double price = rs.getDouble("price");
 
-                // Thực thi truy vấn và tính tổng giá trị giỏ hàng
-                try (ResultSet rs = statement.executeQuery()) {
-                    Map<Integer, Double> productPriceMap = new HashMap<>();
-
-                    // Lưu trữ giá sản phẩm trong Map (product_id -> price)
-                    while (rs.next()) {
-                        productPriceMap.put(rs.getInt("p_id"), rs.getDouble("price"));
-                    }
-
-                    // Tính tổng giá trị giỏ hàng dựa trên Map
-                    for (CartItem cartItem : cartList) {
-                        int productId = cartItem.getProductId(); // Lấy ID sản phẩm
-                        Double price = productPriceMap.get(productId); // Lấy giá từ Map
-
-                        if (price != null) {
-                            int quantity = cartItem.getQuantity(); // Lấy số lượng từ CartItem
-                            double itemTotal = price * quantity; // Tính giá trị sản phẩm (giá * số lượng)
-                            sum += itemTotal; // Cộng giá trị sản phẩm vào tổng
-                            System.out.println("Product ID: " + productId + ", Quantity: " + quantity + ", Item Total: " + itemTotal);
-                        } else {
-                            // Trường hợp không tìm thấy giá của sản phẩm trong Map
-                            System.err.println("Price not found for Product ID: " + productId);
+                            sum += price * cartItem.getQuantity();
                         }
                     }
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace(); // In lỗi nếu có sự cố
             }
         }
 
-        return sum; // Trả về tổng giá trị giỏ hàng
+        return sum;
     }
 
 
+
     public Users login(String username, String password) {
-        String query = "SELECT * FROM User WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM User WHERE username = ?";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            statement.setString(2, password);
 
-            // Kiểm tra kết quả truy vấn
+            statement.setString(1, username);
+
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    // Lấy thông tin người dùng từ kết quả truy vấn
-                    Users user = new Users(
-                            rs.getInt("user_id"),
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("password"),
-                            rs.getString("phone"),
-                            rs.getString("role"),
-                            rs.getString("address")
-                            );
-                    // Hiển thị thông tin người dùng ra console (debug)
-                    System.out.println("Đăng nhập thành công! Người dùng: " + user);
-                    return user;
+                    String storedPassword = rs.getString("password"); // Mật khẩu đã hash lưu trong DB
+                    String[] parts = storedPassword.split(":");
+
+                    if (parts.length != 2) {
+                        System.out.println("Lỗi dữ liệu mật khẩu trong database.");
+                        return null;
+                    }
+
+                    byte[] salt = hexToBytes(parts[0]);
+                    String hashedPasswordFromDB = parts[1];
+
+                    // Kiểm tra mật khẩu nhập vào
+                    String hashedInputPassword = hashPassword(password, salt);
+
+                    if (hashedInputPassword.equals(storedPassword)) {
+                        Users user = new Users(
+                                rs.getInt("user_id"),
+                                rs.getString("username"),
+                                rs.getString("email"),
+                                rs.getString("password"),
+                                rs.getString("phone"),
+                                rs.getString("role"),
+                                rs.getString("address")
+                        );
+                        System.out.println("Đăng nhập thành công! Người dùng: " + user);
+                        return user;
+                    } else {
+                        System.out.println("Sai mật khẩu.");
+                    }
                 } else {
                     System.out.println("Không tìm thấy người dùng.");
                 }
@@ -346,8 +342,40 @@ public class dao {
             e.printStackTrace();
         }
         return null;
-
     }
+
+    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 65536;
+        int keyLength = 256;
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return bytesToHex(salt) + ":" + bytesToHex(hash); // Ghép salt và hash lại giống format trong DB
+    }
+
+    private byte[] hexToBytes(String hex) {
+        int length = hex.length();
+        byte[] bytes = new byte[length / 2];
+        for (int i = 0; i < length; i += 2) {
+            bytes[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+                    + Character.digit(hex.charAt(i + 1), 16));
+        }
+        return bytes;
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
+
 
     public Users checkExist(String username) {
         String query = "SELECT * FROM User WHERE username = ?";
@@ -380,7 +408,7 @@ public class dao {
         return null; // Trả về null nếu không tìm thấy người dùng
     }
 
-    public void Register(String username, String email, String password, String phone, String address) {
+    public void Register(String username, String email, String hashedPassword, String phone, String address) {
         String query = "INSERT INTO User (username, email, password, role, phone, address) VALUES (?, ?, ?, 0, ?, ?)";
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -388,7 +416,7 @@ public class dao {
             // Thiết lập các tham số theo thứ tự đúng
             statement.setString(1, username);
             statement.setString(2, email);
-            statement.setString(3, password);
+            statement.setString(3, hashedPassword); // Dùng mật khẩu đã băm
             statement.setString(4, phone);
             statement.setString(5, address);
 
@@ -399,14 +427,16 @@ public class dao {
             } else {
                 System.out.println("Failed to register user.");
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Bắt lỗi nếu username hoặc email đã tồn tại (giả sử có ràng buộc UNIQUE trong DB)
+            System.err.println("Lỗi: Tên người dùng hoặc email đã tồn tại.");
         } catch (SQLException e) {
-            System.err.println("Database error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi chi tiết ra để dễ dàng debug
+            System.err.println("Lỗi cơ sở dữ liệu: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
+            System.err.println("Lỗi không xác định: " + e.getMessage());
         }
     }
+
 
 
     public List<Products> getRandomProducts() {
@@ -461,55 +491,5 @@ public class dao {
             System.out.println(c);
         }
     }
-    public double getProductPriceById(int productId) {
-        String query = "SELECT price FROM product WHERE p_id = ?";
-        double price = 0.0;
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setInt(1, productId);
-
-            try (ResultSet rs = statement.executeQuery()) {
-                if (rs.next()) {
-                    price = rs.getDouble("price");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return price;
-    }
-
-    public static List<Products> searchProducts(String keyword) {
-        List<Products> list_products = new ArrayList<>();
-        String sql = "SELECT * FROM Product WHERE name LIKE ?";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setString(1, "%" + keyword + "%");
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-                Products product = new Products(
-                        rs.getInt("p_id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),
-                        rs.getInt("stock"),
-                        rs.getString("description"),
-                        rs.getInt("category_id"),
-                        rs.getString("img")
-                );
-                list_products.add(product);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return list_products;
-    }
-
 }
+

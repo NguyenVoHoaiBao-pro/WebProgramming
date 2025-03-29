@@ -1,22 +1,25 @@
+
 package controll;
 
 import entity.Products;
-import dao.dao;  // Đảm bảo import lớp DAO đúng
+import dao.dao;
 import entity.Review;
 import dao.ReviewDao;
 import dao.UserDao;
 import entity.Users;
-import jakarta.servlet.RequestDispatcher;
+import dao.MySQLConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/detail")
 public class DetailController extends HttpServlet {
@@ -36,27 +39,23 @@ public class DetailController extends HttpServlet {
         Products product = d.getProductById(Integer.parseInt(productId));
         request.setAttribute("product", product);
 
-        String ratingParam = request.getParameter("rating");
         List<Review> reviews;
+        String ratingParam = request.getParameter("rating");
 
         if (ratingParam != null && !ratingParam.isEmpty() && !ratingParam.equals("null")) {
             try {
                 int rating = Integer.parseInt(ratingParam);
                 reviews = rd.getReviewsByRatingAndProductId(rating, Integer.parseInt(productId));
             } catch (NumberFormatException e) {
-                // Nếu xảy ra lỗi khi chuyển đổi, lấy tất cả reviews
                 reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
             }
         } else {
-            reviews = rd.getReviewsByProductId(Integer.parseInt(productId)); // Nếu không có rating, lấy tất cả reviews
+            reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
         }
 
-
-
-        // Tính toán điểm trung bình và số lượng đánh giá
         double averageRating = 0;
         int totalReviews = reviews.size();
-        int[] ratingCounts = new int[5]; // Đếm số lượng đánh giá cho từng rating từ 1-5 sao
+        int[] ratingCounts = new int[5];
 
         if (totalReviews > 0) {
             int totalRating = 0;
@@ -67,17 +66,41 @@ public class DetailController extends HttpServlet {
             averageRating = (double) totalRating / totalReviews;
         }
         List<Products> randomProductList = d.getRandomProducts();
-        // Trả về dữ liệu cần thiết để hiển thị trong JSP
+
         request.setAttribute("averageRating", averageRating);
         request.setAttribute("totalReviews", totalReviews);
         request.setAttribute("ratingCounts", ratingCounts);
-        request.setAttribute("reviews", reviews); // Gửi danh sách review cho JSP
+        request.setAttribute("reviews", reviews);
         request.setAttribute("randomProductList", randomProductList);
 
-        // Chuyển hướng tới trang chi tiết sản phẩm
         request.getRequestDispatcher("/doanweb/html/detail.jsp").include(request, response);
     }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("user_id");
+        int productId = Integer.parseInt(request.getParameter("product_id"));
+        int rating = Integer.parseInt(request.getParameter("review-rating"));
+        String comment = request.getParameter("review-comment");
 
+        if (userId == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "INSERT INTO reviews (user_id, product_id, rating, comment, review_date) VALUES (?, ?, ?, ?, NOW())";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, userId);
+                stmt.setInt(2, productId);
+                stmt.setInt(3, rating);
+                stmt.setString(4, comment);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        response.sendRedirect("detail?id=" + productId);
+    }
 }

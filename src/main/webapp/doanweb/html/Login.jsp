@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -215,6 +216,7 @@
                     <input type="password" class="form-control" id="password" name="password"
                            placeholder="Nhập Mật Khẩu Của Bạn!" required>
                 </div>
+               <a href="<%= request.getContextPath() %>/forgot-password" class="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
                 <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register"
                                                                       id="showSignUp">Đăng ký</a></p>
@@ -303,3 +305,4 @@
 </html>
 
 <%----%>
+

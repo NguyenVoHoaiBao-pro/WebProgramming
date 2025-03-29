@@ -42,15 +42,15 @@ public class UserDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();  // In ra lỗi nếu có
+            e.printStackTrace();
         }
-        return user;  // Trả về người dùng nếu tìm thấy, nếu không trả về null
+        return user;
     }
 
     public boolean changePassword(String username, String oldPassword, String newPassword) {
         boolean isUpdated = false;
-        String queryCheck = "SELECT password FROM User WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu cũ
-        String queryUpdate = "UPDATE User SET password = ? WHERE username = ?";  // Câu lệnh cập nhật mật khẩu mới
+        String queryCheck = "SELECT password FROM User WHERE username = ?";
+        String queryUpdate = "UPDATE User SET password = ? WHERE username = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement checkStatement = connection.prepareStatement(queryCheck)) {

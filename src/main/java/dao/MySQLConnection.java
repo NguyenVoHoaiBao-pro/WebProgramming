@@ -20,7 +20,7 @@ public class MySQLConnection {
         config.setPassword(PASSWORD);
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-        // Cấu hình hiệu suất
+
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(5);
         config.setIdleTimeout(30000);

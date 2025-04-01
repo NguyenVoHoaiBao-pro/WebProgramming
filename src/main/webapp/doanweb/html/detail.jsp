@@ -167,6 +167,76 @@
             text-decoration: none; /* Xóa gạch chân khi hover */
             color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
         }
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .product-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .left-arrow {
+            left: 10px;
+        }
+
+        .right-arrow {
+            right: 10px;
+        }
+
+        .arrow-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .arrow-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            border: 2px solid red;
+        }
+
+
     </style>
 </head>
 <body>
@@ -280,13 +350,22 @@
 <section class="container sproduct my-5 pt-5">
     <div class="row mt-5">
         <div class="col-lg-5 col-md-12 col-12 d-flex justify-content-center align-items-center">
+            <button id="prev-btn" class="arrow-btn left-arrow">&lt;</button>
             <div class="product-image-container">
                 <img
+                        id="product-image"
                         class="product-image"
                         src="<%= request.getContextPath() %>/${product.image}"
                         alt="${product.name}">
             </div>
+
+
+            <!-- Mũi tên phải -->
+            <button id="next-btn" class="arrow-btn right-arrow">&gt;</button>
+
+
         </div>
+
         <div class="col-lg-6 col-md-12 col-12">
             <h6
                     class="text-secondary mt-5"
@@ -549,6 +628,48 @@
         });
     });
 
+</script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+    const images = ["doanweb/images/duigaimg/Pasted image (100).png","doanweb/images/duigaimg/Pasted image (102).png"]; // Danh sách ảnh
+    let currentIndex = 0;
+    const productImage = document.getElementById("product-image");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    function updateImage(index) {
+        productImage.src = `<%= request.getContextPath() %>/` + images[index];
+    }
+
+    // Sự kiện click để chuyển ảnh
+    prevBtn.addEventListener("click", function () {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImage(currentIndex);
+    });
+
+    nextBtn.addEventListener("click", function () {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImage(currentIndex);
+    });
+
+    // Sự kiện giữ (hold) để cuộn ảnh
+    let holdInterval;
+
+    function startHold(direction) {
+        holdInterval = setInterval(() => {
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            updateImage(currentIndex);
+        }, 500);
+    }
+
+    function stopHold() {
+        clearInterval(holdInterval);
+    }
+
+    prevBtn.addEventListener("mousedown", () => startHold(-1));
+    nextBtn.addEventListener("mousedown", () => startHold(1));
+    prevBtn.addEventListener("mouseup", stopHold);
+    nextBtn.addEventListener("mouseup", stopHold);
+});
 </script>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">

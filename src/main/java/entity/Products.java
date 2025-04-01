@@ -22,6 +22,9 @@ public class Products {
         this.category_id = category_id;
     }
 
+    public Products(int id, String name, double price, int stock) {
+    }
+
 
     public int getId() {
         return id;

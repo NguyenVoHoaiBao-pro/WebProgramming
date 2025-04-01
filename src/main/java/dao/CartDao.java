@@ -129,6 +129,7 @@ public class CartDao {
 
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
+            ProductDao productDao = new ProductDao(); // Tạo DAO để lấy thông tin sản phẩm
 
             while (rs.next()) {
                 int cartId = rs.getInt("cart_id");
@@ -136,12 +137,14 @@ public class CartDao {
                 int quantity = rs.getInt("quantity");
                 Timestamp createdAt = rs.getTimestamp("created_at");
 
-                // Tạo đối tượng Cart
-                Cart cart = new Cart(cartId, userId, productId, createdAt);
+                // Lấy thông tin sản phẩm từ ProductDao
+                Products product = productDao.getProductById(productId);
 
-                // Tạo đối tượng CartItem
-                CartItem cartItem = new CartItem(cart, quantity);
-                cartItems.add(cartItem);
+                if (product != null) {
+                    // Tạo đối tượng CartItem với Product thay vì Cart
+                    CartItem cartItem = new CartItem(product, quantity);
+                    cartItems.add(cartItem);
+                }
             }
 
         } catch (SQLException e) {
@@ -282,6 +285,7 @@ public class CartDao {
             e.printStackTrace();
         }
     }
+
 
 }
 

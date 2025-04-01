@@ -13,12 +13,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
 
 @WebServlet("/contact") // Đường dẫn để gọi servlet
 public class ContactUsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -26,6 +27,7 @@ public class ContactUsController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/contact.jsp");
         dispatcher.forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -78,8 +80,8 @@ public class ContactUsController extends HttpServlet {
     }
 
     private void sendEmail(String name, String email, String message) {
-        final String senderEmail = "phamthaibao57@@gmail.com"; 
-        final String senderPassword = "rjxnslafxlvkbnxz"; 
+        final String senderEmail = "phamthaibao57@@gmail.com";
+        final String senderPassword = "rjxnslafxlvkbnxz";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -106,4 +108,5 @@ public class ContactUsController extends HttpServlet {
             e.printStackTrace();
         }
     }
+}
 

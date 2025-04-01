@@ -20,7 +20,8 @@ public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
-        List<Products> products = dao.searchProducts(name);
+        dao daoInstance = new dao();
+        List<Products> products = daoInstance.searchProducts(name);
 
         // Set response type to HTML
         response.setContentType("text/html");

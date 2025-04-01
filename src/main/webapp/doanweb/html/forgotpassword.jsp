@@ -69,13 +69,20 @@
 <body>
 <div class="container">
     <h3>Quên mật khẩu</h3>
-    <form action="ForgotPasswordController" method="post">
+    <form action="${pageContext.request.contextPath}/forgotpassword" method="post">
         <div class="form-group">
             <label for="email">Nhập email của bạn:</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <button type="submit" class="btn btn-primary">Gửi yêu cầu</button>
     </form>
+    <% if (request.getAttribute("message") != null) { %>
+    <div style="color: green;"><%= request.getAttribute("message") %></div>
+    <% } %>
+    <% if (request.getAttribute("error") != null) { %>
+    <div style="color: red;"><%= request.getAttribute("error") %></div>
+    <% } %>
+
 </div>
 </body>
 </html>

@@ -69,8 +69,8 @@
 <body>
 <div class="container">
   <h3>Đặt lại mật khẩu</h3>
-  <form action="ResetPasswordController" method="post">
-    <input type="hidden" name="token" value="<%= request.getParameter("token") %>">
+  <form action="${pageContext.request.contextPath}/resetpassword" method="post">
+  <input type="hidden" name="token" value="<%= request.getParameter("token") %>">
     <div class="form-group">
       <label for="password">Mật khẩu mới:</label>
       <input type="password" class="form-control" id="password" name="password" required>

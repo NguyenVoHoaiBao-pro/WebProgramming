@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <style>
@@ -248,6 +250,16 @@
                 <button type="submit" class="btn btn-dark">Đăng ký</button>
                 <p class="py-2 text-center">Bạn có tài khoản rồi? <a
                         href="<%= request.getContextPath() %>/doanweb/html/Login.jsp" id="showSignUp">Đăng Nhập</a></p>
+                <div class="text-center mt-3">
+                    <p>Hoặc đăng nhập với</p>
+                    <a href="#" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center mb-2">
+                        <i class="fab fa-facebook-f mr-2"></i> Đăng nhập với Facebook
+                    </a>
+                    <a href="#" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
+                        <i class="fab fa-google mr-2"></i> Đăng nhập với Google
+                    </a>
+                </div>
+
             </form>
         </div>
     </div>

@@ -56,6 +56,12 @@
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>2.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.42.3</version> <!-- Use the latest version -->
+        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>

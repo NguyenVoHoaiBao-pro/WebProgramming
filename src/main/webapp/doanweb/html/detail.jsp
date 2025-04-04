@@ -433,45 +433,7 @@
             </div>
 
             <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    let thumbnails = document.querySelectorAll(".thumbnail");
-                    let mainImage = document.getElementById("product-image");
-                    let prevBtn = document.getElementById("prev-btn");
-                    let nextBtn = document.getElementById("next-btn");
-
-                    let images = Array.from(thumbnails).map(img => img.src);
-                    let currentIndex = 0;
-
-                    function updateMainImage(index) {
-                        mainImage.src = images[index];
-                        thumbnails.forEach(t => t.classList.remove("active"));
-                        thumbnails[index].classList.add("active");
-                    }
-
-                    // Khi click vào thumbnail
-                    thumbnails.forEach((thumb, index) => {
-                        thumb.addEventListener("click", function () {
-                            currentIndex = index;
-                            updateMainImage(index);
-                        });
-                    });
-
-                    // Chuyển ảnh khi nhấn nút trái/phải
-                    prevBtn.addEventListener("click", function () {
-                        currentIndex = (currentIndex - 1 + images.length) % images.length;
-                        updateMainImage(currentIndex);
-                    });
-
-                    nextBtn.addEventListener("click", function () {
-                        currentIndex = (currentIndex + 1) % images.length;
-                        updateMainImage(currentIndex);
-                    });
-
-                    // Đặt ảnh đầu tiên là active
-                    updateMainImage(currentIndex);
-                });
-
-
+                
                 window.onload = function () {
                     var successMessageElement = document.getElementById("successMessage");
                     var errorMessageElement = document.getElementById("errorMessage");

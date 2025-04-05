@@ -251,12 +251,12 @@
                 <p class="py-2 text-center">Bạn có tài khoản rồi? <a
                         href="<%= request.getContextPath() %>/doanweb/html/Login.jsp" id="showSignUp">Đăng Nhập</a></p>
                 <div class="text-center mt-3">
-                    <p>Hoặc đăng nhập với</p>
+                    <p>Hoặc đăng kí với</p>
                     <a href="#" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center mb-2">
-                        <i class="fab fa-facebook-f mr-2"></i> Đăng nhập với Facebook
+                        <i class="fab fa-facebook-f mr-2"></i> Đăng kí với Facebook
                     </a>
                     <a href="#" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
-                        <i class="fab fa-google mr-2"></i> Đăng nhập với Google
+                        <i class="fab fa-google mr-2"></i> Đăng kí với Google
                     </a>
                 </div>
 

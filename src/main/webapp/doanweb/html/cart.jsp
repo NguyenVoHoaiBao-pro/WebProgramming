@@ -287,12 +287,12 @@
                 <div class="d-flex justify-content-between">
                     <h6>Tạm tính</h6>
                     <p id="subtotal-value">
-                        <strong>${sessionScope.totalPrice}K</strong>
+                        <strong>${sessionScope.totalPrice}VND</strong>
                     </p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6>Phí vận chuyển</h6>
-                    <p id="shipping-value">20K</p>
+                    <p id="shipping-value">20.000 VND</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6>Thời gian giao hàng dự kiến</h6>
@@ -308,7 +308,7 @@
                 <div class="d-flex justify-content-between">
                     <h6>Tổng cộng</h6>
                     <p id="total-value">
-                        ${sessionScope.totalPrice + 20}K
+                        ${sessionScope.totalPrice + 20}VND
                     </p>
                 </div>
 

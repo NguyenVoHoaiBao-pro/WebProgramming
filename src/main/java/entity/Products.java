@@ -23,6 +23,12 @@ public class Products {
     }
 
     public Products(int id, String name, double price, int stock) {
+        this.id = id;
+        this.name = name;
+        this.price = (int) price;
+        this.stock = stock;
+        this.image = "";
+        this.category_id = 0;
     }
 
 

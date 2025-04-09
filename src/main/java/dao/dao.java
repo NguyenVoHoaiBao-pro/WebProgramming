@@ -498,6 +498,50 @@ public class dao {
         }
         return products;
     }
+    public void addToCartInDB(int userId, int productId, int quantity) {
+        try (Connection conn = getConnection()) {
+            // Kiểm tra nếu sản phẩm đã có trong giỏ → cập nhật số lượng
+            String checkSql = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?";
+            PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+            checkStmt.setInt(1, userId);
+            checkStmt.setInt(2, productId);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next()) {
+                // Cập nhật số lượng
+                String updateSql = "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?";
+                PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+                updateStmt.setInt(1, quantity);
+                updateStmt.setInt(2, userId);
+                updateStmt.setInt(3, productId);
+                updateStmt.executeUpdate();
+            } else {
+                // Thêm mới
+                String insertSql = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
+                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+                insertStmt.setInt(1, userId);
+                insertStmt.setInt(2, productId);
+                insertStmt.setInt(3, quantity);
+                insertStmt.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeFromCartInDB(int userId, int productId) {
+        try (Connection conn = getConnection()) {
+            String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, productId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static void main(String[] args) {
         dao d = new dao();

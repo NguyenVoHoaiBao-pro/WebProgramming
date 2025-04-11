@@ -542,6 +542,7 @@
 
             <div class="col-md-10">
                 <div class="row">
+                    <jsp:useBean id="productList" scope="request" type="java.util.List"/>
                     <c:forEach var="product" items="${productList}">
                         <div class="col-md-3 mb-4">
                             <div class="product-card">
@@ -571,7 +572,6 @@
 
     </body>
 
-    </div>
 </section>
 
 

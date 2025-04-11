@@ -500,6 +500,46 @@ public class dao {
             // Xử lý rollback nếu cần thiết
         }
     }
+    public void updateProductWithImages(Products product) {
+        String productSql = "UPDATE product SET name=?, description=?, price=?, stock=?, image=?, category_id=? WHERE p_id=?";
+        String deleteImagesSql = "DELETE FROM product_images WHERE product_id=?";
+        String insertImageSql = "INSERT INTO product_images (product_id, image_url) VALUES (?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement productStmt = conn.prepareStatement(productSql);
+             PreparedStatement deleteImagesStmt = conn.prepareStatement(deleteImagesSql);
+             PreparedStatement insertImageStmt = conn.prepareStatement(insertImageSql)) {
+
+            conn.setAutoCommit(false);
+
+            // Cập nhật thông tin sản phẩm
+            productStmt.setString(1, product.getName());
+            productStmt.setString(2, product.getDescription());
+            productStmt.setInt(3, product.getPrice());
+            productStmt.setInt(4, product.getStock());
+            productStmt.setString(5, product.getImage());
+            productStmt.setInt(6, product.getCategory_id());
+            productStmt.setInt(7, product.getId());
+            productStmt.executeUpdate();
+
+            // Xóa các ảnh chi tiết cũ
+            deleteImagesStmt.setInt(1, product.getId());
+            deleteImagesStmt.executeUpdate();
+
+            // Thêm các ảnh chi tiết mới
+            for (String imageUrl : product.getImages()) {
+                insertImageStmt.setInt(1, product.getId());
+                insertImageStmt.setString(2, imageUrl);
+                insertImageStmt.addBatch();
+            }
+            insertImageStmt.executeBatch();
+
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý rollback nếu cần thiết
+        }
+    }
 
     public List<Products> getRandomProducts() {
         List<Products> products = new ArrayList<>();

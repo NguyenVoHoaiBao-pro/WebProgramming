@@ -1,3 +1,5 @@
+
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -287,12 +289,12 @@
                 <div class="d-flex justify-content-between">
                     <h6>Tạm tính</h6>
                     <p id="subtotal-value">
-                        <strong>${sessionScope.totalPrice}VND</strong>
+                        <strong>${sessionScope.totalPrice}K</strong>
                     </p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6>Phí vận chuyển</h6>
-                    <p id="shipping-value">20.000 VND</p>
+                    <p id="shipping-value">20K</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6>Thời gian giao hàng dự kiến</h6>
@@ -308,7 +310,7 @@
                 <div class="d-flex justify-content-between">
                     <h6>Tổng cộng</h6>
                     <p id="total-value">
-                        ${sessionScope.totalPrice + 20}VND
+                        ${sessionScope.totalPrice + 20}K
                     </p>
                 </div>
 
@@ -413,3 +415,5 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
 </html>
+
+

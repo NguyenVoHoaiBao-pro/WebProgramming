@@ -461,6 +461,45 @@ public class dao {
         }
     }
 
+    public void addProductWithImages(Products product) {
+        String productSql = "INSERT INTO product (name, description, price, stock, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String imageSql = "INSERT INTO product_images (product_id, image_url) VALUES (?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement productStmt = conn.prepareStatement(productSql, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement imageStmt = conn.prepareStatement(imageSql)) {
+
+            conn.setAutoCommit(false);
+
+            // Thêm sản phẩm
+            productStmt.setString(1, product.getName());
+            productStmt.setString(2, product.getDescription());
+            productStmt.setInt(3, product.getPrice());
+            productStmt.setInt(4, product.getStock());
+            productStmt.setString(5, product.getImage());
+            productStmt.setInt(6, product.getCategory_id());
+            productStmt.executeUpdate();
+
+            // Lấy ID của sản phẩm vừa thêm
+            ResultSet generatedKeys = productStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int productId = generatedKeys.getInt(1);
+
+                // Thêm các ảnh chi tiết
+                for (String imageUrl : product.getImages()) {
+                    imageStmt.setInt(1, productId);
+                    imageStmt.setString(2, imageUrl);
+                    imageStmt.addBatch();
+                }
+                imageStmt.executeBatch();
+            }
+
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý rollback nếu cần thiết
+        }
+    }
 
     public List<Products> getRandomProducts() {
         List<Products> products = new ArrayList<>();
@@ -503,7 +542,7 @@ public class dao {
             System.out.println("Giá: " + latestProduct.getPrice());
             System.out.println("Số lượng: " + latestProduct.getStock());
             System.out.println("Hình ảnh: " + latestProduct.getImage());
-            System.out.println("ID Danh mục: " + latestProduct.getCategoryId());
+            System.out.println("ID Danh mục: " + latestProduct.getCategory_Id());
         } else {
             System.out.println("Không có sản phẩm nào trong cơ sở dữ liệu.");
         }

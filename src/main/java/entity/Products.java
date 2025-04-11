@@ -2,94 +2,103 @@ package entity;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.List;
 
-public class Products  {
+public class Products {
     private int id;
     private String name;
     private String description;
     private int price;
     private int stock;
-    private List<String> images; // Danh sách ảnh
-    private int categoryId; // Tham chiếu đến Category
+    private String image;
+    // Danh sách ảnh của sản phẩm
+    private int category_id; // Tham chiếu đến Category
+    private List<String> images; // Danh sách ảnh chi tiết
 
-    public Products (int id, String name, String description, int price, int stock, List<String> images, int categoryId) {
+    // Constructor
+
+    public Products(int id, String name, int price, int stock, String description, int category_id, String image) {        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.image = image;
+        this.category_id = category_id;
+    }
+
+    public Products(String image, int id, String name, String description, int price, int stock, int category_id, List<String> images) {
+        this.image = image;
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.category_id = category_id;
         this.images = images;
-        this.categoryId = categoryId;
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
+    // Getters & Setters
     public List<String> getImages() {
         return images;
     }
-
     public void setImages(List<String> images) {
         this.images = images;
     }
-
-    public int getCategoryId() {
-        return categoryId;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public int getPrice() {
+        return price;
+    }
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    public int getStock() {
+        return stock;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public int getCategory_Id() {
+        return category_id;
     }
 
+    public void setCategory_Id(int category_id) {
+        this.category_id = category_id;
+    }
     @Override
     public String toString() {
-        return "Product{" +
+        return "Products{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", stock=" + stock +
+                ", image='" + image + '\'' +
+                ", category_id=" + category_id +
                 ", images=" + images +
-                ", categoryId=" + categoryId +
                 '}';
     }
+
 }

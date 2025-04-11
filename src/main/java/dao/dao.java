@@ -5,6 +5,7 @@ import entity.CartItem;
 import entity.Categories;
 import entity.Products;
 import entity.Users;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -117,8 +118,24 @@ public class dao {
         }
         return l;
     }
+    public int getProductPriceById(int productId) {
+        String query = "SELECT price FROM Product WHERE p_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, productId);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("price");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Trả về -1 nếu không tìm thấy sản phẩm
+    }
 
-    public Products getProductById(int productId) {
+
+    public static Products getProductById(int productId) {
         Products product = null;
         String query = "SELECT * FROM Product WHERE p_id = ?";  // Câu lệnh SQL để lấy sản phẩm theo ID
 
@@ -181,6 +198,35 @@ public class dao {
         }
         return product;  // Trả về sản phẩm nếu tìm thấy, nếu không trả về null
     }
+    public List<Products> searchProducts(String keyword) {
+        List<Products> productList = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE name LIKE ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, "%" + keyword + "%");
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Products product = new Products(
+                        rs.getInt("p_id"),
+                        rs.getString("name"),
+                        rs.getInt("price"),
+                        rs.getInt("stock"),
+                        rs.getString("description"),
+                        rs.getInt("category_id"),
+                        rs.getString("img")
+                );
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return productList;
+    }
+
 
     /// ///////////////////
     public void addProduct(String name, double price, int stock, String description, int category_id, String image) {
@@ -298,6 +344,7 @@ public class dao {
 
     public Users login(String username, String password) {
         String query = "SELECT * FROM User WHERE username = ?";
+
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -305,21 +352,10 @@ public class dao {
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    String storedPassword = rs.getString("password"); // Mật khẩu đã hash lưu trong DB
-                    String[] parts = storedPassword.split(":");
+                    String hashedPasswordFromDB = rs.getString("password"); // Mật khẩu đã hash lưu trong DB
 
-                    if (parts.length != 2) {
-                        System.out.println("Lỗi dữ liệu mật khẩu trong database.");
-                        return null;
-                    }
-
-                    byte[] salt = hexToBytes(parts[0]);
-                    String hashedPasswordFromDB = parts[1];
-
-                    // Kiểm tra mật khẩu nhập vào
-                    String hashedInputPassword = hashPassword(password, salt);
-
-                    if (hashedInputPassword.equals(storedPassword)) {
+                    // Kiểm tra mật khẩu nhập vào bằng BCrypt
+                    if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
                         Users user = new Users(
                                 rs.getInt("user_id"),
                                 rs.getString("username"),
@@ -329,13 +365,13 @@ public class dao {
                                 rs.getString("role"),
                                 rs.getString("address")
                         );
-                        System.out.println("Đăng nhập thành công! Người dùng: " + user);
+                        System.out.println("✅ Đăng nhập thành công! Người dùng: " + user);
                         return user;
                     } else {
-                        System.out.println("Sai mật khẩu.");
+                        System.out.println("❌ Sai mật khẩu.");
                     }
                 } else {
-                    System.out.println("Không tìm thấy người dùng.");
+                    System.out.println("❌ Không tìm thấy người dùng.");
                 }
             }
         } catch (Exception e) {
@@ -343,6 +379,7 @@ public class dao {
         }
         return null;
     }
+
 
     private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 65536;
@@ -398,12 +435,8 @@ public class dao {
                     );
                 }
             }
-        } catch (SQLException e) {
-            System.err.println("Database error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi chi tiết ra để dễ dàng debug
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace(); // In lỗi nếu có lỗi không phải từ database
+            e.printStackTrace();
         }
         return null; // Trả về null nếu không tìm thấy người dùng
     }
@@ -465,6 +498,50 @@ public class dao {
         }
         return products;
     }
+    public void addToCartInDB(int userId, int productId, int quantity) {
+        try (Connection conn = getConnection()) {
+            // Kiểm tra nếu sản phẩm đã có trong giỏ → cập nhật số lượng
+            String checkSql = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?";
+            PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+            checkStmt.setInt(1, userId);
+            checkStmt.setInt(2, productId);
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next()) {
+                // Cập nhật số lượng
+                String updateSql = "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?";
+                PreparedStatement updateStmt = conn.prepareStatement(updateSql);
+                updateStmt.setInt(1, quantity);
+                updateStmt.setInt(2, userId);
+                updateStmt.setInt(3, productId);
+                updateStmt.executeUpdate();
+            } else {
+                // Thêm mới
+                String insertSql = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)";
+                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+                insertStmt.setInt(1, userId);
+                insertStmt.setInt(2, productId);
+                insertStmt.setInt(3, quantity);
+                insertStmt.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeFromCartInDB(int userId, int productId) {
+        try (Connection conn = getConnection()) {
+            String sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, productId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static void main(String[] args) {
         dao d = new dao();

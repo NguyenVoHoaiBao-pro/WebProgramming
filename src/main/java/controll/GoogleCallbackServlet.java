@@ -13,7 +13,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Userinfo;
 
-@WebServlet("/oauth2callback")
+@WebServlet("/googlecallback")
 public class GoogleCallbackServlet extends HttpServlet {
     private static final String CLIENT_ID = "YOUR_CLIENT_ID";
     private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET";

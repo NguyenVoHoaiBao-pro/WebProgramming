@@ -28,6 +28,10 @@ public class CartItem {
         this.quantity = quantity;
         updateTotalPrice();
     }
+    public int getProductId() {
+        return product.getId(); // Giả sử Products có phương thức getId()
+    }
+
 
     public int getTotalPrice() {
         return totalPrice;

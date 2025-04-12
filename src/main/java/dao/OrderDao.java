@@ -38,4 +38,21 @@ public class OrderDao {
 
         return orderList;
     }
+    public boolean createOrderFromCart(int userId, double totalPrice) {
+        String query = "INSERT INTO orders (user_id, total_amount, order_date) VALUES (?, ?, NOW())";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, userId);
+            statement.setDouble(2, totalPrice);
+            int rowsInserted = statement.executeUpdate();
+
+            return rowsInserted > 0; // Trả về true nếu thêm thành công
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi tạo đơn hàng: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false; // Trả về false nếu có lỗi
+    }
+
 }

@@ -3,4 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+
+    <!-- Đăng ký servlet cho FacebookLoginServlet -->
+    <servlet>
+        <servlet-name>controll.FacebookLoginController</servlet-name>
+        <servlet-class>controll.FacebookLoginController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>controll.FacebookLoginController</servlet-name>
+        <url-pattern>/facebookLogin</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

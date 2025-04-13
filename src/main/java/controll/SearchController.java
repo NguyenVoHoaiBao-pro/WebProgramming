@@ -1,3 +1,4 @@
+
 package controll;
 
 import entity.Products;
@@ -60,3 +61,4 @@ public class SearchController extends HttpServlet {
         out.flush();
     }
 }
+

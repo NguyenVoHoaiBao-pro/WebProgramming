@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <!-- reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -23,6 +21,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=YOUR_APP_ID&autoLogAppEvents=1" nonce="L6SrgIY8"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
@@ -218,7 +222,7 @@
                     <input type="password" class="form-control" id="password" name="password"
                            placeholder="Nhập Mật Khẩu Của Bạn!" required>
                 </div>
-                <!-- ✅ Google reCAPTCHA widget -->
+               <!-- ✅ Google reCAPTCHA widget -->
                 <div class="form-group my-3">
                     <div class="g-recaptcha" data-sitekey="6LfvZxYrAAAAAGmR56yCGXy0DvLDtY1djlym0fUI"></div>
                 </div>
@@ -227,6 +231,21 @@
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
                 <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register"
                                                                       id="showSignUp">Đăng ký</a></p>
+                <div class="text-center mt-3">
+                    <p>Hoặc đăng nhập với</p>
+
+                    <!-- Nút đăng nhập Facebook -->
+                    <a href="#" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center mb-2" id="facebook-login-btn">
+                        <i class="fab fa-facebook-f mr-2"></i> Đăng nhập với Facebook
+                    </a>
+
+                    <!-- Nút đăng nhập Google (chưa xử lý) -->
+                    <a href="#" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
+                        <i class="fab fa-google mr-2"></i> Đăng nhập với Google
+                    </a>
+                </div>
+
+
             </form>
         </div>
     </div>
@@ -308,8 +327,58 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '972945285017261',
+            cookie: true,
+            xfbml: true,
+            version: 'v19.0'
+        });
+
+        FB.AppEvents.logPageView();
+    };
+
+    // Load Facebook SDK
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Bắt sự kiện click nút Facebook Login
+    document.getElementById('facebook-login-btn').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        FB.login(function (response) {
+            if (response.status === 'connected') {
+                FB.api('/me', { fields: 'name,email' }, function (userInfo) {
+                    // Gửi thông tin tới servlet
+                    fetch('facebookLoginServlet', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userInfo)
+                    }).then(res => {
+                        if (res.ok) {
+                            // Chuyển hướng sau khi login thành công
+                            window.location.href = "home.jsp"; // Thay bằng trang bạn muốn
+                        }
+                    });
+                });
+            } else {
+                alert('Bạn chưa đăng nhập thành công bằng Facebook.');
+            }
+        }, { scope: 'public_profile,email' });
+    });
+</script>
+
+
 </body>
 </html>
 
-<%----%>
 

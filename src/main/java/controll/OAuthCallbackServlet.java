@@ -1,3 +1,4 @@
+
 package controll;
 
 import com.google.api.client.auth.oauth2.BearerToken;
@@ -73,3 +74,4 @@ public class OAuthCallbackServlet extends HttpServlet {
         return new GoogleUser(userinfo.getId(), userinfo.getName(), userinfo.getEmail());
     }
 }
+

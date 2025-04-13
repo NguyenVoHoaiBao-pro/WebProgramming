@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -216,6 +218,11 @@
                     <input type="password" class="form-control" id="password" name="password"
                            placeholder="Nhập Mật Khẩu Của Bạn!" required>
                 </div>
+                <!-- ✅ Google reCAPTCHA widget -->
+                <div class="form-group my-3">
+                    <div class="g-recaptcha" data-sitekey="6LfvZxYrAAAAAGmR56yCGXy0DvLDtY1djlym0fUI"></div>
+                </div>
+
                <a href="<%= request.getContextPath() %>/forgotpassword" id="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
                 <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register"

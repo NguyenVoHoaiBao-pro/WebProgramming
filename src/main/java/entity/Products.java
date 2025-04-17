@@ -80,7 +80,7 @@ public class Products {
         this.image = image;
     }
 
-    public int getCategory_Id() {
+    public int getCategory_id() {
         return category_id;
     }
 

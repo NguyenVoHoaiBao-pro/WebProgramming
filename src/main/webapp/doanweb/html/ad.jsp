@@ -126,7 +126,7 @@
         <td><%= product.getPrice() %></td>
         <td><%= product.getStock() %></td>
         <td><img src="<%= product.getImage() %>" alt="<%= product.getName() %>" style="width: 50px;"></td>
-        <td><%= product.getCategoryId() %></td>
+        <td><%= product.getCategory_id() %></td>
         <td>
             <form action="UpdateProduct" method="post" style="display:inline;">
                 <input type="hidden" name="id" value="<%= product.getId() %>">
@@ -148,7 +148,7 @@
                 <label>
                     <select name="category_id" required>
                         <% for (Categories category : categoryList) { %>
-                        <option value="<%= category.getId() %>" <%= (category.getId() == product.getCategoryId()) ? "selected" : "" %>>
+                        <option value="<%= category.getId() %>" <%= (category.getId() == product.getCategory_id()) ? "selected" : "" %>>
                             <%= category.getName() %>
                         </option>
                         <% } %>

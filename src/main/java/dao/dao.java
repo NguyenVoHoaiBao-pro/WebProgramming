@@ -582,7 +582,7 @@ public class dao {
             System.out.println("Giá: " + latestProduct.getPrice());
             System.out.println("Số lượng: " + latestProduct.getStock());
             System.out.println("Hình ảnh: " + latestProduct.getImage());
-            System.out.println("ID Danh mục: " + latestProduct.getCategory_Id());
+            System.out.println("ID Danh mục: " + latestProduct.getCategory_id());
         } else {
             System.out.println("Không có sản phẩm nào trong cơ sở dữ liệu.");
         }

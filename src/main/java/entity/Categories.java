@@ -3,9 +3,12 @@ package entity;
 public class Categories {
     private int id;
     private String name;
+
+    // Constructor mặc định
     public Categories() {
     }
 
+    // Constructor có tham số
     public Categories(int id, String name) {
         this.id = id;
         this.name = name;
@@ -28,12 +31,9 @@ public class Categories {
         this.name = name;
     }
 
-    // Override toString() for debugging
+    // Override toString() để dễ debug
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return String.format("Category {id=%d, name='%s'}", id, name);
     }
 }

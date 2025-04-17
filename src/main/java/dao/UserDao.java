@@ -1,14 +1,12 @@
 package dao;
 
-import entity.Products;
 import entity.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static dao.MySQLConnection.getConnection;
 
@@ -20,7 +18,7 @@ public class UserDao {
 
     public Users getUserByUsername(String username) {
         Users user = null;
-        String query = "SELECT * FROM user WHERE username = ?";  // Câu lệnh SQL để lấy người dùng theo username
+        String query = "SELECT * FROM User WHERE username = ?";  // Câu lệnh SQL để lấy người dùng theo username
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -44,45 +42,15 @@ public class UserDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();  // In ra lỗi nếu có
+            e.printStackTrace();
         }
-        return user;  // Trả về người dùng nếu tìm thấy, nếu không trả về null
-    }
-    public Users getUserByUserId(int userId) {
-        Users user = null;
-        String query = "SELECT * FROM user WHERE user_id = ?";  // Câu lệnh SQL để lấy người dùng theo username
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            // Thiết lập tham số cho PreparedStatement
-            statement.setInt(1, userId);
-
-            // Thực thi câu lệnh và lấy kết quả
-            try (ResultSet rs = statement.executeQuery()) {
-                if (rs.next()) {
-                    user = new Users(
-                            rs.getInt("user_id"),
-                            rs.getString("username"),
-                            rs.getString("email"),
-                            rs.getString("password"),
-                            rs.getString("phone"),
-                            rs.getString("role"),
-                            rs.getString("address")
-                    );
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();  // In ra lỗi nếu có
-        }
-        return user;  // Trả về người dùng nếu tìm thấy, nếu không trả về null
+        return user;
     }
 
     public boolean changePassword(String username, String oldPassword, String newPassword) {
         boolean isUpdated = false;
-        String queryCheck = "SELECT password FROM user WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu cũ
-        String queryUpdate = "UPDATE user SET password = ? WHERE username = ?";  // Câu lệnh cập nhật mật khẩu mới
+        String queryCheck = "SELECT password FROM User WHERE username = ?";
+        String queryUpdate = "UPDATE User SET password = ? WHERE username = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement checkStatement = connection.prepareStatement(queryCheck)) {
@@ -121,8 +89,8 @@ public class UserDao {
 
     public boolean deleteAccount(String username, String password) {
         boolean isDeleted = false;
-        String queryCheck = "SELECT password FROM user WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu
-        String queryDelete = "DELETE FROM user WHERE username = ?";  // Câu lệnh xóa tài khoản
+        String queryCheck = "SELECT password FROM User WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu
+        String queryDelete = "DELETE FROM User WHERE username = ?";  // Câu lệnh xóa tài khoản
 
         try (Connection connection = getConnection();
              PreparedStatement checkStatement = connection.prepareStatement(queryCheck)) {
@@ -168,7 +136,7 @@ public class UserDao {
 
 
     public boolean checkCurrentPassword(String username, String currentPassword) {
-        String sql = "SELECT password FROM user WHERE username = ?"; // Câu lệnh SQL để lấy mật khẩu từ DB
+        String sql = "SELECT password FROM User WHERE username = ?"; // Câu lệnh SQL để lấy mật khẩu từ DB
         try (Connection conn = getConnection(); // Mở kết nối tới DB
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -187,7 +155,7 @@ public class UserDao {
 
     public boolean editUser(Users user) {
         boolean isUpdated = false;
-        String query = "UPDATE user SET email = ?, phone = ?, address = ? WHERE username = ?"; // Câu lệnh SQL cập nhật thông tin người dùng
+        String query = "UPDATE User SET email = ?, phone = ?, address = ? WHERE username = ?"; // Câu lệnh SQL cập nhật thông tin người dùng
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

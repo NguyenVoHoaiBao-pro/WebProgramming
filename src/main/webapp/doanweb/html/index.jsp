@@ -1,5 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String name = (String) session.getAttribute("user_name");
+    if (name != null) {
+%>
+<p>Xin chào, <strong><%= name %></strong> (Google)</p>
+<%
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,12 +201,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
                 </li>
-<%--                <li class="nav-item" id="admin-btn" style="display: <%=--%>
-<%--                    (session.getAttribute("role") != null &&--%>
-<%--                    (Integer.parseInt((String)session.getAttribute("role")) == 1)) ? "block" : "none"--%>
-<%--                    %>;">--%>
-<%--                    <a class="nav-link" href="<%= request.getContextPath() %>/ad">Quản trị</a>--%>
-<%--                </li>--%>
+                <%--                <li class="nav-item" id="admin-btn" style="display: <%=--%>
+                <%--                    (session.getAttribute("role") != null &&--%>
+                <%--                    (Integer.parseInt((String)session.getAttribute("role")) == 1)) ? "block" : "none"--%>
+                <%--                    %>;">--%>
+                <%--                    <a class="nav-link" href="<%= request.getContextPath() %>/ad">Quản trị</a>--%>
+                <%--                </li>--%>
 
 
                 <div class="nav-item" id="nav-icons">
@@ -507,10 +516,10 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
                 <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
-                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
-                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">Thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">Liên hệ</a></li>
                 <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
@@ -521,7 +530,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>
@@ -544,9 +553,6 @@
         </div>
         <div class="copyright mt-5">
             <div class="row container mx-auto">
-                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
-                  <img src="img/payment.png" alt="payment..logo">
-                </div> -->
 
                 <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
                     <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
@@ -563,7 +569,7 @@
     </div>
 
 </footer>
-<!-- bootstarp cdn -->
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -573,15 +579,3 @@
 </body>
 </html>
 
-<%--<div class="category-filter">--%>
-<%--  <form action="<%= request.getContextPath() %>/shop" method="get">--%>
-<%--    <label for="category">Chọn danh mục:</label>--%>
-<%--    <select name="category" id="category">--%>
-<%--      <option value="">Tất cả</option>--%>
-<%--      <c:forEach var="category" items="${categoriesList}">--%>
-<%--        <option value="${category.id}">${category.name}</option>--%>
-<%--      </c:forEach>--%>
-<%--    </select>--%>
-<%--    <button type="submit">Lọc</button>--%>
-<%--  </form>--%>
-<%--</div>--%>

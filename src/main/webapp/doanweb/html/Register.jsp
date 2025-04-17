@@ -13,10 +13,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <style>
@@ -25,6 +31,7 @@
             font-size: 2.5rem;
             font-weight: 700;
         }
+
         .login-btn {
             width: 30%;
             background-color: #343a40;
@@ -40,28 +47,34 @@
             width: 80%;
             margin: 0 auto;
         }
+
         #signUpForm input, #loginForm input {
             border: 1px solid #343a40;
             padding: 10px;
         }
+
         #signUpForm input:focus, #loginForm input:focus {
             background-color: aliceblue;
         }
+
         #signUpForm button, #loginForm button {
             background-color: #343a40;
             color: aliceblue;
             border: none;
             font-weight: 600;
         }
+
         #signUpForm button:hover, #loginForm button:hover {
             background-color: #BC1F23;
             color: aliceblue;
             border: none;
         }
+
         #showSignUp {
             color: #BC1F23;
             font-weight: 600;
         }
+
         #showSignUp:hover {
             color: #343a40;
             text-decoration: none;
@@ -72,7 +85,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
-        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();" id="logo-img" alt="logo..">
+        <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();"
+             id="logo-img" alt="logo..">
 
 
         <button class="navbar-toggler" onclick="toggleMenu()">
@@ -114,7 +128,8 @@
                                                                                               id="user-icon"></i></a>
                     <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
                     <a href="<%= request.getContextPath() %>/cart" class="position-relative">
-                        <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i> <!-- Biểu tượng giỏ hàng -->
+                        <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
+                        <!-- Biểu tượng giỏ hàng -->
                         <!-- Số lượng sản phẩm trong giỏ -->
                         <span class="position-absolute top-0 start-90 translate-middle badge rounded-circle bg-danger"
                               id="cart-count"
@@ -167,11 +182,11 @@
                     <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>Login.html">ĐĂNG
 
                 </div>
-                    <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
-                        <span id="greeting-menu"></span>
-                        <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
-                    </div>
+                <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
+                    <span id="greeting-menu"></span>
+                    <h4><i class="bi bi-person"></i><a href="javascript:void(0);" onclick="logout()">ĐĂNG XUẤT</a></h4>
                 </div>
+            </div>
         </div>
 </nav>
 
@@ -186,7 +201,8 @@
 <div class="container mt-5" id="container-register">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-12 mt-0">
-            <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" class="img-fluid" alt="login-img">
+            <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" class="img-fluid"
+                 alt="login-img">
         </div>
         <div class="col-lg-6 col-md-6 col-12 mt-5">
             <!-- Hiển thị thông báo lỗi nếu có -->
@@ -202,37 +218,52 @@
             <form id="signUpForm" action="<%= request.getContextPath() %>/register" method="post">
                 <div class="form-group">
                     <label for="username">Tài Khoản</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                    <input type="text" class="form-control" id="username" name="username"
+                           placeholder="Nhập Tên Tài Khoản Của Bạn !" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email của Bạn !"
+                           required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Nhập mật khẩu" required>
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Nhập Lại Mật Khẩu</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Enter your confirm password" required>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                           placeholder="Nhập Lại Mật Khẩu" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone" required>
+                    <input type="text" class="form-control" id="phone" name="phone"
+                           placeholder="Nhập Số Điện Thoại Của Bạn" required>
                 </div>
                 <div class="form-group">
                     <label for="address">Địa chỉ</label>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
+                    <input type="text" class="form-control" id="address" name="address"
+                           placeholder="Nhập Địa Chỉ Nhận Hàng" required>
                 </div>
 
                 <button type="submit" class="btn btn-dark">Đăng ký</button>
-                <p class="py-2 text-center">Bạn có tài khoản rồi? <a href="<%= request.getContextPath() %>/doanweb/html/Login.jsp" id="showSignUp">Đăng Nhập</a></p>
+                <p class="py-2 text-center">Bạn có tài khoản rồi? <a
+                        href="<%= request.getContextPath() %>/doanweb/html/Login.jsp" id="showSignUp">Đăng Nhập</a></p>
+                <div class="text-center mt-3">
+                    <p>Hoặc đăng kí với</p>
+                    <a href="#" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center mb-2">
+                        <i class="fab fa-facebook-f mr-2"></i> Đăng kí với Facebook
+                    </a>
+                    <a href="#" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
+                        <i class="fab fa-google mr-2"></i> Đăng kí với Google
+                    </a>
+                </div>
+
             </form>
         </div>
     </div>
 </div>
-
-
 
 
 <footer class="mt-5 p-5 bg-dark">
@@ -246,10 +277,10 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
                 <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
-                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
-                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">Thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">Liên hệ</a></li>
                 <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
@@ -260,7 +291,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

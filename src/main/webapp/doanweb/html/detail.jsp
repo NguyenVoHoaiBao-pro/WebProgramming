@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +53,7 @@
             height: 100%; /* Chiều cao đầy đủ container */
             object-fit: cover; /* Đảm bảo ảnh lấp đầy và giữ tỷ lệ */
         }
+
         /* CSS cho phần hình ảnh sản phẩm */
         .product img {
             margin-right: 50px;
@@ -76,26 +76,8 @@
         .sproduct input:focus {
             outline: none;
         }
-        .wishlist-btn {
-            background-color: #BC1F23; /* Màu đỏ nhấn */
-            color: white;
-            border-radius: 2px;
-            border: none;
-            padding: 16px 16px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-        }
 
-        .wishlist-btn:hover {
-            background-color: #ff3d3d;
-            transition: 0.3s;
-        }
-
-
-        .cart-btn, .btn-danger {
+        .cart-btn {
             background-color: #BC1F23;
             font-size: 0.8rem;
             font-weight: 700;
@@ -113,7 +95,7 @@
             background-color: black;
         }
 
-        .ShopMore  {
+        .ShopMore {
             background-color: black;
             font-size: 18px;
             font-weight: 700;
@@ -129,7 +111,7 @@
             width: 250px;
         }
 
-        .buy-now-btn  {
+        .buy-now-btn {
             background-color: black !important;
             font-size: 0.8rem;
             font-weight: 700;
@@ -148,95 +130,16 @@
             color: black;
         }
 
-        .alert-success, .alert-danger{
+        .alert-success {
             width: 61%; /* Điều chỉnh chiều rộng của thông báo */
             text-align: center;
             margin-top: 10px;
         }
-        
+
         .product-name {
             color: black;
             font-weight: bold;
         }
-
-        .filter-buttons button.active {
-            background-color: #BC1F23;; /* Màu tô đậm */
-            color: #fff; /* Chữ màu trắng */
-        }
-        a:hover {
-            text-decoration: none; /* Xóa gạch chân khi hover */
-            color: #ff6600; /* Thay đổi màu khi hover (tùy chỉnh) */
-        }
-        .product-image-container {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .product-image {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .arrow-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 24px;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        .left-arrow {
-            left: 10px;
-        }
-
-        .right-arrow {
-            right: 10px;
-        }
-
-        .arrow-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .product-image-container {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .arrow-btn {
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .thumbnail-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .thumbnail {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            margin: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .thumbnail:hover, .thumbnail.active {
-            border: 2px solid red;
-        }
-
-
     </style>
 </head>
 <body>
@@ -350,22 +253,13 @@
 <section class="container sproduct my-5 pt-5">
     <div class="row mt-5">
         <div class="col-lg-5 col-md-12 col-12 d-flex justify-content-center align-items-center">
-            <button id="prev-btn" class="arrow-btn left-arrow">&lt;</button>
             <div class="product-image-container">
                 <img
-                        id="product-image"
                         class="product-image"
                         src="<%= request.getContextPath() %>/${product.image}"
                         alt="${product.name}">
             </div>
-
-
-            <!-- Mũi tên phải -->
-            <button id="next-btn" class="arrow-btn right-arrow">&gt;</button>
-
-
         </div>
-
         <div class="col-lg-6 col-md-12 col-12">
             <h6
                     class="text-secondary mt-5"
@@ -390,66 +284,27 @@
 
             <button
                     class="buy-now-btn"
-                    onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now&quantity=' + document.getElementById('quantity').value">
+                    onclick="window.location.href='add-to-cart?id=${product.id}&action=buy-now'">
                 Mua ngay
             </button>
-
-            <button
-                    class="cart-btn"
-                    onclick="window.location.href='add-to-cart?id=${product.id}&action=add-cart&quantity=' + document.getElementById('quantity').value">
-                Thêm vào giỏ hàng
+            <button class="cart-btn" onclick="window.location.href='add-to-cart?id=${product.id}'">Thêm vào giỏ hàng
             </button>
-
-
-            <button
-                    class="wishlist-btn"
-                    onclick="window.location.href='<%= request.getContextPath() %>/add-to-wishlist?id=${product.id}'">
-                <i class="fa fa-heart"></i>
-            </button>
-
-
             <%
-                String successMessage = (String) request.getAttribute("message");
-                String errorMessage = (String) request.getAttribute("error");
+                String message = (String) request.getAttribute("message");
+                if (message != null) {
             %>
-
-            <%-- Hiển thị thông báo thành công hoặc lỗi --%>
-            <div id="messageContainer">
-                <%
-                    if (successMessage != null) {
-                %>
-                <div class="alert alert-success" id="successMessage">
-                    <%= successMessage %>
-                </div>
-                <%
-                } else if (errorMessage != null) {
-                %>
-                <div class="alert alert-danger" id="errorMessage">
-                    <%= errorMessage %>
-                </div>
-                <%
-                    }
-                %>
+            <div class="alert alert-success" id="successMessage">
+                <%= message %>
             </div>
-
+            <% } %>
             <script>
-                
+                // Kiểm tra xem có thông báo hay không
                 window.onload = function () {
-                    var successMessageElement = document.getElementById("successMessage");
-                    var errorMessageElement = document.getElementById("errorMessage");
-
-                    // Chỉ hiển thị 1 thông báo: thành công hoặc lỗi
-                    if (successMessageElement) {
-                        successMessageElement.style.display = "block";  // Hiển thị thông báo thành công
+                    var messageElement = document.getElementById("successMessage");
+                    if (messageElement) {
+                        messageElement.style.display = "block";  // Hiển thị thông báo
                         setTimeout(function () {
-                            successMessageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
-                        }, 2000);  // 2000ms = 2s
-                    }
-
-                    if (errorMessageElement) {
-                        errorMessageElement.style.display = "block";  // Hiển thị thông báo lỗi
-                        setTimeout(function () {
-                            errorMessageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
+                            messageElement.style.display = "none";  // Ẩn thông báo sau 2 giây
                         }, 2000);  // 2000ms = 2s
                     }
                 };
@@ -459,6 +314,7 @@
             <span class="text-secondary">${product.description}</span>
         </div>
     </div>
+
 </section>
 
 
@@ -467,107 +323,73 @@
     <h3 class="text-center pb-3">Đánh giá sản phẩm</h3>
     <hr class="border border-danger border-2 opacity-75 mx-auto mb-4">
     <div class="rating-summary">
-        <div class="rating-score"><%= request.getAttribute("averageRating") %> trên 5</div>
-        <div class="stars">
-            <%
-                double averageRating = (double) request.getAttribute("averageRating");
-                int fullStars = (int) averageRating;
-                int halfStars = (int) ((averageRating - fullStars) * 2);
-            %>
-            <% for (int i = 0; i < fullStars; i++) { %> ★ <% } %>
-            <% if (halfStars == 1) { %> ★☆ <% } %>
-        </div>
-
-        <%
-            int[] ratingCounts = (int[]) request.getAttribute("ratingCounts");
-        %>
-
+        <div class="rating-score">5 trên 5</div>
+        <div class="stars">★★★★★</div>
         <div class="filter-buttons">
-            <button class="<%= request.getParameter("rating") == null ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>'">Tất Cả</button>
-            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("5") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=5'">5 Sao (<%= ratingCounts[4] %>)</button>
-            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("4") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=4'">4 Sao (<%= ratingCounts[3] %>)</button>
-            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("3") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=3'">3 Sao (<%= ratingCounts[2] %>)</button>
-            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("2") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=2'">2 Sao (<%= ratingCounts[1] %>)</button>
-            <button class="<%= request.getParameter("rating") != null && request.getParameter("rating").equals("1") ? "active" : "" %>" onclick="window.location='?id=<%= request.getParameter("id") %>&rating=1'">1 Sao (<%= ratingCounts[0] %>)</button>
+            <button class="active">Tất Cả</button>
+            <button>5 Sao (3)</button>
+            <button>4 Sao (0)</button>
+            <button>3 Sao (0)</button>
+            <button>2 Sao (0)</button>
+            <button>1 Sao (0)</button>
+        </div>
+    </div>
+
+    <div class="reviews">
+        <div class="review">
+            <div class="user-avatar">A</div>
+            <div class="review-content">
+                <p class="username">anhtruonguyenhong6879</p>
+                <div class="stars">★★★★★</div>
+                <p class="review-date">2024-02-19 23:14</p>
+                <p>Chất lượng sản phẩm: ok</p>
+            </div>
         </div>
 
+        <div class="review">
+            <div class="user-avatar">T</div>
+            <div class="review-content">
+                <p class="username">trngiahuy159</p>
+                <div class="stars">★★★★★</div>
+                <p class="review-date">2024-02-16 16:18</p>
+                <p>Tuyệt vời</p>
+            </div>
+        </div>
 
+        <div class="review">
+            <div class="user-avatar">N</div>
+            <div class="review-content">
+                <p class="username">nambuiohoang857</p>
+                <div class="stars">★★★★★</div>
+                <p class="review-date">2023-11-24 19:18</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Reviews List -->
-    <div class="reviews mt-4">
-        <c:if test="${empty reviews}">
-            <div class="no-reviews text-center mt-3">
-                <p>Không có đánh giá nào cho sản phẩm này.</p>
-            </div>
-        </c:if>
-        <c:forEach var="review" items="${reviews}">
-            <div class="review mb-4">
-                <!-- User Avatar -->
-                <div class="user-avatar rounded-circle bg-primary text-white text-center">
-                    <c:choose>
-                        <c:when test="${not empty review.username}">
-                            ${review.username.substring(0, 1)} <!-- Lấy chữ cái đầu tiên từ tên người dùng -->
-                        </c:when>
-                        <c:otherwise>
-                            ?
-                        </c:otherwise>
-                    </c:choose>
-                </div>
 
-                <div class="review-content mt-2">
-                    <!-- Username -->
-                    <p class="username font-weight-bold">${review.username}</p>
-
-                    <!-- Rating Stars -->
-                    <div class="stars">
-                        <c:forEach var="i" begin="1" end="${review.rating}">
-                            ★
-                        </c:forEach>
-                        <c:forEach var="i" begin="${review.rating + 1}" end="5">
-                            ☆
-                        </c:forEach>
-                    </div>
-
-                    <!-- Review Date -->
-                    <p class="review-date text-muted">${review.review_date}</p>
-
-                    <!-- Review Comment -->
-                    <p>${review.comment}</p>
-                </div>
-            </div>
-        </c:forEach>
-    </div>
     <!-- Add a new review form -->
-    <form id="review-form" action="addReview" method="POST">
-        <!-- Hidden fields for productId and userId -->
-        <input type="hidden" name="product_id" value="${product.id}" /> <!-- Đảm bảo tên là 'product_id' -->
-        <input type="hidden" name="user_id" value="${user.id}" /> <!-- user.id từ session -->
-
-        <!-- Review Comment -->
-        <div class="form-group mt-3">
-            <label for="review-comment">Nhận xét của bạn</label>
-            <textarea class="form-control" id="review-comment" name="review-comment" rows="4"
-                      placeholder="Chia sẻ cảm nhận của bạn về sản phẩm" required></textarea>
-        </div>
-
-        <!-- Review Rating -->
-        <div class="form-group mt-3">
-            <label for="review-rating">Đánh giá:</label>
-            <select class="form-control" id="review-rating" name="review-rating" required>
-                <option value="5">★★★★★</option>
-                <option value="4">★★★★☆</option>
-                <option value="3">★★★☆☆</option>
-                <option value="2">★★☆☆☆</option>
-                <option value="1">★☆☆☆☆</option>
-            </select>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-danger mt-3">Gửi đánh giá</button>
-    </form>
+    <div class="mt-5">
+        <h5>Để lại đánh giá của bạn</h5>
+        <form id="review-form">
+            <div class="form-group mt-3">
+                <label for="review-comment">Nhận xét của bạn</label>
+                <textarea class="form-control" id="review-comment" rows="4"
+                          placeholder="Chia sẻ cảm nhận của bạn về sản phẩm" required></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="review-rating">Đánh giá:</label>
+                <select class="form-control" id="review-rating" required>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-review">Gửi đánh giá</button>
+        </form>
+    </div>
 </section>
-
 
 <section class="my-5 pb-5">
     <div class="container text-center mt-5 py-5">
@@ -581,7 +403,8 @@
                 <c:if test="${status.index < 4}">
                     <div class="product text-center col-lg-3 col-md-4 col-12 mb-4">
                         <a href="detail?id=${product.id}">
-                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}" alt="${product.name}">
+                            <img class="img-fluid" src="<%= request.getContextPath() %>/${product.image}"
+                                 alt="${product.name}">
                             <h5 class="product-name">${product.name}</h5>
                             <h4 class="product-price">${product.price} VND</h4>
                         </a>
@@ -594,84 +417,8 @@
         <button class="ShopMore my-5 mx-auto" onclick="window.location.href = '/shop';">Tiếp tục mua sắm</button>
     </div>
 </section>
-<script>
-    function setActive(button) {
-        // Lấy tất cả các nút trong div .filter-buttons
-        const buttons = document.querySelectorAll('.filter-buttons button');
 
-        // Xóa class 'active' khỏi tất cả các nút
-        buttons.forEach(btn => btn.classList.remove('active'));
 
-        // Thêm class 'active' vào nút vừa được nhấn
-        button.classList.add('active');
-    }
-
-    // Hàm gửi yêu cầu AJAX và cập nhật giao diện khi chọn rating
-    function filterReviews(rating) {
-        var productId = "${product.id}"; // Sử dụng EL để lấy ID sản phẩm từ JSP
-        var url = "/detail?id=" + productId + "&rating=" + rating; // URL yêu cầu
-
-        // Gửi yêu cầu AJAX (sử dụng Fetch API)
-        fetch(url)
-            .then(response => response.text()) // Nhận dữ liệu HTML từ server
-            .then(html => {
-                // Cập nhật nội dung HTML vào phần tử tương ứng
-                document.querySelector('.rating-summary').innerHTML = html;
-            })
-            .catch(error => console.error('Error:', error)); // Xử lý lỗi nếu có
-    }
-
-    // Lắng nghe sự kiện click trên các nút lọc
-    document.querySelectorAll('.filter-buttons button').forEach(button => {
-        button.addEventListener('click', function() {
-            var rating = this.getAttribute('data-rating');
-            filterReviews(rating); // Gửi yêu cầu AJAX khi người dùng chọn rating
-        });
-    });
-
-</script>
-<script>document.addEventListener("DOMContentLoaded", function () {
-    const images = ["doanweb/images/duigaimg/Pasted image (100).png","doanweb/images/duigaimg/Pasted image (102).png"]; // Danh sách ảnh
-    let currentIndex = 0;
-    const productImage = document.getElementById("product-image");
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
-
-    function updateImage(index) {
-        productImage.src = `<%= request.getContextPath() %>/` + images[index];
-    }
-
-    // Sự kiện click để chuyển ảnh
-    prevBtn.addEventListener("click", function () {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateImage(currentIndex);
-    });
-
-    nextBtn.addEventListener("click", function () {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateImage(currentIndex);
-    });
-
-    // Sự kiện giữ (hold) để cuộn ảnh
-    let holdInterval;
-
-    function startHold(direction) {
-        holdInterval = setInterval(() => {
-            currentIndex = (currentIndex + direction + images.length) % images.length;
-            updateImage(currentIndex);
-        }, 500);
-    }
-
-    function stopHold() {
-        clearInterval(holdInterval);
-    }
-
-    prevBtn.addEventListener("mousedown", () => startHold(-1));
-    nextBtn.addEventListener("mousedown", () => startHold(1));
-    prevBtn.addEventListener("mouseup", stopHold);
-    nextBtn.addEventListener("mouseup", stopHold);
-});
-</script>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -686,10 +433,10 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Liên kết nhanh</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="<%= request.getContextPath() %>/home">trang chủ</a></li>
+                <li><a href="<%= request.getContextPath() %>/home">Trang chủ</a></li>
                 <li><a href="<%= request.getContextPath() %>/shop">Cửa hàng</a></li>
-                <li><a href="<%= request.getContextPath() %>/about">thông tin</a></li>
-                <li><a href="<%= request.getContextPath() %>/contact">liên hệ</a></li>
+                <li><a href="<%= request.getContextPath() %>/about">Thông tin</a></li>
+                <li><a href="<%= request.getContextPath() %>/contact">Liên hệ</a></li>
                 <li><a href="<%= request.getContextPath() %>/cart">Giỏ hàng</a></li>
             </ul>
         </div>
@@ -700,7 +447,7 @@
                 <p>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
             </div>
             <div>
-                <h6 class="text-uppercase">điện thoại</h6>
+                <h6 class="text-uppercase">Điện thoại</h6>
                 <p>0849294483</p>
             </div>
             <div>

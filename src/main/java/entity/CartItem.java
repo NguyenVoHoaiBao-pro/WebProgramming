@@ -1,23 +1,23 @@
 package entity;
 
-import java.sql.Timestamp;
-import dao.dao;
-
 public class CartItem {
-    private Cart cart;
+    private Products product;
     private int quantity;
+    private int totalPrice;
 
-    public CartItem(Cart cart, int quantity) {
-        this.cart = cart;
+    public CartItem(Products product, int quantity) {
+        this.product = product;
         this.quantity = quantity;
+        this.totalPrice = product.getPrice() * quantity;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Products getProduct() {
+        return product;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setProduct(Products product) {
+        this.product = product;
+        updateTotalPrice();
     }
 
     public int getQuantity() {
@@ -26,35 +26,32 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+        updateTotalPrice();
     }
-
-    public int getCartId() {
-        return cart.getC_id();
-    }
-
-    public int getUserId() {
-        return cart.getUser_id();
-    }
-
     public int getProductId() {
-        return cart.getProduct_id();
-    }
-
-    public Timestamp getCreatedAt() {
-        return cart.getCreated_at();
+        return product.getId(); // Giả sử Products có phương thức getId()
     }
 
 
-    public void setCartAttributes(int c_id, int user_id, int product_id, Timestamp created_at, int quantity) {
-        this.cart.setC_id(c_id);
-        this.cart.setUser_id(user_id);
-        this.cart.setProduct_id(product_id);
-        this.cart.setCreated_at(created_at);
-        this.setQuantity(quantity);
+    public int getTotalPrice() {
+        return totalPrice;
     }
-    public Products getProduct() {
-        return dao.getProductById(cart.getProduct_id());
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
 
+    private void updateTotalPrice() {
+        this.totalPrice = product.getPrice() * quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "product=" + product +
+                ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

@@ -1,7 +1,6 @@
 package entity;
 
-import java.sql.Timestamp;
-import java.util.List;
+
 
 public class Products {
     private int id;
@@ -9,84 +8,86 @@ public class Products {
     private String description;
     private int price;
     private int stock;
-    private String image;
-    // Danh sách ảnh của sản phẩm
+    private String image;  // Danh sách ảnh của sản phẩm
     private int category_id; // Tham chiếu đến Category
-    private List<String> images; // Danh sách ảnh chi tiết
-
     // Constructor
 
-    public Products(int id, String name, int price, int stock, String description, int category_id, String image) {        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stock = stock;
-        this.image = image;
-        this.category_id = category_id;
-    }
-
-    public Products(String image, int id, String name, String description, int price, int stock, int category_id, List<String> images) {
-        this.image = image;
+    public Products(int id, String name, int price, int stock, String description, int category_id, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.image = image;
         this.category_id = category_id;
-        this.images = images;
     }
 
-    // Getters & Setters
-    public List<String> getImages() {
-        return images;
+    public Products(int id, String name, double price, int stock) {
+        this.id = id;
+        this.name = name;
+        this.price = (int) price;
+        this.stock = stock;
+        this.image = "";
+        this.category_id = 0;
     }
-    public void setImages(List<String> images) {
-        this.images = images;
-    }
+
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public int getPrice() {
         return price;
     }
+
     public void setPrice(int price) {
         this.price = price;
     }
+
     public int getStock() {
         return stock;
     }
+
     public void setStock(int stock) {
         this.stock = stock;
     }
+
     public String getImage() {
         return image;
     }
+
     public void setImage(String image) {
         this.image = image;
     }
 
-    public int getCategory_id() {
+    public int getCategoryId() {
         return category_id;
     }
 
-    public void setCategory_Id(int category_id) {
+    public void setCategoryId(int category_id) {
         this.category_id = category_id;
     }
+
     @Override
     public String toString() {
         return "Products{" +
@@ -97,7 +98,6 @@ public class Products {
                 ", stock=" + stock +
                 ", image='" + image + '\'' +
                 ", category_id=" + category_id +
-                ", images=" + images +
                 '}';
     }
 

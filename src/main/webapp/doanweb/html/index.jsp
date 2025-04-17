@@ -1,5 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String name = (String) session.getAttribute("user_name");
+    if (name != null) {
+%>
+<p>Xin chào, <strong><%= name %></strong> (Google)</p>
+<%
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 

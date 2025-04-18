@@ -352,10 +352,19 @@ public class dao {
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    String hashedPasswordFromDB = rs.getString("password"); // Mật khẩu đã hash lưu trong DB
+                    String storedPassword = rs.getString("password"); // Định dạng: salt:hash
 
-                    // Kiểm tra mật khẩu nhập vào bằng BCrypt
-                    if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
+                    // Tách salt và hash
+                    String[] parts = storedPassword.split(":");
+                    if (parts.length != 2) {
+                        System.out.println("❌ Lỗi định dạng mật khẩu trong DB.");
+                        return null;
+                    }
+
+                    byte[] salt = hexToBytes(parts[0]);
+                    String hashedInputPassword = hashPassword(password, salt);
+
+                    if (storedPassword.equals(hashedInputPassword)) {
                         Users user = new Users(
                                 rs.getInt("user_id"),
                                 rs.getString("username"),
@@ -379,6 +388,7 @@ public class dao {
         }
         return null;
     }
+
 
 
     private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {

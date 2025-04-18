@@ -84,6 +84,7 @@
             color: #343a40;
             text-decoration: none;
         }
+
     </style>
 
 </head>
@@ -222,12 +223,12 @@
                     <input type="password" class="form-control" id="password" name="password"
                            placeholder="Nhập Mật Khẩu Của Bạn!" required>
                 </div>
-               <!-- ✅ Google reCAPTCHA widget -->
+                <!-- ✅ Google reCAPTCHA widget -->
                 <div class="form-group my-3">
                     <div class="g-recaptcha" data-sitekey="6LfvZxYrAAAAAGmR56yCGXy0DvLDtY1djlym0fUI"></div>
                 </div>
 
-               <a href="<%= request.getContextPath() %>/forgotpassword" id="forgot-password">Quên mật khẩu?</a>
+                <a href="<%= request.getContextPath() %>/forgotpassword" id="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
                 <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register"
                                                                       id="showSignUp">Đăng ký</a></p>
@@ -240,7 +241,7 @@
                     </a>
 
                     <!-- Nút đăng nhập Google (chưa xử lý) -->
-                    <a href="${pageContext.request.contextPath}/google-login" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
+                    <a href="#" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
                         <i class="fab fa-google mr-2"></i> Đăng nhập với Google
                     </a>
                 </div>
@@ -378,6 +379,7 @@
 </script>
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </body>
 </html>
 

@@ -241,7 +241,7 @@
                     </a>
 
                     <!-- Nút đăng nhập Google (chưa xử lý) -->
-                    <a href="#" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
+                    <a href="${pageContext.request.contextPath}/google-login" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
                         <i class="fab fa-google mr-2"></i> Đăng nhập với Google
                     </a>
                 </div>
@@ -379,6 +379,7 @@
 </script>
 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 </body>
 </html>

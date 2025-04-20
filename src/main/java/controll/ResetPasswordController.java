@@ -38,14 +38,14 @@ public class ResetPasswordController extends HttpServlet {
                 int rowsUpdated = updateStmt.executeUpdate();
 
                 if (rowsUpdated > 0) {
-                    System.out.println("✅ Mật khẩu đã được cập nhật!");
+                    System.out.println(" Mật khẩu đã được cập nhật!");
                     request.setAttribute("message", "Mật khẩu đã được cập nhật!");
                 } else {
-                    System.out.println("❌ Không cập nhật được mật khẩu, có thể token không đúng!");
+                    System.out.println(" Không cập nhật được mật khẩu, có thể token không đúng!");
                     request.setAttribute("error", "Lỗi cập nhật mật khẩu!");
                 }
             } else {
-                System.out.println("❌ Token không hợp lệ hoặc đã hết hạn!");
+                System.out.println(" Token không hợp lệ hoặc đã hết hạn!");
                 request.setAttribute("error", "Token không hợp lệ!");
             }
         } catch (Exception e) {

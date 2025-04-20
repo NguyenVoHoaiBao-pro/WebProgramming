@@ -86,7 +86,7 @@
                 </li>
                 <li class="nav-item" id="nav-icons">
                     <!-- <i class="bi bi-search"></i> -->
-                    <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"></i></a>
+                    <a href="<%= request.getContextPath() %>/home"><i class="bi bi-person-fill"></i></a>
                     <a href="<%= request.getContextPath() %>/cart"><i class="bi bi-bag-heart-fill"></i></a>
                 </li>
 

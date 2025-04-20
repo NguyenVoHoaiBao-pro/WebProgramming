@@ -1,5 +1,6 @@
 package controll;
 
+import dao.PasswordUtils;
 import dao.UserDao;
 import entity.Users;
 import jakarta.servlet.RequestDispatcher;
@@ -88,13 +89,7 @@ public class ProfileController extends HttpServlet {
                 break;
 
             case "change-pass":
-                try {
-                    handleChangePassword(request, response, loggedInUser);
-                } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
-                } catch (InvalidKeySpecException e) {
-                    throw new RuntimeException(e);
-                }
+                handleChangePassword(request, response, loggedInUser);
                 break;
 
             case "deleteAccount":
@@ -167,80 +162,50 @@ public class ProfileController extends HttpServlet {
 
 
     private void handleChangePassword(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
-            throws IOException, ServletException, NoSuchAlgorithmException, InvalidKeySpecException {
-        // Lấy thông tin từ form nhập
+            throws IOException, ServletException {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
 
-        // Kiểm tra mật khẩu xác nhận có khớp với mật khẩu mới không
         if (!newPassword.equals(confirmPassword)) {
             request.getSession().setAttribute("errorMessage", "Mật khẩu xác nhận không khớp!");
             response.sendRedirect("/profile?action=change-pass");
             return;
         }
 
-        // Kiểm tra mật khẩu cũ có đúng không
-        boolean isPasswordCorrect = dao.checkOldPassword(loggedInUser.getUsername(), oldPassword);
-        if (!isPasswordCorrect) {
-            request.getSession().setAttribute("errorMessage", "Mật khẩu cũ không đúng!");
-            response.sendRedirect("/profile?action=change-pass");
-            return;
-        }
+        try {
+            // Lấy mật khẩu đã lưu từ DB (dạng salt:hash)
+            String storedPassword = dao.getPasswordByUsername(loggedInUser.getUsername());
 
-        // Mã hóa mật khẩu mới
-        String salt = generateSalt();
-        String hashedNewPassword = hashPassword(newPassword, salt.getBytes());
+            // So sánh mật khẩu cũ nhập vào với mật khẩu đã lưu
+            boolean isPasswordCorrect = PasswordUtils.verifyPassword(oldPassword, storedPassword);
+            if (!isPasswordCorrect) {
+                request.getSession().setAttribute("errorMessage", "Mật khẩu cũ không đúng!");
+                response.sendRedirect("/profile?action=change-pass");
+                return;
+            }
 
-        // Cập nhật mật khẩu mới vào cơ sở dữ liệu
-        boolean isPasswordChanged = dao.updatePassword(loggedInUser.getUsername(), hashedNewPassword, salt);
-        if (isPasswordChanged) {
-            request.getSession().setAttribute("successMessage", "Mật khẩu đã được thay đổi thành công!");
-        } else {
-            request.getSession().setAttribute("errorMessage", "Có lỗi xảy ra trong quá trình thay đổi mật khẩu.");
+            // Mã hóa mật khẩu mới
+            String salt = PasswordUtils.generateSalt();
+            byte[] saltBytes = PasswordUtils.hexToBytes(salt);
+            String hashedNewPassword = PasswordUtils.hashPassword(newPassword, saltBytes);
+
+            // Cập nhật vào database
+            boolean isPasswordChanged = dao.updatePassword(loggedInUser.getUsername(), hashedNewPassword, salt);
+
+            if (isPasswordChanged) {
+                request.getSession().setAttribute("successMessage", "Mật khẩu đã được thay đổi thành công!");
+            } else {
+                request.getSession().setAttribute("errorMessage", "Có lỗi xảy ra trong quá trình thay đổi mật khẩu.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute("errorMessage", "Lỗi hệ thống: " + e.getMessage());
         }
 
         response.sendRedirect("/profile?action=change-pass");
     }
-
-    private String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        int iterations = 65536;  // Số lần lặp lại để tăng cường bảo mật
-        int keyLength = 256;  // Độ dài hash (256-bit)
-
-        // Tạo PBEKeySpec với mật khẩu, salt, số lần lặp lại, và độ dài hash
-        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
-
-        // Tạo đối tượng SecretKeyFactory sử dụng thuật toán PBKDF2WithHmacSHA256
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-
-        // Tạo hash mật khẩu
-        byte[] hash = skf.generateSecret(spec).getEncoded();
-
-        // Trả về kết quả kết hợp salt và hash dưới dạng chuỗi hex
-        return bytesToHex(salt) + ":" + bytesToHex(hash);  // Salt và hash được ghép lại theo định dạng salt:hash
-    }
-
-
-    private String generateSalt() {
-        // Tạo một salt ngẫu nhiên với độ dài 16 bytes
-        byte[] salt = new byte[16];
-        new SecureRandom().nextBytes(salt);
-        return bytesToHex(salt); // Chuyển đổi salt thành chuỗi hex
-    }
-
-    private String bytesToHex(byte[] bytes) {
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : bytes) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-        return hexString.toString();
-    }
-
-
 
     private void handleDeleteAccount(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
             throws IOException, ServletException {

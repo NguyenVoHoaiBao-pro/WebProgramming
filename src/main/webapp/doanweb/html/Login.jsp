@@ -224,9 +224,9 @@
                            placeholder="Nhập Mật Khẩu Của Bạn!" required>
                 </div>
                 <!-- ✅ Google reCAPTCHA widget -->
-                <div class="form-group my-3">
-                    <div class="g-recaptcha" data-sitekey="6LfvZxYrAAAAAGmR56yCGXy0DvLDtY1djlym0fUI"></div>
-                </div>
+<%--                <div class="form-group my-3">--%>
+<%--                    <div class="g-recaptcha" data-sitekey="6LfvZxYrAAAAAGmR56yCGXy0DvLDtY1djlym0fUI"></div>--%>
+<%--                </div>--%>
 
                 <a href="<%= request.getContextPath() %>/forgotpassword" id="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>

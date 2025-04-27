@@ -2,6 +2,8 @@ package dao;
 
 import entity.Users;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,51 +89,31 @@ public class UserDao {
         return isUpdated;  // Trả về true nếu đổi mật khẩu thành công, ngược lại là false
     }
 
-    public boolean deleteAccount(String username, String password) {
-        boolean isDeleted = false;
-        String queryCheck = "SELECT password FROM User WHERE username = ?";  // Câu lệnh kiểm tra mật khẩu
-        String queryDelete = "DELETE FROM User WHERE username = ?";  // Câu lệnh xóa tài khoản
+    public boolean deleteAccount(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String storedPassword = getPasswordByUsername(username);
+        if (storedPassword == null) {
+            return false;
+        }
 
-        try (Connection connection = getConnection();
-             PreparedStatement checkStatement = connection.prepareStatement(queryCheck)) {
+        // Kiểm tra mật khẩu nhập vào có khớp không
+        boolean isValid = PasswordUtils.verifyPassword(password, storedPassword);
+        if (!isValid) {
+            return false;
+        }
 
-            // Thiết lập tham số cho PreparedStatement kiểm tra mật khẩu
-            checkStatement.setString(1, username);
+        // Nếu đúng thì xóa
+        String query = "DELETE FROM User WHERE username = ?";
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            // Thực thi câu lệnh kiểm tra và lấy kết quả
-            try (ResultSet rs = checkStatement.executeQuery()) {
-                if (rs.next()) {
-                    String currentPassword = rs.getString("password");
-
-                    // Kiểm tra mật khẩu có đúng không
-                    if (currentPassword.equals(password)) {
-                        // Mật khẩu đúng, xóa tài khoản
-                        try (PreparedStatement deleteStatement = connection.prepareStatement(queryDelete)) {
-                            deleteStatement.setString(1, username);
-
-                            int rowsAffected = deleteStatement.executeUpdate();
-                            if (rowsAffected > 0) {
-                                isDeleted = true;  // Xóa tài khoản thành công
-                            } else {
-                                System.out.println("Không thể xóa tài khoản, vui lòng thử lại.");
-                            }
-                        }
-                    } else {
-                        System.out.println("Mật khẩu không đúng.");
-                    }
-                } else {
-                    System.out.println("Không tìm thấy tài khoản với username: " + username);
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Lỗi cơ sở dữ liệu: " + e.getMessage());
-            e.printStackTrace();
+            stmt.setString(1, username);
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;
         } catch (Exception e) {
-            System.err.println("Lỗi: " + e.getMessage());
             e.printStackTrace();
         }
 
-        return isDeleted;  // Trả về true nếu xóa tài khoản thành công, ngược lại là false
+        return false;
     }
 
 

@@ -206,6 +206,40 @@ public class UserDao {
         }
         return isUpdated; // Trả về true nếu thành công, false nếu không
     }
+    public String getPasswordByUsername(String username) {
+        String query = "SELECT password FROM User WHERE username = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, username);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("password"); // Trả về chuỗi salt:hash
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public boolean updatePassword(String username, String hashedPasswordWithSalt, String salt) {
+        String query = "UPDATE User SET password = ? WHERE username = ?";
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, hashedPasswordWithSalt);
+            statement.setString(2, username);
+
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
 
 
 }

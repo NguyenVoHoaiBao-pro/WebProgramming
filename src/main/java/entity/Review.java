@@ -21,6 +21,10 @@ public class Review {
         this.review_date = review_date;
     }
 
+    public Review() {
+
+    }
+
     public int getReview_id() {
         return review_id;
     }

@@ -35,45 +35,41 @@ public class DetailController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lấy ID sản phẩm từ tham số trong URL
         String productId = request.getParameter("id");
-        Products product = d.getProductById(Integer.parseInt(productId));
-        request.setAttribute("product", product);
+        if (productId != null) {
+            Products product = d.getProductById(Integer.parseInt(productId)); // Lấy thông tin sản phẩm theo ID
+            request.setAttribute("product", product); // Truyền sản phẩm vào JSP
 
-        List<Review> reviews;
-        String ratingParam = request.getParameter("rating");
+            // Lấy tất cả đánh giá của sản phẩm từ DAO
+            List<Review> reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
+            request.setAttribute("reviews", reviews); // Truyền danh sách đánh giá vào JSP
 
-        if (ratingParam != null && !ratingParam.isEmpty() && !ratingParam.equals("null")) {
-            try {
-                int rating = Integer.parseInt(ratingParam);
-                reviews = rd.getReviewsByRatingAndProductId(rating, Integer.parseInt(productId));
-            } catch (NumberFormatException e) {
-                reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
-            }
-        } else {
-            reviews = rd.getReviewsByProductId(Integer.parseInt(productId));
-        }
+            // Tính toán trung bình rating
+            double averageRating = calculateAverageRating(reviews);
+            request.setAttribute("averageRating", averageRating); // Truyền trung bình rating vào JSP
 
-        double averageRating = 0;
-        int totalReviews = reviews.size();
-        int[] ratingCounts = new int[5];
-
-        if (totalReviews > 0) {
-            int totalRating = 0;
+            // Đếm số lượng đánh giá cho mỗi mức rating (1 đến 5)
+            int[] ratingCounts = new int[5];
             for (Review review : reviews) {
-                totalRating += review.getRating();
                 ratingCounts[review.getRating() - 1]++;
             }
-            averageRating = (double) totalRating / totalReviews;
+            request.setAttribute("ratingCounts", ratingCounts); // Truyền số lượng đánh giá cho từng mức rating vào JSP
+
+            // Chuyển hướng đến trang JSP để hiển thị sản phẩm và đánh giá
+            request.getRequestDispatcher("/doanweb/html/detail.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("error.jsp"); // Nếu không có ID sản phẩm, chuyển hướng đến trang lỗi
         }
-        List<Products> randomProductList = d.getRandomProducts();
+    }
 
-        request.setAttribute("averageRating", averageRating);
-        request.setAttribute("totalReviews", totalReviews);
-        request.setAttribute("ratingCounts", ratingCounts);
-        request.setAttribute("reviews", reviews);
-        request.setAttribute("randomProductList", randomProductList);
-
-        request.getRequestDispatcher("/doanweb/html/detail.jsp").include(request, response);
+    // Tính toán trung bình rating từ các đánh giá
+    private double calculateAverageRating(List<Review> reviews) {
+        int totalRating = 0;
+        for (Review review : reviews) {
+            totalRating += review.getRating();
+        }
+        return reviews.size() > 0 ? (double) totalRating / reviews.size() : 0;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

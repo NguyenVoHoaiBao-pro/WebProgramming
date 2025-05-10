@@ -11,12 +11,6 @@ public class PasswordUtils {
     private static final int ITERATIONS = 65536;
     private static final int KEY_LENGTH = 256;
 
-    /**
-     * Mã hóa mật khẩu với salt đã cho.
-     * @param password Mật khẩu gốc.
-     * @param salt Salt dạng byte[].
-     * @return Chuỗi định dạng "salt:hash".
-     */
     public static String hashPassword(String password, byte[] salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -27,12 +21,6 @@ public class PasswordUtils {
         return bytesToHex(salt) + ":" + bytesToHex(hash);
     }
 
-    /**
-     * Kiểm tra mật khẩu nhập vào có khớp với chuỗi đã mã hóa không.
-     * @param inputPassword Mật khẩu người dùng nhập.
-     * @param storedPassword Chuỗi từ DB theo định dạng "salt:hash".
-     * @return true nếu khớp, ngược lại false.
-     */
     public static boolean verifyPassword(String inputPassword, String storedPassword)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
 

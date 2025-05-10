@@ -93,7 +93,13 @@ public class ProfileController extends HttpServlet {
                 break;
 
             case "deleteAccount":
-                handleDeleteAccount(request, response, loggedInUser);
+                try {
+                    handleDeleteAccount(request, response, loggedInUser);
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                } catch (InvalidKeySpecException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
 
             default:
@@ -208,7 +214,7 @@ public class ProfileController extends HttpServlet {
     }
 
     private void handleDeleteAccount(HttpServletRequest request, HttpServletResponse response, Users loggedInUser)
-            throws IOException, ServletException {
+            throws IOException, ServletException, NoSuchAlgorithmException, InvalidKeySpecException {
         String password = request.getParameter("confirmDelete");
 
         boolean isAccountDeleted = dao.deleteAccount(loggedInUser.getUsername(), password);

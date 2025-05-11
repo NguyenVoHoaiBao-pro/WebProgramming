@@ -286,44 +286,59 @@
         <div class="Total col-lg-8 col-md-6 col-12 mb-4 mx-auto">
             <div>
                 <h5>Tổng giỏ hàng</h5>
+
+                <!-- Tạm tính -->
                 <div class="d-flex justify-content-between">
                     <h6>Tạm tính</h6>
                     <p id="subtotal-value">
                         <strong>${sessionScope.totalPrice}K</strong>
                     </p>
                 </div>
+
+                <!-- Phí vận chuyển -->
                 <div class="d-flex justify-content-between">
                     <h6>Phí vận chuyển</h6>
                     <p id="shipping-value">20K</p>
                 </div>
+
+                <!-- Thời gian giao hàng -->
                 <div class="d-flex justify-content-between">
                     <h6>Thời gian giao hàng dự kiến</h6>
                     <p id="shippingtime">1h</p>
                 </div>
+
                 <hr class="second-hr">
+
+                <!-- Giảm giá -->
                 <div id="discount-row" class="d-flex justify-content-between">
                     <h6>Giảm giá</h6>
                     <p id="discount-value">
                         <fmt:formatNumber value="${discount}" type="currency" currencySymbol="VND"/>
                     </p>
                 </div>
+
+                <!-- Tổng cộng -->
                 <div class="d-flex justify-content-between">
                     <h6>Tổng cộng</h6>
                     <p id="total-value">
-                        ${sessionScope.totalPrice + 20}K
+                        ${sessionScope.totalPrice + 20 - (discount != null ? discount : 0)}K
                     </p>
                 </div>
 
+                <!-- Chọn voucher -->
+
                 <div class="form-group my-3">
                     <label for="voucherSelect">
-                        <h6>Chọn voucher</h6>
+                        <h6>Chọn mã giảm giá</h6>
                     </label>
                     <select class="form-control" id="voucherSelect" onchange="applyVoucher()">
                         <option value="0">Không sử dụng voucher</option>
-                        <option value="5000">Giảm 5,000 VND</option>
-                        <option value="10000">Giảm 10,000 VND</option>
+                        <option value="0.10">Giảm 10% (Đơn ≥ 100K)</option>
+                        <option value="0.15">Giảm 15% (Đơn ≥ 300K)</option>
+                        <option value="0.20">Giảm 20% (Đơn ≥ 500K)</option>
                     </select>
                 </div>
+
 
                 <!-- Phương thức thanh toán -->
                 <div class="form-group my-3">
@@ -331,15 +346,18 @@
                         <h6>Phương thức thanh toán</h6>
                     </label>
                     <select class="form-control" id="paymentMethod">
-                        <option value="cash">Thanh toán bằng trực tiếp</option>
+                        <option value="cash">Thanh toán trực tiếp</option>
                         <option value="card">Thanh toán bằng thẻ</option>
                     </select>
                 </div>
-                <button class="ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
+
+                <!-- Nút thanh toán -->
+                <button class="ShopMore ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
             </div>
         </div>
     </div>
 </section>
+
 </body>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
@@ -407,13 +425,38 @@
     </div>
 
 </footer>
-<!-- bootstarp cdn -->
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+<script>
+    function applyVoucher() {
+        const voucherSelect = document.getElementById('voucherSelect');
+        const selectedValue = parseFloat(voucherSelect.value);
+        const subtotal = parseFloat('${sessionScope.totalPrice}');
+        const shipping = 20;
+
+        let validDiscount = 0;
+
+        if (selectedValue === 0.10 && subtotal >= 100) {
+            validDiscount = 0.10;
+        } else if (selectedValue === 0.15 && subtotal >= 300) {
+            validDiscount = 0.15;
+        } else if (selectedValue === 0.20 && subtotal >= 500) {
+            validDiscount = 0.20;
+        }
+
+        const discountAmount = subtotal * validDiscount;
+        const total = subtotal + shipping - discountAmount;
+
+        document.getElementById('discount-value').innerText = discountAmount.toFixed(0) + 'K';
+        document.getElementById('total-value').innerText = total.toFixed(0) + 'K';
+    }
+</script>
+
 </html>
 
 

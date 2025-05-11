@@ -111,6 +111,62 @@
                 font-size: 16px;
                 border: 1px solid #ccc;
             }
+            .cart-container {
+                width: 80%;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .cart-item {
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid #ddd;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .product-info {
+                display: flex;
+                gap: 15px;
+            }
+
+            .product-info img {
+                max-width: 100px;
+            }
+
+            .shipping-info {
+                margin-top: 20px;
+            }
+
+            .shipping-info h4 {
+                font-size: 1.2em;
+            }
+
+            .shipping-info input, .shipping-info select {
+                margin: 5px 0;
+                padding: 8px;
+            }
+
+            .shipping-info button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+            }
+
+            .shipping-info button:hover {
+                background-color: #45a049;
+            }
+
+            #result {
+                margin-top: 10px;
+                font-weight: bold;
+                color: #333;
+            }
+
 
 
         </style>
@@ -275,6 +331,24 @@
                         <i class="bi bi-trash3"></i>
                     </button>
                 </td>
+                <td colspan="6">
+                    <!-- Form tính phí vận chuyển -->
+                    <div class="shipping-info mt-2">
+                        <h6>Tính phí vận chuyển</h6>
+                        <form id="shippingForm_${item.product.id}" data-product-id="${item.product.id}">
+                            <select name="toDistrict">
+                                <option value="1442">Quận 7</option>
+                                <option value="1445">Quận Tân Phú</option>
+                                <!-- Thêm các quận khác nếu cần -->
+                            </select>
+                            <input name="toWardCode" placeholder="Mã phường (ví dụ: 10007)" />
+                            <input name="weight" type="number" value="${item.product.weight}" placeholder="Khối lượng (Gram)" />
+                            <button type="submit">Tính phí</button>
+                        </form>
+                        <p id="result_${item.product.id}"></p>
+                    </div>
+                </td>
+
             </tr>
         </c:forEach>
         </tbody>
@@ -339,8 +413,11 @@
             </div>
         </div>
     </div>
+
 </section>
 </body>
+
+
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -414,6 +491,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll("#shippingForm").forEach(form => {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch("/your-app/api/shipping-fee", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const resultElement = this.querySelector("#result");
+                    resultElement.innerText = "Phí vận chuyển: " + data.data.total + " VND";
+                });
+        });
+    });
+</script>
 </html>
 
 

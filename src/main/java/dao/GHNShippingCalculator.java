@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class GHNShippingCalculator {
     private static final String GHN_URL = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
-    private static final String GHN_TOKEN = "YOUR_TOKEN_HERE";
-    private static final String SHOP_ID = "YOUR_SHOP_ID";
+    private static final String GHN_TOKEN = "57fb4bcb2ed011f0905846b90fbc47f5";
+    private static final String SHOP_ID = "4762660";
 
     public static String getShippingFee(int fromDistrict, int toDistrict, String toWardCode, int weight) throws IOException {
         OkHttpClient client = new OkHttpClient();

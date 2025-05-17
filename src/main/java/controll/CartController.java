@@ -22,9 +22,8 @@ public class CartController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        cartDao = new CartDao(); // ✅ Khởi tạo DAO
+        cartDao = new CartDao(); // Khởi tạo DAO
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,10 +31,9 @@ public class CartController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
+        Users user = (Users) session.getAttribute("auth"); // Đặt chung là "auth"
 
         ArrayList<CartItem> cartList = new ArrayList<>();
-
         if (user != null) {
             List<CartItem> sessionCart = (List<CartItem>) session.getAttribute("cartItems");
             if (sessionCart != null) {
@@ -51,13 +49,12 @@ public class CartController extends HttpServlet {
             }
         }
 
-        double totalPrice = cartDao.getTotalCartPrice(cartList);  // Đơn giá tạm tính
+        double totalPrice = cartDao.getTotalCartPrice(cartList);
         int totalItems = cartDao.getTotalItemCount(cartList);
 
-        // Giảm giá tự động
+        // Tính giảm giá tự động
         double autoDiscount = 0;
-        String discountNote = "Không đủ điều kiện áp dụng voucher tự động";
-
+        String discountNote = "Không đủ điều kiện áp dụng giảm tự động";
         if (totalPrice > 500) {
             autoDiscount = totalPrice * 0.20;
             discountNote = "Giảm 20% cho đơn trên 500K";
@@ -69,11 +66,9 @@ public class CartController extends HttpServlet {
             discountNote = "Giảm 10% cho đơn trên 100K";
         }
 
-        // Lấy voucher từ tham số (nếu có)
-        // Lấy voucher từ tham số (nếu có) và áp dụng giảm theo phần trăm
+        // Tính giảm giá từ voucher (nếu có)
         double voucherDiscount = 0;
         String voucherParam = request.getParameter("voucher");
-
         if (voucherParam != null && voucherParam.equalsIgnoreCase("VOUCHER")) {
             if (totalPrice > 500) {
                 voucherDiscount = totalPrice * 0.20;
@@ -84,10 +79,14 @@ public class CartController extends HttpServlet {
             }
         }
 
-        // Tính tổng giảm giá
         double totalDiscount = autoDiscount + voucherDiscount;
 
-        double shippingFee = 20;
+        // Tính phí vận chuyển
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        double shippingFee = calculateShippingCost(province, district);
+
+        // Tính tổng thanh toán
         double finalAmount = totalPrice + shippingFee - totalDiscount;
 
         // Gửi dữ liệu về JSP
@@ -103,5 +102,21 @@ public class CartController extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("doanweb/html/cart.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private double calculateShippingCost(String province, String district) {
+        if (province == null || district == null) return 0;
+
+        if ("Hanoi".equals(province)) {
+            if ("HoanKiem".equals(district)) return 30000;
+            if ("BaDinh".equals(district)) return 25000;
+        } else if ("HoChiMinh".equals(province)) {
+            if ("TanBinh".equals(district)) return 35000;
+            if ("Quan1".equals(district)) return 40000;
+        } else if ("DaNang".equals(province)) {
+            if ("HaiChau".equals(district)) return 20000;
+        }
+
+        return 20000; // phí mặc định
     }
 }

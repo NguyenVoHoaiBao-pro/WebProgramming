@@ -1,7 +1,8 @@
 
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <html>
 
 <head>
@@ -281,65 +282,126 @@
     </table>
 </section>
 
-<section id="cart-bottom" class="container">
-    <div class="row">
-        <div class="Total col-lg-8 col-md-6 col-12 mb-4 mx-auto">
-            <div>
-                <h5>Tổng giỏ hàng</h5>
-                <div class="d-flex justify-content-between">
-                    <h6>Tạm tính</h6>
-                    <p id="subtotal-value">
-                        <strong>${sessionScope.totalPrice}K</strong>
-                    </p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <h6>Phí vận chuyển</h6>
-                    <p id="shipping-value">20K</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <h6>Thời gian giao hàng dự kiến</h6>
-                    <p id="shippingtime">1h</p>
-                </div>
-                <hr class="second-hr">
-                <div id="discount-row" class="d-flex justify-content-between">
-                    <h6>Giảm giá</h6>
-                    <p id="discount-value">
-                        <fmt:formatNumber value="${discount}" type="currency" currencySymbol="VND"/>
-                    </p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <h6>Tổng cộng</h6>
-                    <p id="total-value">
-                        ${sessionScope.totalPrice + 20}K
-                    </p>
-                </div>
+<section id="cart-bottom" class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12">
+            <div class="card shadow rounded-3">
+                <div class="card-body p-4">
+                    <h4 class="mb-4">Tổng giỏ hàng</h4>
 
-                <div class="form-group my-3">
-                    <label for="voucherSelect">
-                        <h6>Chọn voucher</h6>
-                    </label>
-                    <select class="form-control" id="voucherSelect" onchange="applyVoucher()">
-                        <option value="0">Không sử dụng voucher</option>
-                        <option value="5000">Giảm 5,000 VND</option>
-                        <option value="10000">Giảm 10,000 VND</option>
-                    </select>
-                </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6 class="mb-0">Tạm tính</h6>
+                        <strong>
+                            <fmt:formatNumber value="${sessionScope.totalPrice * 1000}" type="currency" currencySymbol="VND" />
+                        </strong>
+                    </div>
 
-                <!-- Phương thức thanh toán -->
-                <div class="form-group my-3">
-                    <label for="paymentMethod">
-                        <h6>Phương thức thanh toán</h6>
-                    </label>
-                    <select class="form-control" id="paymentMethod">
-                        <option value="cash">Thanh toán bằng trực tiếp</option>
-                        <option value="card">Thanh toán bằng thẻ</option>
-                    </select>
+                    <form action="cart" method="get" id="shipping-form">
+                        <!-- Chọn đơn vị vận chuyển -->
+                        <div class="form-group mb-3">
+                            <label for="shippingProvider"><strong>Chọn đơn vị vận chuyển</strong></label>
+                            <select class="form-control" name="shippingProvider" id="shippingProvider">
+                                <option value="GHN">Giao hàng nhanh</option>
+                                <option value="GHTK">Giao hàng tiết kiệm</option>
+                            </select>
+                        </div>
+
+                        <!-- Chọn tỉnh -->
+                        <div class="form-group mb-3">
+                            <label for="province"><strong>Chọn Tỉnh/Thành phố</strong></label>
+                            <select name="province" id="province" class="form-control" onchange="document.getElementById('shipping-form').submit();">
+                                <option value="">-- Chọn tỉnh --</option>
+                                <option value="Hanoi" ${param.province == 'Hanoi' ? 'selected' : ''}>Hà Nội</option>
+                                <option value="HoChiMinh" ${param.province == 'HoChiMinh' ? 'selected' : ''}>TP. Hồ Chí Minh</option>
+                                <option value="DaNang" ${param.province == 'DaNang' ? 'selected' : ''}>Đà Nẵng</option>
+                            </select>
+                        </div>
+
+                        <!-- Chọn quận huyện -->
+                        <div class="form-group mb-4">
+                            <label for="district"><strong>Chọn Quận/Huyện</strong></label>
+                            <select name="district" id="district" class="form-control" onchange="document.getElementById('shipping-form').submit();">
+                                <option value="">-- Chọn quận/huyện --</option>
+                                <c:if test="${param.province == 'Hanoi'}">
+                                    <option value="HoanKiem" ${param.district == 'HoanKiem' ? 'selected' : ''}>Hoàn Kiếm</option>
+                                    <option value="BaDinh" ${param.district == 'BaDinh' ? 'selected' : ''}>Ba Đình</option>
+                                </c:if>
+                                <c:if test="${param.province == 'HoChiMinh'}">
+                                    <option value="TanBinh" ${param.district == 'TanBinh' ? 'selected' : ''}>Tân Bình</option>
+                                    <option value="Quan1" ${param.district == 'Quan1' ? 'selected' : ''}>Quận 1</option>
+                                </c:if>
+                                <c:if test="${param.province == 'DaNang'}">
+                                    <option value="HaiChau" ${param.district == 'HaiChau' ? 'selected' : ''}>Hải Châu</option>
+                                </c:if>
+                            </select>
+                        </div>
+                    </form>
+
+                    <p hidden id="dataValues"
+                       data-totalprice="${sessionScope.totalPrice}"
+                       data-shipping="${shippingCost}">
+                    </p>
+                    <!-- Phí và thời gian giao hàng -->
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="mb-0">Phí vận chuyển</h6>
+                        <p class="mb-0" id="shippingCost">
+                            <fmt:formatNumber value="${shippingCost}" type="currency" currencySymbol="VND" />
+                        </p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <h6 class="mb-0">Thời gian giao hàng dự kiến</h6>
+                        <p class="mb-0" id="shippingtime">1h</p>
+                    </div>
+
+                    <hr>
+
+                    <!-- Giảm giá -->
+                    <div class="d-flex justify-content-between mb-3" id="discount-row">
+                        <h6 class="mb-0">Giảm giá</h6>
+                        <p class="mb-0" id="discountText">
+                            <fmt:formatNumber value="${discount}" type="currency" currencySymbol="VND" />
+                        </p>
+                    </div>
+
+                    <!-- Tổng cộng -->
+                    <div class="d-flex justify-content-between mb-4">
+                        <h5 class="mb-0">Tổng cộng</h5>
+                        <strong id="totalAmountText">
+                            <fmt:formatNumber value="${(sessionScope.totalPrice * 1000) + shippingCost - discount}" type="currency" currencySymbol="VND" />
+                        </strong>
+                    </div>
+
+
+                    <!-- Chọn voucher -->
+                    <div class="form-group mb-3">
+                        <label for="voucherSelect"><strong>Chọn voucher</strong></label>
+                        <select class="form-control" id="voucherSelect" onchange="applyVoucher()">
+                            <option value="0">Không sử dụng voucher</option>
+                            <option value="5000">Giảm 5,000 VND</option>
+                            <option value="10000">Giảm 10,000 VND</option>
+                        </select>
+                    </div>
+
+                    <!-- Phương thức thanh toán -->
+                    <div class="form-group mb-4">
+                        <label for="paymentMethod"><strong>Phương thức thanh toán</strong></label>
+                        <select class="form-control" id="paymentMethod">
+                            <option value="cash">Thanh toán trực tiếp</option>
+                            <option value="card">Thanh toán bằng thẻ</option>
+                        </select>
+                    </div>
+
+                    <!-- Nút thanh toán -->
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary px-4">TIẾN HÀNH THANH TOÁN</button>
+                    </div>
                 </div>
-                <button class="ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
             </div>
         </div>
     </div>
 </section>
+
 </body>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
@@ -414,6 +476,57 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+<script>
+    const districtOptions = {
+        Hanoi: [
+            { value: "HoanKiem", text: "Hoàn Kiếm" },
+            { value: "BaDinh", text: "Ba Đình" }
+        ],
+        HoChiMinh: [
+            { value: "TanBinh", text: "Tân Bình" },
+            { value: "Quan1", text: "Quận 1" }
+        ],
+        DaNang: [
+            { value: "HaiChau", text: "Hải Châu" }
+        ]
+    };
+
+    document.getElementById("province").addEventListener("change", function () {
+        const province = this.value;
+        const districtSelect = document.getElementById("district");
+
+        // Xóa các quận hiện tại
+        districtSelect.innerHTML = '<option value="">-- Chọn quận/huyện --</option>';
+
+        // Nếu tỉnh có dữ liệu, thêm vào
+        if (districtOptions[province]) {
+            districtOptions[province].forEach(function (district) {
+                const option = document.createElement("option");
+                option.value = district.value;
+                option.text = district.text;
+                districtSelect.appendChild(option);
+            });
+        }
+    });
+</script>
+<script>
+    function applyVoucher() {
+        const totalPrice = parseInt("${sessionScope.totalPrice}") * 1000; // Đảm bảo là VND
+        const shippingCost = parseInt("${shippingCost}") ;
+        const discountValue = parseInt(document.getElementById("voucherSelect").value);
+
+        // Tính tổng cộng sau khi áp dụng voucher
+        const totalAmount = totalPrice + shippingCost - discountValue;
+
+        // Cập nhật tổng cộng
+        document.getElementById("totalAmountText").innerText = totalAmount.toLocaleString('vi-VN') + " VND";
+
+        // Cập nhật giảm giá
+        document.getElementById("discountText").innerText = discountValue.toLocaleString('vi-VN') + " VND";
+    }
+
+</script>
+
 </html>
 
 

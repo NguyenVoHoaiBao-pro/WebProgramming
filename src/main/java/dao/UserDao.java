@@ -134,6 +134,36 @@ public class UserDao {
         }
         return false; // Trả về false nếu không tìm thấy hoặc có lỗi xảy ra
     }
+    public Users login(String username, String password) {
+        Users user = null;
+        String query = "SELECT * FROM User WHERE username = ? AND password = ?"; // kiểm tra username và password
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    user = new Users(
+                            rs.getInt("user_id"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("phone"),
+                            rs.getString("role"),
+                            rs.getString("address")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
 
     public boolean editUser(Users user) {
         boolean isUpdated = false;

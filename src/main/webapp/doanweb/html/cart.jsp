@@ -289,6 +289,7 @@
                 <div class="card-body p-4">
                     <h4 class="mb-4">Tổng giỏ hàng</h4>
 
+                    <!-- Tạm tính -->
                     <div class="d-flex justify-content-between mb-3">
                         <h6 class="mb-0">Tạm tính</h6>
                         <strong>
@@ -296,8 +297,9 @@
                         </strong>
                     </div>
 
+                    <!-- Form chọn vận chuyển -->
                     <form action="cart" method="get" id="shipping-form">
-                        <!-- Chọn đơn vị vận chuyển -->
+                        <!-- Đơn vị vận chuyển -->
                         <div class="form-group mb-3">
                             <label for="shippingProvider"><strong>Chọn đơn vị vận chuyển</strong></label>
                             <select class="form-control" name="shippingProvider" id="shippingProvider">
@@ -341,7 +343,8 @@
                        data-totalprice="${sessionScope.totalPrice}"
                        data-shipping="${shippingCost}">
                     </p>
-                    <!-- Phí và thời gian giao hàng -->
+
+                    <!-- Phí vận chuyển -->
                     <div class="d-flex justify-content-between mb-2">
                         <h6 class="mb-0">Phí vận chuyển</h6>
                         <p class="mb-0" id="shippingCost">
@@ -349,6 +352,7 @@
                         </p>
                     </div>
 
+                    <!-- Thời gian giao hàng -->
                     <div class="d-flex justify-content-between mb-4">
                         <h6 class="mb-0">Thời gian giao hàng dự kiến</h6>
                         <p class="mb-0" id="shippingtime">1h</p>
@@ -372,14 +376,14 @@
                         </strong>
                     </div>
 
-
                     <!-- Chọn voucher -->
                     <div class="form-group mb-3">
-                        <label for="voucherSelect"><strong>Chọn voucher</strong></label>
+                        <label for="voucherSelect"><strong>Chọn mã giảm giá</strong></label>
                         <select class="form-control" id="voucherSelect" onchange="applyVoucher()">
                             <option value="0">Không sử dụng voucher</option>
-                            <option value="5000">Giảm 5,000 VND</option>
-                            <option value="10000">Giảm 10,000 VND</option>
+                            <option value="0.10">Giảm 10% (Đơn ≥ 100K)</option>
+                            <option value="0.15">Giảm 15% (Đơn ≥ 300K)</option>
+                            <option value="0.20">Giảm 20% (Đơn ≥ 500K)</option>
                         </select>
                     </div>
 
@@ -394,13 +398,14 @@
 
                     <!-- Nút thanh toán -->
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary px-4">TIẾN HÀNH THANH TOÁN</button>
+                        <button class="btn btn-primary px-4" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 </body>
 <footer class="mt-5 p-5 bg-dark">
@@ -469,7 +474,7 @@
     </div>
 
 </footer>
-<!-- bootstarp cdn -->
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -477,6 +482,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
 <script>
+    // Cập nhật danh sách quận/huyện theo tỉnh được chọn
     const districtOptions = {
         Hanoi: [
             { value: "HoanKiem", text: "Hoàn Kiếm" },
@@ -495,10 +501,8 @@
         const province = this.value;
         const districtSelect = document.getElementById("district");
 
-        // Xóa các quận hiện tại
         districtSelect.innerHTML = '<option value="">-- Chọn quận/huyện --</option>';
 
-        // Nếu tỉnh có dữ liệu, thêm vào
         if (districtOptions[province]) {
             districtOptions[province].forEach(function (district) {
                 const option = document.createElement("option");
@@ -508,24 +512,36 @@
             });
         }
     });
-</script>
-<script>
+
+    // Xử lý áp dụng mã giảm giá
     function applyVoucher() {
-        const totalPrice = parseInt("${sessionScope.totalPrice}") * 1000; // Đảm bảo là VND
-        const shippingCost = parseInt("${shippingCost}") ;
-        const discountValue = parseInt(document.getElementById("voucherSelect").value);
+        const voucherSelect = document.getElementById('voucherSelect');
+        const selectedValue = parseFloat(voucherSelect.value);
 
-        // Tính tổng cộng sau khi áp dụng voucher
-        const totalAmount = totalPrice + shippingCost - discountValue;
+        const subtotal = parseFloat('${sessionScope.totalPrice}') * 1000; // Chuyển về VND
+        const shipping = parseFloat('${shippingCost}'); // Đảm bảo có thể thay đổi
+        let discountRate = 0;
 
-        // Cập nhật tổng cộng
-        document.getElementById("totalAmountText").innerText = totalAmount.toLocaleString('vi-VN') + " VND";
+        if (selectedValue === 0.10 && subtotal >= 100000) {
+            discountRate = 0.10;
+        } else if (selectedValue === 0.15 && subtotal >= 300000) {
+            discountRate = 0.15;
+        } else if (selectedValue === 0.20 && subtotal >= 500000) {
+            discountRate = 0.20;
+        }
 
-        // Cập nhật giảm giá
-        document.getElementById("discountText").innerText = discountValue.toLocaleString('vi-VN') + " VND";
+        const discountAmount = subtotal * discountRate;
+        const total = subtotal + shipping - discountAmount;
+
+        // Cập nhật UI
+        document.getElementById('discountText')?.innerText = discountAmount.toLocaleString('vi-VN') + ' VND';
+        document.getElementById('discount-value')?.innerText = (discountAmount / 1000).toFixed(0) + 'K';
+
+        document.getElementById('totalAmountText')?.innerText = total.toLocaleString('vi-VN') + ' VND';
+        document.getElementById('total-value')?.innerText = (total / 1000).toFixed(0) + 'K';
     }
-
 </script>
+
 
 </html>
 

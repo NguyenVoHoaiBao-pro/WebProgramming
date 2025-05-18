@@ -1,8 +1,6 @@
 package entity;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Cart {
     private int c_id;
@@ -10,10 +8,6 @@ public class Cart {
     private int product_id;
     private int quantity;
     private Timestamp created_at;
-    private List<CartItem> cartItems;
-
-    public Cart() {
-    }
 
     // Constructor
     public Cart(int c_id, int user_id, int product_id, int quantity,Timestamp created_at) {
@@ -22,7 +16,6 @@ public class Cart {
         this.product_id = product_id;
         this.quantity = quantity;
         this.created_at = created_at;
-        this.cartItems = new ArrayList<>();
     }
 
     public int getC_id() {
@@ -65,17 +58,6 @@ public class Cart {
         this.user_id = user_id;
     }
 
-    public void addItem(CartItem item) {
-        cartItems.add(item);
-    }
-
-    public List<CartItem> getCartItems() {
-        return cartItems;
-    }
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
-    }
-
     @Override
     public String toString() {
         return "Cart" +
@@ -86,4 +68,6 @@ public class Cart {
                 ", created_at=" + created_at +
                 '}';
     }
+
+
 }

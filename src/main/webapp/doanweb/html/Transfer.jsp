@@ -229,7 +229,7 @@
     <div class="container">
         <div class="payment-card-form">
             <h4>Thanh toán bằng thẻ</h4>
-            <form action="#" method="post">
+            <form action="Transfer" method="post">
                 <div class="form-group">
                     <label for="cardName">Tên trên thẻ</label>
                     <input type="text" id="cardName" name="cardName" placeholder="Nguyen Van A" required>

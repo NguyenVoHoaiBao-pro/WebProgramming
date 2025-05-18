@@ -60,11 +60,12 @@
         color: #555;
     }
 
-    .payment-cash-form .form-group input[type="text"] {
+    .payment-cash-form .form-group input[type="text"],
+    .payment-cash-form .form-group input[type="checkbox"] {
+        font-size: 1rem;
         padding: 10px 12px;
         border: 1.5px solid #ccc;
         border-radius: 6px;
-        font-size: 1rem;
         transition: border-color 0.3s ease;
     }
 
@@ -72,6 +73,17 @@
         outline: none;
         border-color: #0066ff;
         box-shadow: 0 0 6px #99bbff;
+    }
+
+    /* Checkbox đặc biệt style */
+    .payment-cash-form .form-group input[type="checkbox"] {
+        width: auto;
+        height: auto;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        cursor: pointer;
     }
 
     .payment-cash-form .btn-submit {
@@ -98,6 +110,7 @@
             padding: 20px 15px;
         }
     }
+
 
 </style>
 <body>
@@ -210,21 +223,41 @@
         <div class="payment-cash-form">
             <h4>Thanh toán bằng tiền mặt</h4>
             <form action="#" method="post">
+
                 <div class="form-group">
-                    <label for="payerName">Tên người thanh toán</label>
+                    <label for="payerName">Tên người thanh toán <span style="color:red;">*</span></label>
                     <input type="text" id="payerName" name="payerName" placeholder="Nguyen Van A" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="amount">Số tiền</label>
+                    <label for="phoneNumber">Số điện thoại <span style="color:red;">*</span></label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="0901234567" pattern="[0-9]{9,11}" title="Số điện thoại từ 9 đến 11 số" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Số tiền thanh toán <span style="color:red;">*</span></label>
                     <input type="text" id="amount" name="amount" placeholder="1,000,000 VND" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="address">Địa chỉ nhận hóa đơn (nếu có)</label>
+                    <input type="text" id="address" name="address" placeholder="123 Đường ABC, Quận 1, TP.HCM">
+                </div>
+
                 <div class="form-group">
                     <label for="notes">Ghi chú (tuỳ chọn)</label>
                     <input type="text" id="notes" name="notes" placeholder="Ví dụ: Thanh toán tại cửa hàng">
                 </div>
+
+                <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree" style="font-weight: normal; color: #555;">Tôi đồng ý với điều khoản thanh toán tiền mặt</label>
+                </div>
+
                 <button type="submit" class="btn-submit">Xác nhận thanh toán tiền mặt</button>
             </form>
         </div>
+
 
     </div>
 </section>

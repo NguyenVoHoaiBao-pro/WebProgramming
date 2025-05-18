@@ -344,65 +344,17 @@
                        data-shipping="${shippingCost}">
                     </p>
 
-                    <!-- Phí vận chuyển -->
-                    <div class="d-flex justify-content-between mb-2">
-                        <h6 class="mb-0">Phí vận chuyển</h6>
-                        <p class="mb-0" id="shippingCost">
-                            <fmt:formatNumber value="${shippingCost}" type="currency" currencySymbol="VND" />
-                        </p>
-                    </div>
-
-                    <!-- Thời gian giao hàng -->
-                    <div class="d-flex justify-content-between mb-4">
-                        <h6 class="mb-0">Thời gian giao hàng dự kiến</h6>
-                        <p class="mb-0" id="shippingtime">1h</p>
-                    </div>
-
-                    <hr>
-
-                    <!-- Giảm giá -->
-                    <div class="d-flex justify-content-between mb-3" id="discount-row">
-                        <h6 class="mb-0">Giảm giá</h6>
-                        <p class="mb-0" id="discountText">
-                            <fmt:formatNumber value="${discount}" type="currency" currencySymbol="VND" />
-                        </p>
-                    </div>
-
-                    <!-- Tổng cộng -->
-                    <div class="d-flex justify-content-between mb-4">
-                        <h5 class="mb-0">Tổng cộng</h5>
-                        <strong id="totalAmountText">
-                            <fmt:formatNumber value="${(sessionScope.totalPrice * 1000) + shippingCost - discount}" type="currency" currencySymbol="VND" />
-                        </strong>
-                    </div>
-
-                    <!-- Chọn voucher -->
-                    <div class="form-group mb-3">
-                        <label for="voucherSelect"><strong>Chọn mã giảm giá</strong></label>
-                        <select class="form-control" id="voucherSelect" onchange="applyVoucher()">
-                            <option value="0">Không sử dụng voucher</option>
-                            <option value="0.10">Giảm 10% (Đơn ≥ 100K)</option>
-                            <option value="0.15">Giảm 15% (Đơn ≥ 300K)</option>
-                            <option value="0.20">Giảm 20% (Đơn ≥ 500K)</option>
-                        </select>
-                    </div>
-
-                    <!-- Phương thức thanh toán -->
-                    <div class="form-group mb-4">
-                        <label for="paymentMethod"><strong>Phương thức thanh toán</strong></label>
-                        <select class="form-control" id="paymentMethod">
-                            <option value="cash">Thanh toán trực tiếp</option>
-                            <option value="card">Thanh toán bằng thẻ</option>
-                        </select>
-                    </div>
-
-                    <!-- Nút thanh toán -->
-                    <div class="text-end">
-                        <button class="btn btn-primary px-4" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
-                    </div>
+                <div class="payment-method" style="margin-top: 30px; text-align: center;">
+                    <h3>Chọn hình thức thanh toán</h3>
+                    <select id="paymentSelect" class="sort-button">
+                        <option value="">-- Vui lòng chọn --</option>
+                        <option value="direct">Thanh toán trực tiếp</option>
+                        <option value="card">Thanh toán bằng thẻ</option>
+                    </select>
+                    <button onclick="redirectPayment()" class="sort-button" style="margin-top: 20px;">Tiếp tục</button>
                 </div>
+
             </div>
-        </div>
     </div>
 </section>
 
@@ -539,6 +491,17 @@
 
         document.getElementById('totalAmountText')?.innerText = total.toLocaleString('vi-VN') + ' VND';
         document.getElementById('total-value')?.innerText = (total / 1000).toFixed(0) + 'K';
+    }
+    function redirectPayment() {
+        const selectedOption = document.getElementById("paymentSelect").value;
+
+        if (selectedOption === "direct") {
+            window.location.href = "<%= request.getContextPath() %>/doanweb/html/DirectDeposit.jsp";  // thay link thật
+        } else if (selectedOption === "card") {
+            window.location.href = "<%= request.getContextPath() %>/doanweb/html/Transfer.jsp"; // thay link thật
+        } else {
+            alert("Vui lòng chọn hình thức thanh toán.");
+        }
     }
 </script>
 

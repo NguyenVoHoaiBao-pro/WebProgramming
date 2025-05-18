@@ -12,66 +12,58 @@ import java.util.List;
 import static dao.MySQLConnection.getConnection;
 
 public class CartDao {
-
-    private int getOrCreateCartId(int userId, String sessionId) throws SQLException {
+    // Thêm sản phẩm vào giỏ hàng (có tính session_id)
+    public void addItemToCart(int userId, int productId, int quantity, String sessionId) {
         String cartQuery = "SELECT cart_id FROM cart WHERE user_id = ? AND session_id = ?";
-        try (PreparedStatement checkStmt = MySQLConnection.getConnection().prepareStatement(cartQuery)) {
-            checkStmt.setInt(1, userId);
-            checkStmt.setString(2, sessionId);
-            ResultSet rs = checkStmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("cart_id");
-            }
-        }
+        try (Connection connection = getConnection();
+             PreparedStatement cartStmt = connection.prepareStatement(cartQuery)) {
+            cartStmt.setInt(1, userId);
+            cartStmt.setString(2, sessionId);
+            ResultSet cartRs = cartStmt.executeQuery();
 
-        // Nếu không có cart, tạo mới
-        String createCartQuery = "INSERT INTO cart (user_id, session_id, created_at) VALUES (?, ?, ?)";
-        try (PreparedStatement createStmt = MySQLConnection.getConnection().prepareStatement(createCartQuery, Statement.RETURN_GENERATED_KEYS)) {
-            createStmt.setInt(1, userId);
-            createStmt.setString(2, sessionId);
-            createStmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-            createStmt.executeUpdate();
-            ResultSet generatedKeys = createStmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                return generatedKeys.getInt(1);
-            }
-        }
-
-        throw new SQLException("Failed to create cart");
-    }
-
-    public void addItemToCart(int userId, int productId, int quantity, String sessionId) throws SQLException {
-        int cartId = getOrCreateCartId(userId, sessionId);
-
-        // Kiểm tra xem sản phẩm đã có trong cart_item chưa
-        String checkQuery = "SELECT quantity FROM cart_item WHERE cart_id = ? AND product_id = ?";
-        try (PreparedStatement checkStmt = MySQLConnection.getConnection().prepareStatement(checkQuery)) {
-            checkStmt.setInt(1, cartId);
-            checkStmt.setInt(2, productId);
-            ResultSet rs = checkStmt.executeQuery();
-            if (rs.next()) {
-                // Nếu đã có, cập nhật số lượng
-                int existingQuantity = rs.getInt("quantity");
-                int newQuantity = existingQuantity + quantity;
-                String updateQuery = "UPDATE cart_item SET quantity = ? WHERE cart_id = ? AND product_id = ?";
-                try (PreparedStatement updateStmt = MySQLConnection.getConnection().prepareStatement(updateQuery)) {
-                    updateStmt.setInt(1, newQuantity);
-                    updateStmt.setInt(2, cartId);
-                    updateStmt.setInt(3, productId);
-                    updateStmt.executeUpdate();
-                }
+            int cartId = 0;
+            if (cartRs.next()) {
+                cartId = cartRs.getInt("cart_id");
             } else {
-                // Nếu chưa có, thêm mới
-                String insertQuery = "INSERT INTO cart_item (cart_id, product_id, quantity) VALUES (?, ?, ?)";
-                try (PreparedStatement insertStmt = MySQLConnection.getConnection().prepareStatement(insertQuery)) {
-                    insertStmt.setInt(1, cartId);
-                    insertStmt.setInt(2, productId);
-                    insertStmt.setInt(3, quantity);
-                    insertStmt.executeUpdate();
+                String createCartQuery = "INSERT INTO cart (user_id, session_id) VALUES (?, ?)";
+                try (PreparedStatement createCartStmt = connection.prepareStatement(createCartQuery, Statement.RETURN_GENERATED_KEYS)) {
+                    createCartStmt.setInt(1, userId);
+                    createCartStmt.setString(2, sessionId);
+                    createCartStmt.executeUpdate();
+                    ResultSet generatedKeys = createCartStmt.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        cartId = generatedKeys.getInt(1);
+                    }
                 }
             }
+
+            // Kiểm tra cartId đã được xác định chính xác
+            if (cartId == 0) {
+                System.err.println("Error: cartId is 0, something went wrong!");
+                return;
+            }
+
+            String addItemQuery = "INSERT INTO cart_item (cart_id, product_id, quantity) VALUES (?, ?, ?) " +
+                    "ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+            try (PreparedStatement addItemStmt = connection.prepareStatement(addItemQuery)) {
+                addItemStmt.setInt(1, cartId);
+                addItemStmt.setInt(2, productId);
+                addItemStmt.setInt(3, quantity);
+                addItemStmt.setInt(4, quantity);  // Cập nhật số lượng nếu đã có sản phẩm
+                int rowsAffected = addItemStmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Product successfully added to cart.");
+                } else {
+                    System.err.println("Failed to add product to cart.");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while adding item to cart: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
 
 
     public List<CartItem> getCartItemsByUserId(int userId) {
@@ -412,26 +404,46 @@ public class CartDao {
 
         return sum;
     }
-    public void saveCart(Cart cart, String sessionId, List<CartItem> cartItems) throws SQLException {
-        int cartId = getOrCreateCartId(cart.getUser_id(), sessionId);
+    public void saveCart(int userId, String sessionId, List<CartItem> cartItems) {
+        // Kiểm tra xem giỏ hàng có tồn tại không
+        String cartQuery = "SELECT cart_id FROM cart WHERE user_id = ? AND session_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement cartStmt = connection.prepareStatement(cartQuery)) {
+            cartStmt.setInt(1, userId);
+            cartStmt.setString(2, sessionId);
+            ResultSet cartRs = cartStmt.executeQuery();
 
-        // Xoá toàn bộ cart_item cũ (nếu muốn cập nhật lại toàn bộ)
-        String deleteQuery = "DELETE FROM cart_item WHERE cart_id = ?";
-        try (PreparedStatement deleteStmt = MySQLConnection.getConnection().prepareStatement(deleteQuery)) {
-            deleteStmt.setInt(1, cartId);
-            deleteStmt.executeUpdate();
-        }
-
-        // Thêm lại các item
-        String insertQuery = "INSERT INTO cart_item (cart_id, product_id, quantity) VALUES (?, ?, ?)";
-        for (CartItem item : cart.getCartItems()) {
-            try (PreparedStatement stmt = MySQLConnection.getConnection().prepareStatement(insertQuery)) {
-                stmt.setInt(1, cartId);
-                stmt.setInt(2, item.getProduct().getId());
-                stmt.setInt(3, item.getQuantity());
-                stmt.executeUpdate();
+            int cartId = 0;
+            if (cartRs.next()) {
+                cartId = cartRs.getInt("cart_id");
+            } else {
+                // Tạo mới giỏ hàng nếu chưa có
+                String createCartQuery = "INSERT INTO cart (user_id, session_id) VALUES (?, ?)";
+                try (PreparedStatement createCartStmt = connection.prepareStatement(createCartQuery, Statement.RETURN_GENERATED_KEYS)) {
+                    createCartStmt.setInt(1, userId);
+                    createCartStmt.setString(2, sessionId);
+                    createCartStmt.executeUpdate();
+                    ResultSet generatedKeys = createCartStmt.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        cartId = generatedKeys.getInt(1);
+                    }
+                }
             }
+
+            // Lưu các item vào bảng cart_item
+            String insertItemQuery = "INSERT INTO cart_item (cart_id, product_id, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + ?";
+            try (PreparedStatement addItemStmt = connection.prepareStatement(insertItemQuery)) {
+                for (CartItem cartItem : cartItems) {
+                    addItemStmt.setInt(1, cartId);
+                    addItemStmt.setInt(2, cartItem.getProduct().getId());
+                    addItemStmt.setInt(3, cartItem.getQuantity());
+                    addItemStmt.setInt(4, cartItem.getQuantity());  // Nếu sản phẩm đã có, cập nhật số lượng
+                    addItemStmt.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-}
 
+}

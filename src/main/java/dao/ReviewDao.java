@@ -37,33 +37,30 @@ public class ReviewDao {
     }
 
     public List<Review> getReviewsByProductId(int productId) {
-        List<Review> reviewList = new ArrayList<>();
-        String query = "SELECT * FROM review WHERE product_id = ?";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setInt(1, productId);
-            try (ResultSet rs = statement.executeQuery()) {
-                while (rs.next()) {
-                    Review review = new Review(
-                            rs.getInt("review_id"),
-                            rs.getInt("product_id"),
-                            rs.getInt("user_id"),
-                            rs.getInt("rating"),
-                            rs.getString("comment"),
-                            rs.getTimestamp("review_date")
-                    );
-                    reviewList.add(review);
+        List<Review> reviews = new ArrayList<>();
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT * FROM reviews WHERE product_id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, productId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        Review review = new Review();
+                        review.setReview_id(rs.getInt("id"));
+                        review.setUser_id(rs.getInt("user_id"));
+                        review.setProduct_id((rs.getInt("product_id")));
+                        review.setRating(rs.getInt("rating"));
+                        review.setComment(rs.getString("comment"));
+                        review.setReview_date(rs.getTimestamp("review_date"));
+                        reviews.add(review);
+                    }
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return reviewList;
+        return reviews;
     }
+
 
     public List<Review> getReviewsByRating(int rating) {
         List<Review> reviews = new ArrayList<>();

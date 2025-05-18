@@ -340,21 +340,17 @@
                 </div>
 
 
-                <!-- Phương thức thanh toán -->
-                <div class="form-group my-3">
-                    <label for="paymentMethod">
-                        <h6>Phương thức thanh toán</h6>
-                    </label>
-                    <select class="form-control" id="paymentMethod">
-                        <option value="cash">Thanh toán trực tiếp</option>
+                <div class="payment-method" style="margin-top: 30px; text-align: center;">
+                    <h3>Chọn hình thức thanh toán</h3>
+                    <select id="paymentSelect" class="sort-button">
+                        <option value="">-- Vui lòng chọn --</option>
+                        <option value="direct">Thanh toán trực tiếp</option>
                         <option value="card">Thanh toán bằng thẻ</option>
                     </select>
+                    <button onclick="redirectPayment()" class="sort-button" style="margin-top: 20px;">Tiếp tục</button>
                 </div>
 
-                <!-- Nút thanh toán -->
-                <button class="ShopMore ml-auto" onclick="handlePayment()">TIẾN HÀNH THANH TOÁN</button>
             </div>
-        </div>
     </div>
 </section>
 
@@ -455,7 +451,20 @@
         document.getElementById('discount-value').innerText = discountAmount.toFixed(0) + 'K';
         document.getElementById('total-value').innerText = total.toFixed(0) + 'K';
     }
+    function redirectPayment() {
+        const selectedOption = document.getElementById("paymentSelect").value;
+
+        if (selectedOption === "direct") {
+            window.location.href = "<%= request.getContextPath() %>/doanweb/html/DirectDeposit.jsp";  // thay link thật
+        } else if (selectedOption === "card") {
+            window.location.href = "<%= request.getContextPath() %>/doanweb/html/Transfer.jsp"; // thay link thật
+        } else {
+            alert("Vui lòng chọn hình thức thanh toán.");
+        }
+    }
 </script>
+
+
 
 </html>
 

@@ -1390,3 +1390,11 @@ button {
     display: block;
 
 }
+.payment-method select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #BC1F23;
+    margin-top: 10px;
+    color: #333;
+}

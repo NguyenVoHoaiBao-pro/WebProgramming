@@ -1,96 +1,120 @@
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiệm gà sao hỏa</title>
+    <title>Thong tin</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/doanweb/styles/style.css">
     <link rel="icon" href="<%= request.getContextPath() %>/doanweb/images/Page1/LoadWeb.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
+    <script src="<%= request.getContextPath() %>/doanweb/js/index.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
+
+    <!-- bootstarp stackpath cdn -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Bootstrap icons cdn-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-
-
-
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=YOUR_APP_ID&autoLogAppEvents=1" nonce="L6SrgIY8"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-    <style>
-        h3 {
-            color: #343a40;
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        .login-btn {
-            width: 30%;
-            background-color: #343a40;
-            color: aliceblue;
-            font-size: 1.2rem;
-            font-weight: 600;
-            /* center */
-            display: block;
-            margin: 0 auto;
-        }
-
-        #loginForm {
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        #signUpForm input, #loginForm input {
-            border: 1px solid #343a40;
-            padding: 10px;
-        }
-
-        #signUpForm input:focus, #loginForm input:focus {
-            background-color: aliceblue;
-        }
-
-        #signUpForm button, #loginForm button {
-            background-color: #343a40;
-            color: aliceblue;
-            border: none;
-            font-weight: 600;
-        }
-
-        #signUpForm button:hover, #loginForm button:hover {
-            background-color: #BC1F23;
-            color: aliceblue;
-            border: none;
-        }
-
-        #showSignUp {
-            color: #BC1F23;
-            font-weight: 600;
-        }
-
-        #showSignUp:hover {
-            color: #343a40;
-            text-decoration: none;
-        }
-
-    </style>
-
 </head>
+<style>
+    .payment-cash-form {
+        max-width: 420px;
+        margin: 100px auto 80px auto;
+        padding: 25px 30px;
+        background-color: #ffffff;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
+    .payment-cash-form h4 {
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .payment-cash-form form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .payment-cash-form .form-group {
+        margin-bottom: 18px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .payment-cash-form .form-group label {
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #555;
+    }
+
+    .payment-cash-form .form-group input[type="text"],
+    .payment-cash-form .form-group input[type="checkbox"] {
+        font-size: 1rem;
+        padding: 10px 12px;
+        border: 1.5px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease;
+    }
+
+    .payment-cash-form .form-group input[type="text"]:focus {
+        outline: none;
+        border-color: #0066ff;
+        box-shadow: 0 0 6px #99bbff;
+    }
+
+    /* Checkbox đặc biệt style */
+    .payment-cash-form .form-group input[type="checkbox"] {
+        width: auto;
+        height: auto;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    .payment-cash-form .btn-submit {
+        background-color: #0066ff;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: background-color 0.25s ease;
+        margin-top: 10px;
+    }
+
+    .payment-cash-form .btn-submit:hover {
+        background-color: #004bb5;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .payment-cash-form {
+            margin: 15px 10px;
+            padding: 20px 15px;
+        }
+    }
+
+
+</style>
 <body>
-<!-- Navbar -->
+<!-- Nav section -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-4 fixed-top">
     <div class="container-fluid mr-5">
         <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" onclick="location.reload();"
@@ -100,46 +124,44 @@
             <span><i id="nav-bar-icon" class="bi bi-list"></i></span>
         </button>
 
-        <div class="search-bar">
-            <input type="text" class="search-input" id="searchInput" placeholder="Tìm kiếm...">
-            <button class="search-button" id="searchButton">
-                <i class="bi bi-search"></i>
-            </button>
-        </div>
-
-        <div id="searchResults" class="search-results"></div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="<%= request.getContextPath() %>/home">Trang Chủ</a>
+                    <a class="nav-link " href="<%= request.getContextPath() %>/home">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
+                    <a class="nav-link " href="<%= request.getContextPath() %>/shop">Cửa Hàng</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/about">Thông tin</a>
+                    <a class="nav-link active" href="<%= request.getContextPath() %>/about">Thông tin</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%= request.getContextPath() %>/contact">Liên hệ</a>
 
                 </li>
-                <li class="nav-item" id="admin-btn" style="display: none;">
-                    <a class="nav-link" href="<%= request.getContextPath() %>/admin">Quản trị</a>
-                </li>
-                <div class="nav-item" id="nav-icons">
-                    <!-- <i class="bi bi-search"></i> -->
-                    <a href="<%= request.getContextPath() %>/login"><i class="bi bi-person-fill"
-                                                                       id="user-icon"></i></a>
-
-                    <a href="<%= request.getContextPath() %>/cart"><i class="bi bi-bag-heart-fill"></i></a>
+                <div class="nav-item">
+                    <li class="nav-item">
+                        <a href="<%= (session.getAttribute("user") != null) ? request.getContextPath() + "/profile" : request.getContextPath() + "/doanweb/html/Login.jsp" %>">
+                            <i class="bi bi-person-fill" id="user-icon"></i>
+                        </a>
+                        <!-- Biểu tượng giỏ hàng với số lượng sản phẩm -->
+                        <a href="<%= request.getContextPath() %>/cart" class="position-relative">
+                            <i class="bi bi-bag-heart-fill" style="font-size: 1.3rem; color: #BC1F23;"></i>
+                            <!-- Biểu tượng giỏ hàng -->
+                            <!-- Số lượng sản phẩm trong giỏ -->
+                            <span class="position-absolute top-0 start-90 translate-middle badge rounded-circle bg-danger"
+                                  id="cart-count"
+                                  style="width: 22px; height: 22px; line-height: 22px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;">
+                                ${sessionScope.totalItems != null ? sessionScope.totalItems : 0}
+                            </span>
+                        </a>
+                    </li>
                 </div>
 
             </ul>
         </div>
-
 
         <div id="mySideBar" class="sidebar">
             <div class="sidebar-header">
@@ -155,31 +177,33 @@
                 </div>
                 <div class="menu-section">
                     <h4><a href="<%= request.getContextPath() %>/about">VỀ MFS</a></h4>
+
                 </div>
                 <div class="menu-section">
                     <h4><a href="<%= request.getContextPath() %>/chinhsach">CHÍNH SÁCH</a></h4>
+
                 </div>
                 <div class="menu-section">
                     <h4><a href="javascript:void(0);" class="toggle-menu">THỰC ĐƠN</a></h4>
                     <ul class="submenu">
                         <li><a href="<%= request.getContextPath() %>/shop">Các món đùi gà nổi bật</a></li>
                         <li><a href="<%= request.getContextPath() %>/shop">Các món cánh gà nổi bật</a></li>
-                        <li><a href="<%= request.getContextPath() %>/shop">Combo gà phải thử</a></li>
+                        <li><a href="#">Combo gà phải thử</a></li>
                     </ul>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/home">DỊCH VỤ</a></h4>
+                    <h4><a href="#">DỊCH VỤ</a></h4>
                 </div>
                 <div class="menu-section">
                     <h4><a href="<%= request.getContextPath() %>/contact">LIÊN HỆ</a></h4>
                 </div>
                 <div class="menu-section">
-                    <h4><a href="<%= request.getContextPath() %>/home">TUYỂN DỤNG</a></h4>
+                    <h4><a href="#">TUYỂN DỤNG</a></h4>
                 </div>
 
                 <div class="menu-section user" id="user-sidebar">
-                    <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>Login.html">ĐĂNG
-                        NHẬP</a> / <a href="<%= request.getContextPath() %>/register">ĐĂNG KÝ</a></h4>
+                    <h4><i class="bi bi-person"></i><a href="<%= request.getContextPath() %>/login">ĐĂNG NHẬP</a> / <a
+                            href="<%= request.getContextPath() %>/register">ĐĂNG KÝ</a></h4>
 
                 </div>
                 <div class="menu-section user-logged-in" id="user-logged-in" style="display: none;">
@@ -189,71 +213,54 @@
                 </div>
             </div>
         </div>
+    </div>
+
 </nav>
 
+<!-- About section -->
+<section class="about-section mt-5">
+    <div class="container">
+        <div class="payment-cash-form">
+            <h4>Thanh toán bằng tiền mặt</h4>
+            <form action="#" method="post">
 
-<section id="featured" class="mt-3 pt-3">
-    <div class="container text-center mt-5 pt-5">
-        <h3 id="form-heading" class="mt-5 pt-5">Đăng Nhập</h3>
-        <hr class="border border-danger border-2 opacity-75 mx-auto">
-    </div>
-</section>
-
-<div class="container mt-5" id="container-login">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-12 mt-0">
-            <img src="<%= request.getContextPath() %>/doanweb/images/Page1/LogoWeb.png" class="img-fluid"
-                 alt="login-img">
-        </div>
-        <div class="col-lg-6 col-md-6 col-12 mt-5 pt-5">
-            <form id="loginForm" action="${pageContext.request.contextPath}/login" method="POST">
-                <c:if test="${not empty mess}">
-                    <p class="text-danger">${mess}</p>
-                </c:if>
-                <c:if test="${not empty loginSuccess}">
-                    <p class="text-success">${loginSuccess}</p>
-                </c:if>
                 <div class="form-group">
-                    <label for="username">Tài Khoản</label>
-                    <input type="text" class="form-control" id="username" name="username"
-                           placeholder="Nhập Tên Tài Khoản Của Bạn!" required>
+                    <label for="payerName">Tên người thanh toán <span style="color:red;">*</span></label>
+                    <input type="text" id="payerName" name="payerName" placeholder="Nguyen Van A" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                           placeholder="Nhập Mật Khẩu Của Bạn!" required>
-                </div>
-                <!-- ✅ Google reCAPTCHA widget -->
-<%--                <div class="form-group my-3">--%>
-<%--                    <div class="g-recaptcha" data-sitekey="6LfvZxYrAAAAAGmR56yCGXy0DvLDtY1djlym0fUI"></div>--%>
-<%--                </div>--%>
-
-                <a href="<%= request.getContextPath() %>/forgotpassword" id="forgot-password">Quên mật khẩu?</a>
-                <button type="submit" class="login-btn btn btn-dark py-2 mt-4 mb-3">Đăng nhập</button>
-                <p class="py-2 text-center">Bạn chưa có tài khoản? <a href="<%= request.getContextPath() %>/register"
-                                                                      id="showSignUp">Đăng ký</a></p>
-                <div class="text-center mt-3">
-                    <p>Hoặc đăng nhập với</p>
-
-                    <!-- Nút đăng nhập Facebook -->
-                    <a href="#" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center mb-2" id="facebook-login-btn">
-                        <i class="fab fa-facebook-f mr-2"></i> Đăng nhập với Facebook
-                    </a>
-
-                    <!-- Nút đăng nhập Google (chưa xử lý) -->
-                    <a href="${pageContext.request.contextPath}/google-login" class="btn btn-danger btn-lg d-flex align-items-center justify-content-center">
-                        <i class="fab fa-google mr-2"></i> Đăng nhập với Google
-                    </a>
-
+                    <label for="phoneNumber">Số điện thoại <span style="color:red;">*</span></label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="0901234567" pattern="[0-9]{9,11}" title="Số điện thoại từ 9 đến 11 số" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="amount">Số tiền thanh toán <span style="color:red;">*</span></label>
+                    <input type="text" id="amount" name="amount" placeholder="1,000,000 VND" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="address">Địa chỉ nhận hóa đơn (nếu có)</label>
+                    <input type="text" id="address" name="address" placeholder="123 Đường ABC, Quận 1, TP.HCM">
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Ghi chú (tuỳ chọn)</label>
+                    <input type="text" id="notes" name="notes" placeholder="Ví dụ: Thanh toán tại cửa hàng">
+                </div>
+
+                <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree" style="font-weight: normal; color: #555;">Tôi đồng ý với điều khoản thanh toán tiền mặt</label>
+                </div>
+
+                <button type="submit" class="btn-submit">Xác nhận thanh toán tiền mặt</button>
             </form>
         </div>
+
+
     </div>
-</div>
-
-
+</section>
 <footer class="mt-5 p-5 bg-dark">
     <div class="row conatiner mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -305,7 +312,9 @@
         </div>
         <div class="copyright mt-5">
             <div class="row container mx-auto">
-
+                <!-- <div class="col-lg-3 col-md-6 col-12 mb-4">
+                  <img src="img/payment.png" alt="payment..logo">
+                </div> -->
 
                 <div class="col-lg-6 col-md-8 col-12 mb-2 mx-auto">
                     <p>MARSSTORE WEBSITE &copy; DESIGN 2024</p>
@@ -329,59 +338,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '972945285017261',
-            cookie: true,
-            xfbml: true,
-            version: 'v19.0'
-        });
-
-        FB.AppEvents.logPageView();
-    };
-
-    // Load Facebook SDK
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Bắt sự kiện click nút Facebook Login
-    document.getElementById('facebook-login-btn').addEventListener('click', function (e) {
-        e.preventDefault();
-
-        FB.login(function (response) {
-            if (response.status === 'connected') {
-                FB.api('/me', { fields: 'name,email' }, function (userInfo) {
-                    // Gửi thông tin tới servlet
-                    fetch('facebookLoginServlet', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(userInfo)
-                    }).then(res => {
-                        if (res.ok) {
-                            // Chuyển hướng sau khi login thành công
-                            window.location.href = "home.jsp"; // Thay bằng trang bạn muốn
-                        }
-                    });
-                });
-            } else {
-                alert('Bạn chưa đăng nhập thành công bằng Facebook.');
-            }
-        }, { scope: 'public_profile,email' });
-    });
-</script>
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
 </body>
 </html>
-
-

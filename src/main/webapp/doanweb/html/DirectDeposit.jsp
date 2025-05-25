@@ -222,7 +222,7 @@
     <div class="container">
         <div class="payment-cash-form">
             <h4>Thanh toán bằng tiền mặt</h4>
-            <form action="#" method="post">
+            <form action="DirectDeposit" method="post">
 
                 <div class="form-group">
                     <label for="payerName">Tên người thanh toán <span style="color:red;">*</span></label>

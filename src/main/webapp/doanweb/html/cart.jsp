@@ -353,8 +353,8 @@
                     </select>
                     <button onclick="redirectPayment()" class="sort-button" style="margin-top: 20px;">Tiếp tục</button>
                 </div>
-
             </div>
+        </div>
     </div>
 </section>
 
@@ -464,6 +464,17 @@
             });
         }
     });
+    function redirectPayment() {
+        const selectedOption = document.getElementById("paymentSelect").value;
+
+        if (selectedOption === "direct") {
+            window.location.href = "<%= request.getContextPath() %>/doanweb/html/DirectDeposit.jsp";  // thay link thật
+        } else if (selectedOption === "card") {
+            window.location.href = "<%= request.getContextPath() %>/doanweb/html/Transfer.jsp"; // thay link thật
+        } else {
+            alert("Vui lòng chọn hình thức thanh toán.");
+        }
+    }
 
     // Xử lý áp dụng mã giảm giá
     function applyVoucher() {
@@ -492,17 +503,7 @@
         document.getElementById('totalAmountText')?.innerText = total.toLocaleString('vi-VN') + ' VND';
         document.getElementById('total-value')?.innerText = (total / 1000).toFixed(0) + 'K';
     }
-    function redirectPayment() {
-        const selectedOption = document.getElementById("paymentSelect").value;
 
-        if (selectedOption === "direct") {
-            window.location.href = "<%= request.getContextPath() %>/doanweb/html/DirectDeposit.jsp";  // thay link thật
-        } else if (selectedOption === "card") {
-            window.location.href = "<%= request.getContextPath() %>/doanweb/html/Transfer.jsp"; // thay link thật
-        } else {
-            alert("Vui lòng chọn hình thức thanh toán.");
-        }
-    }
 </script>
 
 
